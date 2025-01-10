@@ -33,6 +33,10 @@ export default {
       boxShadow: {
         primary:
           "0px 1px 3px 0px rgba(16, 24, 40, 0.10), 0px 1px 2px 0px rgba(16, 24, 40, 0.06)",
+        secondary: "0px 1px 1px 0px rgba(0, 0, 0, 0.07)",
+      },
+      margin: {
+        62.5: "250px",
       },
     },
   },
