@@ -4,7 +4,7 @@ import Sidebar from "./sidebar";
 
 const RootLayout = () => {
   return (
-    <main className="flex h-screen overflow-hidden bg-light_bg dark:bg-dark_bg">
+    <main className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <aside className="w-62.5 border-r border-white_opacity10 bg-secondary_main px-4 py-6 dark:bg-dark_secondary">
         <Sidebar />

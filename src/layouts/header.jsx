@@ -1,11 +1,14 @@
+import { useTheme } from "@/components/theme-provider";
 import {
   DownArrow,
   MoonIcon,
   NotificationIcon,
   SunIcon,
 } from "@/components/ui/svgs";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
+  const { theme, setTheme } = useTheme();
   return (
     <nav className="flex items-center justify-between gap-4">
       <div>
@@ -16,10 +19,23 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-6">
         <div className="inline-flex items-center rounded border-[0.5px] border-[#D0D5DD] p-1">
-          <button className="shadow-secondary rounded border-[0.5px] border-white_opacity05 bg-primary_main px-2 py-1 text-white">
+          <button
+            onClick={() => setTheme("light")}
+            className={cn(
+              "rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085]",
+              theme === "light" &&
+                "shadow-secondary bg-primary_main text-white",
+            )}
+          >
             <SunIcon />
           </button>{" "}
-          <button className="rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085]">
+          <button
+            onClick={() => setTheme("dark")}
+            className={cn(
+              "rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085]",
+              theme === "dark" && "shadow-secondary bg-primary_main text-white",
+            )}
+          >
             <MoonIcon />
           </button>
         </div>
@@ -31,7 +47,7 @@ const Header = () => {
             </div>
           </button>
         </div>
-        <div className="inline-flex cursor-pointer items-center gap-3 h-10">
+        <div className="inline-flex h-10 cursor-pointer items-center gap-3">
           <img className="rounded" src="/images/user.png" alt="user-icon" />
           <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723]">
             John Doe
