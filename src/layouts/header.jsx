@@ -3,17 +3,37 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   DownArrow,
+  LogoutIcon,
   MoonIcon,
   NotificationIcon,
+  SettingIcon,
   SunIcon,
+  UsersIcon,
 } from "@/components/ui/svgs";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router";
+
+const dropdownMenuItems = [
+  {
+    label: "My Accounts",
+    href: "/profile",
+    icon: UsersIcon,
+  },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: SettingIcon,
+  },
+  {
+    label: "Log Out",
+    href: "/logout",
+    icon: LogoutIcon,
+  },
+];
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -56,26 +76,41 @@ const Header = () => {
           </button>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="!h-10">
-            <div className="dark:bg-dark_header inline-flex cursor-pointer items-center gap-3 dark:rounded-lg dark:px-3 dark:py-1.5">
-              <img
-                className="rounded dark:w-7"
-                src="/images/user.png"
-                alt="user-icon"
-              />
-              <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
-                John Doe
+          <DropdownMenuTrigger className="!h-10 min-w-[173px]">
+            <div className="inline-flex w-full cursor-pointer items-center justify-between gap-3 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5">
+              <span className="inline-flex items-center gap-3">
+                <img
+                  className="rounded dark:w-7"
+                  src="/images/user.png"
+                  alt="user-icon"
+                />
+                <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
+                  John Doe
+                </span>
               </span>
               <span className="text-[#898D97]">
                 <DownArrow />
               </span>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+
+          <DropdownMenuContent className="border shadow-primary dark:bg-[#282c3f]">
+            {dropdownMenuItems.map((item, index) => (
+              <DropdownMenuItem
+                key={index}
+                className="text-[#4A5773] dark:text-white"
+              >
+                <Link
+                  to={item.href}
+                  className="inline-flex items-center justify-center gap-2.5"
+                >
+                  <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#F2F4F7] dark:bg-[#171D291A]">
+                    {<item.icon />}
+                  </span>
+                  {item.label}
+                </Link>
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
