@@ -13,7 +13,7 @@ const RootLayout = () => {
       {/* Main Section */}
       <section className="relative flex flex-1 flex-col">
         {/* Header */}
-        <header className="relative z-50 w-full border-b-[0.5px] border-white_opacity10 bg-background px-6 py-4 shadow-primary dark:bg-white_opacity05">
+        <header className="relative z-50 max-h-[72px] w-full border-b-[0.5px] border-white_opacity10 bg-background px-6 py-4 shadow-primary dark:bg-white_opacity05">
           <Header />
         </header>
 

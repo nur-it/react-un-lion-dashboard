@@ -20,11 +20,7 @@ const DropdownMenuSubTrigger = React.forwardRef(
   ({ className, inset, children, ...props }, ref) => (
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
-      className={cn(
-        "",
-
-        className,
-      )}
+      className={cn("", inset && "pl-8", className)}
       {...props}
     >
       {children}
