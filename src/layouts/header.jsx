@@ -15,6 +15,7 @@ import {
   UsersIcon,
 } from "@/components/ui/svgs";
 import { cn } from "@/lib/utils";
+import { Menu } from "lucide-react";
 import { Link } from "react-router";
 
 const dropdownMenuItems = [
@@ -40,7 +41,10 @@ const Header = () => {
   return (
     <nav className="flex items-center justify-between gap-4">
       <div>
-        <h5 className="inline-flex items-center gap-1 text-secondary_main dark:text-white">
+        <button className="rounded border-[0.5px] border-[#D0D5DD] p-1.5 lg:hidden">
+          <Menu />
+        </button>
+        <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">Good Morning -</span>
           <span className="text-xl font-bold leading-[130%]">John Doe</span>
         </h5>
@@ -52,7 +56,7 @@ const Header = () => {
             className={cn(
               "rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085] dark:text-[#D0D5DD]",
               theme === "light" &&
-                "shadow-secondary bg-primary_main text-white",
+                "bg-primary_main text-white shadow-secondary",
             )}
           >
             <SunIcon />
@@ -61,7 +65,7 @@ const Header = () => {
             onClick={() => setTheme("dark")}
             className={cn(
               "rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085] dark:text-[#D0D5DD]",
-              theme === "dark" && "shadow-secondary bg-primary_main text-white",
+              theme === "dark" && "bg-primary_main text-white shadow-secondary",
             )}
           >
             <MoonIcon />
@@ -76,7 +80,7 @@ const Header = () => {
           </button>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="!h-10 min-w-[173px]">
+          <DropdownMenuTrigger className="!h-10 lg:min-w-[173px]">
             <div className="inline-flex w-full cursor-pointer items-center justify-between gap-3 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5">
               <span className="inline-flex items-center gap-3">
                 <img
