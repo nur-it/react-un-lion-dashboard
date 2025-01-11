@@ -6,7 +6,7 @@ const RootLayout = () => {
   return (
     <main className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-62.5 border-r border-white_opacity10 bg-secondary_main px-4 py-6 dark:bg-dark_secondary">
+      <aside className="hidden w-62.5 border-r border-white_opacity10 bg-secondary_main px-4 py-6 dark:bg-dark_secondary lg:block">
         <Sidebar />
       </aside>
 
