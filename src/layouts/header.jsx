@@ -80,9 +80,9 @@ const Header = () => {
           </button>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="!h-10 lg:min-w-[173px]">
-            <div className="inline-flex w-full cursor-pointer items-center justify-between gap-3 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5">
-              <span className="inline-flex items-center gap-3">
+          <DropdownMenuTrigger className="!h-10 md:min-w-[173px]">
+            <div className="inline-flex w-full cursor-pointer items-center justify-between gap-0.5 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5 md:gap-3">
+              <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
                   className="rounded dark:w-7"
                   src="/images/user.png"
