@@ -10,5 +10,6 @@
   }
   body {
     font-family: "Space Grotesk", serif;
+    @apply bg-light_bg text-foreground dark:bg-dark_bg dark:text-background;
   }
 }

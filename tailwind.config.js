@@ -29,6 +29,7 @@ export default {
         text_disable: "#98A2B3",
         white_opacity05: "rgba(255, 255, 255, 0.05)",
         white_opacity10: "rgba(255, 255, 255, 0.10)",
+        dark_header: "rgba(243, 244, 246, 0.10)",
       },
       boxShadow: {
         primary:
