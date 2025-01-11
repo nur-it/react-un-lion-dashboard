@@ -14,8 +14,9 @@ import {
   SunIcon,
   UsersIcon,
 } from "@/components/ui/svgs";
+import { useSidebar } from "@/contexts/sidebar.contexts";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router";
 
 const dropdownMenuItems = [
@@ -38,11 +39,17 @@ const dropdownMenuItems = [
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
   return (
     <nav className="flex items-center justify-between gap-4">
       <div>
-        <button className="rounded border-[0.5px] border-[#D0D5DD] p-1.5 lg:hidden">
-          <Menu />
+        <button
+          onClick={toggleSidebar}
+          className={cn(
+            "rounded border-[0.5px] border-[#D0D5DD] p-1.5 lg:hidden",
+          )}
+        >
+          {!isSidebarOpen ? <Menu /> : <X />}
         </button>
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">Good Morning -</span>
