@@ -19,7 +19,14 @@ const StackedBarChart = () => {
         data: [10, 15, 15, 25, 30, 10, 15],
         backgroundColor: "#F23838",
         stack: "stack1",
-        borderRadius: 20,
+        borderRadius: {
+          topLeft: 0,
+          topRight: 0,
+          bottomLeft: 20,
+          bottomRight: 20,
+        },
+        borderSkipped: false,
+       
       },
       {
         label: "Medium Risk",
@@ -27,13 +34,20 @@ const StackedBarChart = () => {
         backgroundColor: "#E38604",
         stack: "stack1",
         borderRadius: 20,
+        borderSkipped: false,
       },
       {
         label: "Low Risk",
         data: [45, 15, 25, 35, 40, 25, 45],
         backgroundColor: "#0CAF60",
         stack: "stack1",
-        borderRadius: 20,
+        borderRadius: {
+          topLeft: 20,
+          topRight: 20,
+          bottomLeft: 0,
+          bottomRight: 0,
+        },
+        borderSkipped: false,
       },
       // Separate bar (single color)
       {
@@ -42,6 +56,7 @@ const StackedBarChart = () => {
         backgroundColor: "#665CF3",
         stack: "stack2",
         borderRadius: 20,
+        borderSkipped: false,
       },
     ],
   };
@@ -62,7 +77,7 @@ const StackedBarChart = () => {
         stacked: true,
       },
     },
-    barThickness: 10,
+    barThickness: 12,
     maxBarThickness: 15,
   };
 
