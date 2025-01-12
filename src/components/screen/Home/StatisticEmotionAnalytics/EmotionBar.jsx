@@ -6,10 +6,10 @@ const EmotionBar = ({ label, value, maxValue, color }) => {
 
   return (
     <div className="space-y-[2px]">
-      <p className="text-sm text-text_secondary">{label}</p>
+      <p className="text-sm text-text_secondary dark:white/[80%]">{label}</p>
       <div className="relative flex items-center whitespace-nowrap">
         <div
-          className="flex h-2.5 w-full overflow-hidden rounded-full bg-[#0000000D] dark:bg-neutral-700"
+          className="flex h-2.5 w-full overflow-hidden rounded-full bg-[#0000000D] dark:bg-white/[10%]"
           role="progressbar"
           aria-valuenow={percentage}
           aria-valuemin="0"
@@ -22,7 +22,7 @@ const EmotionBar = ({ label, value, maxValue, color }) => {
             style={{ width: `${percentage}%` }}
           ></div>
         </div>
-        <span className="ml-2 w-9 text-right text-sm font-bold text-secondary_main">{maxValue}K</span>
+        <span className="ml-2 w-9 text-right text-sm font-bold text-secondary_main dark:text-white">{maxValue}K</span>
 
         {/* Tooltip with Arrow */}
         {isHovered && (
