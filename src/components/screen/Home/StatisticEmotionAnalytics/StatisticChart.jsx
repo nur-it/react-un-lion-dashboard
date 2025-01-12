@@ -65,6 +65,16 @@ const StackedBarChart = () => {
       legend: {
         display: false,
       },
+      tooltip: {
+        callbacks: {
+          title: () => null,
+
+          label: (context) => context.raw,
+        },
+        displayColors: false,
+        caretPadding: 10,
+        yAlign: "bottom",
+      },
     },
     responsive: true,
     maintainAspectRatio: false,
@@ -81,7 +91,7 @@ const StackedBarChart = () => {
           stepSize: 20,
           callback: (value) => value,
         },
-        max: 80,
+        max: 100,
       },
     },
     barThickness: 12,
