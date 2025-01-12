@@ -49,22 +49,11 @@ const StackedBarChart = () => {
   const options = {
     plugins: {
       legend: {
-        display: true,
-        position: "top",
-        labels: {
-          usePointStyle: true,
-          pointStyle: "circle",
-          boxWidth: 10,
-          boxHeight: 10,
-          padding: 10,
-          font: {
-            size: 12,
-          },
-          color: "#4A5773",
-        },
+        display: false,
       },
     },
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         stacked: true,
@@ -73,8 +62,8 @@ const StackedBarChart = () => {
         stacked: true,
       },
     },
-    barThickness: 15,
-    maxBarThickness: 20,
+    barThickness: 10,
+    maxBarThickness: 15,
   };
 
   return (
