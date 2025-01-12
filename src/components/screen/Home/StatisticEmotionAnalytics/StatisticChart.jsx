@@ -16,21 +16,21 @@ const StackedBarChart = () => {
     datasets: [
       {
         label: "High Risk",
-        data: [10, 15, 20, 25, 30, 35, 40],
+        data: [10, 15, 15, 25, 30, 10, 15],
         backgroundColor: "#F23838",
         stack: "stack1",
         borderRadius: 20,
       },
       {
         label: "Medium Risk",
-        data: [20, 25, 30, 35, 40, 45, 50],
+        data: [5, 10, 15, 10, 20, 15, 10],
         backgroundColor: "#E38604",
         stack: "stack1",
         borderRadius: 20,
       },
       {
         label: "Low Risk",
-        data: [30, 35, 40, 45, 50, 55, 60],
+        data: [45, 15, 25, 35, 40, 25, 45],
         backgroundColor: "#0CAF60",
         stack: "stack1",
         borderRadius: 20,
@@ -38,7 +38,7 @@ const StackedBarChart = () => {
       // Separate bar (single color)
       {
         label: "Mitigated Risk",
-        data: [50, 60, 70, 80, 90, 100, 110],
+        data: [30, 10, 20, 25, 40, 25, 25],
         backgroundColor: "#665CF3",
         stack: "stack2",
         borderRadius: 20,
