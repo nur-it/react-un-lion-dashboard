@@ -26,7 +26,6 @@ const StackedBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-       
       },
       {
         label: "Medium Risk",
@@ -38,7 +37,7 @@ const StackedBarChart = () => {
       },
       {
         label: "Low Risk",
-        data: [45, 15, 25, 35, 40, 25, 45],
+        data: [45, 15, 25, 35, 30, 25, 45],
         backgroundColor: "#0CAF60",
         stack: "stack1",
         borderRadius: {
@@ -72,9 +71,17 @@ const StackedBarChart = () => {
     scales: {
       x: {
         stacked: true,
+        grid: {
+          display: false,
+        },
       },
       y: {
         stacked: true,
+        ticks: {
+          stepSize: 20,
+          callback: (value) => value,
+        },
+        max: 80,
       },
     },
     barThickness: 12,
