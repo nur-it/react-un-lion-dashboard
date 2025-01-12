@@ -1,12 +1,18 @@
+import { useSidebar } from "@/contexts/sidebar.contexts";
 import { Outlet } from "react-router";
 import Header from "./header";
 import Sidebar from "./sidebar";
 
 const RootLayout = () => {
+  const { isSidebarOpen, closeSidebar } = useSidebar();
   return (
     <main className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <aside className="hidden w-62.5 border-r border-white_opacity10 bg-secondary_main px-4 py-6 dark:bg-dark_secondary lg:block">
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-62.5 bg-secondary_main px-4 py-6 transition-transform lg:static lg:translate-x-0 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
         <Sidebar />
       </aside>
 

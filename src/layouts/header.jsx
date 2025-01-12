@@ -14,8 +14,9 @@ import {
   SunIcon,
   UsersIcon,
 } from "@/components/ui/svgs";
+import { useSidebar } from "@/contexts/sidebar.contexts";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router";
 
 const dropdownMenuItems = [
@@ -38,11 +39,17 @@ const dropdownMenuItems = [
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
   return (
     <nav className="flex items-center justify-between gap-4">
       <div>
-        <button className="rounded border-[0.5px] border-[#D0D5DD] p-1.5 lg:hidden">
-          <Menu />
+        <button
+          onClick={toggleSidebar}
+          className={cn(
+            "rounded border-[0.5px] border-[#D0D5DD] p-1.5 lg:hidden",
+          )}
+        >
+          {!isSidebarOpen ? <Menu /> : <X />}
         </button>
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">Good Morning -</span>
@@ -80,9 +87,9 @@ const Header = () => {
           </button>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="!h-10 lg:min-w-[173px]">
-            <div className="inline-flex w-full cursor-pointer items-center justify-between gap-3 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5">
-              <span className="inline-flex items-center gap-3">
+          <DropdownMenuTrigger className="!h-10 md:min-w-[173px]">
+            <div className="inline-flex w-full cursor-pointer items-center justify-between gap-0.5 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5 md:gap-3">
+              <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
                   className="rounded dark:w-7"
                   src="/images/user.png"
