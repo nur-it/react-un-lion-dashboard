@@ -1,0 +1,23 @@
+export  const topics = [
+  { text: 'Trump', style: 'text-base font-bold text-success' },
+  { text: 'Apple', style: 'text-sm text-text_secondary' },
+  { text: 'Amazon', style: 'text-sm text-success' },
+  { text: 'BYD', style: 'text-sm text-success' },
+  { text: 'Delaware', style: 'text-xl font-bold text-error' },
+  { text: 'Tesla', style: 'text-sm text-text_secondary' },
+  { text: 'Semiconductors', style: 'text-xl font-bold text-error' },
+  { text: 'Green Energy', style: 'text-sm text-text_secondary' },
+  { text: 'SpaceX', style: 'text-sm text-text_secondary' },
+  { text: 'Bitcoin', style: 'text-lg font-bold text-success' },
+  { text: 'Electric Vehicles', style: 'text-sm font-bold text-error' },
+  { text: 'Lucid Motors', style: 'text-sm text-success' },
+  { text: 'Universal Studios', style: 'font-bold text-success' },
+  { text: 'Bitcoin', style: 'text-sm font-medium text-text_secondary' },
+  { text: 'Binance', style: 'text-sm text-success' },
+  { text: 'Shopify', style: 'text-lg font-bold text-error' },
+  { text: 'Bitcoin', style: 'text-sm font-medium text-text_secondary' },
+  { text: 'Ethereum', style: 'text-xs text-success' },
+  { text: 'Netflix', style: 'text-lg font-bold text-error' },
+  { text: 'Alibaba', style: 'text-sm text-success' },
+  { text: 'Netflix', style: 'text-base font-bold text-text_secondary' }
+];

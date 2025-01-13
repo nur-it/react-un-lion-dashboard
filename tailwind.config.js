@@ -24,12 +24,14 @@ export default {
         dark_secondary: "#11162b",
         purple_main: "#FD27E0",
         blue_main: "#665CF3",
+        pink_main:"#FE16D4",
         blue_dodger: "#1C89F6",
         mountain_main: "#8D8D8D",
         text_disable: "#98A2B3",
         white_opacity05: "rgba(255, 255, 255, 0.05)",
         white_opacity10: "rgba(255, 255, 255, 0.10)",
         dark_header: "rgba(243, 244, 246, 0.10)",
+        text_secondary:"#4A5773"
       },
       boxShadow: {
         primary:
