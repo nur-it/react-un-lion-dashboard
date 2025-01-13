@@ -11,7 +11,7 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const StackedBarChart = () => {
-  const isDarkMode = document.documentElement.classList.contains('dark');
+  const isDarkMode = document.documentElement.classList.contains("dark");
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
@@ -90,9 +90,9 @@ const StackedBarChart = () => {
         stacked: true,
         grid: {
           display: true,
-          color: isDarkMode ? 'gray-100' : '#ccc',
+          color: isDarkMode ? "gray-100" : "#ccc",
         },
-       
+
         ticks: {
           stepSize: 20,
           callback: (value) => value,

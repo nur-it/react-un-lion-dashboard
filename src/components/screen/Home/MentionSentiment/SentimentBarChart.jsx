@@ -11,41 +11,42 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const SentimentBarChart = () => {
-  const isDarkMode = document.documentElement.classList.contains('dark');
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
-        label: "High Risk",
-        data: [10, 15, 15, 25, 30, 10, 15],
-        backgroundColor: "#F23838",
-        stack: "stack1",
+        label: "Neutral",
+        data: [102, 130, 110, 105, 140, 105, 130],
+        backgroundColor: "#98A2B3",
         borderRadius: {
-          topLeft: 0,
-          topRight: 0,
+          topLeft: 20,
+          topRight: 20,
           bottomLeft: 20,
           bottomRight: 20,
         },
         borderSkipped: false,
       },
       {
-        label: "Medium Risk",
-        data: [5, 10, 15, 10, 20, 15, 10],
-        backgroundColor: "#E38604",
-        stack: "stack1",
-        borderRadius: 20,
-        borderSkipped: false,
-      },
-      {
-        label: "Low Risk",
-        data: [45, 15, 25, 35, 30, 25, 45],
+        label: "Positive",
+        data: [140, 170, 145, 125, 160, 140, 160],
         backgroundColor: "#0CAF60",
-        stack: "stack1",
         borderRadius: {
           topLeft: 20,
           topRight: 20,
-          bottomLeft: 0,
-          bottomRight: 0,
+          bottomLeft: 20,
+          bottomRight: 20,
+        },
+        borderSkipped: false,
+      },
+      {
+        label: "Negative ",
+        data: [160, 190, 160, 155, 180, 155, 190],
+        backgroundColor: "#F23838",
+        borderRadius: {
+          topLeft: 20,
+          topRight: 20,
+          bottomLeft: 20,
+          bottomRight: 20,
         },
         borderSkipped: false,
       },
@@ -56,16 +57,6 @@ const SentimentBarChart = () => {
     plugins: {
       legend: {
         display: false,
-      },
-      tooltip: {
-        callbacks: {
-          title: () => null,
-
-          label: (context) => context.raw,
-        },
-        displayColors: false,
-        caretPadding: 10,
-        yAlign: "bottom",
       },
     },
     responsive: true,
@@ -78,17 +69,14 @@ const SentimentBarChart = () => {
         },
       },
       y: {
-        stacked: true,
+        stacked: false,
         grid: {
           display: true,
-          color: isDarkMode ? 'gray-100' : '#ccc',
         },
-       
         ticks: {
-          stepSize: 20,
-          callback: (value) => value,
+          stepSize: 50,
+          max: 200,
         },
-        max: 100,
       },
     },
     barThickness: 12,
@@ -103,5 +91,3 @@ const SentimentBarChart = () => {
 };
 
 export default SentimentBarChart;
-
-
