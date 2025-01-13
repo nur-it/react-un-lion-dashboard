@@ -7,8 +7,10 @@ const Mentions = () => {
         <h5 className="text-xl font-bold text-secondary_main dark:text-white">
           Mentions
         </h5>
-        <div className="flex h-9 items-center rounded-lg border border-gray-300 bg-white/[2%] px-3">
-          <p className="text-sm font-medium text-text_secondary">04/01/2025</p>
+        <div className="flex h-9 items-center justify-center rounded-lg border border-gray-300 bg-white/[2%] px-3">
+          <p className="pt-0.5 text-sm font-medium text-text_secondary">
+            04/01/2025
+          </p>
         </div>
       </div>
       <div className="flex items-center gap-3">

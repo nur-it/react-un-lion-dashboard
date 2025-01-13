@@ -8,29 +8,29 @@ const Sentiment = () => {
           <h5 className="text-xl font-bold text-secondary_main dark:text-white">
             Sentiment
           </h5>
-          <div className="flex h-9 items-center rounded-lg border border-gray-300 bg-white/[2%] px-3">
-            <p className="text-sm font-medium text-text_secondary">
+          <div className="flex h-9 items-center justify-center rounded-lg border border-gray-300 bg-white/[2%] px-3">
+            <p className="text-sm font-medium text-text_secondary pt-0.5">
               04/01/2025
             </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-[#4A5773]"></div>
+            <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+              Neutral
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-success"></div>
+            <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+              Positive
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5">
             <div className="h-2.5 w-2.5 rounded-full bg-error"></div>
             <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
-              Youtube
-            </p>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="h-2.5 w-2.5 rounded-full bg-blue_dodger"></div>
-            <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
-              Facebook
-            </p>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="h-2.5 w-2.5 rounded-full bg-warning"></div>
-            <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
-              X
+              Negative
             </p>
           </div>
         </div>

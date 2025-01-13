@@ -11,6 +11,7 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const StatisticChart = () => {
+  const isDarkMode = document.documentElement.classList.contains("dark");
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
@@ -90,6 +91,8 @@ const StatisticChart = () => {
         stacked: false,
         grid: {
           display: true,
+          color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
+          
         },
         ticks: {
           stepSize: 20,

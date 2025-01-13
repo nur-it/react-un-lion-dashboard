@@ -28,7 +28,7 @@ const MentionChart = () => {
         label: "Dataset 1",
         data: [10, 30, 35, 19, 25, 18, 10],
         borderColor: "#F23838",
-        backgroundColor: "#F23838                               ",
+        backgroundColor: "#F23838",
         pointHoverRadius: 6,
         pointRadius: 0, 
       },
