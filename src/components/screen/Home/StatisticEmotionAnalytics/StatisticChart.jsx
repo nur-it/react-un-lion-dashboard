@@ -10,46 +10,46 @@ import { Bar } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const StackedBarChart = () => {
-  const isDarkMode = document.documentElement.classList.contains("dark");
+const StatisticChart = () => {
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
         label: "High Risk",
-        data: [10, 15, 15, 25, 30, 10, 15],
+        data: [10, 11, 10, 8, 25, 10, 18],
         backgroundColor: "#F23838",
-        stack: "stack1",
         borderRadius: {
-          topLeft: 0,
-          topRight: 0,
+          topLeft: 20,
+          topRight: 20,
           bottomLeft: 20,
           bottomRight: 20,
         },
         borderSkipped: false,
       },
       {
-        label: "Medium Risk",
-        data: [5, 10, 15, 10, 20, 15, 10],
+        label: "Positive",
+        data: [18, 18, 30, 20, 38, 20, 30],
         backgroundColor: "#E38604",
-        stack: "stack1",
-        borderRadius: 20,
-        borderSkipped: false,
-      },
-      {
-        label: "Low Risk",
-        data: [45, 15, 25, 35, 30, 25, 45],
-        backgroundColor: "#0CAF60",
-        stack: "stack1",
         borderRadius: {
           topLeft: 20,
           topRight: 20,
-          bottomLeft: 0,
-          bottomRight: 0,
+          bottomLeft: 20,
+          bottomRight: 20,
         },
         borderSkipped: false,
       },
-      // Separate bar (single color)
+      {
+        label: "Negative ",
+        data: [58, 40, 56, 62, 75, 45, 62],
+        backgroundColor: "#0CAF60",
+        borderRadius: {
+          topLeft: 20,
+          topRight: 20,
+          bottomLeft: 20,
+          bottomRight: 20,
+        },
+        borderSkipped: false,
+      },
       {
         label: "Mitigated Risk",
         data: [30, 10, 20, 25, 40, 25, 25],
@@ -87,17 +87,14 @@ const StackedBarChart = () => {
         },
       },
       y: {
-        stacked: true,
+        stacked: false,
         grid: {
           display: true,
-          color: isDarkMode ? "gray-100" : "#ccc",
         },
-
         ticks: {
           stepSize: 20,
-          callback: (value) => value,
+          max: 100,
         },
-        max: 100,
       },
     },
     barThickness: 12,
@@ -111,4 +108,4 @@ const StackedBarChart = () => {
   );
 };
 
-export default StackedBarChart;
+export default StatisticChart;

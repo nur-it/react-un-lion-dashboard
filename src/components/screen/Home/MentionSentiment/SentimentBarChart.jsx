@@ -50,6 +50,7 @@ const SentimentBarChart = () => {
         },
         borderSkipped: false,
       },
+     
     ],
   };
 
@@ -58,6 +59,7 @@ const SentimentBarChart = () => {
       legend: {
         display: false,
       },
+      
     },
     responsive: true,
     maintainAspectRatio: false,
