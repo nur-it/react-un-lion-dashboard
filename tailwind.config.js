@@ -24,6 +24,7 @@ export default {
         dark_secondary: "#11162b",
         purple_main: "#FD27E0",
         blue_main: "#665CF3",
+        pink_main:"#FE16D4",
         blue_dodger: "#1C89F6",
         mountain_main: "#8D8D8D",
         text_disable: "#98A2B3",

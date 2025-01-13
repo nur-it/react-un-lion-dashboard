@@ -17,7 +17,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 const MentionChart = () => {
@@ -26,33 +26,47 @@ const MentionChart = () => {
     datasets: [
       {
         label: "Dataset 1",
-        data: [10, 30, 50, 70, 90, 60, 40],
-        borderColor: "rgba(255, 99, 132, 1)",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        data: [10, 30, 35, 19, 25, 18, 10],
+        borderColor: "#F23838",
+        backgroundColor: "#F23838                               ",
+        pointHoverRadius: 6,
+        pointRadius: 0, 
       },
       {
         label: "Dataset 2",
-        data: [20, 40, 60, 80, 50, 30, 10],
-        borderColor: "rgba(54, 162, 235, 1)",
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        data: [30, 35, 39, 30, 42, 30, 50],
+        borderColor: "#1C89F6",
+        backgroundColor: "#1C89F6",
+        pointHoverRadius: 6,
+        pointRadius: 0,
+      
       },
       {
         label: "Dataset 3",
-        data: [35, 25, 35, 45, 55, 65, 75],
-        borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        data: [50, 45, 50, 45, 55, 53, 75],
+        borderColor: "#0CAF60",
+        backgroundColor: "#0CAF60",
+        pointHoverRadius: 6,
+        pointRadius: 0,
+        
       },
       {
         label: "Dataset 4",
-        data: [45, 15, 25, 35, 45, 55, 65],
-        borderColor: "rgba(153, 102, 255, 1)",
-        backgroundColor: "rgba(153, 102, 255, 0.2)",
+        data: [30, 62, 55, 55, 62, 62, 30],
+        borderColor: "#F79009",
+        backgroundColor: "#F79009",
+        pointHoverRadius: 6,
+        pointRadius: 0,
+       
       },
       {
         label: "Dataset 5",
-        data: [25, 35, 45, 55, 65, 75, 85],
-        borderColor: "rgba(255, 206, 86, 1)",
-        backgroundColor: "rgba(255, 206, 86, 0.2)",
+        data: [75, 55, 75, 50, 78, 70, 78],
+        borderColor: "#FE16D4",
+        backgroundColor: "#FE16D4",
+        pointHoverRadius: 6,
+        pointRadius: 0.1,
+        
       },
     ],
   };
@@ -75,6 +89,16 @@ const MentionChart = () => {
         displayColors: false,
         caretPadding: 10,
         yAlign: "bottom",
+      },
+    },
+    interaction: {
+      mode: "nearest", // Ensure tooltip is shown only for points
+      intersect: true, // Trigger tooltip only when hovering over a point
+    },
+    elements: {
+      line: {
+        borderWidth: 2, // Line width
+        hoverBorderWidth: 0, // Disable hover effects for the line
       },
     },
     scales: {

@@ -11,6 +11,38 @@ const Mentions = () => {
           <p className="text-sm font-medium text-text_secondary">04/01/2025</p>
         </div>
       </div>
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5">
+          <div className="h-2.5 w-2.5 rounded-full bg-error"></div>
+          <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+            Youtube
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-2.5 w-2.5 rounded-full bg-blue_dodger"></div>
+          <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+            Facebook
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-2.5 w-2.5 rounded-full bg-warning"></div>
+          <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+            X
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-2.5 w-2.5 rounded-full bg-success"></div>
+          <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+            TikTok
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="bg-pink_main h-2.5 w-2.5 rounded-full"></div>
+          <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+            Instagram
+          </p>
+        </div>
+      </div>
       <div>
         <MentionChart />
       </div>
