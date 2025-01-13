@@ -1,54 +1,12 @@
+import { rowData } from "@/data/threatTableData";
 import { IoChevronDown } from "react-icons/io5";
 import sortIcon from "../../../../assets/icon/sort.svg";
 
 const ThreatDetectionTable = () => {
-  const rowData = [
-    {
-      threatType: "Trump",
-      platform: "Space X",
-      contentSummary: "Content Summary Goes Here....",
-      id: "123450",
-      reach: "Low",
-      status: "Mitigated",
-    },
-    {
-      threatType: "Bitcoin",
-      platform: "Space X",
-      contentSummary: "Content Summary Goes Here....",
-      id: "123456",
-      reach: "High",
-      status: "In Progress",
-    },
-    {
-      threatType: "Ethereum",
-      platform: "Space X",
-      contentSummary: "Content Summary Goes Here....",
-      id: "123457",
-      reach: "Medium",
-      status: "",
-    },
-    {
-      threatType: "Stocks",
-      platform: "Space X",
-      contentSummary: "Content Summary Goes Here....",
-      id: "123458",
-      reach: "Low",
-      status: "Mitigated",
-    },
-    {
-      threatType: "Gold",
-      platform: "Space X",
-      contentSummary: "Content Summary Goes Here....",
-      id: "123459",
-      reach: "High",
-      status: "",
-    },
-  ];
-
   return (
     <div>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full border border-[#0000001A] text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
+      <div className="relative overflow-x-auto border border-[#0000001A] sm:rounded-lg">
+        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm text-text_secondary dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="p-4">
@@ -141,9 +99,12 @@ const ThreatDetectionTable = () => {
                         <span className="absolute inset-0 rounded-md bg-white opacity-40"></span>
                       )}
                     </button>
-                    <button className="flex h-8 min-w-[110px] items-center justify-between rounded-md bg-success px-3 font-medium text-white">
+                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-success px-3 font-medium text-white">
                       Dismiss
                       <IoChevronDown />
+                      {row.status && (
+                        <span className="absolute inset-0 rounded-md bg-white opacity-40"></span>
+                      )}
                     </button>
                   </div>
                 </td>
@@ -153,7 +114,15 @@ const ThreatDetectionTable = () => {
                       className={`flex h-8 w-[100px] items-center justify-center rounded-md px-3 font-medium ${
                         row.status === "Mitigated"
                           ? "bg-[#473BF01A] text-primary_main"
-                          : "bg-[#F38E001A] text-warning"
+                          : ""
+                      } ${
+                        row.status === "Dismissed"
+                          ? "bg-[#0CAF6014] text-success"
+                          : ""
+                      } ${
+                        row.status === "In Progress"
+                          ? "bg-[#F38E001A] text-warning"
+                          : ""
                       }`}
                       disabled
                     >
