@@ -1,5 +1,6 @@
 import MentionSentiment from "@/components/screen/Home/MentionSentiment/MentionSentiment";
 import StatisticEmotionAnalytics from "@/components/screen/Home/StatisticEmotionAnalytics/StatisticEmotionAnalytics";
+import ThreatDetection from "@/components/screen/Home/ThreatDetection/ThreatDetection";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
       {/* <Button variant="default">Button</Button> */}
       <StatisticEmotionAnalytics />
       <MentionSentiment />
+      <ThreatDetection />
     </div>
   );
 };
