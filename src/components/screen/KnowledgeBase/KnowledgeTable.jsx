@@ -1,8 +1,12 @@
+import FullKnowledgeTable from "./FullKnowledgeTable";
 
 const KnowledgeTable = () => {
   return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis minus, aspernatur officiis iusto quaerat dignissimos voluptate enim, atque dolores earum expedita eaque accusamus consectetur! Vel maiores eligendi sunt architecto corrupti!
+    <div className="pb-5">
+      <div className="mb-4 h-[1px] w-full bg-gray200"></div>
+      <div>
+        <FullKnowledgeTable />
+      </div>
     </div>
   );
 };
