@@ -4,8 +4,8 @@ import sortIcon from "../../../../assets/icon/sort.svg";
 
 const ThreatDetectionTable = () => {
   return (
-    <div>
-      <div className="relative overflow-x-auto border border-[#0000001A] sm:rounded-lg">
+    <div className="w-full">
+      <div className="relative w-full overflow-x-auto border border-[#0000001A] sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm text-text_secondary dark:bg-gray-700 dark:text-gray-400">
             <tr>

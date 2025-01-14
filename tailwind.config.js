@@ -31,7 +31,8 @@ export default {
         white_opacity05: "rgba(255, 255, 255, 0.05)",
         white_opacity10: "rgba(255, 255, 255, 0.10)",
         dark_header: "rgba(243, 244, 246, 0.10)",
-        text_secondary:"#4A5773"
+        text_secondary:"#4A5773",
+        gray300:"#D0D5DD"
       },
       boxShadow: {
         primary:
