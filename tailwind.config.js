@@ -34,7 +34,10 @@ export default {
         text_secondary:"#4A5773",
         gray200:"#E4E7EC",
         gray300:"#D0D5DD",
-        gray600:"#4B5563"
+        gray600:"#4B5563",
+        text_main900:"#0A0D14",
+        text_soft400:"#868C98",
+        text_sub500:"#525866"
       },
       boxShadow: {
         primary:
