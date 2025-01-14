@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import cloudIcon from "../../../assets/icon/cloud-icon.svg";
 import info from "../../../assets/icon/information-circle.svg";
+import Tooltip from "./Tooltip";
 
 const InformationKnowledge = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredTooltip, setHoveredTooltip] = useState(null);
 
   const fileInputRef = useRef(null);
-
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -18,8 +18,12 @@ const InformationKnowledge = () => {
       console.log("Selected file:", file);
     }
   };
+
+  const tooltips = {
+    title: "Enter title text to submit",
+  };
   return (
-    <div className="pb-5">
+    <form className="pb-5">
       <div className="mb-8 h-[1px] w-full bg-gray200"></div>
       <div className="space-y-6">
         <div className="grid grid-cols-9 gap-10">
@@ -27,20 +31,14 @@ const InformationKnowledge = () => {
             <div className="relative flex items-center gap-1.5">
               <p className="text-lg font-medium text-secondary_main">Title</p>
               <div
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onMouseEnter={() => setHoveredTooltip("title")}
+                onMouseLeave={() => setHoveredTooltip(null)}
               >
                 <img src={info} alt="info" className="cursor-pointer" />
-                {isHovered && (
-                  <div className="absolute bottom-8 left-9 mt-1 flex flex-col items-center">
-                    <div className="relative">
-                      <div className="info-shadow rounded-md border border-[#E2E4E9] bg-white px-1.5 py-0.5 text-sm text-gray-700">
-                        Enter title text to submit
-                      </div>
-                      <div className="absolute left-3 -mt-1 h-2 w-2 rotate-45 border-b border-r border-[#E2E4E9] bg-white shadow-md"></div>
-                    </div>
-                  </div>
-                )}
+                <Tooltip
+                  content={tooltips.title}
+                  isVisible={hoveredTooltip === "title"}
+                />
               </div>
             </div>
           </div>
@@ -127,7 +125,7 @@ const InformationKnowledge = () => {
           <Button>Submit</Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
