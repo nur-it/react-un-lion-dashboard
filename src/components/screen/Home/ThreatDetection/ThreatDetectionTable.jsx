@@ -1,4 +1,5 @@
 import { rowData } from "@/data/threatTableData";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { IoChevronDown } from "react-icons/io5";
 import sortIcon from "../../../../assets/icon/sort.svg";
 
@@ -134,6 +135,35 @@ const ThreatDetectionTable = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      {/* Pagination */}
+      <div className="mt-6 flex w-full items-center justify-center">
+        <div className="flex items-center gap-1.5">
+          <button className="flex h-8 w-8 items-center justify-center">
+            <FiChevronLeft size={22} className="text-[#667085]" />
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0000000F] text-sm font-medium text-secondary_main">
+            1
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
+            2
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
+            3
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
+            4
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
+            5
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
+            ...
+          </button>
+          <button className="flex h-8 w-8 items-center justify-center">
+            <FiChevronRight size={20} className="text-secondary_main" />
+          </button>
+        </div>
       </div>
     </div>
   );

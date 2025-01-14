@@ -1,3 +1,4 @@
+import search from "../../../../assets/icon/search.svg";
 import ThreatDetectionTable from "./ThreatDetectionTable";
 
 const ThreatDetection = () => {
@@ -8,12 +9,17 @@ const ThreatDetection = () => {
           <h5 className="text-xl font-bold text-secondary_main dark:text-white">
             Threat Detection
           </h5>
-          <div className="flex items-center bg-[#F238381A] px-3 py-1 rounded-md">
+          <div className="flex items-center rounded-md bg-[#F238381A] px-3 py-1">
             <p className="text-sm text-error">8 open threats to review</p>
           </div>
         </div>
-        <div className="max-w-[384px] h-10 flex items-center gap-2.5 px-4 bg-[#0000000F] border border-gray300">
-
+        <div className="border-gray300 flex h-10 max-w-[384px] items-center gap-2.5 rounded-lg border bg-[#0000000F] px-4 py-3">
+          <img src={search} alt="search" />
+          <input
+            type="text"
+            placeholder="Search Threats"
+            className="h-full w-full bg-transparent text-sm text-black outline-none placeholder:text-[#98A2B3]"
+          />
         </div>
       </div>
       <div>

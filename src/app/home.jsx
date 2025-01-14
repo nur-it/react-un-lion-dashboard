@@ -4,7 +4,7 @@ import ThreatDetection from "@/components/screen/Home/ThreatDetection/ThreatDete
 
 const HomePage = () => {
   return (
-    <div className="space-y-6 pb-20">
+    <div className="space-y-6 pb-10">
       <h1>Home</h1>
       {/* <Button variant="default">Button</Button> */}
       <StatisticEmotionAnalytics />
