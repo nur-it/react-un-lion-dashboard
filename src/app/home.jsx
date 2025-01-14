@@ -7,7 +7,7 @@ import PageHeading from "@/components/shared/PageHeading";
 const HomePage = () => {
   return (
     <div className="space-y-6 pb-10">
-      <PageHeading page_name="Dashboard" user_name="John Due" />
+      <PageHeading page_name="Dashboard" />
       {/* <Button variant="default">Button</Button> */}
       <StatisticEmotionAnalytics />
       <MentionSentiment />
