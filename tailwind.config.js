@@ -32,6 +32,7 @@ export default {
         white_opacity10: "rgba(255, 255, 255, 0.10)",
         dark_header: "rgba(243, 244, 246, 0.10)",
         text_secondary:"#4A5773",
+        gray200:"#E4E7EC",
         gray300:"#D0D5DD",
         gray600:"#4B5563"
       },
