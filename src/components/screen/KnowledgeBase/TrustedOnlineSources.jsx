@@ -1,5 +1,7 @@
 import tickMark from "../../../assets/icon/check-circle.svg";
 import info from "../../../assets/icon/information-circle.svg";
+import rotateLeft from "../../../assets/icon/rotate_left.svg";
+import crossCircle from "../../../assets/icon/x-circle.svg";
 
 const TrustedOnlineSources = () => {
   return (
@@ -12,21 +14,87 @@ const TrustedOnlineSources = () => {
           <img src={info} alt="info" className="cursor-pointer" />
         </div>
       </div>
-      <div className="col-span-6 space-y-6">
-        <form action="">
+      <div className="col-span-6">
+        <form action="" className="space-y-6">
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label
-                htmlFor="Wikipedia Page"
-                className="text-gray900 text-sm font-medium"
-              >
+              <label htmlFor="Wikipedia Page" className="trusted-label">
                 Wikipedia Page
               </label>
-              <div className="bg-gray50 flex h-11 w-full items-center gap-2 rounded-lg border border-gray200 px-4 py-3">
+              <div className="trusted-input-box">
                 <input
                   type="text"
                   placeholder="Filter by category"
-                  className="placeholder:text-gray500 h-full w-full bg-transparent text-sm outline-none"
+                  className="trusted-input-field"
+                />
+                <img src={tickMark} alt="tickMark" />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label htmlFor="X" className="trusted-label">
+                X
+              </label>
+              <div className="trusted-input-box">
+                <input
+                  type="text"
+                  placeholder="X account name"
+                  className="trusted-input-field"
+                />
+                <img src={crossCircle} alt="crossCircle" />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label htmlFor="Facebook" className="trusted-label">
+                Facebook
+              </label>
+              <div className="trusted-input-box">
+                <input
+                  type="text"
+                  placeholder="Facebook account name"
+                  className="trusted-input-field"
+                />
+                <img src={rotateLeft} alt="rotateLeft" />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label htmlFor="Instagram" className="trusted-label">
+                Instagram
+              </label>
+              <div className="trusted-input-box">
+                <input
+                  type="text"
+                  placeholder="Instagram account name"
+                  className="trusted-input-field"
+                />
+                <img src={tickMark} alt="tickMark" />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label htmlFor="TikTok" className="trusted-label">
+                TikTok
+              </label>
+              <div className="trusted-input-box">
+                <input
+                  type="text"
+                  placeholder="TikTok account name"
+                  className="trusted-input-field"
+                />
+                <img src={tickMark} alt="tickMark" />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label htmlFor="Youtube" className="trusted-label">
+                Youtube
+              </label>
+              <div className="trusted-input-box">
+                <input
+                  type="text"
+                  placeholder="Youtube account name"
+                  className="trusted-input-field"
                 />
                 <img src={tickMark} alt="tickMark" />
               </div>

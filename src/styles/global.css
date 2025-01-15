@@ -43,3 +43,15 @@
 .xs-shadow {
   box-shadow: 0px 2px 4px 0px #1b1c1d0a;
 }
+
+.trusted-label {
+  @apply text-gray900 text-sm font-medium;
+}
+
+.trusted-input-box {
+  @apply bg-gray50 flex h-11 w-full items-center gap-2 rounded-lg border border-gray200 px-4 py-3;
+}
+
+.trusted-input-field {
+  @apply placeholder:text-gray500 h-full w-full bg-transparent text-sm outline-none;
+}
