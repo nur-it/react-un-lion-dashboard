@@ -1,5 +1,6 @@
 import RelevantKeywords from "./RelevantKeywords";
 import TrustedOnlineSources from "./TrustedOnlineSources";
+import UpdateInitialDocument from "./UpdateInitialDocument";
 
 const InitialInformation = () => {
   return (
@@ -8,6 +9,8 @@ const InitialInformation = () => {
       <RelevantKeywords />
       <div className="my-8 h-[1px] w-full bg-gray200"></div>
       <TrustedOnlineSources />
+      <div className="my-8 h-[1px] w-full bg-gray200"></div>
+      <UpdateInitialDocument />
     </div>
   );
 };
