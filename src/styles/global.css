@@ -24,3 +24,22 @@
 
   box-shadow: 0px 12px 24px 0px #868c981f;
 }
+.toggle-shadow-active {
+  box-shadow: 0px 4px 4px 0px #0f0f101f inset;
+}
+
+.toggle-shadow-normal {
+  box-shadow: 0px 4px 4px 0px #0f0f100f inset;
+}
+.first-circle-shadow {
+  box-shadow: 0px 2px 4px 0px #16266414;
+
+  box-shadow: 0px 4px 8px 0px #16266414;
+
+  box-shadow: 0px 6px 10px 0px #16266414;
+
+  box-shadow: 0px -3px 3px 0px #e4e5e7 inset;
+}
+.xs-shadow {
+  box-shadow: 0px 2px 4px 0px #1b1c1d0a;
+}

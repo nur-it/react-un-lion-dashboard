@@ -1,6 +1,7 @@
 import Toggle from "@/components/ui/toggle";
 import { knowledgeTableData } from "@/data/knowledgeTableData";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import writeIcon from "../../../assets/icon/pencil.svg";
 import sortIcon from "../../../assets/icon/sort.svg";
 
 const FullKnowledgeTable = () => {
@@ -66,9 +67,13 @@ const FullKnowledgeTable = () => {
                 <td className="p-4">{row.data}</td>
                 <td className="p-4">{row.source}</td>
                 <td className="p-4">
-                  <Toggle  />
+                <Toggle initialActive={row.isActive} />
                 </td>
-                <td className="p-4">pen</td>
+                <td className="p-4">
+                  <button>
+                    <img src={writeIcon} alt="writeIcon" />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -1,14 +1,36 @@
+import { useState } from "react";
 
-const toggle = () => {
+const Toggle = ({ initialActive = false }) => {
+  const [isActive, setIsActive] = useState(initialActive);
+
+  const handleToggle = () => {
+    setIsActive((prevState) => !prevState);
+  };
+
   return (
-    <div>
-      <label className="inline-flex cursor-pointer items-center">
-        <input type="checkbox" value="" className="peer sr-only" />
-        <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white  dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-        
-      </label>
+    <div
+      className={`flex h-[22px] w-[35px] cursor-pointer items-center rounded-full ${
+        isActive
+          ? "toggle-shadow-active border-t border-[#253EA7] bg-[#375DFB]"
+          : "toggle-shadow-normal border-t border-[#CDD0D5] bg-[#E2E4E9]"
+      } p-[3px] transition-colors duration-300`}
+      onClick={handleToggle}
+    >
+      {/* main circle */}
+      <div
+        className={`first-circle-shadow flex h-[14px] w-[14px] items-center justify-center rounded-full border-b border-l border-r border-[#FFFFFF] bg-white transition-transform duration-300 mb-[1px] ${
+          isActive ? "translate-x-[12.5px]" : "translate-x-0"
+        }`}
+      >
+        {/* x-small circle */}
+        <div
+          className={`xs-shadow mt-[1.2px] h-[6px] w-[6px] rounded-full ${
+            isActive ? "bg-blue-500" : "bg-gray-400"
+          }`}
+        ></div>
+      </div>
     </div>
   );
 };
 
-export default toggle;
+export default Toggle;

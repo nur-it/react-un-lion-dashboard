@@ -5,6 +5,7 @@ export const knowledgeTableData = [
     data: "24/11/2024",
     id: "123450",
     source: "User",
+    isActive: true,
   },
   {
     title: "X Account",
@@ -12,6 +13,7 @@ export const knowledgeTableData = [
     data: "24/11/2024",
     id: "123452",
     source: "X",
+    isActive: false,
   },
   {
     title: "Test",
@@ -19,5 +21,6 @@ export const knowledgeTableData = [
     data: "24/11/2024",
     id: "123453",
     source: "Facebook",
+    isActive: true,
   },
 ];
