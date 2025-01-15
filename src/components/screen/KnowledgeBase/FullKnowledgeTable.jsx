@@ -1,4 +1,4 @@
-import Toggle from "@/components/ui/toggle";
+import Toggle from "@/components/shared/Toggle";
 import { knowledgeTableData } from "@/data/knowledgeTableData";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import writeIcon from "../../../assets/icon/pencil.svg";
@@ -6,7 +6,7 @@ import sortIcon from "../../../assets/icon/sort.svg";
 
 const FullKnowledgeTable = () => {
   return (
-    <div className="w-full">
+    <div className="w-full mt-6">
       <div className="relative w-full overflow-x-auto border border-[#0000001A] sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:bg-gray-700 dark:text-gray-400">
