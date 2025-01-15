@@ -13,3 +13,45 @@
     @apply bg-light_bg text-foreground dark:bg-dark_bg dark:text-background;
   }
 }
+
+.tab-shadow {
+  box-shadow: 0px 1px 2px 0px #1018280f;
+
+  box-shadow: 0px 1px 3px 0px #1018281a;
+}
+.info-shadow {
+  box-shadow: 0px 1px 2px 0px #e4e5e73d;
+
+  box-shadow: 0px 12px 24px 0px #868c981f;
+}
+.toggle-shadow-active {
+  box-shadow: 0px 4px 4px 0px #0f0f101f inset;
+}
+
+.toggle-shadow-normal {
+  box-shadow: 0px 4px 4px 0px #0f0f100f inset;
+}
+.first-circle-shadow {
+  box-shadow: 0px 2px 4px 0px #16266414;
+
+  box-shadow: 0px 4px 8px 0px #16266414;
+
+  box-shadow: 0px 6px 10px 0px #16266414;
+
+  box-shadow: 0px -3px 3px 0px #e4e5e7 inset;
+}
+.xs-shadow {
+  box-shadow: 0px 2px 4px 0px #1b1c1d0a;
+}
+
+.trusted-label {
+  @apply text-gray900 text-sm font-medium;
+}
+
+.trusted-input-box {
+  @apply bg-gray50 flex h-11 w-full items-center gap-2 rounded-lg border border-gray200 px-4 py-3;
+}
+
+.trusted-input-field {
+  @apply placeholder:text-gray500 h-full w-full bg-transparent text-sm outline-none;
+}
