@@ -162,3 +162,254 @@ export const ContactIcon = ({ className, ...props }) => {
     </svg>
   );
 };
+
+export const AskAiIcon = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={16}
+      height={16}
+      viewBox="0 0 16 16"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <g clipPath="url(#clip0_640_12670)">
+        <path
+          d="M14.4268 2.42666L13.5734 1.57332C13.4984 1.49753 13.4091 1.43737 13.3107 1.39631C13.2123 1.35525 13.1067 1.33411 13.0001 1.33411C12.8935 1.33411 12.7879 1.35525 12.6895 1.39631C12.5911 1.43737 12.5018 1.49753 12.4268 1.57332L1.57344 12.4267C1.49766 12.5017 1.43749 12.591 1.39643 12.6894C1.35537 12.7878 1.33423 12.8934 1.33423 13C1.33423 13.1066 1.35537 13.2122 1.39643 13.3106C1.43749 13.409 1.49766 13.4983 1.57344 13.5733L2.42678 14.4267C2.50133 14.5033 2.59047 14.5642 2.68894 14.6057C2.78741 14.6473 2.89322 14.6687 3.00011 14.6687C3.107 14.6687 3.21281 14.6473 3.31128 14.6057C3.40975 14.5642 3.4989 14.5033 3.57344 14.4267L14.4268 3.57332C14.5034 3.49878 14.5643 3.40963 14.6058 3.31116C14.6474 3.21269 14.6688 3.10688 14.6688 2.99999C14.6688 2.8931 14.6474 2.78729 14.6058 2.68882C14.5643 2.59035 14.5034 2.5012 14.4268 2.42666Z"
+          stroke="url(#paint0_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.33325 4.66669L11.3333 6.66669"
+          stroke="url(#paint1_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M3.33325 4V6.66667"
+          stroke="url(#paint2_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M12.6667 9.33331V12"
+          stroke="url(#paint3_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6.66675 1.33331V2.66665"
+          stroke="url(#paint4_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M4.66667 5.33331H2"
+          stroke="url(#paint5_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13.9999 10.6667H11.3333"
+          stroke="url(#paint6_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M7.33333 2H6"
+          stroke="url(#paint7_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <linearGradient
+          id="paint0_linear_640_12670"
+          x1="1.33423"
+          y1="8.00142"
+          x2="14.1004"
+          y2="8.00142"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear_640_12670"
+          x1="9.33325"
+          y1="5.66669"
+          x2="11.248"
+          y2="5.66669"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint2_linear_640_12670"
+          x1="3.33325"
+          y1="5.33333"
+          x2="4.29062"
+          y2="5.33333"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint3_linear_640_12670"
+          x1="12.6667"
+          y1="10.6666"
+          x2="13.6241"
+          y2="10.6666"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint4_linear_640_12670"
+          x1="6.66675"
+          y1="1.99998"
+          x2="7.62412"
+          y2="1.99998"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint5_linear_640_12670"
+          x1={2}
+          y1="5.83331"
+          x2="4.55299"
+          y2="5.83331"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint6_linear_640_12670"
+          x1="11.3333"
+          y1="11.1667"
+          x2="13.8862"
+          y2="11.1667"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint7_linear_640_12670"
+          x1={6}
+          y1="2.5"
+          x2="7.27649"
+          y2="2.5"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <clipPath id="clip0_640_12670">
+          <rect width={16} height={16} fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
+export const ClockIcon = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <mask
+        id="mask0_701_7560"
+        style={{ maskType: "alpha" }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={24}
+        height={24}
+      >
+        <rect width={24} height={24} fill="currentColor" />
+      </mask>
+      <g mask="url(#mask0_701_7560)">
+        <path
+          d="M11.9808 20.5C9.81544 20.5 7.92828 19.7872 6.31928 18.3615C4.71028 16.9358 3.78403 15.1487 3.54053 13H5.07128C5.32378 14.727 6.10103 16.1587 7.40303 17.2952C8.70486 18.4318 10.2308 19 11.9808 19C13.9308 19 15.5849 18.3208 16.9433 16.9625C18.3016 15.6042 18.9808 13.95 18.9808 12C18.9808 10.05 18.3016 8.39583 16.9433 7.0375C15.5849 5.67917 13.9308 5 11.9808 5C10.8884 5 9.86478 5.24267 8.90978 5.728C7.95461 6.21317 7.13211 6.88075 6.44228 7.73075H9.05778V9.23075H3.98078V4.15375H5.48078V6.523C6.29228 5.56533 7.26411 4.82208 8.39628 4.29325C9.52828 3.76442 10.7231 3.5 11.9808 3.5C13.1603 3.5 14.2654 3.72308 15.2963 4.16925C16.3269 4.61542 17.2256 5.22183 17.9923 5.9885C18.7589 6.75517 19.3654 7.65392 19.8115 8.68475C20.2577 9.71542 20.4808 10.8205 20.4808 12C20.4808 13.1795 20.2577 14.2846 19.8115 15.3152C19.3654 16.3461 18.7589 17.2448 17.9923 18.0115C17.2256 18.7782 16.3269 19.3846 15.2963 19.8307C14.2654 20.2769 13.1603 20.5 11.9808 20.5ZM14.9828 16.027L11.2598 12.3038V7H12.7595V11.6962L16.0365 14.973L14.9828 16.027Z"
+          fill="currentColor"
+        />
+      </g>
+    </svg>
+  );
+};
+export const FilterIcon = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <mask
+        id="mask0_701_7571"
+        style={{ maskType: "alpha" }}
+        maskUnits="userSpaceOnUse"
+        x={0}
+        y={0}
+        width={24}
+        height={24}
+      >
+        <rect width={24} height={24} fill="currentColor" />
+      </mask>
+      <g mask="url(#mask0_701_7571)">
+        <path
+          d="M17.6538 19.6537C16.7169 19.6537 15.925 19.3303 15.278 18.6834C14.6312 18.0364 14.3077 17.2445 14.3077 16.3077C14.3077 15.3707 14.6312 14.5788 15.278 13.9319C15.925 13.2849 16.7169 12.9614 17.6538 12.9614C18.5908 12.9614 19.3827 13.2849 20.0295 13.9319C20.6765 14.5788 21 15.3707 21 16.3077C21 17.2445 20.6765 18.0364 20.0295 18.6834C19.3827 19.3303 18.5908 19.6537 17.6538 19.6537ZM17.6528 18.1537C18.1624 18.1537 18.5977 17.9736 18.9587 17.6134C19.3196 17.2531 19.5 16.8182 19.5 16.3087C19.5 15.799 19.3198 15.3637 18.9595 15.0027C18.5993 14.6419 18.1644 14.4614 17.6547 14.4614C17.1451 14.4614 16.7098 14.6416 16.349 15.0019C15.9882 15.3621 15.8077 15.797 15.8077 16.3067C15.8077 16.8164 15.9878 17.2516 16.348 17.6124C16.7083 17.9733 17.1433 18.1537 17.6528 18.1537ZM4.5 17.0577V15.5577H12.1155V17.0577H4.5ZM6.34625 11.0384C5.40925 11.0384 4.61733 10.7149 3.9705 10.0679C3.3235 9.42111 3 8.62919 3 7.69219C3 6.75536 3.3235 5.96344 3.9705 5.31644C4.61733 4.66961 5.40925 4.34619 6.34625 4.34619C7.28308 4.34619 8.075 4.66961 8.722 5.31644C9.36883 5.96344 9.69225 6.75536 9.69225 7.69219C9.69225 8.62919 9.36883 9.42111 8.722 10.0679C8.075 10.7149 7.28308 11.0384 6.34625 11.0384ZM6.34525 9.53844C6.85492 9.53844 7.29017 9.35827 7.651 8.99794C8.01183 8.63777 8.19225 8.20286 8.19225 7.69319C8.19225 7.18352 8.01217 6.74828 7.652 6.38744C7.29167 6.02661 6.85675 5.84619 6.34725 5.84619C5.83758 5.84619 5.40225 6.02628 5.04125 6.38644C4.68042 6.74678 4.5 7.18169 4.5 7.69119C4.5 8.20086 4.68017 8.63619 5.0405 8.99719C5.40067 9.35803 5.83558 9.53844 6.34525 9.53844ZM11.8845 8.44219V6.94219H19.5V8.44219H11.8845Z"
+          fill="currentColor"
+        />
+      </g>
+    </svg>
+  );
+};
+
+export const PencilIcon = ({ className, ...props }) => {
+  return (
+    <svg
+      width={16}
+      height={16}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <g id="edit">
+        <path
+          id="icon"
+          d="M3.33333 12.6667H4.28333L10.8 6.15L9.85 5.2L3.33333 11.7167V12.6667ZM2 14V11.1667L10.8 2.38333C10.9333 2.26111 11.0806 2.16667 11.2417 2.1C11.4028 2.03333 11.5722 2 11.75 2C11.9278 2 12.1 2.03333 12.2667 2.1C12.4333 2.16667 12.5778 2.26667 12.7 2.4L13.6167 3.33333C13.75 3.45556 13.8472 3.6 13.9083 3.76667C13.9694 3.93333 14 4.1 14 4.26667C14 4.44444 13.9694 4.61389 13.9083 4.775C13.8472 4.93611 13.75 5.08333 13.6167 5.21667L4.83333 14H2ZM10.3167 5.68333L9.85 5.2L10.8 6.15L10.3167 5.68333Z"
+          fill="currentColor"
+        />
+      </g>
+    </svg>
+  );
+};
