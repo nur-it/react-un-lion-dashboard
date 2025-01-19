@@ -14,7 +14,7 @@ const RouterProvider = () => {
           <Route index element={<HomePage />} />
           <Route path="knowledge-base" element={<KnowledgeBasePage />} />
           <Route path="ask-avatar" element={<AskAvatarPage />} />
-          <Route path="setting" element={<SettingPage />} />
+          <Route path="settings" element={<SettingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
