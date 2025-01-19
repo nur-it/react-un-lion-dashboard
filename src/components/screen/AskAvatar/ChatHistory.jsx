@@ -22,7 +22,7 @@ const historyItems = [
 
 export function ChatHistory() {
   return (
-    <div className="w-full rounded-2xl border-[#e4e7ec] bg-white lg:bg-gradient-to-b from-white via-white to-[#b4aff91d] lg:min-h-[707px] lg:max-w-[280px]">
+    <div className="w-full rounded-2xl border-[#e4e7ec] bg-[#f8f7fe] to-[#b4aff91d] lg:min-h-[707px] lg:max-w-[280px]">
       <div className="flex items-center border-b p-4">
         <Button variant="ghost" size="icon" className="mr-2">
           <Clock className="h-4 w-4" />

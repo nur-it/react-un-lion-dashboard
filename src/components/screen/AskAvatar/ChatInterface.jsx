@@ -7,7 +7,7 @@ export default function ChatInterface() {
     <div className="gap-8 space-y-8 lg:flex lg:space-y-0">
       <ChatHistory />
       <div className="flex-1">
-        <div className="flex h-full items-center justify-center rounded-2xl border-[#e4e7ec] bg-white from-white via-white to-[#b4aff92d] p-4 lg:min-h-[707px] lg:bg-gradient-to-r">
+        <div className="flex h-full items-center justify-center rounded-2xl border-[#e4e7ec] bg-white from-white to-[#f8f7fe] p-4 lg:min-h-[707px] lg:bg-gradient-to-r">
           <div className="min-w-full space-y-5 xl:min-w-[820px] xl:space-y-10">
             <div className="space-y-4 p-8 text-center">
               <h1 className="bg-gradient-primary bg-clip-text text-2xl font-bold text-transparent sm:text-5xl">
