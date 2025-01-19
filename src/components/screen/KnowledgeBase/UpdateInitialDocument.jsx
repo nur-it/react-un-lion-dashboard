@@ -80,7 +80,7 @@ const UpdateInitialDocument = () => {
                   </div>
                 </div>
               </div>
-              <button>
+              <button className="text-gray600">
                 <RiCloseLine />
               </button>
             </div>
