@@ -71,7 +71,9 @@ const InformationKnowledge = () => {
             />
           </div>
         </div>
-        <UpdateInitialDocument />
+        <div>
+          <UpdateInitialDocument />
+        </div>
       </div>
     </form>
   );
