@@ -12,7 +12,7 @@ export const menuItems = {
     },
     {
       label: "Ask the Avatar",
-      href: "/setting",
+      href: "/ask-avatar",
       icon: StarsIcon,
       notify: 4,
     },
