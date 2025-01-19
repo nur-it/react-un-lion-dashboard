@@ -162,3 +162,167 @@ export const ContactIcon = ({ className, ...props }) => {
     </svg>
   );
 };
+
+export const AskAiIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={16}
+      height={16}
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <g clipPath="url(#clip0_640_12670)">
+        <path
+          d="M14.4268 2.42666L13.5734 1.57332C13.4984 1.49753 13.4091 1.43737 13.3107 1.39631C13.2123 1.35525 13.1067 1.33411 13.0001 1.33411C12.8935 1.33411 12.7879 1.35525 12.6895 1.39631C12.5911 1.43737 12.5018 1.49753 12.4268 1.57332L1.57344 12.4267C1.49766 12.5017 1.43749 12.591 1.39643 12.6894C1.35537 12.7878 1.33423 12.8934 1.33423 13C1.33423 13.1066 1.35537 13.2122 1.39643 13.3106C1.43749 13.409 1.49766 13.4983 1.57344 13.5733L2.42678 14.4267C2.50133 14.5033 2.59047 14.5642 2.68894 14.6057C2.78741 14.6473 2.89322 14.6687 3.00011 14.6687C3.107 14.6687 3.21281 14.6473 3.31128 14.6057C3.40975 14.5642 3.4989 14.5033 3.57344 14.4267L14.4268 3.57332C14.5034 3.49878 14.5643 3.40963 14.6058 3.31116C14.6474 3.21269 14.6688 3.10688 14.6688 2.99999C14.6688 2.8931 14.6474 2.78729 14.6058 2.68882C14.5643 2.59035 14.5034 2.5012 14.4268 2.42666Z"
+          stroke="url(#paint0_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.33325 4.66669L11.3333 6.66669"
+          stroke="url(#paint1_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M3.33325 4V6.66667"
+          stroke="url(#paint2_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M12.6667 9.33331V12"
+          stroke="url(#paint3_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6.66675 1.33331V2.66665"
+          stroke="url(#paint4_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M4.66667 5.33331H2"
+          stroke="url(#paint5_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13.9999 10.6667H11.3333"
+          stroke="url(#paint6_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M7.33333 2H6"
+          stroke="url(#paint7_linear_640_12670)"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <linearGradient
+          id="paint0_linear_640_12670"
+          x1="1.33423"
+          y1="8.00142"
+          x2="14.1004"
+          y2="8.00142"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear_640_12670"
+          x1="9.33325"
+          y1="5.66669"
+          x2="11.248"
+          y2="5.66669"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint2_linear_640_12670"
+          x1="3.33325"
+          y1="5.33333"
+          x2="4.29062"
+          y2="5.33333"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint3_linear_640_12670"
+          x1="12.6667"
+          y1="10.6666"
+          x2="13.6241"
+          y2="10.6666"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint4_linear_640_12670"
+          x1="6.66675"
+          y1="1.99998"
+          x2="7.62412"
+          y2="1.99998"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint5_linear_640_12670"
+          x1={2}
+          y1="5.83331"
+          x2="4.55299"
+          y2="5.83331"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint6_linear_640_12670"
+          x1="11.3333"
+          y1="11.1667"
+          x2="13.8862"
+          y2="11.1667"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <linearGradient
+          id="paint7_linear_640_12670"
+          x1={6}
+          y1="2.5"
+          x2="7.27649"
+          y2="2.5"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#E375D1" />
+          <stop offset="0.837708" stopColor="#8370F8" />
+        </linearGradient>
+        <clipPath id="clip0_640_12670">
+          <rect width={16} height={16} fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
