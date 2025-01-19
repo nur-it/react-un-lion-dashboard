@@ -1,3 +1,4 @@
+import AskAvatarPage from "@/app/ask-avatar";
 import HomePage from "@/app/home";
 import KnowledgeBasePage from "@/app/knowledge-base";
 import RootLayout from "@/layouts/root-layout";
@@ -11,6 +12,7 @@ const RouterProvider = () => {
         <Route element={<RootLayout />}>
           <Route index element={<HomePage />} />
           <Route path="knowledge-base" element={<KnowledgeBasePage />} />
+          <Route path="ask-avatar" element={<AskAvatarPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
