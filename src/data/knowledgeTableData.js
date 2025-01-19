@@ -23,4 +23,12 @@ export const knowledgeTableData = [
     source: "Facebook",
     isActive: true,
   },
+  {
+    title: "Test",
+    type: "Post",
+    data: "24/11/2024",
+    id: "123453",
+    source: "Twitter",
+    isActive: true,
+  },
 ];
