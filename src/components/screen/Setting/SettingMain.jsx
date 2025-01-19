@@ -1,4 +1,5 @@
 import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router";
 import userImg from "../../../assets/img/user.svg";
 import Notification from "./Notification";
 const SettingMain = () => {
@@ -45,6 +46,16 @@ const SettingMain = () => {
 
       {/* Notification */}
       <Notification />
+
+      <p className="text-base text-text_secondary">
+        If you need any help{" "}
+        <Link
+          to={"./contact-us"}
+          className="font-medium text-primary_main underline"
+        >
+          Contact us
+        </Link>{" "}
+      </p>
     </div>
   );
 };
