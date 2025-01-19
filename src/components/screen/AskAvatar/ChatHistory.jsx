@@ -8,8 +8,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ClockIcon, FilterIcon } from "@/components/ui/svgs";
+import { ClockIcon, FilterIcon, PencilIcon } from "@/components/ui/svgs";
 import { MoreHorizontal } from "lucide-react";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const historyItems = [
   { id: "1", title: "Greetings & Inquiry", date: "03 Jan 2025" },
@@ -51,14 +52,17 @@ export function ChatHistory() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100"
+                        className="absolute right-2 top-1/2 -translate-y-1/2"
                       >
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Rename</DropdownMenuItem>
-                      <DropdownMenuItem className="text-red-600">
+                      <DropdownMenuItem>
+                        <PencilIcon /> Rename
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-error">
+                        <RiDeleteBin6Line />
                         Remove
                       </DropdownMenuItem>
                     </DropdownMenuContent>
