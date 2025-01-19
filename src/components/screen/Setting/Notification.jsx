@@ -11,12 +11,12 @@ const Notification = () => {
   // State to manage selected radio button
   const [selectedOption, setSelectedOption] = useState(options[0].id);
   return (
-    <div className="space-y-6 rounded-xl border border-gray300 p-6">
+    <div className="space-y-4 sm:space-y-6 rounded-xl border border-gray300 p-6">
       <h5 className="text-lg font-medium text-secondary_main">
         Notification Settings
       </h5>
-      <div className="space-y-1">
-        <div className="flex items-start gap-6">
+      <div className="space-y-4 sm:space-y-1">
+        <div className="flex items-start flex-col sm:flex-row gap-4 sm:gap-6">
           <p className="text-sm text-text_secondary">Email Notification</p>
           <div className="space-y-4">
             {options.map((option) => (
@@ -47,7 +47,7 @@ const Notification = () => {
           </div>
         </div>
         <div className="flex items-center justify-end">
-          <Button>Save</Button>
+          <Button className="w-full sm:w-auto">Save</Button>
         </div>
       </div>
     </div>
