@@ -44,13 +44,13 @@ export function ChatInput() {
   };
 
   return (
-    <div className="relative rounded-xl border border-[#E4E7EC] bg-black/[0.05] px-4 py-3 shadow-primary">
+    <div className="relative rounded-xl border border-[#E4E7EC] bg-black/[0.05] px-4 py-3 shadow-primary dark:border-[#344054] dark:bg-white_opacity05">
       {/* Attachment Display */}
       <div className="flex flex-wrap gap-2">
         {attachments.map((attachment, index) => (
           <div
             key={index}
-            className="relative flex items-center gap-2 rounded border-gray-300 bg-white p-1 shadow-sm"
+            className="relative flex items-center gap-2 rounded border-gray-300 bg-white p-1 shadow-sm dark:border-[#344054] dark:bg-secondary_main dark:text-white"
           >
             {attachment.preview ? (
               <div className="max-h-[65px] max-w-[65px]">
@@ -71,7 +71,7 @@ export function ChatInput() {
             <button
               type="button"
               onClick={() => removeAttachment(index)}
-              className="absolute -right-1 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-white text-xs text-red-500 hover:underline"
+              className="absolute -right-1 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-white text-xs text-red-500 hover:underline dark:bg-secondary_main"
             >
               <X className="h-3 w-3" />
             </button>
@@ -98,7 +98,7 @@ export function ChatInput() {
             <div className="flex items-center gap-2">
               <label
                 htmlFor="attachment"
-                className="flex cursor-pointer items-center gap-1 text-sm text-[#4a5773]"
+                className="flex cursor-pointer items-center gap-1 text-sm text-[#4a5773] dark:text-[#98A2B3]"
               >
                 <CiCirclePlus className="h-4 w-4" />
                 <p>Add Attachment</p>
@@ -112,7 +112,7 @@ export function ChatInput() {
               />
             </div>
             <div className="flex items-center gap-2">
-              <div className="text-muted-foreground text-sm">
+              <div className="text-sm text-[#4a5773] dark:text-[#98A2B3]">
                 {input.length}/1000
               </div>
               <Button type="submit" size="icon" className="rounded-md">
