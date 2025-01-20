@@ -43,7 +43,7 @@ export function ChatHistory() {
                 <div key={item.id} className="group relative">
                   <Button
                     variant="ghost"
-                    className="h-auto w-full justify-start rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50"
+                    className="h-auto w-full justify-start rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
                   >
                     {item.title}
                   </Button>
