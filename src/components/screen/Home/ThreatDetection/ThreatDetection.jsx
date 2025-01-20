@@ -1,5 +1,5 @@
 import search from "../../../../assets/icon/search.svg";
-import ThreatDetectionTable from "./ThreatDetectionTable";
+// import ThreatDetectionTable from "./ThreatDetectionTable";
 
 const ThreatDetection = () => {
   return (
@@ -22,7 +22,7 @@ const ThreatDetection = () => {
           />
         </div>
       </div>
-      <ThreatDetectionTable />
+      {/* <ThreatDetectionTable /> */}
     </div>
   );
 };

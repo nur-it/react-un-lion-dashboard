@@ -24,7 +24,7 @@ const RootLayout = () => {
         </header>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto px-6 pt-6">
+        <div className="flex-1 overflow-y-auto px-5 sm:px-6 pt-6">
           <Outlet />
         </div>
       </section>
