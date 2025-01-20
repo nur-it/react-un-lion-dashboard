@@ -15,7 +15,7 @@ const CategoryDropdown = ({ options }) => {
   };
 
   return (
-    <div className="relative w-[260px]">
+    <div className="relative w-full sm:w-[260px]">
       {/* Dropdown button */}
       <div
         className="flex h-10 items-center justify-between gap-2.5 rounded-lg border border-gray300 bg-[#0000000F] px-4 py-3 cursor-pointer text-[#00000099]"
