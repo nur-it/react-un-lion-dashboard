@@ -54,6 +54,9 @@ export default {
       backgroundImage: {
         "gradient-primary":
           "linear-gradient(90deg, #4A5773 10.31%, #FB6BE3 47.87%, #725CF6 80.2%)",
+
+        "gradient-dark-text":
+          "linear-gradient(90deg, #FFF 10.31%, #FB6BE3 47.87%, #725CF6 80.2%)",
       },
     },
   },

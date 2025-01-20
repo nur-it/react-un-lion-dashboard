@@ -20,7 +20,7 @@ export function TopicSuggestions() {
         <Button
           key={topic.id}
           variant="outline"
-          className="rounded-2xl border border-[#d0d5dd] bg-white_opacity05 px-3 py-1.5 text-sm font-normal text-secondary_main"
+          className="rounded-2xl border border-[#d0d5dd] bg-white_opacity05 px-3 py-1.5 text-sm font-normal text-secondary_main dark:border-[#344054] dark:bg-[#252848] dark:text-white dark:hover:bg-[#1d204b] dark:hover:text-white"
           size="sm"
         >
           {topic.name}
