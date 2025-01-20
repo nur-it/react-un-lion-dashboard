@@ -23,10 +23,10 @@ const UpdateInitialDocument = () => {
   };
   return (
     <div className="space-y-6">
-      <div className="md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
+      <div className="md:grid md:grid-cols-9 md:gap-10 space-y-10 md:space-y-0">
         <div className="md:col-span-3">
           <div className="relative flex items-center gap-1.5">
-            <p className="text-lg font-medium text-secondary_main">
+            <p className="text-base sm:text-lg font-medium text-secondary_main dark:text-white">
               Upload Intial Documents
             </p>
             <img src={info} alt="info" className="cursor-pointer" />
@@ -60,33 +60,31 @@ const UpdateInitialDocument = () => {
           </div>
 
           {/* loading part */}
-          <div className="w-full rounded-xl border border-gray300 bg-black/[4%] py-4 pl-[14px] pr-4">
+          <div className="w-full rounded-xl border border-gray300 bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]">
             <div className="flex justify-between gap-3">
               <div className="flex items-center gap-3">
                 <img src={fileUpload} alt="fileUpload" />
                 <div>
-                  <p className="text-sm font-medium text-secondary_main">
+                  <p className="text-sm font-medium text-secondary_main dark:text-white">
                     new-video.mp4
                   </p>
                   <div className="flex items-center gap-1">
-                    <p className="text-xs text-text_secondary">
+                    <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
                       60 KB of 6.5 MB
                     </p>
-                    <div className="h-1 w-1 rounded-full bg-[#00000080]"></div>
-                    <div className="flex items-center gap-1">
-                      <FiLoader size={15} />
-                      <p className="text-xs text-secondary_main">
-                        Uploading...
-                      </p>
+                    <div className="h-1 w-1 rounded-full bg-[#00000080] dark:bg-[#FFFFFF80]"></div>
+                    <div className="flex items-center gap-1 text-secondary_main dark:text-white">
+                      <FiLoader size={16} />
+                      <p className="text-xs">Uploading...</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <button className="text-gray600">
+              <button className="text-gray600 dark:text-white">
                 <RiCloseLine />
               </button>
             </div>
-            <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A]">
+            <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A] dark:bg-[#FFFFFF1A]">
               <div
                 className="h-full rounded-full bg-[#665CF3] transition-all duration-300"
                 style={{ width: `${65}%` }}
@@ -95,19 +93,23 @@ const UpdateInitialDocument = () => {
           </div>
 
           {/* storage part */}
-          <div className="flex w-full items-center justify-between gap-3 rounded-xl border border-gray300 bg-black/[4%] py-4 pl-[14px] pr-4">
+          <div className="flex w-full items-center justify-between gap-3 rounded-xl border border-gray300 bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]">
             <div className="flex items-center gap-3">
               <img src={addFrame} alt="addFrame" />
               <div>
-                <p className="text-sm font-medium text-secondary_main">
+                <p className="text-sm font-medium text-secondary_main dark:text-white">
                   my-photo.jpg
                 </p>
                 <div className="flex items-center gap-1">
-                  <p className="text-xs text-text_secondary">94 KB of 94 KB</p>
-                  <div className="h-1 w-1 rounded-full bg-[#00000080]"></div>
+                  <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
+                    94 KB of 94 KB
+                  </p>
+                  <div className="h-1 w-1 rounded-full bg-[#00000080] dark:bg-[#FFFFFF80]"></div>
                   <div className="flex items-center gap-1">
                     <img src={tickMark} alt="tickMark" />
-                    <p className="text-xs text-secondary_main">Completed</p>
+                    <p className="text-xs text-secondary_main dark:text-white">
+                      Completed
+                    </p>
                   </div>
                 </div>
               </div>
@@ -119,7 +121,7 @@ const UpdateInitialDocument = () => {
         </div>
       </div>
       <div className="flex items-center justify-end">
-        <Button>Submit</Button>
+        <Button className="w-full md:max-w-[97px]">Submit</Button>
       </div>
     </div>
   );
