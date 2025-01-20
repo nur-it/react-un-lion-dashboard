@@ -8,7 +8,7 @@ const KnowledgeBasePage = () => {
   return (
     <div className="space-y-6 pb-10">
       <PageHeading page_name="Knowledge Base" />
-      <div className="space-y-6">
+      <div className="space-y-2 sm:space-y-6">
         <ToggleTab
           title="Add Information to the Knowledge Base"
           content={<InformationKnowledge />}

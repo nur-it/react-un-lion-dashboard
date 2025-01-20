@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const PageHeading = ({ page_name }) => {
   return (
     <div className="space-y-2">
-      <h4 className="text-lg font-bold text-secondary_main dark:text-white sm:text-2xl">
+      <h4 className="text-[24px] font-bold text-secondary_main dark:text-white sm:text-2xl">
         {page_name}
       </h4>
       <div className="flex items-center gap-1 text-gray600 dark:text-text_disable">

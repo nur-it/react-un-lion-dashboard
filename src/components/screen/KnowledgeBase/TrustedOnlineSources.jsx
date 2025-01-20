@@ -5,20 +5,20 @@ import crossCircle from "../../../assets/icon/x-circle.svg";
 
 const TrustedOnlineSources = () => {
   return (
-    <div className="grid grid-cols-9 gap-10">
-      <div className="col-span-3">
+    <div className="md:grid md:grid-cols-9 md:gap-10 space-y-4 md:space-y-0">
+      <div className="md:col-span-3">
         <div className="relative flex items-center gap-1.5">
-          <p className="text-lg font-medium text-secondary_main">
+          <p className="text-base sm:text-lg font-medium text-secondary_main dark:text-white">
             Trusted Online Sources
           </p>
           <img src={info} alt="info" className="cursor-pointer" />
         </div>
       </div>
-      <div className="col-span-6">
-        <form action="" className="space-y-6">
-          <div className="grid grid-cols-2 gap-3">
+      <div className="md:col-span-6">
+        <form action="" className="space-y-3 md:space-y-6">
+          <div className="grid md:grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label htmlFor="Wikipedia Page" className="trusted-label">
+              <label htmlFor="Wikipedia Page" className="trusted-label dark:text-white">
                 Wikipedia Page
               </label>
               <div className="trusted-input-box">
@@ -44,7 +44,7 @@ const TrustedOnlineSources = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid md:grid-cols-2 gap-3">
             <div className="space-y-1">
               <label htmlFor="Facebook" className="trusted-label">
                 Facebook
@@ -72,7 +72,7 @@ const TrustedOnlineSources = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid md:grid-cols-2 gap-3">
             <div className="space-y-1">
               <label htmlFor="TikTok" className="trusted-label">
                 TikTok
