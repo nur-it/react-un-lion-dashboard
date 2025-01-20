@@ -136,6 +136,7 @@ const ThreatDetectionTable = () => {
           </tbody>
         </table>
       </div>
+
       {/* Pagination */}
       <div className="mt-6 flex w-full items-center justify-center">
         <div className="flex items-center gap-1.5">

@@ -13,7 +13,7 @@ const ThreatDetection = () => {
             <p className="text-sm text-error">8 open threats to review</p>
           </div>
         </div>
-        <div className="border-gray300 flex h-10 max-w-[384px] items-center gap-2.5 rounded-lg border bg-[#0000000F] px-4 py-3">
+        <div className="flex h-10 max-w-[384px] items-center gap-2.5 rounded-lg border border-gray300 bg-[#0000000F] px-4 py-3">
           <img src={search} alt="search" />
           <input
             type="text"
@@ -22,9 +22,7 @@ const ThreatDetection = () => {
           />
         </div>
       </div>
-      <div>
-        <ThreatDetectionTable />
-      </div>
+      <ThreatDetectionTable />
     </div>
   );
 };

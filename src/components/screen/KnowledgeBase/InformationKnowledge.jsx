@@ -1,7 +1,7 @@
 import { useState } from "react";
 import info from "../../../assets/icon/information-circle.svg";
+import InfoUpdateInitialDocument from "./InfoUpdateInitialDocument";
 import Tooltip from "./Tooltip";
-import UpdateInitialDocument from "./UpdateInitialDocument";
 
 const InformationKnowledge = () => {
   const [hoveredTooltip, setHoveredTooltip] = useState(null);
@@ -72,7 +72,7 @@ const InformationKnowledge = () => {
           </div>
         </div>
         <div>
-          <UpdateInitialDocument />
+          <InfoUpdateInitialDocument />
         </div>
       </div>
     </form>

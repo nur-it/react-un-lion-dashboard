@@ -45,13 +45,13 @@
 }
 
 .trusted-label {
-  @apply text-gray900 text-sm font-medium;
+  @apply text-sm font-medium text-gray900;
 }
 
 .trusted-input-box {
-  @apply bg-gray50 flex h-11 w-full items-center gap-2 rounded-lg border border-gray200 px-4 py-3;
+  @apply flex h-11 w-full items-center gap-2 rounded-lg border border-gray200 bg-gray50 px-4 py-3;
 }
 
 .trusted-input-field {
-  @apply placeholder:text-gray500 h-full w-full bg-transparent text-sm outline-none;
+  @apply h-full w-full bg-transparent text-sm outline-none placeholder:text-gray500;
 }
