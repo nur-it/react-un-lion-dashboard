@@ -1,4 +1,5 @@
 import InformationKnowledge from "@/components/screen/KnowledgeBase/InformationKnowledge";
+import InitialInformation from "@/components/screen/KnowledgeBase/InitialInformation";
 import KnowledgeTable from "@/components/screen/KnowledgeBase/KnowledgeTable";
 import ToggleTab from "@/components/screen/KnowledgeBase/ToggleTab";
 import PageHeading from "@/components/shared/PageHeading";
@@ -15,8 +16,7 @@ const KnowledgeBasePage = () => {
         <ToggleTab title="Knowledge Table" content={<KnowledgeTable />} />
         <ToggleTab
           title="Initial Information"
-          // content={<InitialInformation />}
-          content={"three"}
+          content={<InitialInformation />}
         />
       </div>
     </div>
