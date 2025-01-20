@@ -24,14 +24,14 @@ const historyItems = [
 
 export function ChatHistory() {
   return (
-    <div className="w-full rounded-2xl border-[#e4e7ec] bg-[#f8f7fe] to-[#b4aff91d] lg:min-h-[707px] lg:max-w-[280px]">
+    <div className="w-full rounded-2xl bg-[#f8f7fe] dark:bg-[#1a1d40] lg:min-h-[707px] lg:max-w-[280px]">
       <div className="space-y-6">
         <div className="flex items-center justify-between p-4">
-          <button>
+          <button className="text-[#4A5773] dark:text-[#E4E7EC]">
             <ClockIcon />
           </button>
-          <button className="inline-flex items-center gap-2 rounded-md border border-[#E4E7EC] bg-white px-2 py-1">
-            <span className="text-sm font-normal text-[#4A5773]">All Time</span>
+          <button className="inline-flex items-center gap-2 rounded-md border border-[#E4E7EC] bg-white px-2 py-1 text-[#4A5773] dark:border-[#344054] dark:bg-[#171C35] dark:text-[#E4E7EC]">
+            <span className="text-sm font-normal">All Time</span>
             <FilterIcon />
           </button>
         </div>
