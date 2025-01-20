@@ -45,7 +45,7 @@ export function ChatHistory() {
   return (
     <div className="w-full rounded-2xl bg-[#f8f7fe] dark:bg-[#1a1d40] lg:min-h-[707px] lg:max-w-[280px]">
       <div className="space-y-6">
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between px-3 py-2 lg:p-4">
           <button className="text-[#4A5773] dark:text-[#E4E7EC]">
             <ClockIcon />
           </button>
