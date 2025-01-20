@@ -22,7 +22,7 @@ const ToggleTab = ({ title, content }) => {
       {/* Content */}
       <div
         className={`overflow-hidden transition-all duration-700 ease-in-out ${
-          isOpen ? "max-h-[150vh]" : "max-h-0"
+          isOpen ? "max-h-[280vh]" : "max-h-0"
         }`}
       >
         <div>{content}</div>
