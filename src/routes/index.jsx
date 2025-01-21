@@ -27,11 +27,15 @@ const RouterProvider = () => {
           <Route path="knowledge-base" element={<KnowledgeBasePage />} />
           <Route path="ask-avatar" element={<AskAvatarPage />} />
           <Route path="settings" element={<SettingPage />} />
+        </Route>
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
         <Route path="forget-password" element={<ForgetPasswordPage />} />
-        <Route path="forget-password-message" element={<ForgetPasswordMessagePage />} />
-          <Route path="*" element={<ErrorPage />} />
+        <Route
+          path="forget-password-message"
+          element={<ForgetPasswordMessagePage />}
+        />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );
