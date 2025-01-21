@@ -5,7 +5,7 @@ const SignInPage = () => {
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
-        <div className="w-[540px] space-y-10 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-10">
+        <div className="w-[335px] space-y-10 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-6 sm:w-[540px] sm:p-10">
           <div className="flex items-center justify-center">
             <div className="space-y-2">
               <h4 className="text-center text-2xl font-bold text-white">
@@ -39,11 +39,11 @@ const SignInPage = () => {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <input
                     type="checkbox"
                     id="accent-checkbox"
-                    className="h-5 w-5 rounded border-[#98A2B3] text-blue-600"
+                    className="h-5 w-5 bg-transparent rounded border-[#98A2B3] text-blue-600"
                   />
                   <label htmlFor="accent-checkbox" className="text-white">
                     Remember me
@@ -56,7 +56,9 @@ const SignInPage = () => {
                 </div>
               </div>
             </div>
-            <Button className="h-[56px] w-full bg-primary_main">Sign In</Button>
+            <Button className="h-12 w-full bg-primary_main sm:h-[56px]">
+              Sign In
+            </Button>
           </form>
         </div>
       </div>
