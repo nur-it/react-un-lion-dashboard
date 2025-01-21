@@ -6,7 +6,7 @@ const EmotionBar = ({ label, value, maxValue, color }) => {
 
   return (
     <div className="space-y-[2px]">
-      <p className="text-sm text-text_secondary dark:white/[80%]">{label}</p>
+      <p className="text-sm text-text_secondary dark:text-[#FFFFFFCC]">{label}</p>
       <div className="relative flex items-center whitespace-nowrap">
         <div
           className="flex h-2.5 w-full overflow-hidden rounded-full bg-[#0000000D] dark:bg-white/[10%]"
