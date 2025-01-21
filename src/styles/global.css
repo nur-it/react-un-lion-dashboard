@@ -56,5 +56,5 @@
   @apply h-full w-full bg-transparent text-sm outline-none placeholder:text-gray500;
 }
 .auth_input_field {
-  @apply flex h-[52px] w-full items-center rounded-lg border border-[#FFFFFF1A] bg-[#FFFFFF0A] px-3 py-4 text-sm text-white outline-none placeholder:text-white/[50%];
+  @apply flex h-12 w-full items-center rounded-lg border border-[#FFFFFF1A] bg-[#FFFFFF0A] px-3 py-4 text-sm text-white outline-none placeholder:text-white/[50%] sm:h-[52px];
 }

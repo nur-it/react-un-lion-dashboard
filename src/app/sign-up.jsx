@@ -2,11 +2,11 @@ import CustomCheckbox from "@/components/shared/CustomCheckbox";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   return (
     <section>
-      <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
-        <div className="w-[335px] space-y-10 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-6 sm:w-[540px] sm:p-10">
+      <div className="flex h-screen w-full items-center justify-center overflow-hidden bg-dark_bg">
+        <div className="w-[335px] space-y-5 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-6 sm:w-[540px] sm:space-y-10 sm:p-10">
           <div className="flex items-center justify-center">
             <div className="space-y-2">
               <h4 className="text-center text-2xl font-bold text-white">
@@ -17,8 +17,8 @@ const SignInPage = () => {
               </p>
             </div>
           </div>
-          <form action="#" className="space-y-6">
-            <div className="space-y-5">
+          <form action="#" className="space-y-5 sm:space-y-6">
+            <div className="space-y-4 sm:space-y-5">
               <div className="space-y-2">
                 <label htmlFor="Username" className="text-sm text-white">
                   Username
@@ -30,7 +30,17 @@ const SignInPage = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="Password" className="text-sm text-white">
+                <label htmlFor="email" className="text-sm text-white">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="auth_input_field"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="Username" className="text-sm text-white">
                   Password
                 </label>
                 <input
@@ -66,4 +76,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
