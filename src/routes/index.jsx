@@ -6,13 +6,20 @@ import SettingPage from "@/app/setting";
 import SignInPage from "@/app/sign-in";
 import RootLayout from "@/layouts/root-layout";
 import { BrowserRouter, Route, Routes } from "react-router";
+// import ProtectedRoute from "./auth-protected-route";
 
 const RouterProvider = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* root layout */}
-        <Route element={<RootLayout />}>
+        <Route
+          element={
+            // <ProtectedRoute>
+            <RootLayout />
+            // </ProtectedRoute>
+          }
+        >
           <Route index element={<HomePage />} />
           <Route path="knowledge-base" element={<KnowledgeBasePage />} />
           <Route path="ask-avatar" element={<AskAvatarPage />} />
