@@ -11,7 +11,7 @@ const HomePage = () => {
       {/* <Button variant="default">Button</Button> */}
       <StatisticEmotionAnalytics />
       <MentionSentiment />
-      <ThreatDetection />
+      {/* <ThreatDetection /> */}
     </div>
   );
 };
