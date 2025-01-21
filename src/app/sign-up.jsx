@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   return (
     <section>
-      <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
-        <div className="w-[335px] space-y-10 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-6 sm:w-[540px] sm:p-10">
+      <div className="flex h-screen w-full items-center justify-center overflow-hidden bg-dark_bg">
+        <div className="w-[335px] space-y-5 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-6 sm:w-[540px] sm:space-y-10 sm:p-10">
           <div className="flex items-center justify-center">
             <div className="space-y-2">
               <h4 className="text-center text-2xl font-bold text-white">
@@ -29,7 +29,17 @@ const SignInPage = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="Password" className="text-sm text-white">
+                <label htmlFor="email" className="text-sm text-white">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="auth_input_field"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="Username" className="text-sm text-white">
                   Password
                 </label>
                 <input
@@ -43,7 +53,7 @@ const SignInPage = () => {
                   <input
                     type="checkbox"
                     id="accent-checkbox"
-                    className="h-5 w-5 bg-transparent rounded border-[#98A2B3] text-blue-600"
+                    className="h-5 w-5 rounded border-[#98A2B3] bg-transparent text-blue-600"
                   />
                   <label htmlFor="accent-checkbox" className="text-white">
                     Remember me
@@ -66,4 +76,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
