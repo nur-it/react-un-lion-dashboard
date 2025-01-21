@@ -1,6 +1,7 @@
 import AskAvatarPage from "@/app/ask-avatar";
 import HomePage from "@/app/home";
 import KnowledgeBasePage from "@/app/knowledge-base";
+import ErrorPage from "@/app/not-found";
 import SettingPage from "@/app/setting";
 import SignInPage from "@/app/sign-in";
 import RootLayout from "@/layouts/root-layout";
@@ -18,6 +19,7 @@ const RouterProvider = () => {
           <Route path="settings" element={<SettingPage />} />
         </Route>
         <Route path="sign-in" element={<SignInPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );
