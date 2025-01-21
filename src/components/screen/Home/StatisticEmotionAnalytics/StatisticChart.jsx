@@ -17,7 +17,7 @@ const StatisticChart = () => {
     datasets: [
       {
         label: "High Risk",
-        data: [10, 11, 10, 8, 25, 10, 18],
+        data: [11, 11, 10, 8, 25, 10, 18],
         backgroundColor: "#F23838",
         borderRadius: {
           topLeft: 20,
