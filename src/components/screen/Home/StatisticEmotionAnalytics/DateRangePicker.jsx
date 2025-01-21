@@ -47,7 +47,7 @@ const DateRangePicker = () => {
 
       {/* Calendar shown when clicked */}
       {isCalendarOpen && (
-        <div className="absolute right-0 z-10 mt-2 bg-white border border-[#DADDE5] shadow-lg  rounded-lg">
+        <div className="absolute right-[-16px] sm:right-0 z-10 mt-2 bg-white border border-[#DADDE5] shadow-lg  rounded-lg">
           <DatePicker
             selected={tempStartDate || startDate}
             onChange={handleSelectDates}
@@ -60,7 +60,7 @@ const DateRangePicker = () => {
           />
 
           {/* Buttons for apply and cancel */}
-          <div className="p-4 flex justify-between gap-4 border-t border-[#E2E4E9] ">
+          <div className="p-2 sm:p-4 flex justify-between gap-4 border-t border-[#E2E4E9] ">
             <button
               className="w-[50%] px-6 py-1.5 bg-white border border-[#E2E4E9] rounded-lg text-sm text-[#525866]"
               onClick={handleCancel}
