@@ -1,5 +1,6 @@
 import AskAvatarPage from "@/app/ask-avatar";
 import ForgetPasswordPage from "@/app/forget-password";
+import ForgetPasswordMessagePage from "@/app/forget-password-message";
 import HomePage from "@/app/home";
 import KnowledgeBasePage from "@/app/knowledge-base";
 import SettingPage from "@/app/setting";
@@ -22,6 +23,7 @@ const RouterProvider = () => {
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
         <Route path="forget-password" element={<ForgetPasswordPage />} />
+        <Route path="forget-password-message" element={<ForgetPasswordMessagePage />} />
       </Routes>
     </BrowserRouter>
   );
