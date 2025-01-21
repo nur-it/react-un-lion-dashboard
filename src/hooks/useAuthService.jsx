@@ -26,8 +26,13 @@ export const useRegister = () => {
   const queryClient = useQueryClient();
 
   return useMutation(authService.register, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["currentUser"]); // Optionally refresh user
+    onSuccess: (data) => {
+      // Save tokens in cookies
+      Cookies.set("accessToken", data.accessToken, { expires: 7 });
+      Cookies.set("refreshToken", data.refreshToken, { expires: 7 });
+
+      // Optionally refresh user data
+      queryClient.invalidateQueries(["currentUser"]);
     },
     onError: (error) => {
       console.error("Registration failed:", error.message);
