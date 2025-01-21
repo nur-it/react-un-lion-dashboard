@@ -48,7 +48,7 @@ const SignInPage = () => {
                 </div>
                 <div>
                   <Link
-                    to={"./forget-password"}
+                    to={"/forget-password"}
                     className="font-medium text-primary_main"
                   >
                     Forget Password?

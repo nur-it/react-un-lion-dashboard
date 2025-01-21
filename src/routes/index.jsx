@@ -3,6 +3,7 @@ import ForgetPasswordPage from "@/app/forget-password";
 import ForgetPasswordMessagePage from "@/app/forget-password-message";
 import HomePage from "@/app/home";
 import KnowledgeBasePage from "@/app/knowledge-base";
+import MyAccountPage from "@/app/my-account";
 import ErrorPage from "@/app/not-found";
 import SettingPage from "@/app/setting";
 import SignInPage from "@/app/sign-in";
@@ -24,15 +25,16 @@ const RouterProvider = () => {
           }
         >
           <Route index element={<HomePage />} />
-          <Route path="knowledge-base" element={<KnowledgeBasePage />} />
-          <Route path="ask-avatar" element={<AskAvatarPage />} />
-          <Route path="settings" element={<SettingPage />} />
+          <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+          <Route path="/ask-avatar" element={<AskAvatarPage />} />
+          <Route path="/my-accounts" element={<MyAccountPage />} />
+          <Route path="/settings" element={<SettingPage />} />
         </Route>
-        <Route path="sign-in" element={<SignInPage />} />
-        <Route path="sign-up" element={<SignUpPage />} />
-        <Route path="forget-password" element={<ForgetPasswordPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/forget-password" element={<ForgetPasswordPage />} />
         <Route
-          path="forget-password-message"
+          path="/forget-password-message"
           element={<ForgetPasswordMessagePage />}
         />
         <Route path="*" element={<ErrorPage />} />
