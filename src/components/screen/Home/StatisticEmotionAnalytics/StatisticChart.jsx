@@ -74,17 +74,22 @@ const StatisticChart = () => {
             const index = tooltipItem.dataIndex;
             const stack = tooltipItem.dataset.stack;
 
-            // Filter datasets in the same stack and create a row of values
-            const row = data.datasets
-              .filter((dataset) => dataset.stack === stack)
-              .map((dataset) => {
-                const value = dataset.data[index];
-                const color = dataset.backgroundColor;
-                return `\u2022 ${value}`;
-              })
-              .join("   ");
+            if (stack === "stack2") {
+              const blueValue = data.datasets[3]?.data[index] || 0;
+              return `🔵 ${blueValue}`;
+            }
 
-            return row;
+            const values = {
+              green: data.datasets[2]?.data[index] || 0,
+              red: data.datasets[0]?.data[index] || 0,
+              orange: data.datasets[1]?.data[index] || 0,
+            };
+
+            return [
+              `🔴 ${values.red}`,
+              `🟠 ${values.orange}`,
+              `🟢 ${values.green}`,
+            ].join("  ");
           },
         },
         displayColors: false,

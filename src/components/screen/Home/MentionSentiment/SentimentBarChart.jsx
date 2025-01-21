@@ -34,12 +34,12 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-        barThickness: 18
+        barThickness: 18,
       },
       {
         label: "Positive",
         data: [140, 170, 145, 125, 160, 140, 160],
-        backgroundColor: "#0CAF60",
+        backgroundColor: "#0CAF60", 
         borderRadius: {
           topLeft: 20,
           topRight: 20,
@@ -47,12 +47,12 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-        barThickness: 18
+        barThickness: 18,
       },
       {
-        label: "Negative ",
+        label: "Negative",
         data: [160, 190, 160, 155, 180, 155, 190],
-        backgroundColor: "#F23838",
+        backgroundColor: "#F23838", 
         borderRadius: {
           topLeft: 20,
           topRight: 20,
@@ -60,9 +60,8 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-        barThickness: 18
+        barThickness: 18,
       },
-     
     ],
   };
 
@@ -80,19 +79,19 @@ const SentimentBarChart = () => {
           },
           label: (tooltipItem) => {
             const index = tooltipItem.dataIndex;
-            const stack = tooltipItem.dataset.stack;
 
-            // Filter datasets in the same stack and create a row of values
-            const row = data.datasets
-              .filter((dataset) => dataset.stack === stack)
-              .map((dataset) => {
-                const value = dataset.data[index];
-                const color = dataset.backgroundColor;
-                return `\u2022 ${value}`;
-              })
-              .join("   ");
+       
+            const values = {
+              gray: data.datasets[0]?.data[index] || 0,
+              green: data.datasets[1]?.data[index] || 0, 
+              red: data.datasets[2]?.data[index] || 0,
+            };
 
-            return row;
+            return [
+              `⚪ ${values.gray}`,
+              `🟢 ${values.green}`,
+              `🔴 ${values.red}`,
+            ].join("  ");
           },
         },
         displayColors: false,
