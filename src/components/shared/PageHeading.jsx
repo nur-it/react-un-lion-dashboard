@@ -4,9 +4,9 @@ import { Link } from "react-router";
 const PageHeading = ({ page_name }) => {
   return (
     <div className="space-y-2">
-      <h4 className="text-[24px] font-bold text-secondary_main dark:text-white sm:text-2xl">
+      <h2 className="text-[24px] font-bold text-secondary_main dark:text-white sm:text-2xl">
         {page_name}
-      </h4>
+      </h2>
       <div className="flex items-center gap-1 text-gray600 dark:text-text_disable">
         <Link to={"/"}>
           <RiHome2Line size={20} />

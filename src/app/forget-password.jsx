@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 const ForgetPasswordPage = () => {
+  const navigate = useNavigate();
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
@@ -28,7 +30,10 @@ const ForgetPasswordPage = () => {
               />
             </div>
 
-            <Button className="h-12 w-full bg-primary_main sm:h-[56px]">
+            <Button
+              onClick={() => navigate("/forget-password-message")}
+              className="h-12 w-full bg-primary_main sm:h-[56px]"
+            >
               Continue
             </Button>
           </form>

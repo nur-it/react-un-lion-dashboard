@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 import closeIcon from "../assets/icon/x.svg";
 import mgsBox from "../assets/img/message-box.svg";
 
 const ForgetPasswordMessagePage = () => {
+  const navigate = useNavigate();
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
@@ -21,7 +23,10 @@ const ForgetPasswordMessagePage = () => {
             </p>
           </div>
 
-          <Button className="h-12 w-full bg-primary_main sm:h-[56px]">
+          <Button
+            onClick={() => navigate("/sign-in")}
+            className="h-12 w-full bg-primary_main sm:h-[56px]"
+          >
             OK
           </Button>
 
