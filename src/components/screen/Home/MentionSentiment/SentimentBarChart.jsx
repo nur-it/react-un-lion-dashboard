@@ -11,8 +11,17 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const SentimentBarChart = () => {
+  const isDarkMode = document.documentElement.classList.contains("dark");
   const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    labels: [
+      "Jan 10",
+      "Jan 11",
+      "Jan 12",
+      "Jan 13",
+      "Jan 14",
+      "Jan 15",
+      "Jan 16",
+    ],
     datasets: [
       {
         label: "Neutral",
@@ -25,11 +34,12 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
+        barThickness: 18,
       },
       {
         label: "Positive",
         data: [140, 170, 145, 125, 160, 140, 160],
-        backgroundColor: "#0CAF60",
+        backgroundColor: "#0CAF60", 
         borderRadius: {
           topLeft: 20,
           topRight: 20,
@@ -37,11 +47,12 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
+        barThickness: 18,
       },
       {
-        label: "Negative ",
+        label: "Negative",
         data: [160, 190, 160, 155, 180, 155, 190],
-        backgroundColor: "#F23838",
+        backgroundColor: "#F23838", 
         borderRadius: {
           topLeft: 20,
           topRight: 20,
@@ -49,8 +60,8 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
+        barThickness: 18,
       },
-     
     ],
   };
 
@@ -59,7 +70,34 @@ const SentimentBarChart = () => {
       legend: {
         display: false,
       },
-      
+      tooltip: {
+        titleAlign: "center",
+        callbacks: {
+          title: (tooltipItems) => {
+            const index = tooltipItems[0].dataIndex;
+            return data.labels[index];
+          },
+          label: (tooltipItem) => {
+            const index = tooltipItem.dataIndex;
+
+       
+            const values = {
+              gray: data.datasets[0]?.data[index] || 0,
+              green: data.datasets[1]?.data[index] || 0, 
+              red: data.datasets[2]?.data[index] || 0,
+            };
+
+            return [
+              `⚪ ${values.gray}`,
+              `🟢 ${values.green}`,
+              `🔴 ${values.red}`,
+            ].join("  ");
+          },
+        },
+        displayColors: false,
+        caretPadding: 10,
+        yAlign: "bottom",
+      },
     },
     responsive: true,
     maintainAspectRatio: false,
@@ -69,15 +107,20 @@ const SentimentBarChart = () => {
         grid: {
           display: false,
         },
+        ticks: {
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
+        },
       },
       y: {
         stacked: false,
         grid: {
           display: true,
+          color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
         },
         ticks: {
           stepSize: 50,
           max: 200,
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
       },
     },

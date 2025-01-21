@@ -17,12 +17,21 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const MentionChart = () => {
+  const isDarkMode = document.documentElement.classList.contains("dark");
   const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    labels: [
+      "Jan 10",
+      "Jan 11",
+      "Jan 12",
+      "Jan 13",
+      "Jan 14",
+      "Jan 15",
+      "Jan 16",
+    ],
     datasets: [
       {
         label: "Dataset 1",
@@ -30,7 +39,7 @@ const MentionChart = () => {
         borderColor: "#F23838",
         backgroundColor: "#F23838",
         pointHoverRadius: 6,
-        pointRadius: 0, 
+        pointRadius: 0,
       },
       {
         label: "Dataset 2",
@@ -39,7 +48,6 @@ const MentionChart = () => {
         backgroundColor: "#1C89F6",
         pointHoverRadius: 6,
         pointRadius: 0,
-      
       },
       {
         label: "Dataset 3",
@@ -48,7 +56,6 @@ const MentionChart = () => {
         backgroundColor: "#0CAF60",
         pointHoverRadius: 6,
         pointRadius: 0,
-        
       },
       {
         label: "Dataset 4",
@@ -57,7 +64,6 @@ const MentionChart = () => {
         backgroundColor: "#F79009",
         pointHoverRadius: 6,
         pointRadius: 0,
-       
       },
       {
         label: "Dataset 5",
@@ -66,7 +72,6 @@ const MentionChart = () => {
         backgroundColor: "#FE16D4",
         pointHoverRadius: 6,
         pointRadius: 0.1,
-        
       },
     ],
   };
@@ -106,11 +111,19 @@ const MentionChart = () => {
         grid: {
           display: false,
         },
+        ticks: {
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
+        },
       },
       y: {
         beginAtZero: true,
+        grid: {
+          display: true,
+          color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
+        },
         ticks: {
           stepSize: 20,
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
       },
     },
