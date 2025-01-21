@@ -172,3 +172,7 @@
 .react-datepicker__month {
   margin: 0px;
 }
+.react-datepicker__day--keyboard-selected {
+  background-color: #375dfb !important;
+  color: white;
+}
