@@ -1,6 +1,6 @@
 import CategoryDropdown from "@/components/shared/CategoryDropdown";
 import search from "../../../assets/icon/search.svg";
-// import FullKnowledgeTable from "./FullKnowledgeTable";
+import FullKnowledgeTable from "./FullKnowledgeTable";
 
 const KnowledgeTable = () => {
   const categories = ["Category 1", "Category 2", "Category 3", "Category 4"];
@@ -22,7 +22,7 @@ const KnowledgeTable = () => {
         </div>
       </div>
       <div>
-        {/* <FullKnowledgeTable /> */}
+        <FullKnowledgeTable />
       </div>
     </div>
   );
