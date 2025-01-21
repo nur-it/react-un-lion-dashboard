@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 
 const ProfileLists = () => {
   const navigate = useNavigate();
+
   return (
     <div className="space-y-4 pt-6">
       <div className="flex items-center justify-between gap-2 rounded-lg border border-gray200 bg-white px-6 py-5">
