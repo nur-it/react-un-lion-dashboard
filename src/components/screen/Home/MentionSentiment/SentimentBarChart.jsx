@@ -11,8 +11,17 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const SentimentBarChart = () => {
+  const isDarkMode = document.documentElement.classList.contains("dark");
   const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    labels: [
+      "Jan 10",
+      "Jan 11",
+      "Jan 12",
+      "Jan 13",
+      "Jan 14",
+      "Jan 15",
+      "Jan 16",
+    ],
     datasets: [
       {
         label: "Neutral",
@@ -25,6 +34,7 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
+        barThickness: 18
       },
       {
         label: "Positive",
@@ -37,6 +47,7 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
+        barThickness: 18
       },
       {
         label: "Negative ",
@@ -49,6 +60,7 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
+        barThickness: 18
       },
      
     ],
@@ -59,7 +71,34 @@ const SentimentBarChart = () => {
       legend: {
         display: false,
       },
-      
+      tooltip: {
+        titleAlign: "center",
+        callbacks: {
+          title: (tooltipItems) => {
+            const index = tooltipItems[0].dataIndex;
+            return data.labels[index];
+          },
+          label: (tooltipItem) => {
+            const index = tooltipItem.dataIndex;
+            const stack = tooltipItem.dataset.stack;
+
+            // Filter datasets in the same stack and create a row of values
+            const row = data.datasets
+              .filter((dataset) => dataset.stack === stack)
+              .map((dataset) => {
+                const value = dataset.data[index];
+                const color = dataset.backgroundColor;
+                return `\u2022 ${value}`;
+              })
+              .join("   ");
+
+            return row;
+          },
+        },
+        displayColors: false,
+        caretPadding: 10,
+        yAlign: "bottom",
+      },
     },
     responsive: true,
     maintainAspectRatio: false,
@@ -69,15 +108,20 @@ const SentimentBarChart = () => {
         grid: {
           display: false,
         },
+        ticks: {
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
+        },
       },
       y: {
         stacked: false,
         grid: {
           display: true,
+          color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
         },
         ticks: {
           stepSize: 50,
           max: 200,
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
       },
     },

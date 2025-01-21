@@ -87,7 +87,7 @@ const StatisticChart = () => {
             return row;
           },
         },
-        displayColors: false, // Disable default color boxes
+        displayColors: false,
         caretPadding: 10,
         yAlign: "bottom",
       },
@@ -99,6 +99,9 @@ const StatisticChart = () => {
         stacked: true,
         grid: {
           display: false,
+        },
+        ticks: {
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
         categoryPercentage: 0.8,
         barPercentage: 0.7,
@@ -112,6 +115,7 @@ const StatisticChart = () => {
         ticks: {
           stepSize: 20,
           max: 100,
+          color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
       },
     },
