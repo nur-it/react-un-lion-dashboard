@@ -1,6 +1,7 @@
 import { authService } from "@/services/auth-service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 // Hook for login
 export const useLogin = () => {
@@ -14,6 +15,7 @@ export const useLogin = () => {
 
       // Optionally refresh user data
       queryClient.invalidateQueries(["currentUser"]);
+      toast.success("Login successful!");
     },
     onError: (error) => {
       console.error("Login failed:", error.message);
@@ -33,6 +35,7 @@ export const useRegister = () => {
 
       // Optionally refresh user data
       queryClient.invalidateQueries(["currentUser"]);
+      toast.success("Registration successful!");
     },
     onError: (error) => {
       console.error("Registration failed:", error.message);
@@ -44,7 +47,7 @@ export const useRegister = () => {
 export const useResetPassword = () => {
   return useMutation(authService.resetPassword, {
     onSuccess: () => {
-      console.log("Password reset successful");
+      toast.success("Password reset successful");
     },
     onError: (error) => {
       console.error("Password reset failed:", error.message);
@@ -59,6 +62,7 @@ export const useUpdateEmail = () => {
   return useMutation(authService.updateEmail, {
     onSuccess: () => {
       queryClient.invalidateQueries(["currentUser"]); // Optionally refresh user email data
+      toast.success("Email update successful!");
     },
     onError: (error) => {
       console.error("Email update failed:", error.message);
@@ -78,6 +82,7 @@ export const useLogout = () => {
 
       // Clear cached data
       queryClient.clear(); // Clear all cached queries
+      toast.success("Logout successful!");
     },
     onError: (error) => {
       console.error("Logout failed:", error.message);
