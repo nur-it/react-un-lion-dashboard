@@ -1,4 +1,10 @@
-import { menuItems } from "@/data/sidebar.data";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { dropdownMenuItems, menuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
 import { ChevronsUpDown } from "lucide-react";
 import { Link, useLocation } from "react-router";
@@ -14,19 +20,42 @@ const Sidebar = () => {
           </Link>
           <div className="space-y-2">
             <div>
-              <button className="mb-2 inline-flex w-full items-center justify-between gap-2 rounded-md border border-white_opacity10 bg-white_opacity05 px-4 py-2.5 text-white transition-all duration-300 ease-in-out">
-                <span className="inline-flex items-center space-x-2 text-sm font-medium">
-                  <img
-                    src="/images/user.png"
-                    className="h-8 w-8 rounded-full"
-                    alt="user"
-                  />
-                  <span>John Doe</span>
-                </span>
-                <span>
-                  <ChevronsUpDown className="h-5 w-5 text-[#98A2B3]" />
-                </span>
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="w-full">
+                  <button className="mb-2 inline-flex w-full items-center justify-between gap-2 rounded-md border border-white_opacity10 bg-white_opacity05 px-4 py-2.5 text-white transition-all duration-300 ease-in-out">
+                    <span className="inline-flex items-center space-x-2 text-sm font-medium">
+                      <img
+                        src="/images/user.png"
+                        className="h-8 w-8 rounded-full"
+                        alt="user"
+                      />
+                      <span>John Doe</span>
+                    </span>
+                    <span>
+                      <ChevronsUpDown className="h-5 w-5 text-[#98A2B3]" />
+                    </span>
+                  </button>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent className="min-w-[217px] border border-white_opacity10 bg-[#282c3f] shadow-primary">
+                  {dropdownMenuItems.map((item, index) => (
+                    <DropdownMenuItem
+                      key={index}
+                      className="text-white hover:bg-primary_main"
+                    >
+                      <Link
+                        to={item.href}
+                        className="inline-flex items-center justify-center gap-2.5"
+                      >
+                        <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#171D291A]">
+                          {<item.icon />}
+                        </span>
+                        {item.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {menuItems.top_level.map((item, index) => (

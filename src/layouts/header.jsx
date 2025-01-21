@@ -7,36 +7,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   DownArrow,
-  LogoutIcon,
   MenuIcon,
   MoonIcon,
   NotificationIcon,
-  SettingIcon,
   SunIcon,
-  UsersIcon,
 } from "@/components/ui/svgs";
 import { useSidebar } from "@/contexts/sidebar.contexts";
+import { dropdownMenuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { Link } from "react-router";
-
-const dropdownMenuItems = [
-  {
-    label: "My Accounts",
-    href: "/profile",
-    icon: UsersIcon,
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: SettingIcon,
-  },
-  {
-    label: "Log Out",
-    href: "/logout",
-    icon: LogoutIcon,
-  },
-];
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
