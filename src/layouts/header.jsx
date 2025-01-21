@@ -24,8 +24,8 @@ const Header = () => {
   return (
     <nav className="flex items-center justify-between gap-4">
       <div>
-        <Link to="/" className="hidden dark:inline-block lg:hidden">
-          <img src="/logo.svg" alt="logo" />
+        <Link to="/" className="hidden dark:inline-block lg:dark:hidden">
+          <img src="/logo.svg" className="max-w-20" alt="logo" />
         </Link>
         <Link to="/" className="inline-block dark:hidden lg:hidden">
           <img src="/sm-wh-logo.svg" alt="logo" />
