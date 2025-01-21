@@ -1,3 +1,4 @@
+import CustomCheckbox from "@/components/shared/CustomCheckbox";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
@@ -40,17 +41,16 @@ const SignInPage = () => {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2 sm:space-x-3">
-                  <input
-                    type="checkbox"
-                    id="accent-checkbox"
-                    className="h-5 w-5 bg-transparent rounded border-[#98A2B3] text-blue-600"
-                  />
+                  <CustomCheckbox />
                   <label htmlFor="accent-checkbox" className="text-white">
                     Remember me
                   </label>
                 </div>
                 <div>
-                  <Link to={"./forget-password"} className="font-medium text-primary_main">
+                  <Link
+                    to={"./forget-password"}
+                    className="font-medium text-primary_main"
+                  >
                     Forget Password?
                   </Link>
                 </div>
