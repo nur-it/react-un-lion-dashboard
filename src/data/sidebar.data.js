@@ -1,4 +1,4 @@
-import { ContactIcon } from "@/components/ui/svgs";
+import { ContactIcon, SettingIcon, UsersIcon } from "@/components/ui/svgs";
 import { BookOpen, LayoutDashboard, StarsIcon } from "lucide-react";
 
 export const menuItems = {
@@ -15,6 +15,14 @@ export const menuItems = {
       href: "/ask-avatar",
       icon: StarsIcon,
       notify: 4,
+    },
+  ],
+  profile_views: [
+    { label: "My Accounts", href: "/my-accounts", icon: UsersIcon, notify: 8 },
+    {
+      label: "Settings",
+      href: "/settings",
+      icon: SettingIcon,
     },
   ],
   bottom_level: [
