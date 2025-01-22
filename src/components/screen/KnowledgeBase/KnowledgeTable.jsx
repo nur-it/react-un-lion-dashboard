@@ -17,7 +17,7 @@ const KnowledgeTable = () => {
             <input
               type="text"
               placeholder="Search Threats"
-              className="h-full w-full bg-transparent text-sm text-black outline-none placeholder:text-[#98A2B3] dark:placeholder:text-[#FFFFFF99]"
+              className="h-full w-full bg-transparent text-sm dark:text-white text-black outline-none placeholder:text-[#98A2B3] dark:placeholder:text-[#FFFFFF99]"
             />
           </div>
           <CategoryDropdown options={categories} />
