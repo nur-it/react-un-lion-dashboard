@@ -37,7 +37,7 @@ const DateRangePicker = () => {
   return (
     <div className="relative">
       <div
-        className="flex h-9 min-w-[123px] items-center justify-center rounded-lg border border-[#D0D5DD] px-3 py-2 cursor-pointer"
+        className="flex h-9 min-w-[123px] items-center justify-center rounded-lg text-[#4A5773] dark:text-white border border-[#D0D5DD] dark:bg-[#FFFFFF05] dark:border-[#FFFFFF4D] text-sm px-3 py-2 cursor-pointer"
         onClick={() => setIsCalendarOpen(true)}
       >
         {startDate && endDate
