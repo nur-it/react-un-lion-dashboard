@@ -1,8 +1,22 @@
 import CustomCheckbox from "@/components/shared/CustomCheckbox";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router";
+import Cookies from "js-cookie";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router";
 
 const SignInPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    Cookies.set("accessToken", "fake-access-token", { expires: 7 });
+    navigate("/my-accounts");
+  };
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
@@ -17,27 +31,44 @@ const SignInPage = () => {
               </p>
             </div>
           </div>
-          <form action="#" className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-5">
               <div className="space-y-2">
-                <label htmlFor="Username" className="text-sm text-white">
+                <label htmlFor="username" className="text-sm text-white">
                   Username
                 </label>
                 <input
                   type="text"
                   placeholder="User name"
                   className="auth_input_field"
+                  {...register("username", {
+                    required: "Username is required",
+                  })}
                 />
+                {errors.username && (
+                  <p className="text-sm text-error">
+                    {errors.username.message}
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="Password" className="text-sm text-white">
+                <label htmlFor="password" className="text-sm text-white">
                   Password
                 </label>
                 <input
                   type="password"
                   placeholder="Password"
                   className="auth_input_field"
+                  {...register("password", {
+                    required:
+                      "The password you entered is incorrect. Please try again or reset your password.",
+                  })}
                 />
+                {errors.password && (
+                  <p className="text-sm text-error">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2 sm:space-x-3">
@@ -56,8 +87,12 @@ const SignInPage = () => {
                 </div>
               </div>
             </div>
-            <Button className="h-12 w-full bg-primary_main sm:h-[56px]">
-              Sign In
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="h-12 w-full bg-primary_main sm:h-[56px]"
+            >
+              {isSubmitting ? "Signing In..." : "Sign In"}
             </Button>
           </form>
         </div>

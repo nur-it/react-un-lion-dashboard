@@ -10,7 +10,7 @@ import SignInPage from "@/app/sign-in";
 import SignUpPage from "@/app/sign-up";
 import RootLayout from "@/layouts/root-layout";
 import { BrowserRouter, Route, Routes } from "react-router";
-// import ProtectedRoute from "./auth-protected-route";
+import ProtectedRoute from "./auth-protected-route";
 
 const RouterProvider = () => {
   return (
@@ -19,9 +19,9 @@ const RouterProvider = () => {
         {/* root layout */}
         <Route
           element={
-            // <ProtectedRoute>
-            <RootLayout />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <RootLayout />
+            </ProtectedRoute>
           }
         >
           <Route index element={<HomePage />} />
