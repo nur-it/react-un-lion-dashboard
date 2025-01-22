@@ -9,15 +9,19 @@ const ToggleTab = ({ title, content }) => {
   };
 
   return (
-    <div className="tab-shadow w-full rounded-2xl border border-gray200 bg-white px-4 dark:border-[#FFFFFF33] dark:bg-[#FFFFFF0A] sm:px-6">
+    <div className="tab-shadow w-full rounded-2xl border border-gray200 bg-white px-4 dark:border-white_opacity10 dark:bg-[#FFFFFF0A] sm:px-6">
       <div
-        className="flex cursor-pointer items-center justify-between py-5 gap-4"
+        className="flex cursor-pointer items-center justify-between gap-4 py-5"
         onClick={toggleContent}
       >
         <h4 className="text-base font-medium text-secondary_main dark:text-white sm:text-2xl sm:font-bold">
           {title}
         </h4>
-        {isOpen ? <LuChevronDown size={24} className="dark:text-[#E4E7EC]" /> : <LuChevronRight size={24} className="dark:text-[#E4E7EC]" />}
+        {isOpen ? (
+          <LuChevronDown size={24} className="dark:text-[#E4E7EC]" />
+        ) : (
+          <LuChevronRight size={24} className="dark:text-[#E4E7EC]" />
+        )}
       </div>
       {/* Content */}
       <div
