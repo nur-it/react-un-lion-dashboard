@@ -46,9 +46,4 @@ export const dropdownMenuItems = [
     href: "/settings",
     icon: SettingIcon,
   },
-  {
-    label: "Log Out",
-    href: "/logout",
-    icon: LogoutIcon,
-  },
 ];

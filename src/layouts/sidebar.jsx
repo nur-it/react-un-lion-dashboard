@@ -4,13 +4,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LogoutIcon } from "@/components/ui/svgs";
 import { dropdownMenuItems, menuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
 import { ChevronsUpDown } from "lucide-react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const Sidebar = () => {
   const pathname = useLocation().pathname;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove("accessToken");
+    navigate("/sign-in");
+  };
   return (
     <div className="flex h-full flex-col justify-between text-white/80">
       {pathname !== "/my-accounts" && (
@@ -54,6 +61,17 @@ const Sidebar = () => {
                       </Link>
                     </DropdownMenuItem>
                   ))}
+                  <DropdownMenuItem className="text-[#4A5773] dark:text-white">
+                    <button
+                      onClick={handleLogout}
+                      className="inline-flex items-center justify-center gap-2.5"
+                    >
+                      <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#F2F4F7] dark:bg-[#171D291A]">
+                        <LogoutIcon />
+                      </span>
+                      Logout
+                    </button>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
