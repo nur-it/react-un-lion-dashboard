@@ -6,7 +6,7 @@ import sortIcon from "../../../assets/icon/sort.svg";
 
 const FullKnowledgeTable = () => {
   return (
-    <div className="w-full mt-6">
+    <div className="mt-6 w-80 min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto border border-[#0000001A] sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:bg-gray-700 dark:text-gray-400">
@@ -43,7 +43,7 @@ const FullKnowledgeTable = () => {
                   </button>
                 </div>
               </th>
-              <th scope="col" className="w-[10%] p-4">
+              <th scope="col" className="min-w-[100px] p-4">
                 <div className="flex items-center justify-between">
                   In Use
                   <button>
@@ -67,7 +67,7 @@ const FullKnowledgeTable = () => {
                 <td className="p-4">{row.data}</td>
                 <td className="p-4">{row.source}</td>
                 <td className="p-4">
-                <Toggle initialActive={row.isActive} />
+                  <Toggle initialActive={row.isActive} />
                 </td>
                 <td className="p-4">
                   <button>
