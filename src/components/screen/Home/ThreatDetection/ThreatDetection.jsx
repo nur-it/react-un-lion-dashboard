@@ -15,12 +15,12 @@ const ThreatDetection = () => {
             </p>
           </div>
         </div>
-        <div className="flex h-10 w-full items-center gap-2.5 rounded-lg border border-gray300 bg-[#0000000F] px-4 py-3 sm:max-w-[384px]">
+        <div className="flex h-10 w-full items-center gap-2.5 rounded-lg border border-gray300 bg-[#0000000F] dark:bg-[#FFFFFF0F] dark:border-[#E4E7EC1A] px-4 py-3 sm:max-w-[384px]">
           <img src={search} alt="search" />
           <input
             type="text"
             placeholder="Search Threats"
-            className="h-full w-full bg-transparent text-sm text-black outline-none placeholder:text-[#98A2B3]"
+            className="h-full w-full bg-transparent text-sm text-black outline-none dark:text-white dark:placeholder:text-[#FFFFFF80] placeholder:text-[#98A2B3]"
           />
         </div>
       </div>

@@ -8,9 +8,6 @@ const Emotions = () => {
         <h5 className="text-lg font-bold text-secondary_main dark:text-white sm:text-xl">
           Emotions
         </h5>
-        {/* <div className="flex h-9 min-w-[123px] items-center justify-center rounded-lg border border-[#D0D5DD] px-3 py-2">
-          
-        </div> */}
         <DateRangePicker />
       </div>
       <EmotionsChart />
