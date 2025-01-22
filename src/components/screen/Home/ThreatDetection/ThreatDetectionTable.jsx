@@ -6,9 +6,9 @@ import sortIcon from "../../../../assets/icon/sort.svg";
 const ThreatDetectionTable = () => {
   return (
     <div className="w-full">
-      <div className="relative w-full overflow-x-auto border border-[#0000001A] rounded-lg">
-        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
-          <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm text-text_secondary dark:bg-gray-700 dark:text-gray-400">
+      <div className="relative w-full overflow-x-auto border border-[#0000001A] rounded-lg dark:border-[#FFFFFF1A]">
+        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right bg-white dark:bg-[#FFFFFF1A]">
+          <thead className="border-b border-[#0000001A] bg-[#4444440D] dark:border-[#FFFFFF1A] text-sm text-text_secondary dark:bg-[#212639] dark:text-[#E4E7EC]">
             <tr>
               <th scope="col" className="p-4">
                 <div className="flex items-center justify-between">
@@ -72,20 +72,20 @@ const ThreatDetectionTable = () => {
             {rowData.map((row, index) => (
               <tr
                 key={index}
-                className="border-b bg-white text-sm text-[#1880F0] dark:border-gray-700 dark:bg-gray-800"
+                className="border-b bg-white text-sm text-[#1880F0] dark:text-white dark:border-[#FFFFFF1A] dark:bg-[#161b2f]"
               >
-                <td className="p-4 underline">{row.threatType}</td>
-                <td className="p-4 underline">{row.platform}</td>
-                <td className="w-[25%] p-4 underline">
+                <td className="p-4 underline dark:no-underline">{row.threatType}</td>
+                <td className="p-4 underline dark:no-underline">{row.platform}</td>
+                <td className="w-[25%] p-4 underline dark:no-underline">
                   <p className="line-clamp-1">{row.contentSummary}</p>
                 </td>
-                <td className="p-4 underline">{row.id}</td>
+                <td className="p-4 underline dark:no-underline">{row.id}</td>
                 <td
                   className={`p-4 ${
                     row.reach === "High"
                       ? "text-error"
                       : row.reach === "Low"
-                        ? "text-text_secondary"
+                        ? "text-text_secondary dark:text-white"
                         : "text-warning"
                   }`}
                 >
@@ -93,18 +93,18 @@ const ThreatDetectionTable = () => {
                 </td>
                 <td className="w-[20%] p-4">
                   <div className="flex items-center justify-between gap-1">
-                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-error px-3 font-medium text-white">
+                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-error dark:bg-opacity-50 px-3 font-medium text-white">
                       Mitigate
                       <IoChevronDown />
                       {row.status && (
-                        <span className="absolute inset-0 rounded-md bg-white opacity-40"></span>
+                        <span className="absolute inset-0 rounded-md bg-white opacity-40 dark:hidden"></span>
                       )}
                     </button>
-                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-success px-3 font-medium text-white">
+                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-success px-3 font-medium text-white dark:bg-opacity-50">
                       Dismiss
                       <IoChevronDown />
                       {row.status && (
-                        <span className="absolute inset-0 rounded-md bg-white opacity-40"></span>
+                        <span className="absolute inset-0 rounded-md bg-white opacity-40 dark:hidden"></span>
                       )}
                     </button>
                   </div>
@@ -112,7 +112,7 @@ const ThreatDetectionTable = () => {
                 <td className="p-4">
                   {row.status && (
                     <button
-                      className={`flex h-8 w-[100px] items-center justify-center rounded-md px-3 font-medium ${
+                      className={`flex h-8 w-[100px] items-center justify-center rounded-md px-3 font-medium cursor-pointer ${
                         row.status === "Mitigated"
                           ? "bg-[#473BF01A] text-primary_main"
                           : ""
