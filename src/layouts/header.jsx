@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   DownArrow,
+  LogoutIcon,
   MenuIcon,
   MoonIcon,
   NotificationIcon,
@@ -15,12 +16,20 @@ import {
 import { useSidebar } from "@/contexts/sidebar.contexts";
 import { dropdownMenuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
+import Cookies from "js-cookie";
 import { X } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
   const { isSidebarOpen, toggleSidebar } = useSidebar();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    Cookies.remove("accessToken");
+    navigate("/sign-in");
+  };
+
   return (
     <nav className="flex items-center justify-between gap-4">
       <div>
@@ -145,6 +154,17 @@ const Header = () => {
                 </Link>
               </DropdownMenuItem>
             ))}
+            <DropdownMenuItem className="text-[#4A5773] dark:text-white">
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center justify-center gap-2.5"
+              >
+                <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#F2F4F7] dark:bg-[#171D291A]">
+                  <LogoutIcon />
+                </span>
+                Logout
+              </button>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
