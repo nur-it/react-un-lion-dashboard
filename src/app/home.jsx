@@ -7,7 +7,6 @@ const HomePage = () => {
   return (
     <div className="w-full space-y-6 pb-10">
       <PageHeading page_name="Dashboard" />
-      {/* <Button variant="default">Button</Button> */}
       <StatisticEmotionAnalytics />
       <MentionSentiment />
       <ThreatDetection />

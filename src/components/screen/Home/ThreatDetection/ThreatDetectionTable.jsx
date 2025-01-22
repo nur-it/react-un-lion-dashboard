@@ -1,86 +1,100 @@
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
 import { rowData } from "@/data/threatTableData";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { IoChevronDown } from "react-icons/io5";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 import sortIcon from "../../../../assets/icon/sort.svg";
 
 const ThreatDetectionTable = () => {
+  const [data, setData] = useState([...rowData]);
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "asc",
+  });
+
+  const handleSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+
+    const sortedData = [...data].sort((a, b) => {
+      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    setSortConfig({ key, direction });
+    setData(sortedData);
+  };
+
   return (
-    <div className="w-full">
+    <div className="w-80 min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
         <table className="w-full bg-white text-left text-sm text-gray-500 dark:bg-[#FFFFFF1A] dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm text-text_secondary dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
             <tr>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  Threat Type
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  Platform
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  Content Summary
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  ID
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  Reach
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  Action
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
-              <th scope="col" className="p-4">
-                <div className="flex items-center justify-between">
-                  Status
-                  <button>
-                    <img src={sortIcon} alt="sortIcon" />
-                  </button>
-                </div>
-              </th>
+              {[
+                { label: "Threat Type", key: "threatType" },
+                { label: "Platform", key: "platform" },
+                { label: "Content Summary", key: "contentSummary" },
+                { label: "ID", key: "id" },
+                { label: "Reach", key: "reach" },
+                { label: "Action", key: "action" }, // No sorting for Action
+                { label: "Status", key: "status" },
+              ].map((column) => (
+                <th key={column.key || column.label} className="p-4">
+                  <div className="flex items-center justify-between">
+                    {column.label}
+                    {column.key && (
+                      <button onClick={() => handleSort(column.key)}>
+                        <img
+                          src={sortIcon}
+                          alt="sortIcon"
+                          className={`${
+                            sortConfig.key === column.key
+                              ? sortConfig.direction === "asc"
+                                ? "rotate-0"
+                                : "rotate-180"
+                              : ""
+                          }`}
+                        />
+                      </button>
+                    )}
+                  </div>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {rowData.map((row, index) => (
+            {data.map((row, index) => (
               <tr
                 key={index}
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
-                <td className="p-4 underline dark:no-underline">
+                <td className="min-w-[150px] p-4 underline dark:no-underline 2xl:min-w-max">
                   {row.threatType}
                 </td>
                 <td className="p-4 underline dark:no-underline">
                   {row.platform}
                 </td>
-                <td className="w-[25%] p-4 underline dark:no-underline">
+                <td className="min-w-[200px] p-4 underline dark:no-underline xl:min-w-max">
                   <p className="line-clamp-1">{row.contentSummary}</p>
                 </td>
                 <td className="p-4 underline dark:no-underline">{row.id}</td>
@@ -95,30 +109,37 @@ const ThreatDetectionTable = () => {
                 >
                   {row.reach}
                 </td>
-                <td className="w-[20%] p-4">
-                  <div className="flex items-center justify-between gap-1">
-                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-error px-3 font-medium text-white dark:bg-opacity-50">
-                      Mitigate
-                      <IoChevronDown />
-                      {row.status && (
-                        <span className="absolute inset-0 rounded-md bg-white opacity-40 dark:hidden"></span>
+                <td className="p-4">
+                  <Select>
+                    <SelectTrigger
+                      className={cn(
+                        "w-max",
+                        row.status === "In Progress" &&
+                          "bg-primary_main text-white dark:bg-primary_main dark:text-white",
+                        row.status === "Dismissed" &&
+                          "bg-success text-white dark:bg-success dark:text-white",
+                        row.status === "Mitigated" &&
+                          "bg-error text-white dark:bg-error dark:text-white",
+                        row.status === "To Review" &&
+                          "bg-primary_main text-white dark:bg-primary_main dark:text-white",
                       )}
-                    </button>
-                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-success px-3 font-medium text-white dark:bg-opacity-50">
-                      Dismiss
-                      <IoChevronDown />
-                      {row.status && (
-                        <span className="absolute inset-0 rounded-md bg-white opacity-40 dark:hidden"></span>
-                      )}
-                    </button>
-                  </div>
+                    >
+                      <SelectValue placeholder={row.status} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="in-progress">In Progress</SelectItem>
+                      <SelectItem value="dismissed">Dismissed</SelectItem>
+                      <SelectItem value="mitigated">Mitigated</SelectItem>
+                      <SelectItem value="to-review">To Review</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </td>
                 <td className="p-4">
                   {row.status && (
                     <button
-                      className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
+                      className={`flex h-8 w-[100px] cursor-not-allowed items-center justify-center rounded-md px-3 font-medium ${
                         row.status === "Mitigated"
-                          ? "bg-[#473BF01A] text-primary_main"
+                          ? "bg-error/[0.15] text-error"
                           : ""
                       } ${
                         row.status === "Dismissed"
@@ -126,9 +147,13 @@ const ThreatDetectionTable = () => {
                           : ""
                       } ${
                         row.status === "In Progress"
-                          ? "bg-[#F38E001A] text-warning"
+                          ? "bg-[#F38E001A] text-warning dark:bg-white/[0.08] dark:text-white"
                           : ""
-                      }`}
+                      } ${
+                        row.status === "To Review"
+                          ? "bg-[#0CAF6014] text-success"
+                          : ""
+                      } `}
                       disabled
                     >
                       {row.status}
@@ -142,39 +167,39 @@ const ThreatDetectionTable = () => {
       </div>
 
       {/* Pagination */}
-      <div className="mt-6 flex w-full items-center justify-center">
-        <div className="flex items-center gap-1.5">
-          <button className="flex h-8 w-8 items-center justify-center">
-            <FiChevronLeft size={22} className="text-[#667085]" />
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0000000F] text-sm font-medium text-secondary_main dark:bg-[#FFFFFF0F] dark:text-white">
-            1
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            2
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            3
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            4
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            5
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            ...
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center">
-            <FiChevronRight
-              size={20}
-              className="text-secondary_main dark:text-white"
-            />
-          </button>
-        </div>
-      </div>
+      <Pagination className="mt-6">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious to="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationItem>
+              <PaginationLink to="#" isActive>
+                1
+              </PaginationLink>
+            </PaginationItem>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink to="#">2</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink to="#">3</PaginationLink>
+          </PaginationItem>{" "}
+          <PaginationItem>
+            <PaginationLink to="#">4</PaginationLink>
+          </PaginationItem>{" "}
+          <PaginationItem>
+            <PaginationLink to="#">5</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext to="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };
-
 export default ThreatDetectionTable;

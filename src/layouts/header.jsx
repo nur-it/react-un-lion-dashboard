@@ -37,25 +37,25 @@ const Header = () => {
         </h5>
       </div>
       <div className="flex items-center gap-3 lg:hidden">
-        <div className="inline-flex items-center rounded border-[0.5px] border-[#D0D5DD] p-1 dark:border-[#282C3F]">
+        <div className="inline-flex items-center rounded border-[0.5px] border-[#D0D5DD] p-0.5 dark:border-[#282C3F]">
           <button
             onClick={() => setTheme("light")}
             className={cn(
-              "rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085] dark:text-[#D0D5DD]",
+              "rounded border-[0.5px] border-white_opacity05 bg-transparent px-1.5 py-0.5 text-[#667085] dark:text-[#D0D5DD]",
               theme === "light" &&
                 "bg-primary_main text-white shadow-secondary",
             )}
           >
-            <SunIcon />
+            <SunIcon className="h-4 w-4" />
           </button>{" "}
           <button
             onClick={() => setTheme("dark")}
             className={cn(
-              "rounded border-[0.5px] border-white_opacity05 bg-transparent px-2 py-1 text-[#667085] dark:text-[#D0D5DD]",
+              "rounded border-[0.5px] border-white_opacity05 bg-transparent px-1.5 py-0.5 text-[#667085] dark:text-[#D0D5DD]",
               theme === "dark" && "bg-primary_main text-white shadow-secondary",
             )}
           >
-            <MoonIcon />
+            <MoonIcon className="h-4 w-4" />
           </button>
         </div>
         <div className="bg-transparent">

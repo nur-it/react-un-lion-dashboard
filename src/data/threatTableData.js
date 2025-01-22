@@ -21,7 +21,7 @@ export const rowData = [
       contentSummary: "Content Summary Goes Here....",
       id: "123457",
       reach: "Low",
-      status: "",
+      status: "To Review",
     },
     {
       threatType: "Stocks",
