@@ -88,13 +88,13 @@ const ThreatDetectionTable = () => {
                 key={index}
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
-                <td className="p-4 underline dark:no-underline">
+                <td className="min-w-[150px] p-4 underline dark:no-underline 2xl:min-w-max">
                   {row.threatType}
                 </td>
                 <td className="p-4 underline dark:no-underline">
                   {row.platform}
                 </td>
-                <td className="w-[25%] p-4 underline dark:no-underline">
+                <td className="min-w-[200px] p-4 underline dark:no-underline xl:min-w-max">
                   <p className="line-clamp-1">{row.contentSummary}</p>
                 </td>
                 <td className="p-4 underline dark:no-underline">{row.id}</td>
