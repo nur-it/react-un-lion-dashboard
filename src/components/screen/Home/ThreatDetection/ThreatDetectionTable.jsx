@@ -44,6 +44,7 @@ const ThreatDetectionTable = () => {
     setData(sortedData);
   };
 
+  
   return (
     <div className="w-80 min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">

@@ -12,7 +12,7 @@ const Toggle = ({ initialActive = false }) => {
       className={`flex h-[22px] w-[35px] cursor-pointer items-center rounded-full ${
         isActive
           ? "toggle-shadow-active border-t border-[#253EA7] bg-[#375DFB]"
-          : "toggle-shadow-normal border-t border-[#CDD0D5] bg-[#E2E4E9]"
+          : "toggle-shadow-normal border-t border-[#CDD0D5] dark:border-[#E2E4E933] bg-[#E2E4E9] dark:bg-[#E2E4E933]"
       } p-[3px] transition-colors duration-300`}
       onClick={handleToggle}
     >
