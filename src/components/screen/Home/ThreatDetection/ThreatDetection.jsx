@@ -5,7 +5,7 @@ const ThreatDetection = () => {
   return (
     <div className="w-full space-y-6 rounded-lg border border-gray-200 bg-white dark:border-white/[10%] dark:bg-white/[4%]">
       <div className="flex flex-col items-center justify-between gap-6 p-4 sm:flex-row sm:gap-3 sm:p-6">
-        <div className="flex w-full items-center justify-between gap-1 sm:justify-start sm:gap-2">
+        <div className="flex w-full items-center justify-between gap-1 sm:justify-start flex-wrap sm:gap-2">
           <h5 className="whitespace-nowrap text-lg font-bold text-secondary_main dark:text-white sm:text-xl">
             Threat Detection
           </h5>
