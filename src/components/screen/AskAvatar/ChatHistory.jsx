@@ -1,5 +1,4 @@
-"use client";
-
+import ChatHistoryModal from "@/components/shared/ChatHistoryModal";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,6 +9,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ClockIcon, FilterIcon, PencilIcon } from "@/components/ui/svgs";
 import { MoreHorizontal } from "lucide-react";
+import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 // Sample data
@@ -42,14 +42,18 @@ const groupedHistory = historyItems.reduce((acc, item) => {
 }, {});
 
 export function ChatHistory() {
+  const [toggleModal, setToggleModal] = useState(false);
   return (
-    <div className="w-full rounded-2xl bg-[#f8f7fe] dark:bg-[#1a1d40] lg:min-h-[707px] lg:max-w-[280px]">
+    <div className="relative w-full rounded-2xl bg-[#f8f7fe] dark:bg-[#1a1d40] lg:min-h-[707px] lg:max-w-[280px]">
       <div className="space-y-6">
         <div className="flex items-center justify-between px-3 py-2 lg:p-4">
           <button className="text-[#4A5773] dark:text-[#E4E7EC]">
             <ClockIcon />
           </button>
-          <button className="inline-flex items-center gap-2 rounded-md border border-[#E4E7EC] bg-white px-2 py-1 text-[#4A5773] dark:border-[#344054] dark:bg-[#171C35] dark:text-[#E4E7EC]">
+          <button
+            onClick={() => setToggleModal(true)}
+            className="inline-flex items-center gap-2 rounded-md border border-[#E4E7EC] bg-white px-2 py-1 text-[#4A5773] dark:border-[#344054] dark:bg-[#171C35] dark:text-[#E4E7EC]"
+          >
             <span className="text-sm font-normal">All Time</span>
             <FilterIcon />
           </button>
@@ -98,6 +102,13 @@ export function ChatHistory() {
           </div>
         </ScrollArea>
       </div>
+
+      {toggleModal && (
+        <ChatHistoryModal
+          toggleModal={toggleModal}
+          setToggleModal={setToggleModal}
+        />
+      )}
     </div>
   );
 }
