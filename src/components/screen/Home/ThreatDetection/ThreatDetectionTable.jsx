@@ -1,5 +1,14 @@
 import { rowData } from "@/data/threatTableData";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { IoChevronDown } from "react-icons/io5";
 import sortIcon from "../../../../assets/icon/sort.svg";
 
@@ -95,23 +104,11 @@ const ThreatDetectionTable = () => {
                 >
                   {row.reach}
                 </td>
-                <td className="w-[20%] p-4">
-                  <div className="flex items-center justify-between gap-1">
-                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-error px-3 font-medium text-white dark:bg-opacity-50">
-                      Mitigate
-                      <IoChevronDown />
-                      {row.status && (
-                        <span className="absolute inset-0 rounded-md bg-white opacity-40 dark:hidden"></span>
-                      )}
-                    </button>
-                    <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-success px-3 font-medium text-white dark:bg-opacity-50">
-                      Dismiss
-                      <IoChevronDown />
-                      {row.status && (
-                        <span className="absolute inset-0 rounded-md bg-white opacity-40 dark:hidden"></span>
-                      )}
-                    </button>
-                  </div>
+                <td className="p-4">
+                  <button className="relative flex h-8 min-w-[110px] items-center justify-between rounded-md bg-error px-3 font-medium text-white dark:bg-opacity-50">
+                    Mitigate
+                    <IoChevronDown />
+                  </button>
                 </td>
                 <td className="p-4">
                   {row.status && (
@@ -142,39 +139,39 @@ const ThreatDetectionTable = () => {
       </div>
 
       {/* Pagination */}
-      <div className="mt-6 flex w-full items-center justify-center">
-        <div className="flex items-center gap-1.5">
-          <button className="flex h-8 w-8 items-center justify-center">
-            <FiChevronLeft size={22} className="text-[#667085]" />
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0000000F] text-sm font-medium text-secondary_main dark:bg-[#FFFFFF0F] dark:text-white">
-            1
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            2
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            3
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            4
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            5
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary dark:text-white">
-            ...
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center">
-            <FiChevronRight
-              size={20}
-              className="text-secondary_main dark:text-white"
-            />
-          </button>
-        </div>
-      </div>
+      <Pagination className="mt-6">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious to="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationItem>
+              <PaginationLink to="#" isActive>
+                1
+              </PaginationLink>
+            </PaginationItem>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink to="#">2</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink to="#">3</PaginationLink>
+          </PaginationItem>{" "}
+          <PaginationItem>
+            <PaginationLink to="#">4</PaginationLink>
+          </PaginationItem>{" "}
+          <PaginationItem>
+            <PaginationLink to="#">5</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext to="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };
-
 export default ThreatDetectionTable;
