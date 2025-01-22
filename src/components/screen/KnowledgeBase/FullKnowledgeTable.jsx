@@ -1,15 +1,23 @@
 import Toggle from "@/components/shared/Toggle";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { knowledgeTableData } from "@/data/knowledgeTableData";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import writeIcon from "../../../assets/icon/pencil.svg";
 import sortIcon from "../../../assets/icon/sort.svg";
 
 const FullKnowledgeTable = () => {
   return (
     <div className="mt-6 w-80 min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
-      <div className="relative w-full overflow-x-auto border border-[#0000001A] sm:rounded-lg">
+      <div className="relative w-full overflow-x-auto border border-[#0000001A] sm:rounded-lg dark:border-[#FFFFFF1A]">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
-          <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:bg-gray-700 dark:text-gray-400">
+          <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
             <tr>
               <th scope="col" className="w-[20%] p-4">
                 <div className="flex items-center justify-between">
@@ -60,7 +68,7 @@ const FullKnowledgeTable = () => {
             {knowledgeTableData.map((row, index) => (
               <tr
                 key={index}
-                className="border-b bg-white text-sm text-[#101828] dark:border-gray-700 dark:bg-gray-800"
+                className="border-b bg-white text-sm text-[#101828] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
                 <td className="p-4">{row.title}</td>
                 <td className="p-4">{row.type}</td>
@@ -81,34 +89,39 @@ const FullKnowledgeTable = () => {
       </div>
 
       {/* Pagination */}
-      <div className="mt-6 flex w-full items-center justify-center">
-        <div className="flex items-center gap-1.5">
-          <button className="flex h-8 w-8 items-center justify-center">
-            <FiChevronLeft size={22} className="text-[#667085]" />
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0000000F] text-sm font-medium text-secondary_main">
-            1
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
-            2
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
-            3
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
-            4
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
-            5
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center text-sm font-medium text-text_secondary">
-            ...
-          </button>
-          <button className="flex h-8 w-8 items-center justify-center">
-            <FiChevronRight size={20} className="text-secondary_main" />
-          </button>
-        </div>
-      </div>
+      {/* Pagination */}
+           <Pagination className="mt-6">
+             <PaginationContent>
+               <PaginationItem>
+                 <PaginationPrevious to="#" />
+               </PaginationItem>
+               <PaginationItem>
+                 <PaginationItem>
+                   <PaginationLink to="#" isActive>
+                     1
+                   </PaginationLink>
+                 </PaginationItem>
+               </PaginationItem>
+               <PaginationItem>
+                 <PaginationLink to="#">2</PaginationLink>
+               </PaginationItem>
+               <PaginationItem>
+                 <PaginationLink to="#">3</PaginationLink>
+               </PaginationItem>{" "}
+               <PaginationItem>
+                 <PaginationLink to="#">4</PaginationLink>
+               </PaginationItem>{" "}
+               <PaginationItem>
+                 <PaginationLink to="#">5</PaginationLink>
+               </PaginationItem>
+               <PaginationItem>
+                 <PaginationEllipsis />
+               </PaginationItem>
+               <PaginationItem>
+                 <PaginationNext to="#" />
+               </PaginationItem>
+             </PaginationContent>
+           </Pagination>
     </div>
   );
 };
