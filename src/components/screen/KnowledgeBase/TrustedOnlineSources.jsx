@@ -124,7 +124,7 @@ const TrustedOnlineSources = () => {
                     })}
                     type="text"
                     placeholder={field.placeholder}
-                    className="trusted-input-field"
+                    className="trusted-input-field bg-transparent"
                     onChange={(e) =>
                       handleInputChange(field.name, e.target.value)
                     }

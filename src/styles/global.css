@@ -100,6 +100,10 @@
   color: #525866 !important;
 }
 
+.modal_input-field {
+  @apply h-[46px] w-full rounded-lg border border-gray300 bg-[#0000000A] px-4 py-2 text-sm outline-none placeholder:text-[#00000080] dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A] dark:placeholder:text-[#FFFFFF80] sm:text-base;
+}
+
 /* .react-datepicker__header {
   padding: 0px;
   background-color: white;

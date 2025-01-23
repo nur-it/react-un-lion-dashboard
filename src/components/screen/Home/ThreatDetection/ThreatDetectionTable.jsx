@@ -46,7 +46,7 @@ const ThreatDetectionTable = () => {
 
   
   return (
-    <div className="w-80 min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
+    <div className="w-80 min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
         <table className="w-full bg-white text-left text-sm text-gray-500 dark:bg-[#FFFFFF1A] dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm text-text_secondary dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">

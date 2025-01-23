@@ -34,7 +34,7 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-        barThickness: 18,
+        barThickness: 15,
       },
       {
         label: "Positive",
@@ -47,7 +47,7 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-        barThickness: 18,
+        barThickness: 15,
       },
       {
         label: "Negative",
@@ -60,7 +60,7 @@ const SentimentBarChart = () => {
           bottomRight: 20,
         },
         borderSkipped: false,
-        barThickness: 18,
+        barThickness: 15,
       },
     ],
   };

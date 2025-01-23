@@ -10,7 +10,7 @@ const InformationKnowledge = () => {
     title: "Enter title text to submit",
   };
   return (
-    <form className="pb-4 md:pb-5">
+    <div className="pb-4 md:pb-5">
       <div className="mb-8 h-[1px] w-full bg-gray200 dark:bg-[#344054]"></div>
       <div className="space-y-6">
         <div className="space-y-2 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
@@ -79,7 +79,7 @@ const InformationKnowledge = () => {
           <InfoUpdateInitialDocument />
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 
