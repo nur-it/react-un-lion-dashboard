@@ -14,7 +14,7 @@ import sortIcon from "../../../assets/icon/sort.svg";
 
 const FullKnowledgeTable = () => {
   return (
-    <div className="mt-6 w-80 min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
+    <div className="mt-6 w-80 min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto border border-[#0000001A] sm:rounded-lg dark:border-[#FFFFFF1A]">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
