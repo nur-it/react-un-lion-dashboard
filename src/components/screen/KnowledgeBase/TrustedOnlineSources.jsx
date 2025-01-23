@@ -32,8 +32,8 @@ const TrustedOnlineSources = () => {
   };
 
   const clearInput = (field) => {
-    setValue(field, ""); // Clear the input value
-    setInputStatus((prev) => ({ ...prev, [field]: undefined })); // Reset the status
+    setValue(field, ""); 
+    setInputStatus((prev) => ({ ...prev, [field]: undefined }));
   };
 
   const renderIcon = (field, status) => {
@@ -46,8 +46,8 @@ const TrustedOnlineSources = () => {
             src={rotateLeft}
             alt="refresh"
             className="h-6 w-6 cursor-pointer"
-            onMouseDown={(e) => e.preventDefault()} // Prevent focus loss
-            onClick={() => clearInput(field)} // Clear input value
+            onMouseDown={(e) => e.preventDefault()} 
+            onClick={() => clearInput(field)} 
           />
         );
       case "invalid":
@@ -56,8 +56,8 @@ const TrustedOnlineSources = () => {
             src={crossCircle}
             alt="invalid"
             className="h-6 w-6 cursor-pointer"
-            onMouseDown={(e) => e.preventDefault()} // Prevent focus loss
-            onClick={() => clearInput(field)} // Clear input value
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => clearInput(field)} 
           />
         );
       default:
