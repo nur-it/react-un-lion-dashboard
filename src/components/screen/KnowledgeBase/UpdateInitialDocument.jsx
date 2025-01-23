@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { FiLoader } from "react-icons/fi";
 import addFrame from "../../../assets/icon/added-frame.svg";
+import closeLoading from "../../../assets/icon/close-loading.svg";
 import cloudIcon from "../../../assets/icon/cloud-icon.svg";
 import fileUpload from "../../../assets/icon/file-loading.svg";
 import tickMark from "../../../assets/icon/green-tick.svg";
@@ -23,18 +24,31 @@ const UpdateInitialDocument = () => {
         name: file.name,
         size: file.size,
         status: "uploading",
+        progress: 0,
       };
 
       setFiles((prevFiles) => [...prevFiles, newFile]);
 
-      // Simulate upload
-      setTimeout(() => {
+      const interval = setInterval(() => {
         setFiles((prevFiles) =>
           prevFiles.map((f) =>
-            f.name === file.name ? { ...f, status: "completed" } : f,
+            f.name === file.name && f.status === "uploading"
+              ? { ...f, progress: f.progress + 10 }
+              : f,
           ),
         );
-      }, 2000); // Simulated 2-second upload
+      }, 200);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        setFiles((prevFiles) =>
+          prevFiles.map((f) =>
+            f.name === file.name
+              ? { ...f, status: "completed", progress: 100 }
+              : f,
+          ),
+        );
+      }, 2000);
     }
   };
 
@@ -124,14 +138,18 @@ const UpdateInitialDocument = () => {
                   className="text-gray600 dark:text-white"
                   onClick={() => handleRemoveFile(file.name)}
                 >
-                  <img src={trashIcon} alt="trashIcon" />
+                  {file.status === "uploading" ? (
+                    <img src={closeLoading} alt="closeLoading" />
+                  ) : (
+                    <img src={trashIcon} alt="trashIcon" />
+                  )}
                 </button>
               </div>
               {file.status === "uploading" && (
                 <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A] dark:bg-[#FFFFFF1A]">
                   <div
-                    className="h-full rounded-full bg-[#665CF3] transition-all duration-300"
-                    style={{ width: `${65}%` }}
+                    className="h-full rounded-full bg-[#665CF3] transition-all duration-200"
+                    style={{ width: `${file.progress}%` }}
                   ></div>
                 </div>
               )}
