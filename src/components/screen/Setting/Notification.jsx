@@ -11,7 +11,7 @@ const Notification = () => {
   // State to manage selected radio button
   const [selectedOption, setSelectedOption] = useState(options[0].id);
   return (
-    <div className="space-y-4 sm:space-y-6 rounded-xl border border-gray300 dark:border-[#344054] p-6">
+    <div className="space-y-4 sm:space-y-6 rounded-xl border border-gray300 dark:border-[#344054] p-4 sm:p-6">
       <h5 className="text-lg font-medium text-secondary_main dark:text-white">
         Notification Settings
       </h5>

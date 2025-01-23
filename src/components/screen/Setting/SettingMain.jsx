@@ -40,7 +40,7 @@ const SettingMain = () => {
       </div>
 
       {/* Personal Information */}
-      <div className="space-y-6 rounded-xl border border-gray300 p-6 dark:border-[#344054]">
+      <div className="space-y-6 rounded-xl border border-gray300 p-4 sm:p-6 dark:border-[#344054]">
         <div className="flex items-center justify-between">
           <h5 className="text-lg font-medium text-secondary_main dark:text-white">
             Personal Information
