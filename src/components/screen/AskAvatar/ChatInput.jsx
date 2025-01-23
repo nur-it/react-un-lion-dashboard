@@ -1,23 +1,30 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { AskAiIcon } from "@/components/ui/svgs";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { AiOutlineFilePdf } from "react-icons/ai";
 import { CiCirclePlus } from "react-icons/ci";
 
-export function ChatInput() {
-  const [input, setInput] = useState("");
+export function ChatInput({ handleSend, topic }) {
   const [attachments, setAttachments] = useState([]);
+  const { register, handleSubmit, watch, reset, setValue } = useForm({
+    defaultValues: { message: "" },
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!input.trim() && attachments.length === 0) return;
-    // Handle message submission
-    console.log({ message: input, attachments });
-    setInput("");
+  const message = watch("message");
+
+  // Pre-fill the textarea with the topic
+  useEffect(() => {
+    if (topic) {
+      setValue("message", topic); // Set topic as initial value
+    }
+  }, [topic, setValue]);
+
+  const onSubmit = (data) => {
+    handleSend(data.message, attachments); // Pass to parent
+    reset({ message: "" });
     setAttachments([]);
   };
 
@@ -79,17 +86,17 @@ export function ChatInput() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div className="space-y-2.5">
           <div className="relative">
             <Textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              {...register("message", {
+                maxLength: 1000,
+                required: { value: true, message: "Message is required" },
+              })}
               placeholder="Ask whatever you want..."
               className="min-h-[62px] resize-none border-none bg-transparent pl-7 pr-12 focus-visible:ring-0"
-              maxLength={1000}
             />
-
             <div className="absolute left-2 top-2.5">
               <AskAiIcon />
             </div>
@@ -113,7 +120,7 @@ export function ChatInput() {
             </div>
             <div className="flex items-center gap-2">
               <div className="text-sm text-[#4a5773] dark:text-[#98A2B3]">
-                {input.length}/1000
+                {message.length}/1000
               </div>
               <Button type="submit" size="icon" className="rounded-md">
                 <ArrowRight className="h-5 w-5" />
