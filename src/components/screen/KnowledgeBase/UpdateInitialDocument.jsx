@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FiLoader } from "react-icons/fi";
-import { RiCloseLine } from "react-icons/ri";
 import addFrame from "../../../assets/icon/added-frame.svg";
+import closeLoading from "../../../assets/icon/close-loading.svg";
 import cloudIcon from "../../../assets/icon/cloud-icon.svg";
 import fileUpload from "../../../assets/icon/file-loading.svg";
 import tickMark from "../../../assets/icon/green-tick.svg";
@@ -11,6 +11,8 @@ import trashIcon from "../../../assets/icon/trash.svg";
 
 const UpdateInitialDocument = () => {
   const fileInputRef = useRef(null);
+  const [files, setFiles] = useState([]);
+
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -18,16 +20,49 @@ const UpdateInitialDocument = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      console.log("Selected file:", file);
+      const newFile = {
+        name: file.name,
+        size: file.size,
+        status: "uploading",
+        progress: 0,
+      };
+
+      setFiles((prevFiles) => [...prevFiles, newFile]);
+
+      const interval = setInterval(() => {
+        setFiles((prevFiles) =>
+          prevFiles.map((f) =>
+            f.name === file.name && f.status === "uploading"
+              ? { ...f, progress: f.progress + 10 }
+              : f,
+          ),
+        );
+      }, 200);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        setFiles((prevFiles) =>
+          prevFiles.map((f) =>
+            f.name === file.name
+              ? { ...f, status: "completed", progress: 100 }
+              : f,
+          ),
+        );
+      }, 2000);
     }
   };
+
+  const handleRemoveFile = (fileName) => {
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  };
+
   return (
     <div className="space-y-6">
-      <div className="md:grid md:grid-cols-9 md:gap-10 space-y-10 md:space-y-0">
+      <div className="space-y-10 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
         <div className="md:col-span-3">
           <div className="relative flex items-center gap-1.5">
-            <p className="text-base sm:text-lg font-medium text-secondary_main dark:text-white">
-              Upload Intial Documents
+            <p className="text-base font-medium text-secondary_main dark:text-white sm:text-lg">
+              Upload Initial Documents
             </p>
             <img src={info} alt="info" className="cursor-pointer" />
           </div>
@@ -59,65 +94,67 @@ const UpdateInitialDocument = () => {
             />
           </div>
 
-          {/* loading part */}
-          <div className="w-full rounded-xl border border-gray300 bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]">
-            <div className="flex justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <img src={fileUpload} alt="fileUpload" />
-                <div>
-                  <p className="text-sm font-medium text-secondary_main dark:text-white">
-                    new-video.mp4
-                  </p>
-                  <div className="flex items-center gap-1">
-                    <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
-                      60 KB of 6.5 MB
+          {files.map((file, index) => (
+            <div
+              key={index}
+              className={`w-full rounded-xl border border-[#D0D5DD] bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A] ${
+                file.status === "uploading"
+                  ? "border-gray300"
+                  : "border-[#D0D5DD]"
+              }`}
+            >
+              <div className="flex justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={file.status === "uploading" ? fileUpload : addFrame}
+                    alt="fileIcon"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-secondary_main dark:text-white">
+                      {file.name}
                     </p>
-                    <div className="h-1 w-1 rounded-full bg-[#00000080] dark:bg-[#FFFFFF80]"></div>
-                    <div className="flex items-center gap-1 text-secondary_main dark:text-white">
-                      <FiLoader size={16} />
-                      <p className="text-xs">Uploading...</p>
+                    <div className="flex items-center gap-1">
+                      <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
+                        {Math.round(file.size / 1024)} KB
+                      </p>
+                      <div className="h-1 w-1 rounded-full bg-[#00000080] dark:bg-[#FFFFFF80]"></div>
+                      {file.status === "uploading" ? (
+                        <div className="flex items-center gap-1 text-secondary_main dark:text-white">
+                          <FiLoader size={16} className="animate-spin" />
+                          <p className="text-xs">Uploading...</p>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1">
+                          <img src={tickMark} alt="tickMark" />
+                          <p className="text-xs text-secondary_main dark:text-white">
+                            Completed
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
+                <button
+                  className="text-gray600 dark:text-white"
+                  onClick={() => handleRemoveFile(file.name)}
+                >
+                  {file.status === "uploading" ? (
+                    <img src={closeLoading} alt="closeLoading" />
+                  ) : (
+                    <img src={trashIcon} alt="trashIcon" />
+                  )}
+                </button>
               </div>
-              <button className="text-gray600 dark:text-white">
-                <RiCloseLine />
-              </button>
-            </div>
-            <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A] dark:bg-[#FFFFFF1A]">
-              <div
-                className="h-full rounded-full bg-[#665CF3] transition-all duration-300"
-                style={{ width: `${65}%` }}
-              ></div>
-            </div>
-          </div>
-
-          {/* storage part */}
-          <div className="flex w-full items-center justify-between gap-3 rounded-xl border border-gray300 bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]">
-            <div className="flex items-center gap-3">
-              <img src={addFrame} alt="addFrame" />
-              <div>
-                <p className="text-sm font-medium text-secondary_main dark:text-white">
-                  my-photo.jpg
-                </p>
-                <div className="flex items-center gap-1">
-                  <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
-                    94 KB of 94 KB
-                  </p>
-                  <div className="h-1 w-1 rounded-full bg-[#00000080] dark:bg-[#FFFFFF80]"></div>
-                  <div className="flex items-center gap-1">
-                    <img src={tickMark} alt="tickMark" />
-                    <p className="text-xs text-secondary_main dark:text-white">
-                      Completed
-                    </p>
-                  </div>
+              {file.status === "uploading" && (
+                <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A] dark:bg-[#FFFFFF1A]">
+                  <div
+                    className="h-full rounded-full bg-[#665CF3] transition-all duration-200"
+                    style={{ width: `${file.progress}%` }}
+                  ></div>
                 </div>
-              </div>
+              )}
             </div>
-            <button>
-              <img src={trashIcon} alt="trashIcon" />
-            </button>
-          </div>
+          ))}
         </div>
       </div>
       <div className="flex items-center justify-end">

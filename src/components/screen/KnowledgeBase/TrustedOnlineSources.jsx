@@ -12,7 +12,7 @@ const TrustedOnlineSources = () => {
     watch,
     formState: { errors },
   } = useForm();
-  
+
   const [inputStatus, setInputStatus] = useState({});
 
   const handleInputChange = (field, value) => {
@@ -32,21 +32,22 @@ const TrustedOnlineSources = () => {
   };
 
   const clearInput = (field) => {
-    setValue(field, ""); // Clear the input value
-    setInputStatus((prev) => ({ ...prev, [field]: undefined })); // Reset the status
+    setValue(field, ""); 
+    setInputStatus((prev) => ({ ...prev, [field]: undefined }));
   };
 
   const renderIcon = (field, status) => {
     switch (status) {
       case "valid":
-        return <img src={tickMark} alt="valid" className="w-6 h-6" />;
+        return <img src={tickMark} alt="valid" className="h-6 w-6" />;
       case "typing":
         return (
           <img
             src={rotateLeft}
             alt="refresh"
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => clearInput(field)}
+            className="h-6 w-6 cursor-pointer"
+            onMouseDown={(e) => e.preventDefault()} 
+            onClick={() => clearInput(field)} 
           />
         );
       case "invalid":
@@ -54,8 +55,9 @@ const TrustedOnlineSources = () => {
           <img
             src={crossCircle}
             alt="invalid"
-            className="w-6 h-6 cursor-pointer"
-            onClick={() => clearInput(field)}
+            className="h-6 w-6 cursor-pointer"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => clearInput(field)} 
           />
         );
       default:
@@ -64,28 +66,51 @@ const TrustedOnlineSources = () => {
   };
 
   return (
-    <div className="md:grid md:grid-cols-9 md:gap-10 space-y-4 md:space-y-0">
+    <div className="space-y-4 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
       <div className="md:col-span-3">
         <div className="relative flex items-center gap-1.5">
-          <p className="text-base sm:text-lg font-medium text-secondary_main dark:text-white">
+          <p className="text-base font-medium text-secondary_main dark:text-white sm:text-lg">
             Trusted Online Sources
           </p>
-          <img src={info} alt="info" className="cursor-pointer w-5 h-5" />
+          <img src={info} alt="info" className="h-5 w-5 cursor-pointer" />
         </div>
       </div>
       <div className="md:col-span-6">
         <form className="space-y-3 md:space-y-6">
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {[
-              { name: "wikipedia", placeholder: "Wikipedia Page", label: "Wikipedia Page" },
+              {
+                name: "wikipedia",
+                placeholder: "Wikipedia Page",
+                label: "Wikipedia Page",
+              },
               { name: "x", placeholder: "X account name", label: "X" },
-              { name: "facebook", placeholder: "Facebook account name", label: "Facebook" },
-              { name: "instagram", placeholder: "Instagram account name", label: "Instagram" },
-              { name: "tiktok", placeholder: "TikTok account name", label: "TikTok" },
-              { name: "youtube", placeholder: "Youtube account name", label: "Youtube" },
+              {
+                name: "facebook",
+                placeholder: "Facebook account name",
+                label: "Facebook",
+              },
+              {
+                name: "instagram",
+                placeholder: "Instagram account name",
+                label: "Instagram",
+              },
+              {
+                name: "tiktok",
+                placeholder: "TikTok account name",
+                label: "TikTok",
+              },
+              {
+                name: "youtube",
+                placeholder: "Youtube account name",
+                label: "Youtube",
+              },
             ].map((field, index) => (
               <div className="space-y-1" key={index}>
-                <label htmlFor={field.name} className="trusted-label dark:text-white">
+                <label
+                  htmlFor={field.name}
+                  className="trusted-label dark:text-white"
+                >
                   {field.label}
                 </label>
                 <div className="trusted-input-box flex items-center gap-2">
@@ -100,13 +125,15 @@ const TrustedOnlineSources = () => {
                     type="text"
                     placeholder={field.placeholder}
                     className="trusted-input-field"
-                    onChange={(e) => handleInputChange(field.name, e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(field.name, e.target.value)
+                    }
                     onBlur={(e) => handleInputBlur(field.name, e.target.value)}
                   />
                   {renderIcon(field.name, inputStatus[field.name])}
                 </div>
                 {errors[field.name] && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-sm text-red-500">
                     {errors[field.name].message}
                   </p>
                 )}
