@@ -30,7 +30,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderRadius: 20,
         borderSkipped: false,
-        barThickness: 18,
+        barThickness: 15,
       },
       {
         label: "Positive",
@@ -39,7 +39,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderRadius: 20,
         borderSkipped: false,
-        barThickness: 18,
+        barThickness: 15,
       },
       {
         label: "Negative",
@@ -48,7 +48,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderRadius: 20,
         borderSkipped: false,
-        barThickness: 18,
+        barThickness: 15,
       },
       {
         label: "Mitigated Risk",
@@ -56,7 +56,7 @@ const StatisticChart = () => {
         backgroundColor: "#665CF3",
         stack: "stack2",
         borderRadius: 20,
-        barThickness: 18,
+        barThickness: 15,
         borderSkipped: false,
       },
     ],
