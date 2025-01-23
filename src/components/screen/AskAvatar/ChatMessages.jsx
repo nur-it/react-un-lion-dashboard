@@ -1,60 +1,49 @@
-"use client";
+import { useEffect, useRef } from "react";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+export function ChatMessages({ response }) {
+  const messagesEndRef = useRef(null);
 
-const messages = [
-  {
-    id: "1",
-    role: "assistant",
-    content: "Here's the results of 5 attention-grabbing headlines:",
-    items: [
-      "Revolutionize Customer Engagement with AI Chat Copywriter",
-      "Unleash the Power of AI Chat Copywriters for Transformative Customer Experiences",
-      "Chatbots on Steroids: Meet the AI Copywriter Transforming Conversations",
-      "From Bland to Brilliant: AI Chat Copywriters Make Brands Conversational Rockstars",
-      "Say Goodbye to Boring Chats: AI Copywriters Elevate Conversational Marketing",
-    ],
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "2",
-    role: "user",
-    content:
-      "Generate 5 attention-grabbing headlines for an article about AI Chat Copywriter",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-];
+  // Scroll to the bottom whenever response updates
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [response]);
 
-export function ChatMessages() {
   return (
-    <ScrollArea className="flex-1 p-4">
-      <div className="mx-auto max-w-4xl">
-        <div className="space-y-6">
-          {messages.map((message) => (
-            <div key={message.id} className="flex gap-4">
-              <Avatar className="h-10 w-10 rounded-lg">
-                <AvatarImage src={message.avatar} />
-                <AvatarFallback>
-                  {message.role === "user" ? "U" : "A"}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1">
-                {message.content}
-                {message.items && (
-                  <ol className="mt-4 list-inside list-decimal space-y-2">
-                    {message.items.map((item, index) => (
-                      <li key={index} className="text-sm">
-                        {item}
-                      </li>
-                    ))}
-                  </ol>
-                )}
+    <div className="dark:scrollbar-thumb-primary_main dark:scrollbar-track-secondary_main scrollbar-thin max-h-[442px] min-h-[442px] flex-1 overflow-y-auto p-4">
+      <div className="mx-auto max-w-4xl space-y-6">
+        {response.map(({ user, avatar_ai }, index) => (
+          <div key={index} className="space-y-3">
+            {/* User Message */}
+            <div className="flex items-center justify-end gap-3">
+              <div className="rounded-xl border border-gray200 bg-black/[0.06] p-3 text-secondary_main dark:border-[#344054] dark:bg-white/[0.06] dark:text-white">
+                {user.content}
+              </div>
+              <div className="h-10 min-w-10 rounded-full">
+                <img
+                  className="h-full w-full rounded-full object-cover"
+                  src={user.avatar}
+                  alt="user"
+                />
               </div>
             </div>
-          ))}
-        </div>
+            {/* AI Message */}
+            <div className="flex max-w-[75%] items-center gap-3">
+              <div className="h-10 min-w-10 rounded-full">
+                <img
+                  className="h-full w-full rounded-full object-cover"
+                  src={avatar_ai.avatar}
+                  alt="user"
+                />
+              </div>
+              <div className="text-secondary_main dark:text-white">
+                {avatar_ai.content}
+              </div>
+            </div>
+          </div>
+        ))}
+        {/* Dummy div to enable auto scroll */}
+        <div ref={messagesEndRef} />
       </div>
-    </ScrollArea>
+    </div>
   );
 }

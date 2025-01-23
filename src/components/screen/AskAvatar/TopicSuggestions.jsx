@@ -13,11 +13,15 @@ const topics = [
   { id: "8", name: "Can AI Assist me" },
 ];
 
-export function TopicSuggestions() {
+export function TopicSuggestions({ setTopic }) {
+  const handleSelectedTopic = (topic) => {
+    setTopic(topic);
+  };
   return (
     <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-2">
       {topics.map((topic) => (
         <Button
+          onClick={() => handleSelectedTopic(topic.name)}
           key={topic.id}
           variant="outline"
           className="rounded-2xl border border-[#d0d5dd] bg-white_opacity05 px-3 py-1.5 text-sm font-normal text-secondary_main dark:border-[#344054] dark:bg-[#252848] dark:text-white dark:hover:bg-[#1d204b] dark:hover:text-white"
