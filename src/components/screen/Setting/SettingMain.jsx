@@ -40,12 +40,15 @@ const SettingMain = () => {
       </div>
 
       {/* Personal Information */}
-      <div className="space-y-6 rounded-xl border border-gray300 p-4 sm:p-6 dark:border-[#344054]">
+      <div className="space-y-6 rounded-xl border border-gray300 p-4 dark:border-[#344054] sm:p-6">
         <div className="flex items-center justify-between">
           <h5 className="text-lg font-medium text-secondary_main dark:text-white">
             Personal Information
           </h5>
-          <button onClick={() => setIsModalOpen(true)} className="flex h-10 w-10 items-center justify-center gap-1.5 rounded-full border border-gray300 bg-[#FFFFFF0A] py-2 text-secondary_main dark:border-[#344054] dark:text-white sm:w-auto sm:px-4">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex h-10 w-10 items-center justify-center gap-1.5 rounded-full border border-gray300 bg-[#FFFFFF0A] py-2 text-secondary_main dark:border-[#344054] dark:text-white sm:w-auto sm:px-4"
+          >
             <FiEdit />
             <span className="hidden text-sm font-medium sm:block">Edit</span>
           </button>
@@ -76,7 +79,7 @@ const SettingMain = () => {
       <p className="text-base text-text_secondary dark:text-[#98A2B3]">
         If you need any help{" "}
         <Link
-          to={"./contact-us"}
+          to={"/contact-us"}
           className="font-medium text-primary_main underline dark:text-[#665CF3]"
         >
           Contact us
