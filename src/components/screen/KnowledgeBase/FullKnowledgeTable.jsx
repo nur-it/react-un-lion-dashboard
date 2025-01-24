@@ -2,11 +2,10 @@ import Toggle from "@/components/shared/Toggle";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
+  PaginationPrevious
 } from "@/components/ui/pagination";
 import { knowledgeTableData } from "@/data/knowledgeTableData";
 import React, { useState } from "react";
@@ -18,6 +17,22 @@ const FullKnowledgeTable = () => {
     key: null,
     direction: "ascending",
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+
+  // Function to handle sorting
+  const requestSort = (key) => {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        return {
+          key,
+          direction: prev.direction === "ascending" ? "descending" : "ascending",
+        };
+      }
+      return { key, direction: "ascending" };
+    });
+  };
 
   const sortedData = React.useMemo(() => {
     let sortableItems = [...knowledgeTableData];
@@ -33,15 +48,44 @@ const FullKnowledgeTable = () => {
       });
     }
     return sortableItems;
-  }, [knowledgeTableData, sortConfig]);
+  }, [sortConfig]);
 
-  const requestSort = (key) => {
-    let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
+  const totalPages = Math.ceil(sortedData.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
+
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        pageNumbers.push(1, 2, 3, 4, "...", totalPages);
+      } else if (currentPage > totalPages - 3) {
+        pageNumbers.push(1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        pageNumbers.push(
+          1,
+          "...",
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          "...",
+          totalPages
+        );
+      }
+    }
+    return pageNumbers;
+  };
+
+  const paginatedData = sortedData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="mt-6 w-80 min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
@@ -79,7 +123,7 @@ const FullKnowledgeTable = () => {
                       </button>
                     </div>
                   </th>
-                ),
+                )
               )}
 
               <th scope="col" className="w-[5%] p-4">
@@ -88,16 +132,16 @@ const FullKnowledgeTable = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((row, index) => (
+            {paginatedData.map((row, index) => (
               <tr
                 key={index}
                 className="border-b bg-white text-sm text-[#101828] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
                 <td className="whitespace-nowrap p-4">{row.title}</td>
                 <td className="whitespace-nowrap p-4">{row.type}</td>
-                <td className="p-4">{row.data}</td>
+                <td className="p-4">{row.date}</td>
                 <td className="whitespace-nowrap p-4">{row.source}</td>
-                <td className="p-4">
+                <td className="p-4 w-[15%]">
                   <Toggle initialActive={row.isActive} />
                 </td>
                 <td className="p-4">
@@ -115,30 +159,33 @@ const FullKnowledgeTable = () => {
       <Pagination className="mt-6">
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious to="#" />
+            <PaginationPrevious
+              to="#"
+              onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+            />
           </PaginationItem>
+          {getPageNumbers().map((page, index) => (
+            <PaginationItem key={index}>
+              {page === "..." ? (
+                <span className="px-2">...</span>
+              ) : (
+                <PaginationLink
+                  to="#"
+                  isActive={page === currentPage}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </PaginationLink>
+              )}
+            </PaginationItem>
+          ))}
           <PaginationItem>
-            <PaginationLink to="#" isActive>
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink to="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink to="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink to="#">4</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink to="#">5</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext to="#" />
+            <PaginationNext
+              to="#"
+              onClick={() =>
+                handlePageChange(Math.min(currentPage + 1, totalPages))
+              }
+            />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
