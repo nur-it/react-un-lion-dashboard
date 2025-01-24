@@ -13,7 +13,7 @@ const SettingMain = () => {
   });
 
   const handleSave = (updatedUser) => {
-    setUser(updatedUser);
+    setUser((prevUser) => ({ ...prevUser, ...updatedUser }));
   };
   return (
     <div className="mt-6 space-y-5 rounded-2xl border border-gray200 bg-white p-6 dark:border-[#FFFFFF33] dark:bg-[#FFFFFF0A] sm:space-y-6">
@@ -21,12 +21,12 @@ const SettingMain = () => {
       <div className="flex items-center justify-between rounded-xl border border-gray300 px-[11px] py-2 dark:border-[#344054] sm:px-6 sm:py-6">
         <div className="flex items-center gap-4">
           <img
-            src={userImg}
+            src={user.profilePic}
             alt="userImg"
-            className="h-[42px] w-[42px] sm:h-[64px] sm:w-[64px]"
+            className="h-[42px] w-[42px] rounded-full sm:h-[64px] sm:w-[64px]"
           />
           <h4 className="text-lg font-bold text-secondary_main dark:text-white sm:text-xl">
-            John Due
+            {user.name}
           </h4>
         </div>
         {/* profile edit */}
@@ -59,7 +59,7 @@ const SettingMain = () => {
               Full Name
             </p>
             <p className="text-base font-medium text-secondary_main dark:text-white">
-              John Due
+              {user.name}
             </p>
           </div>
           <div>
@@ -67,7 +67,7 @@ const SettingMain = () => {
               Email
             </p>
             <p className="text-base font-medium text-secondary_main dark:text-white">
-              username@gmail.com
+              {user.email}
             </p>
           </div>
         </div>
