@@ -88,8 +88,8 @@ const FullKnowledgeTable = () => {
   );
 
   return (
-    <div className="mt-6 w-80 min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] md:w-[670px] lg:w-[675px] xl:w-full">
-      <div className="relative w-full overflow-x-auto border border-[#0000001A] dark:border-[#FFFFFF1A] sm:rounded-lg">
+    <div className="w-[270px] mt-6 min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
+      <div className="relative w-full overflow-x-auto border border-[#0000001A] dark:border-[#FFFFFF1A] rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
             <tr>
@@ -113,7 +113,7 @@ const FullKnowledgeTable = () => {
                         />
                         <FaSortDown
                           size={16}
-                          className={`mt-[-14px] ${
+                          className={`mt-[-16px] ${
                             sortConfig.key === header &&
                             sortConfig.direction === "descending"
                               ? "text-[#687588]"
@@ -137,10 +137,10 @@ const FullKnowledgeTable = () => {
                 key={index}
                 className="border-b bg-white text-sm text-[#101828] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
-                <td className="whitespace-nowrap p-4">{row.title}</td>
-                <td className="whitespace-nowrap p-4">{row.type}</td>
-                <td className="p-4">{row.date}</td>
-                <td className="whitespace-nowrap p-4">{row.source}</td>
+                <td className="whitespace-nowrap p-4 w-[20%]">{row.title}</td>
+                <td className="whitespace-nowrap p-4 w-[20%]">{row.type}</td>
+                <td className="p-4 w-[20%]">{row.date}</td>
+                <td className="whitespace-nowrap p-4 w-[20%]">{row.source}</td>
                 <td className="p-4 w-[15%]">
                   <Toggle initialActive={row.isActive} />
                 </td>
