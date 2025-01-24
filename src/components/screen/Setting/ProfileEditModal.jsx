@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 
 const ProfileEditModal = ({ isOpen, onClose, user, onSave }) => {
@@ -6,6 +6,15 @@ const ProfileEditModal = ({ isOpen, onClose, user, onSave }) => {
   const [email, setEmail] = useState(user.email);
   const [profilePic, setProfilePic] = useState(user.profilePic);
   const [isUploading, setIsUploading] = useState(false);
+
+  // Sync the state with the user prop when the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setName(user.name);
+      setEmail(user.email);
+      setProfilePic(user.profilePic);
+    }
+  }, [isOpen, user]);
 
   const handleFileChange = (e) => {
     setIsUploading(true);

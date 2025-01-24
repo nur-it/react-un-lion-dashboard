@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import info from "../../../assets/icon/information-circle.svg";
 
@@ -6,6 +6,7 @@ const RelevantKeywords = () => {
   const [keywords, setKeywords] = useState(["Best Price", "Low Price"]);
   const [showInput, setShowInput] = useState(false);
   const [newKeyword, setNewKeyword] = useState("");
+  const inputRef = useRef(null);
 
   const addKeyword = () => {
     if (newKeyword.trim() !== "") {
@@ -14,6 +15,23 @@ const RelevantKeywords = () => {
       setShowInput(false);
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setNewKeyword("");
+        setShowInput(false);
+      }
+    };
+
+    if (showInput) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showInput]);
 
   return (
     <div className="space-y-4 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
@@ -37,7 +55,7 @@ const RelevantKeywords = () => {
         ))}
 
         {showInput ? (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2" ref={inputRef}>
             <input
               type="text"
               value={newKeyword}
