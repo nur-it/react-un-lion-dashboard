@@ -1,10 +1,3 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import {
   Pagination,
@@ -16,9 +9,9 @@ import {
 } from "@/components/ui/pagination";
 
 import { rowData } from "@/data/threatTableData";
-import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
+import TableActionDropdown from "./TableActionDropdown";
 
 const ThreatDetectionTable = () => {
   const [sortConfig, setSortConfig] = useState({
@@ -117,36 +110,38 @@ const ThreatDetectionTable = () => {
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
         <table className="w-full bg-white text-left text-sm text-gray-500 dark:bg-[#FFFFFF1A] dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm text-text_secondary dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
-          <tr>
-            {columns.map(({ header, key }) => (
-              <th key={key} scope="col" className="p-4 whitespace-nowrap">
-                <div className="flex items-center justify-between gap-1">
-                  {header}
-                  <button
-                    onClick={() => requestSort(key)}
-                    className="flex flex-col items-center"
-                  >
-                    <FaSortUp
-                      size={16}
-                      className={`${
-                        sortConfig.key === key && sortConfig.direction === "ascending"
-                          ? "text-[#687588]"
-                          : "text-gray-400"
-                      }`}
-                    />
-                    <FaSortDown
-                      size={16}
-                      className={`mt-[-16px] ${
-                        sortConfig.key === key && sortConfig.direction === "descending"
-                          ? "text-[#687588]"
-                          : "text-gray-400"
-                      }`}
-                    />
-                  </button>
-                </div>
-              </th>
-            ))}
-          </tr>
+            <tr>
+              {columns.map(({ header, key }) => (
+                <th key={key} scope="col" className="whitespace-nowrap p-4">
+                  <div className="flex items-center justify-between gap-1">
+                    {header}
+                    <button
+                      onClick={() => requestSort(key)}
+                      className="flex flex-col items-center"
+                    >
+                      <FaSortUp
+                        size={16}
+                        className={`${
+                          sortConfig.key === key &&
+                          sortConfig.direction === "ascending"
+                            ? "text-[#687588]"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <FaSortDown
+                        size={16}
+                        className={`mt-[-16px] ${
+                          sortConfig.key === key &&
+                          sortConfig.direction === "descending"
+                            ? "text-[#687588]"
+                            : "text-gray-400"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </th>
+              ))}
+            </tr>
           </thead>
           <tbody>
             {paginatedData.map((row, index) => (
@@ -154,18 +149,20 @@ const ThreatDetectionTable = () => {
                 key={index}
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
-                <td className="p-4 underline dark:no-underline w-[12%]">
+                <td className="w-[12%] p-4 underline dark:no-underline">
                   {row.threatType}
                 </td>
-                <td className="p-4 underline dark:no-underline  w-[12%]">
+                <td className="w-[12%] p-4 underline dark:no-underline">
                   {row.platform}
                 </td>
-                <td className="p-4 underline dark:no-underline  w-[26%]">
+                <td className="w-[26%] p-4 underline dark:no-underline">
                   <p className="line-clamp-1">{row.contentSummary}</p>
                 </td>
-                <td className="p-4 underline dark:no-underline  w-[10%]">{row.id}</td>
+                <td className="w-[10%] p-4 underline dark:no-underline">
+                  {row.id}
+                </td>
                 <td
-                  className={`p-4  w-[10%] ${
+                  className={`w-[10%] p-4 ${
                     row.reach === "High"
                       ? "text-error"
                       : row.reach === "Low"
@@ -175,32 +172,15 @@ const ThreatDetectionTable = () => {
                 >
                   {row.reach}
                 </td>
-                <td className="p-4  w-[15%]">
-                  <Select>
-                    <SelectTrigger
-                      className={cn(
-                        "w-max",
-                        row.status === "In Progress" &&
-                          "bg-primary_main text-white dark:bg-primary_main dark:text-white",
-                        row.status === "Dismissed" &&
-                          "bg-success text-white dark:bg-success dark:text-white",
-                        row.status === "Mitigated" &&
-                          "bg-error text-white dark:bg-error dark:text-white",
-                        row.status === "To Review" &&
-                          "bg-primary_main text-white dark:bg-primary_main dark:text-white",
-                      )}
-                    >
-                      <SelectValue placeholder={row.status} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="in-progress">In Progress</SelectItem>
-                      <SelectItem value="dismissed">Dismissed</SelectItem>
-                      <SelectItem value="mitigated">Mitigated</SelectItem>
-                      <SelectItem value="to-review">To Review</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <td className="w-[15%] p-4">
+                  <TableActionDropdown
+                    initialStatus={row.status}
+                    onStatusChange={(newStatus) =>
+                      console.log(`Row ${index} status changed to ${newStatus}`)
+                    }
+                  />
                 </td>
-                <td className="p-4  w-[15%]">
+                <td className="w-[15%] p-4">
                   {row.status && (
                     <button
                       className={`flex h-8 w-[100px] cursor-not-allowed items-center justify-center rounded-md px-3 font-medium ${
