@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 const TimePeriodDropdown = ({ options = ["Weekly", "Monthly", "Yearly"] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block" ref={dropdownRef}>
       {/* Dropdown Trigger */}
       <div
         className="flex h-9 max-w-[107px] cursor-pointer items-center justify-between gap-2 rounded-lg border border-[#D0D5DD] bg-[#FFFFFF05] px-3 py-2 dark:border-[#FFFFFF4D]"
