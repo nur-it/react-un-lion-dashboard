@@ -10,6 +10,7 @@ const Notification = () => {
 
   // State to manage selected radio button
   const [selectedOption, setSelectedOption] = useState(options[0].id);
+
   return (
     <div className="space-y-4 sm:space-y-6 rounded-xl border border-gray300 dark:border-[#344054] p-4 sm:p-6">
       <h5 className="text-lg font-medium text-secondary_main dark:text-white">
@@ -20,29 +21,26 @@ const Notification = () => {
           <p className="text-sm text-text_secondary dark:text-gray300">Email Notification</p>
           <div className="space-y-4">
             {options.map((option) => (
-              <div key={option.id} className="flex items-center gap-2">
-                <div className="h-6 w-6">
-                  <div className="inline-flex h-6 w-6 items-center">
-                    <label
-                      className="relative flex cursor-pointer items-center"
-                      htmlFor={option.id}
-                    >
-                      <input
-                        name="color"
-                        type="radio"
-                        className="peer h-6 w-6 cursor-pointer appearance-none rounded-full border border-slate-300 transition-all checked:border-[#473BF0] dark:checked:border-[#948DF6]"
-                        id={option.id}
-                        checked={selectedOption === option.id}
-                        onChange={() => setSelectedOption(option.id)}
-                      />
-                      <span className="absolute left-1/2 top-1/2 h-[14px] w-[14px] -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-[#473BF0] dark:bg-[#948DF6] opacity-0 transition-opacity duration-200 peer-checked:opacity-100"></span>
-                    </label>
-                  </div>
+              <label
+                key={option.id}
+                htmlFor={option.id}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <div className="relative h-6 w-6">
+                  <input
+                    name="notification"
+                    type="radio"
+                    className="peer h-6 w-6 cursor-pointer appearance-none rounded-full border border-slate-300 transition-all checked:border-[#473BF0] dark:checked:border-[#948DF6]"
+                    id={option.id}
+                    checked={selectedOption === option.id}
+                    onChange={() => setSelectedOption(option.id)}
+                  />
+                  <span className="absolute inset-0 m-auto h-[14px] w-[14px] transform rounded-full bg-[#473BF0] dark:bg-[#948DF6] opacity-0 transition-opacity duration-200 peer-checked:opacity-100"></span>
                 </div>
                 <p className="font-medium text-secondary_main dark:text-white">
                   {option.label}
                 </p>
-              </div>
+              </label>
             ))}
           </div>
         </div>

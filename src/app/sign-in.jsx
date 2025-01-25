@@ -72,8 +72,8 @@ const SignInPage = () => {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2 sm:space-x-3">
-                  <CustomCheckbox />
-                  <label htmlFor="accent-checkbox" className="text-white">
+                  <CustomCheckbox id="remember-me" />
+                  <label htmlFor="remember-me" className="text-white cursor-pointer">
                     Remember me
                   </label>
                 </div>

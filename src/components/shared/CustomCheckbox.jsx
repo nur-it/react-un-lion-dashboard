@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CustomCheckbox = () => {
+const CustomCheckbox = ({id}) => {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -8,6 +8,7 @@ const CustomCheckbox = () => {
       <input
         type="checkbox"
         className="hidden"
+        id={id}
         checked={checked}
         onChange={() => setChecked(!checked)}
       />
