@@ -13,7 +13,7 @@ const RootLayout = () => {
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <Sidebar />
+        <Sidebar closeSidebar={closeSidebar} />
       </aside>
 
       {/* Main Section */}
