@@ -137,6 +137,8 @@ const ThreatDetectionTable = () => {
     }, 1000);
   };
 
+  const date = new Date().toLocaleDateString("en-US", "dd/mm/yyyy");
+
   return (
     <div className="w-[270px] min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
@@ -231,7 +233,7 @@ const ThreatDetectionTable = () => {
                 <td className="w-[13%] p-4">
                   {newStatus[index] && (
                     <button
-                      className={`flex h-8 w-[100px] cursor-not-allowed items-center justify-center rounded-md px-3 font-medium ${
+                      className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
                         newStatus[index] === "Mitigated"
                           ? "bg-error/[0.15] text-error"
                           : ""
