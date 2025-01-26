@@ -122,10 +122,18 @@ const ThreatDetectionTable = () => {
 
     // Simulate the final status change after 1 second
     setTimeout(() => {
-      setNewStatus((prev) => ({
-        ...prev,
-        [rowIndex]: newStatus === "Mitigate" ? "Mitigated" : "Dismissed",
-      }));
+      setNewStatus((prev) => {
+        const updatedStatus =
+          newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
+
+        // Update the rowData action field
+        rowData[rowIndex].action = true;
+
+        return {
+          ...prev,
+          [rowIndex]: updatedStatus,
+        };
+      });
     }, 1000);
   };
 
