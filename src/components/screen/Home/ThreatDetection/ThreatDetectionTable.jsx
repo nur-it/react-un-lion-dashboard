@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/pagination";
 
 import { rowData } from "@/data/threatTableData";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import TableActionDropdown from "./TableActionDropdown";
 
