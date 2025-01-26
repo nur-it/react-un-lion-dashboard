@@ -28,3 +28,40 @@ export const exportToCSV = (data) => {
   link.download = "statistic_data.csv";
   link.click();
 };
+
+// ------------------------------- Emotions----------------
+// utils/exportUtils.js
+
+export const exportEmotionToCSV = (data) => {
+  const header = ["Label", "Value", "Max Value", "Color"];
+  const rows = data.map((item) => [
+    item.label,
+    item.value,
+    item.maxValue,
+    item.color,
+  ]);
+
+  const csvContent =
+    "data:text/csv;charset=utf-8," +
+    [header, ...rows]
+      .map((row) => row.join(","))
+      .join("\n");
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.href = encodedUri;
+  link.download = "data.csv";
+  link.click();
+};
+
+export const exportEmotionToJSON = (data) => {
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "data.json";
+  link.click();
+  URL.revokeObjectURL(url);
+};
