@@ -1,4 +1,3 @@
-
 import {
   Pagination,
   PaginationContent,
@@ -20,9 +19,11 @@ const ThreatDetectionTable = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [disabledRows, setDisabledRows] = useState({});
   const itemsPerPage = 4;
+  const [status, setStatus] = useState({});
+  const [newStatus, setNewStatus] = useState({}); // Track individual row statuses
 
-  // Function to handle sorting
   const requestSort = (key) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
@@ -105,6 +106,39 @@ const ThreatDetectionTable = () => {
     { header: "Action", key: "action" },
     { header: "Status", key: "status" },
   ];
+
+  const handleDropdownChange = (rowIndex, newStatus) => {
+    setDisabledRows((prev) => ({
+      ...prev,
+      [rowIndex]: true, // Disable only the specific row's dropdown
+    }));
+    setStatus({ rowIndex, newStatus });
+
+    // Set the "In Progress" status immediately
+    setNewStatus((prev) => ({
+      ...prev,
+      [rowIndex]: "In Progress",
+    }));
+
+    // Simulate the final status change after 1 second
+    setTimeout(() => {
+      setNewStatus((prev) => {
+        const updatedStatus =
+          newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
+
+        // Update the rowData action field
+        rowData[rowIndex].action = true;
+
+        return {
+          ...prev,
+          [rowIndex]: updatedStatus,
+        };
+      });
+    }, 1000);
+  };
+
+  const date = new Date().toLocaleDateString("en-US", "dd/mm/yyyy");
+
   return (
     <div className="w-[270px] min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
@@ -172,37 +206,48 @@ const ThreatDetectionTable = () => {
                 >
                   {row.reach}
                 </td>
-                <td className="w-[15%] p-4">
+                <td className="flex items-center justify-between gap-2 p-4">
                   <TableActionDropdown
-                    initialStatus={row.status}
+                    options={{
+                      value: "Mitigated",
+                      items: ["Mitigate", "Mitigate 2"],
+                    }}
+                    initialStatus={"Mitigate"}
                     onStatusChange={(newStatus) =>
-                      console.log(`Row ${index} status changed to ${newStatus}`)
+                      handleDropdownChange(index, newStatus)
                     }
+                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
+                  />
+                  <TableActionDropdown
+                    options={{
+                      value: "Dismissed",
+                      items: ["Dismiss", "Dismiss 2"],
+                    }}
+                    initialStatus={"Dismiss"}
+                    onStatusChange={(newStatus) =>
+                      handleDropdownChange(index, newStatus)
+                    }
+                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
                   />
                 </td>
-                <td className="w-[15%] p-4">
-                  {row.status && (
+                <td className="w-[13%] p-4">
+                  {newStatus[index] && (
                     <button
-                      className={`flex h-8 w-[100px] cursor-not-allowed items-center justify-center rounded-md px-3 font-medium ${
-                        row.status === "Mitigated"
+                      className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
+                        newStatus[index] === "Mitigated"
                           ? "bg-error/[0.15] text-error"
                           : ""
                       } ${
-                        row.status === "Dismissed"
+                        newStatus[index] === "Dismissed"
                           ? "bg-[#0CAF6014] text-success"
                           : ""
                       } ${
-                        row.status === "In Progress"
+                        newStatus[index] === "In Progress"
                           ? "bg-[#F38E001A] text-warning dark:bg-white/[0.08] dark:text-white"
                           : ""
-                      } ${
-                        row.status === "To Review"
-                          ? "bg-[#0CAF6014] text-success"
-                          : ""
-                      } `}
-                      disabled
+                      }`}
                     >
-                      {row.status}
+                      {newStatus[index]}
                     </button>
                   )}
                 </td>
@@ -249,4 +294,5 @@ const ThreatDetectionTable = () => {
     </div>
   );
 };
+
 export default ThreatDetectionTable;
