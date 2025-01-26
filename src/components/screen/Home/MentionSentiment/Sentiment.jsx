@@ -5,8 +5,8 @@ import SentimentBarChart from "./SentimentBarChart";
 
 const Sentiment = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef(null);  // Ref for the dropdown container
-  const buttonRef = useRef(null);  // Ref for the button
+  const dropdownRef = useRef(null); 
+  const buttonRef = useRef(null); 
 
   const datasets = {
     labels: [
