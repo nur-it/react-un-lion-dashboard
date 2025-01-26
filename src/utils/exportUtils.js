@@ -118,3 +118,33 @@ export const downloadAsCsv = (datasets) => {
   const csvData = [headers, ...rows].join("\n");
   downloadFile(csvData, "csv");
 };
+
+
+// --------------------------Main topics -----------------------
+
+export const exportMainTopicToJSON = (data) => {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'topics.json';
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+export const exportMainTopicToCSV = (data) => {
+  const header = 'Topic, Value, Color\n';
+  const rows = data
+    .map(([text, value, color]) => `${text},${value},${color}`)
+    .join('\n');
+  
+  const csv = header + rows;
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'topics.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+};
