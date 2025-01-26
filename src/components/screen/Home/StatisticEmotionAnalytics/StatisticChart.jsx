@@ -142,7 +142,7 @@ const StatisticChart = () => {
   };
 
   return (
-    <div className="h-[250px] w-full">
+    <div className="h-[230px] w-full">
       <Bar data={data} options={options} />
     </div>
   );

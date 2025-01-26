@@ -68,6 +68,13 @@ const Statistic = () => {
     };
   }, []);
 
+  const riskCategories = [
+    { label: "High Risk", color: "#F23838" },
+    { label: "Medium Risk", color: "#E38604" },
+    { label: "Low Risk", color: "#0CAF60" },
+    { label: "Mitigated Risk", color: "#665CF3" },
+  ];
+
   return (
     <div className="space-y-5 rounded-lg border border-gray-200 bg-white p-4 dark:border-white/[10%] dark:bg-white/[4%] sm:p-6">
       <div className="flex w-full items-center justify-between gap-3">
@@ -101,6 +108,19 @@ const Statistic = () => {
             )}
           </div>
         </div>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        {riskCategories.map((category, index) => (
+          <div key={index} className="flex items-center gap-1.5">
+            <div
+              className="h-2.5 w-2.5 rounded-full"
+              style={{ backgroundColor: category.color }}
+            ></div>
+            <p className="text-xs font-normal text-text_secondary dark:text-white/[80%]">
+              {category.label}
+            </p>
+          </div>
+        ))}
       </div>
       <StatisticChart />
     </div>
