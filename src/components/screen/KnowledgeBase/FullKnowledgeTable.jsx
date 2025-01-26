@@ -167,7 +167,7 @@ const FullKnowledgeTable = () => {
     };
 
     // Update the knowledge data state with the new row
-    setKnowledgeData((prevData) => [...prevData, newRowData]);
+    setKnowledgeData((prevData) => [newRowData, ...prevData]);
 
     // Reset the input fields and errors
     setNewRow({
