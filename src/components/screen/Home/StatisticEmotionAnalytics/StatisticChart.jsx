@@ -12,6 +12,21 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const StatisticChart = () => {
   const isDarkMode = document.documentElement.classList.contains("dark");
+
+  const stack1BaseData = [
+    [20, 15, 20, 20, 25, 15, 22],
+    [10, 10, 15, 10, 15, 10, 10],
+    [40, 20, 30, 30, 45, 40, 35],
+  ];
+
+  const cumulativeData = stack1BaseData.map((dataset, idx) =>
+    dataset.map((value, index) =>
+      stack1BaseData
+        .slice(0, idx)
+        .reduce((acc, current) => acc + current[index], value),
+    ),
+  );
+
   const data = {
     labels: [
       "Jan 10",
@@ -25,28 +40,25 @@ const StatisticChart = () => {
     datasets: [
       {
         label: "High Risk",
-        data: [11, 11, 10, 8, 25, 10, 18],
+        data: cumulativeData[0],
         backgroundColor: "#F23838",
         stack: "stack1",
-        borderRadius: 20,
         borderSkipped: false,
         barThickness: 15,
       },
       {
         label: "Positive",
-        data: [18, 18, 30, 20, 38, 20, 30],
+        data: cumulativeData[1],
         backgroundColor: "#E38604",
         stack: "stack1",
-        borderRadius: 20,
         borderSkipped: false,
         barThickness: 15,
       },
       {
         label: "Negative",
-        data: [58, 40, 56, 62, 75, 45, 62],
+        data: cumulativeData[2],
         backgroundColor: "#0CAF60",
         stack: "stack1",
-        borderRadius: 20,
         borderSkipped: false,
         barThickness: 15,
       },
@@ -55,9 +67,8 @@ const StatisticChart = () => {
         data: [30, 15, 20, 25, 40, 25, 25],
         backgroundColor: "#665CF3",
         stack: "stack2",
-        borderRadius: 20,
-        barThickness: 15,
         borderSkipped: false,
+        barThickness: 15,
       },
     ],
   };
@@ -84,9 +95,9 @@ const StatisticChart = () => {
             }
 
             const values = {
-              green: data.datasets[2]?.data[index] || 0,
-              red: data.datasets[0]?.data[index] || 0,
-              orange: data.datasets[1]?.data[index] || 0,
+              green: stack1BaseData[2][index],
+              red: stack1BaseData[0][index],
+              orange: stack1BaseData[1][index],
             };
 
             return [
