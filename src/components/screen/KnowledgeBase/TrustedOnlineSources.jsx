@@ -13,27 +13,69 @@ const TrustedOnlineSources = () => {
     formState: { errors },
   } = useForm();
 
-  const [inputStatus, setInputStatus] = useState({});
+  const fields = [
+    {
+      name: "wikipedia",
+      placeholder: "Wikipedia Page",
+      label: "Wikipedia Page",
+    },
+    { name: "x", placeholder: "X account name", label: "X" },
+    {
+      name: "facebook",
+      placeholder: "Facebook account name",
+      label: "Facebook",
+    },
+    {
+      name: "instagram",
+      placeholder: "Instagram account name",
+      label: "Instagram",
+    },
+    { name: "tiktok", placeholder: "TikTok account name", label: "TikTok" },
+    { name: "youtube", placeholder: "Youtube account name", label: "Youtube" },
+  ];
 
-  const handleInputChange = (field, value) => {
-    if (value.trim() === "") {
-      setInputStatus((prev) => ({ ...prev, [field]: "invalid" }));
-    } else {
-      setInputStatus((prev) => ({ ...prev, [field]: "typing" }));
-    }
+  const patterns = {
+    wikipedia: /^https?:\/\/(www\.)?wikipedia\.org\/.+$/,
+    x: /^[a-zA-Z0-9_]{3,}$/, // Valid X account username (min 3 characters, alphanumeric + underscore)
+    facebook: /^[a-zA-Z0-9.]{3,}$/, // Facebook account username
+    instagram: /^[a-zA-Z0-9._]{3,}$/, // Instagram account username
+    tiktok: /^[a-zA-Z0-9._]{3,}$/, // TikTok account username
+    youtube: /^https?:\/\/(www\.)?youtube\.com\/.+$/,
   };
 
-  const handleInputBlur = (field, value) => {
-    if (value.trim().length >= 3 && !errors[field]) {
-      setInputStatus((prev) => ({ ...prev, [field]: "valid" }));
-    } else if (value.trim() !== "") {
-      setInputStatus((prev) => ({ ...prev, [field]: "invalid" }));
+  const [inputStatus, setInputStatus] = useState(
+    fields.reduce((acc, field) => ({ ...acc, [field.name]: "typing" }), {}),
+  );
+
+  const [typingTimeouts, setTypingTimeouts] = useState({});
+
+  const handleInputChange = (field, value) => {
+    setInputStatus((prev) => ({ ...prev, [field]: "typing" }));
+
+    // Clear the existing timeout for this field
+    if (typingTimeouts[field]) {
+      clearTimeout(typingTimeouts[field]);
     }
+
+    // Set a new timeout to validate the input after a delay
+    const timeout = setTimeout(() => {
+      const pattern = patterns[field];
+      if (value.trim() && pattern && pattern.test(value.trim())) {
+        setInputStatus((prev) => ({ ...prev, [field]: "valid" }));
+      } else {
+        setInputStatus((prev) => ({ ...prev, [field]: "invalid" }));
+      }
+    }, 500); // 500ms debounce delay
+
+    setTypingTimeouts((prev) => ({ ...prev, [field]: timeout }));
   };
 
   const clearInput = (field) => {
-    setValue(field, ""); 
-    setInputStatus((prev) => ({ ...prev, [field]: undefined }));
+    setValue(field, "");
+    setInputStatus((prev) => ({ ...prev, [field]: "typing" }));
+    if (typingTimeouts[field]) {
+      clearTimeout(typingTimeouts[field]);
+    }
   };
 
   const renderIcon = (field, status) => {
@@ -46,8 +88,8 @@ const TrustedOnlineSources = () => {
             src={rotateLeft}
             alt="refresh"
             className="h-6 w-6 cursor-pointer"
-            onMouseDown={(e) => e.preventDefault()} 
-            onClick={() => clearInput(field)} 
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => clearInput(field)}
           />
         );
       case "invalid":
@@ -57,7 +99,7 @@ const TrustedOnlineSources = () => {
             alt="invalid"
             className="h-6 w-6 cursor-pointer"
             onMouseDown={(e) => e.preventDefault()}
-            onClick={() => clearInput(field)} 
+            onClick={() => clearInput(field)}
           />
         );
       default:
@@ -78,34 +120,7 @@ const TrustedOnlineSources = () => {
       <div className="md:col-span-6">
         <form className="space-y-3 md:space-y-6">
           <div className="grid gap-3 md:grid-cols-2">
-            {[
-              {
-                name: "wikipedia",
-                placeholder: "Wikipedia Page",
-                label: "Wikipedia Page",
-              },
-              { name: "x", placeholder: "X account name", label: "X" },
-              {
-                name: "facebook",
-                placeholder: "Facebook account name",
-                label: "Facebook",
-              },
-              {
-                name: "instagram",
-                placeholder: "Instagram account name",
-                label: "Instagram",
-              },
-              {
-                name: "tiktok",
-                placeholder: "TikTok account name",
-                label: "TikTok",
-              },
-              {
-                name: "youtube",
-                placeholder: "Youtube account name",
-                label: "Youtube",
-              },
-            ].map((field, index) => (
+            {fields.map((field, index) => (
               <div className="space-y-1" key={index}>
                 <label
                   htmlFor={field.name}
@@ -117,9 +132,9 @@ const TrustedOnlineSources = () => {
                   <input
                     {...register(field.name, {
                       required: `${field.label} is required`,
-                      minLength: {
-                        value: 3,
-                        message: `${field.label} must be at least 3 characters`,
+                      pattern: {
+                        value: patterns[field.name],
+                        message: `Invalid ${field.label}`,
                       },
                     })}
                     type="text"
@@ -128,7 +143,6 @@ const TrustedOnlineSources = () => {
                     onChange={(e) =>
                       handleInputChange(field.name, e.target.value)
                     }
-                    onBlur={(e) => handleInputBlur(field.name, e.target.value)}
                   />
                   {renderIcon(field.name, inputStatus[field.name])}
                 </div>
