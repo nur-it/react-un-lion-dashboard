@@ -1,4 +1,3 @@
-
 import {
   Pagination,
   PaginationContent,
@@ -20,6 +19,7 @@ const ThreatDetectionTable = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [disabledRows, setDisabledRows] = useState({}); // Track disabled state by row index
   const itemsPerPage = 4;
 
   // Function to handle sorting
@@ -105,6 +105,15 @@ const ThreatDetectionTable = () => {
     { header: "Action", key: "action" },
     { header: "Status", key: "status" },
   ];
+
+  const handleDropdownChange = (rowIndex, newStatus) => {
+    setDisabledRows((prev) => ({
+      ...prev,
+      [rowIndex]: true, // Disable only the specific row's dropdown
+    }));
+    console.log(`Row ${rowIndex} status changed to ${newStatus}`);
+  };
+
   return (
     <div className="w-[270px] min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
@@ -172,15 +181,31 @@ const ThreatDetectionTable = () => {
                 >
                   {row.reach}
                 </td>
-                <td className="w-[15%] p-4">
+                <td className="flex items-center justify-between gap-2 p-4">
                   <TableActionDropdown
-                    initialStatus={row.status}
+                    options={{
+                      value: "Mitigated",
+                      items: ["Mitigate", "Mitigate 2"],
+                    }}
+                    initialStatus={"Mitigate"}
                     onStatusChange={(newStatus) =>
-                      console.log(`Row ${index} status changed to ${newStatus}`)
+                      handleDropdownChange(index, newStatus)
                     }
+                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
+                  />
+                  <TableActionDropdown
+                    options={{
+                      value: "Dismissed",
+                      items: ["Dismiss", "Dismiss 2"],
+                    }}
+                    initialStatus={"Dismiss"}
+                    onStatusChange={(newStatus) =>
+                      handleDropdownChange(index, newStatus)
+                    }
+                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
                   />
                 </td>
-                <td className="w-[15%] p-4">
+                <td className="w-[13%] p-4">
                   {row.status && (
                     <button
                       className={`flex h-8 w-[100px] cursor-not-allowed items-center justify-center rounded-md px-3 font-medium ${
@@ -249,4 +274,5 @@ const ThreatDetectionTable = () => {
     </div>
   );
 };
+
 export default ThreatDetectionTable;
