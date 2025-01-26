@@ -5,12 +5,13 @@ import {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 import { knowledgeTableData } from "@/data/knowledgeTableData";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import writeIcon from "../../../assets/icon/pencil.svg";
+import checkIcon from "../../../assets/icon/tick-mark.svg";
 
 const FullKnowledgeTable = () => {
   const [sortConfig, setSortConfig] = useState({
@@ -20,6 +21,21 @@ const FullKnowledgeTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
+  const [newRow, setNewRow] = useState({
+    title: "",
+    type: "",
+    date: "",
+    source: "",
+    isActive: false,
+  });
+  const [knowledgeData, setKnowledgeData] = useState(knowledgeTableData);
+
+  const [errors, setErrors] = useState({
+    title: "",
+    type: "",
+    date: "",
+    source: "",
+  });
 
   // Function to handle sorting
   const requestSort = (key) => {
@@ -27,7 +43,8 @@ const FullKnowledgeTable = () => {
       if (prev.key === key) {
         return {
           key,
-          direction: prev.direction === "ascending" ? "descending" : "ascending",
+          direction:
+            prev.direction === "ascending" ? "descending" : "ascending",
         };
       }
       return { key, direction: "ascending" };
@@ -35,7 +52,7 @@ const FullKnowledgeTable = () => {
   };
 
   const sortedData = React.useMemo(() => {
-    let sortableItems = [...knowledgeTableData];
+    let sortableItems = [...knowledgeData];
     if (sortConfig.key) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -48,7 +65,7 @@ const FullKnowledgeTable = () => {
       });
     }
     return sortableItems;
-  }, [sortConfig]);
+  }, [sortConfig, knowledgeData]);
 
   const totalPages = Math.ceil(sortedData.length / itemsPerPage);
 
@@ -66,7 +83,14 @@ const FullKnowledgeTable = () => {
       if (currentPage <= 3) {
         pageNumbers.push(1, 2, 3, 4, "...", totalPages);
       } else if (currentPage > totalPages - 3) {
-        pageNumbers.push(1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        pageNumbers.push(
+          1,
+          "...",
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages,
+        );
       } else {
         pageNumbers.push(
           1,
@@ -75,7 +99,7 @@ const FullKnowledgeTable = () => {
           currentPage,
           currentPage + 1,
           "...",
-          totalPages
+          totalPages,
         );
       }
     }
@@ -84,12 +108,79 @@ const FullKnowledgeTable = () => {
 
   const paginatedData = sortedData.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewRow((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Clear error message when user starts typing
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: value ? "" : "This field is required",
+    }));
+  };
+
+  const handleAddRow = () => {
+    // Check if all fields are filled and set errors accordingly
+    const newErrors = {};
+    let hasError = false;
+
+    if (!newRow.title) {
+      newErrors.title = "Title is required!";
+      hasError = true;
+    }
+    if (!newRow.type) {
+      newErrors.type = "Type is required!";
+      hasError = true;
+    }
+    if (!newRow.date) {
+      newErrors.date = "Date is required!";
+      hasError = true;
+    }
+    if (!newRow.source) {
+      newErrors.source = "Source is required!";
+      hasError = true;
+    }
+
+    // If there are errors, update the errors state and don't add the row
+    if (hasError) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // Create the new row object
+    const newRowData = {
+      ...newRow,
+      isActive: newRow.isActive,
+    };
+
+    // Update the knowledge data state with the new row
+    setKnowledgeData((prevData) => [...prevData, newRowData]);
+
+    // Reset the input fields and errors
+    setNewRow({
+      title: "",
+      type: "",
+      date: "",
+      source: "",
+      isActive: false,
+    });
+    setErrors({
+      title: "",
+      type: "",
+      date: "",
+      source: "",
+    });
+  };
+
   return (
-    <div className="w-[270px] mt-6 min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
-      <div className="relative w-full overflow-x-auto border border-[#0000001A] dark:border-[#FFFFFF1A] rounded-lg">
+    <div className="mt-6 w-[270px] min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
+      <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
             <tr>
@@ -123,7 +214,7 @@ const FullKnowledgeTable = () => {
                       </button>
                     </div>
                   </th>
-                )
+                ),
               )}
 
               <th scope="col" className="w-[5%] p-4">
@@ -137,11 +228,11 @@ const FullKnowledgeTable = () => {
                 key={index}
                 className="border-b bg-white text-sm text-[#101828] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
-                <td className="whitespace-nowrap p-4 w-[20%]">{row.title}</td>
-                <td className="whitespace-nowrap p-4 w-[20%]">{row.type}</td>
-                <td className="p-4 w-[20%]">{row.date}</td>
-                <td className="whitespace-nowrap p-4 w-[20%]">{row.source}</td>
-                <td className="p-4 w-[15%]">
+                <td className="w-[20%] whitespace-nowrap p-4">{row.title}</td>
+                <td className="w-[20%] whitespace-nowrap p-4">{row.type}</td>
+                <td className="w-[20%] p-4">{row.date}</td>
+                <td className="w-[20%] whitespace-nowrap p-4">{row.source}</td>
+                <td className="w-[15%] p-4">
                   <Toggle initialActive={row.isActive} />
                 </td>
                 <td className="p-4">
@@ -151,6 +242,83 @@ const FullKnowledgeTable = () => {
                 </td>
               </tr>
             ))}
+            {/* Blank row for input */}
+            <tr className="bg-white text-sm text-[#101828] dark:bg-[#161b2f] dark:text-white">
+              <td className="w-[20%] whitespace-nowrap p-4">
+                <div className="flex flex-col">
+                  <input
+                    type="text"
+                    name="title"
+                    value={newRow.title}
+                    required
+                    onChange={handleInputChange}
+                    placeholder="Enter title"
+                    className="w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                  />
+                  {errors.title && (
+                    <span className="text-xs text-red-500">{errors.title}</span>
+                  )}
+                </div>
+              </td>
+              <td className="w-[20%] whitespace-nowrap p-4">
+                <div className="flex flex-col">
+                  <input
+                    type="text"
+                    name="type"
+                    required
+                    value={newRow.type}
+                    onChange={handleInputChange}
+                    placeholder="Enter type"
+                    className="h-full w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                  />
+                  {errors.type && (
+                    <span className="text-xs text-red-500">{errors.type}</span>
+                  )}
+                </div>
+              </td>
+              <td className="w-[20%] p-4">
+                <div className="flex flex-col">
+                  <input
+                    type="text"
+                    name="date"
+                    required
+                    value={newRow.date}
+                    onChange={handleInputChange}
+                    placeholder="Enter date"
+                    className="h-full w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                  />
+                  {errors.date && (
+                    <span className="text-xs text-red-500">{errors.date}</span>
+                  )}
+                </div>
+              </td>
+              <td className="w-[20%] whitespace-nowrap p-4">
+                <div className="flex flex-col">
+                  <input
+                    type="text"
+                    name="source"
+                    value={newRow.source}
+                    required
+                    onChange={handleInputChange}
+                    placeholder="Enter source"
+                    className="h-full w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                  />
+                  {errors.source && (
+                    <span className="text-xs text-red-500">
+                      {errors.source}
+                    </span>
+                  )}
+                </div>
+              </td>
+              <td className="w-[15%] p-4">
+                <Toggle initialActive={newRow.isActive} />
+              </td>
+              <td className="p-4">
+                <button onClick={handleAddRow}>
+                  <img src={checkIcon} alt="Check" />
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
