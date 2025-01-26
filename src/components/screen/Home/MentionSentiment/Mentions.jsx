@@ -47,24 +47,24 @@ const Mentions = () => {
             <button
               ref={buttonRef}
               onClick={() => setShowDropdown(!showDropdown)}
-              className="flex h-9 items-center justify-center rounded-lg border border-gray-300 bg-[#FFFFFF05] px-3"
+              className="flex h-9 items-center justify-center rounded-lg border border-gray-300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
             >
               <img src={downloadIcon} alt="Download" />
             </button>
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 z-10 mt-2 w-40 rounded-lg bg-white shadow-lg"
+                className="absolute right-0 z-10 mt-2 w-40 rounded-lg bg-white shadow-lg dark:bg-[#282C3F]"
               >
                 <button
                   onClick={() => downloadMentionJSON(mentionData)}
-                  className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+                  className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-black"
                 >
                   JSON
                 </button>
                 <button
                   onClick={() => downloadMentionCSV(mentionData)}
-                  className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+                  className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-black"
                 >
                   CSV
                 </button>

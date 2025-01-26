@@ -88,3 +88,33 @@ export const downloadMentionCSV = (data, filename = "data.csv") => {
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
   saveAs(blob, filename);
 };
+
+
+// ---------------------------- sentiment page ----------------------
+// utils/downloadUtils.js
+
+export const downloadFile = (data, format) => {
+  const blob = new Blob([data], {
+    type: format === "json" ? "application/json" : "text/csv",
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `datasets.${format}`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+export const downloadAsJson = (datasets) => {
+  const jsonData = JSON.stringify(datasets, null, 2);
+  downloadFile(jsonData, "json");
+};
+
+export const downloadAsCsv = (datasets) => {
+  const headers = ["Label", ...datasets.labels].join(",");
+  const rows = datasets.data.map((dataset) =>
+    [dataset.label, ...dataset.values].join(",")
+  );
+  const csvData = [headers, ...rows].join("\n");
+  downloadFile(csvData, "csv");
+};
