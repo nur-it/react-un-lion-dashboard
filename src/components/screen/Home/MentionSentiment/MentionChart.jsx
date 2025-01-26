@@ -81,10 +81,10 @@ const MentionChart = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // Disable the legend
+        display: false,
       },
       title: {
-        display: false, // Disable the title
+        display: false,
       },
       tooltip: {
         callbacks: {
@@ -97,13 +97,13 @@ const MentionChart = () => {
       },
     },
     interaction: {
-      mode: "nearest", // Ensure tooltip is shown only for points
-      intersect: true, // Trigger tooltip only when hovering over a point
+      mode: "nearest", 
+      intersect: true, 
     },
     elements: {
       line: {
-        borderWidth: 2, // Line width
-        hoverBorderWidth: 0, // Disable hover effects for the line
+        borderWidth: 2, 
+        hoverBorderWidth: 0, 
       },
     },
     scales: {
@@ -130,7 +130,7 @@ const MentionChart = () => {
   };
 
   return (
-    <div className="h-[210px] w-full">
+    <div className="h-[210px] w-full max-w-full" style={{ width: "100%", height: "210px" }}>
       <Line data={data} options={options} />
     </div>
   );

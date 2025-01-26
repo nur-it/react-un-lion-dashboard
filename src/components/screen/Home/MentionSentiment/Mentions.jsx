@@ -1,5 +1,5 @@
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
-import { saveAs } from "file-saver";
+import { downloadMentionCSV, downloadMentionJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import MentionChart from "./MentionChart";
@@ -16,25 +16,6 @@ const Mentions = () => {
     { platform: "TikTok", value: [30, 62, 55, 55, 62, 62, 30] },
     { platform: "Instagram", value: [75, 55, 75, 50, 78, 70, 78] },
   ];
-
-  // Function to handle downloading as JSON
-  const downloadJSON = () => {
-    const blob = new Blob([JSON.stringify(mentionData, null, 2)], {
-      type: "application/json",
-    });
-    saveAs(blob, "mention-data.json");
-  };
-
-  // Function to handle downloading as CSV
-  const downloadCSV = () => {
-    const headers = ["Platform", "Data"];
-    const rows = mentionData.map(
-      (item) => `${item.platform},${item.value.join(";")}`
-    );
-    const csvContent = [headers.join(","), ...rows].join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    saveAs(blob, "mention-data.csv");
-  };
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -73,16 +54,16 @@ const Mentions = () => {
             {showDropdown && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-2 w-40 rounded-lg bg-white shadow-lg z-10"
+                className="absolute right-0 z-10 mt-2 w-40 rounded-lg bg-white shadow-lg"
               >
                 <button
-                  onClick={downloadJSON}
+                  onClick={() => downloadMentionJSON(mentionData)}
                   className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
                 >
                   JSON
                 </button>
                 <button
-                  onClick={downloadCSV}
+                  onClick={() => downloadMentionCSV(mentionData)}
                   className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
                 >
                   CSV
@@ -108,9 +89,8 @@ const Mentions = () => {
           </div>
         ))}
       </div>
-      <div>
-        <MentionChart />
-      </div>
+
+      <MentionChart />
     </div>
   );
 };

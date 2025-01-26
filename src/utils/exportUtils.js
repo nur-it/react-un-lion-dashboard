@@ -65,3 +65,26 @@ export const exportEmotionToJSON = (data) => {
   link.click();
   URL.revokeObjectURL(url);
 };
+
+
+// ---------------------------- MEntions--------------------------
+
+// utils/downloadUtils.js
+import { saveAs } from "file-saver";
+
+// Function to download data as JSON
+export const downloadMentionJSON = (data, filename = "data.json") => {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  saveAs(blob, filename);
+};
+
+// Function to download data as CSV
+export const downloadMentionCSV = (data, filename = "data.csv") => {
+  const headers = ["Platform", "Data"];
+  const rows = data.map(
+    (item) => `${item.platform},${item.value.join(";")}`
+  );
+  const csvContent = [headers.join(","), ...rows].join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  saveAs(blob, filename);
+};
