@@ -1,4 +1,5 @@
 import Toggle from "@/components/shared/Toggle";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +8,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { knowledgeTableData } from "@/data/knowledgeTableData";
+import { format } from "date-fns";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import writeIcon from "../../../assets/icon/pencil.svg";
@@ -178,6 +185,17 @@ const FullKnowledgeTable = () => {
     });
   };
 
+  const handleDateChange = (selectedDate) => {
+    setNewRow((prev) => ({
+      ...prev,
+      date: selectedDate ? format(selectedDate, "dd/MM/yyyy") : "",
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      date: selectedDate ? "" : "This field is required",
+    }));
+  };
+
   return (
     <div className="mt-6 w-[270px] min-[375px]:w-[300px] min-[425px]:w-[350px] min-[430px]:w-[356px] sm:w-[540px] md:w-[670px] lg:w-[675px] xl:w-full">
       <div className="relative w-full overflow-x-auto rounded-lg border border-[#0000001A] dark:border-[#FFFFFF1A]">
@@ -253,7 +271,7 @@ const FullKnowledgeTable = () => {
                     required
                     onChange={handleInputChange}
                     placeholder="Enter title"
-                    className="w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                    className="w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
                   />
                   {errors.title && (
                     <span className="text-xs text-red-500">{errors.title}</span>
@@ -269,7 +287,7 @@ const FullKnowledgeTable = () => {
                     value={newRow.type}
                     onChange={handleInputChange}
                     placeholder="Enter type"
-                    className="h-full w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                    className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
                   />
                   {errors.type && (
                     <span className="text-xs text-red-500">{errors.type}</span>
@@ -278,15 +296,33 @@ const FullKnowledgeTable = () => {
               </td>
               <td className="w-[20%] p-4">
                 <div className="flex flex-col">
-                  <input
-                    type="text"
-                    name="date"
-                    required
-                    value={newRow.date}
-                    onChange={handleInputChange}
-                    placeholder="Enter date"
-                    className="h-full w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
-                  />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <input
+                        type="text"
+                        name="date"
+                        required
+                        value={newRow.date}
+                        onChange={handleInputChange}
+                        placeholder="Enter date"
+                        className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
+                      />
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={
+                          newRow.date
+                            ? new Date(
+                                newRow.date.split("/").reverse().join("-"),
+                              )
+                            : null
+                        }
+                        onSelect={handleDateChange}
+                        className="rounded-lg border shadow"
+                      />
+                    </PopoverContent>
+                  </Popover>
                   {errors.date && (
                     <span className="text-xs text-red-500">{errors.date}</span>
                   )}
@@ -301,7 +337,7 @@ const FullKnowledgeTable = () => {
                     required
                     onChange={handleInputChange}
                     placeholder="Enter source"
-                    className="h-full w-full bg-transparent outline-none placeholder:text-[#98A2B3] whitespace-nowrap"
+                    className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
                   />
                   {errors.source && (
                     <span className="text-xs text-red-500">
