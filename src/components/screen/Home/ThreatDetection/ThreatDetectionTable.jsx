@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/pagination";
 
 import { rowData } from "@/data/threatTableData";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import TableActionDropdown from "./TableActionDropdown";
 
@@ -19,10 +19,11 @@ const ThreatDetectionTable = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [disabledRows, setDisabledRows] = useState({}); // Track disabled state by row index
+  const [disabledRows, setDisabledRows] = useState({});
   const itemsPerPage = 4;
+  const [status, setStatus] = useState({});
+  const [newStatus, setNewStatus] = useState({}); // Track individual row statuses
 
-  // Function to handle sorting
   const requestSort = (key) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
@@ -111,7 +112,21 @@ const ThreatDetectionTable = () => {
       ...prev,
       [rowIndex]: true, // Disable only the specific row's dropdown
     }));
-    console.log(`Row ${rowIndex} status changed to ${newStatus}`);
+    setStatus({ rowIndex, newStatus });
+
+    // Set the "In Progress" status immediately
+    setNewStatus((prev) => ({
+      ...prev,
+      [rowIndex]: "In Progress",
+    }));
+
+    // Simulate the final status change after 1 second
+    setTimeout(() => {
+      setNewStatus((prev) => ({
+        ...prev,
+        [rowIndex]: newStatus === "Mitigate" ? "Mitigated" : "Dismissed",
+      }));
+    }, 1000);
   };
 
   return (
@@ -206,28 +221,23 @@ const ThreatDetectionTable = () => {
                   />
                 </td>
                 <td className="w-[13%] p-4">
-                  {row.status && (
+                  {newStatus[index] && (
                     <button
                       className={`flex h-8 w-[100px] cursor-not-allowed items-center justify-center rounded-md px-3 font-medium ${
-                        row.status === "Mitigated"
+                        newStatus[index] === "Mitigated"
                           ? "bg-error/[0.15] text-error"
                           : ""
                       } ${
-                        row.status === "Dismissed"
+                        newStatus[index] === "Dismissed"
                           ? "bg-[#0CAF6014] text-success"
                           : ""
                       } ${
-                        row.status === "In Progress"
+                        newStatus[index] === "In Progress"
                           ? "bg-[#F38E001A] text-warning dark:bg-white/[0.08] dark:text-white"
                           : ""
-                      } ${
-                        row.status === "To Review"
-                          ? "bg-[#0CAF6014] text-success"
-                          : ""
-                      } `}
-                      disabled
+                      }`}
                     >
-                      {row.status}
+                      {newStatus[index]}
                     </button>
                   )}
                 </td>
