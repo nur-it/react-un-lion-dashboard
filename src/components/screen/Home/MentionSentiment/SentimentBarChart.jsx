@@ -12,7 +12,8 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const SentimentBarChart = () => {
   const isDarkMode = document.documentElement.classList.contains("dark");
-  const data = {
+
+  const baseData = {
     labels: [
       "Jan 10",
       "Jan 11",
@@ -25,44 +26,41 @@ const SentimentBarChart = () => {
     datasets: [
       {
         label: "Neutral",
-        data: [102, 130, 110, 105, 140, 105, 130],
+        data: [125, 100, 140, 105, 105, 115, 105],
         backgroundColor: "#98A2B3",
-        borderRadius: {
-          topLeft: 20,
-          topRight: 20,
-          bottomLeft: 20,
-          bottomRight: 20,
-        },
         borderSkipped: false,
         barThickness: 15,
       },
       {
         label: "Positive",
-        data: [140, 170, 145, 125, 160, 140, 160],
-        backgroundColor: "#0CAF60", 
-        borderRadius: {
-          topLeft: 20,
-          topRight: 20,
-          bottomLeft: 20,
-          bottomRight: 20,
-        },
+        data: [40, 20, 20, 20, 25, 30, 20],
+        backgroundColor: "#0CAF60",
         borderSkipped: false,
         barThickness: 15,
       },
       {
         label: "Negative",
-        data: [160, 190, 160, 155, 180, 155, 190],
-        backgroundColor: "#F23838", 
-        borderRadius: {
-          topLeft: 20,
-          topRight: 20,
-          bottomLeft: 20,
-          bottomRight: 20,
-        },
+        data: [25, 25, 25, 35, 30, 35, 30],
+        backgroundColor: "#F23838",
         borderSkipped: false,
         barThickness: 15,
       },
     ],
+  };
+
+  // Adjust the dataset to make the stacking incremental
+  const data = {
+    labels: baseData.labels,
+    datasets: baseData.datasets.map((dataset, index, datasets) => {
+      const adjustedData = dataset.data.map((value, i) => {
+        // Sum the values of all previous datasets at the same index
+        const previousSum = datasets
+          .slice(0, index)
+          .reduce((sum, prevDataset) => sum + prevDataset.data[i], 0);
+        return value + previousSum;
+      });
+      return { ...dataset, data: adjustedData };
+    }),
   };
 
   const options = {
@@ -80,11 +78,10 @@ const SentimentBarChart = () => {
           label: (tooltipItem) => {
             const index = tooltipItem.dataIndex;
 
-       
             const values = {
-              gray: data.datasets[0]?.data[index] || 0,
-              green: data.datasets[1]?.data[index] || 0, 
-              red: data.datasets[2]?.data[index] || 0,
+              gray: baseData.datasets[0]?.data[index] || 0,
+              green: baseData.datasets[1]?.data[index] || 0,
+              red: baseData.datasets[2]?.data[index] || 0,
             };
 
             return [
@@ -124,8 +121,6 @@ const SentimentBarChart = () => {
         },
       },
     },
-    barThickness: 12,
-    maxBarThickness: 15,
   };
 
   return (
