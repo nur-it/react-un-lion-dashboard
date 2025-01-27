@@ -1,5 +1,5 @@
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
-import { downloadMentionCSV, downloadMentionJSON } from "@/utils/exportUtils";
+import { downloadMentionCSV } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import MentionChart from "./MentionChart";
@@ -46,12 +46,12 @@ const Mentions = () => {
           <div className="relative">
             <button
               ref={buttonRef}
-              onClick={() => setShowDropdown(!showDropdown)}
+              onClick={() => downloadMentionCSV(mentionData)}
               className="flex h-9 items-center justify-center rounded-lg border border-gray-300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
             >
               <img src={downloadIcon} alt="Download" />
             </button>
-            {showDropdown && (
+            {/* {showDropdown && (
               <div
                 ref={dropdownRef}
                 className="absolute right-0 z-10 mt-2 w-40 rounded-lg bg-white shadow-lg dark:bg-[#282C3F]"
@@ -69,7 +69,7 @@ const Mentions = () => {
                   CSV
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
