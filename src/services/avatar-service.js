@@ -1,5 +1,5 @@
 import requests from "./httpService";
 
-export const authService = {
+export const avatarService = {
   listAvatars: async () => await requests.get("/list_avatars"),
 };
