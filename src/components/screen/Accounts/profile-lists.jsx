@@ -32,7 +32,7 @@ const ProfileLists = ({ profiles }) => {
             <b>{profile.threat}</b>
           </div>
           {/* threats, review, insights  */}
-          <div className="items-center gap-1.5 space-y-1.5 md:flex">
+          <div className="items-center gap-1.5 space-y-1.5 md:flex md:space-y-0">
             <div
               title={`${profile.other_threat} Other Threats`}
               className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white"
