@@ -1,22 +1,10 @@
 import CustomCheckbox from "@/components/shared/CustomCheckbox";
 import { Button } from "@/components/ui/button";
-import Cookies from "js-cookie";
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import useAuthentication from "@/hooks/use-authentication";
+import { Link } from "react-router";
 
 const SignInPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm();
-  const navigate = useNavigate();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    Cookies.set("accessToken", "fake-access-token", { expires: 7 });
-    navigate("/my-accounts");
-  };
+  const { register, errors, handleSubmit, onSubmitLogin, isLoading } = useAuthentication();
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
@@ -31,7 +19,7 @@ const SignInPage = () => {
               </p>
             </div>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmitLogin)} className="space-y-6">
             <div className="space-y-5">
               <div className="space-y-2">
                 <label htmlFor="username" className="text-sm text-white">
@@ -73,7 +61,10 @@ const SignInPage = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2 sm:space-x-3">
                   <CustomCheckbox id="remember-me" />
-                  <label htmlFor="remember-me" className="text-white cursor-pointer">
+                  <label
+                    htmlFor="remember-me"
+                    className="cursor-pointer text-white"
+                  >
                     Remember me
                   </label>
                 </div>
@@ -89,10 +80,10 @@ const SignInPage = () => {
             </div>
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isLoading}
               className="h-12 w-full bg-primary_main sm:h-[56px]"
             >
-              {isSubmitting ? "Signing In..." : "Sign In"}
+              {isLoading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
         </div>

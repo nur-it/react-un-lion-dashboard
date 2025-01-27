@@ -25,20 +25,36 @@ instance.interceptors.request.use(
 // Add a response interceptor to handle 401 errors
 instance.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response && error.response.status === 401) {
-      Cookies.remove("accessToken");
-      Cookies.remove("refreshToken");
-      alert("Session expired. Please log in again.");
-      window.location.href = "/sign-in";
+      const refreshToken = Cookies.get("refreshToken");
+      if (refreshToken) {
+        try {
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_APP_API_BASE_URL}/refresh_token`,
+            { refreshToken },
+          );
+          Cookies.set("accessToken", data.accessToken);
+          error.config.headers.Authorization = `Bearer ${data.accessToken}`;
+          return instance(error.config); // Retry the original request
+        } catch (refreshError) {
+          Cookies.remove("accessToken");
+          Cookies.remove("refreshToken");
+          alert("Session expired. Please log in again.");
+          window.location.href = "/sign-in";
+        }
+      } else {
+        alert("Session expired. Please log in again.");
+        window.location.href = "/sign-in";
+      }
     }
     return Promise.reject(error);
   },
 );
 
-const responseBody = (response) => response.data;
+const responseBody = (response) => response?.data || {};
 
-const httpService = {
+const requests = {
   get: (url, headers = {}) => instance.get(url, { headers }).then(responseBody),
   post: (url, body, headers = {}) =>
     instance.post(url, body, { headers }).then(responseBody),
@@ -50,4 +66,4 @@ const httpService = {
     instance.delete(url, { headers }).then(responseBody),
 };
 
-export default httpService;
+export default requests;

@@ -16,11 +16,7 @@ createRoot(document.getElementById("root")).render(
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
         <SidebarProvider>
           <RouterProvider />
-          <ToastContainer
-            position="top-center"
-            transition={"bounce"}
-            autoClose={3000}
-          />
+          <ToastContainer position="top-center" autoClose={1000} />
         </SidebarProvider>
       </ThemeProvider>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}

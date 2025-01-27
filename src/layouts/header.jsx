@@ -18,12 +18,26 @@ import { dropdownMenuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
 import { X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
   const { isSidebarOpen, toggleSidebar } = useSidebar();
+  const [greeting, setGreeting] = useState("Good Morning");
   const navigate = useNavigate();
+
+  // Determine greeting based on the current hour
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      setGreeting("Good Morning");
+    } else if (hour < 18) {
+      setGreeting("Good Afternoon");
+    } else {
+      setGreeting("Good Evening");
+    }
+  }, []);
 
   const handleLogout = () => {
     Cookies.remove("accessToken");
@@ -41,7 +55,7 @@ const Header = () => {
         </Link>
 
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
-          <span className="text-base leading-[0.2px]">Good Morning -</span>
+          <span className="text-base leading-[0.2px]">{greeting} -</span>
           <span className="text-xl font-bold leading-[130%]">John Doe</span>
         </h5>
       </div>
