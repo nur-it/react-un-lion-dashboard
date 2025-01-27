@@ -1,7 +1,7 @@
 import { authService } from "@/services/auth-service";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const useAuthentication = () => {
@@ -37,7 +37,7 @@ const useAuthentication = () => {
       const response = await authService.register(data);
       toast.success("Registration successful! You can now log in.");
       console.log("Register response:", response);
-      navigate("/login");
+      navigate("/sign-in");
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -73,7 +73,7 @@ const useAuthentication = () => {
       const response = await authService.resetPassword(data);
       toast.success("Password reset successful! You can now log in.");
       console.log("Reset Password response:", response);
-      navigate("/login");
+      navigate("/sign-in");
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -107,7 +107,7 @@ const useAuthentication = () => {
       const response = await authService.logout();
       toast.success("Logged out successfully.");
       console.log("Logout response:", response);
-      navigate("/login");
+      navigate("/sign-in");
     } catch (error) {
       toast.error(
         error.response?.data?.message || "An error occurred during logout.",
