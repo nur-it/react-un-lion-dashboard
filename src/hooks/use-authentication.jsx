@@ -1,4 +1,5 @@
 import { authService } from "@/services/auth-service";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -17,9 +18,11 @@ const useAuthentication = () => {
   const onSubmitLogin = async (data) => {
     setIsLoading(true);
     try {
-      const response = await authService.login(data);
+      Cookies.set("accessToken", "fake-access-token", { expires: 7 });
+      // const response = await authService.login(data);
       toast.success("Login successful!");
-      console.log("Login response:", response);
+      // console.log("Login response:", response);
+      console.log(data);
       navigate("/my-accounts");
     } catch (error) {
       toast.error(
