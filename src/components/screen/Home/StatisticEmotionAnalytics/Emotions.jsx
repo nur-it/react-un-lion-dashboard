@@ -1,4 +1,4 @@
-import { exportEmotionToCSV, exportEmotionToJSON } from "@/utils/exportUtils";
+import { exportEmotionToCSV } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import DateRangePicker from "./DateRangePicker";
@@ -44,11 +44,11 @@ const Emotions = () => {
           <div className="relative" ref={dropdownRef}>
             <button
               className="flex h-9 items-center justify-center rounded-lg border border-gray300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
-              onClick={handleDownloadClick}
+              onClick={() => exportEmotionToCSV(emotions)}
             >
               <img src={downloadIcon} alt="Download" />
             </button>
-            {showDropdown && (
+            {/*  {showDropdown && (
               <div className="absolute right-0 z-50 mt-2 w-40 rounded-lg bg-white shadow-lg dark:bg-[#282C3F]">
                 <button
                   className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-black"
@@ -63,7 +63,7 @@ const Emotions = () => {
                   CSV
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
