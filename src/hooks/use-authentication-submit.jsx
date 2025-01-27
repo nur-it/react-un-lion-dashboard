@@ -1,8 +1,8 @@
+import { authService } from "@/services/auth-service";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { authService } from "./authService";
 
 const useAuthentication = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const useAuthentication = () => {
     try {
       const response = await authService.login(data);
       toast.success("Login successful!");
+      console.log("Login response:", response);
       navigate("/my-accounts");
     } catch (error) {
       toast.error(
@@ -35,6 +36,7 @@ const useAuthentication = () => {
     try {
       const response = await authService.register(data);
       toast.success("Registration successful! You can now log in.");
+      console.log("Register response:", response);
       navigate("/login");
     } catch (error) {
       toast.error(
@@ -53,6 +55,8 @@ const useAuthentication = () => {
       toast.success(
         "If an account with this email exists, a password reset link has been sent. Please check your inbox.",
       );
+      navigate("/forget-password-message");
+      console.log("Forgot Password response:", response);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -68,6 +72,7 @@ const useAuthentication = () => {
     try {
       const response = await authService.resetPassword(data);
       toast.success("Password reset successful! You can now log in.");
+      console.log("Reset Password response:", response);
       navigate("/login");
     } catch (error) {
       toast.error(
@@ -84,6 +89,8 @@ const useAuthentication = () => {
     try {
       const response = await authService.updateEmail(data);
       toast.success("Email updated successfully!");
+      console.log("Update Email response:", response);
+      navigate("/my-accounts");
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -97,8 +104,9 @@ const useAuthentication = () => {
   const logout = async () => {
     setIsLoading(true);
     try {
-      await authService.logout();
+      const response = await authService.logout();
       toast.success("Logged out successfully.");
+      console.log("Logout response:", response);
       navigate("/login");
     } catch (error) {
       toast.error(
