@@ -1,10 +1,16 @@
-import httpService from "./httpService";
+import requests from "./httpService";
 
-// User-related API calls
 export const authService = {
-  login: (data) => httpService.post("/auth/login", data),
-  register: (data) => httpService.post("/auth/register", data),
-  resetPassword: (data) => httpService.post("/auth/reset_user", data),
-  updateEmail: (data) => httpService.put("/auth/update_email", data),
-  logout: () => httpService.get("/auth/logout"),
+  login: async (body) => await requests.post("/login", body),
+  register: async (body) => await requests.post("/register", body),
+
+  resetPassword: async (body) => await requests.post("/reset_password", body),
+
+  forgotPassword: async (body) => await requests.post("/reset_user", body),
+  updateEmail: async (body) => await requests.put("/update_email", body),
+
+  updateFrequency: async (body) =>
+    await requests.post("/update_frequency", body),
+
+  logout: () => requests.get("/logout"),
 };
