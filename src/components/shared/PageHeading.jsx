@@ -8,7 +8,7 @@ const PageHeading = ({ page_name }) => {
         {page_name}
       </h2>
       <div className="flex items-center gap-1 text-gray600 dark:text-text_disable">
-        <Link to={"/"}>
+        <Link to={"/my-accounts"}>
           <RiHome2Line size={20} />
         </Link>
         <MdChevronRight size={20} />
