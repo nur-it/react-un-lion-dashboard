@@ -17,6 +17,7 @@ import { useSidebar } from "@/contexts/sidebar.contexts";
 import { dropdownMenuItems } from "@/data/sidebar.data";
 import useAuthentication from "@/hooks/use-authentication";
 import { cn } from "@/lib/utils";
+import Cookies from "js-cookie";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
@@ -27,6 +28,8 @@ const Header = () => {
   const { isSidebarOpen, toggleSidebar } = useSidebar();
   const [greeting, setGreeting] = useState("Good Morning");
   const navigate = useNavigate();
+
+  const profile = JSON.parse(Cookies.get("selectedProfile"));
 
   // Determine greeting based on the current hour
   useEffect(() => {
@@ -59,7 +62,9 @@ const Header = () => {
 
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">{greeting} -</span>
-          <span className="text-xl font-bold leading-[130%]">John Doe</span>
+          <span className="text-xl font-bold leading-[130%]">
+            {profile ? profile.name : "John Doe"}
+          </span>
         </h5>
       </div>
       <div className="flex items-center gap-3 lg:hidden">
@@ -141,11 +146,11 @@ const Header = () => {
               <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
                   className="rounded dark:w-7"
-                  src="/images/user.png"
-                  alt="user-icon"
+                  src={profile ? profile.picture_url : "/user-icon.svg"}
+                  alt={profile ? profile.name : "avatar"}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
-                  John Doe
+                  {profile ? profile.name : "John Doe"}
                 </span>
               </span>
               <span className="text-[#898D97]">
