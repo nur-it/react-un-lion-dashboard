@@ -11,7 +11,9 @@ const ForgetPasswordMessagePage = () => {
         <div className="relative w-[335px] space-y-10 rounded-2xl border border-[#FFFFFF1A] bg-[#FFFFFF0A] p-6 sm:w-[540px] sm:p-10">
           <div className="space-y-3">
             <div className="flex items-center justify-center">
-              <img src={mgsBox} alt="mgsBox" />
+              <div className="h-[106px] w-[120px] bg-transparent">
+                <img className="h-full w-full" src={mgsBox} alt="mgsBox" />
+              </div>
             </div>
             <h4 className="text-center text-2xl font-bold text-white">
               Check Your Email
