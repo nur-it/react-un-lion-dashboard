@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { InfoIcon, WarnRedIcon } from "@/components/ui/svgs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -33,26 +38,38 @@ const ProfileLists = ({ profiles }) => {
           </div>
           {/* threats, review, insights  */}
           <div className="items-center gap-1.5 space-y-1.5 md:flex md:space-y-0">
-            <div
-              title={`${profile.other_threat} Other Threats`}
-              className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white"
-            >
+            <div className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white">
               <span>{profile.other_threat} Other Threats</span>
-              <InfoIcon className="cursor-pointer text-[#98A2B3]" />
+              <Tooltip>
+                <TooltipTrigger>
+                  <InfoIcon className="cursor-pointer text-[#98A2B3]" />
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  {profile.other_threat} Other Threats
+                </TooltipContent>
+              </Tooltip>
             </div>
-            <div
-              title={`${profile.to_review} Elements to Review`}
-              className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white"
-            >
+            <div className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white">
               <span>{profile.to_review} Elements to Review</span>
-              <InfoIcon className="cursor-pointer text-[#98A2B3]" />
+              <Tooltip>
+                <TooltipTrigger>
+                  <InfoIcon className="cursor-pointer text-[#98A2B3]" />
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  {profile.to_review} Elements to Review.
+                </TooltipContent>
+              </Tooltip>
             </div>{" "}
-            <div
-              title={`${profile.new_insights} New Insights`}
-              className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white"
-            >
+            <div className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white">
               <span>{profile.new_insights} New Insights</span>
-              <InfoIcon className="cursor-pointer text-[#98A2B3]" />
+              <Tooltip>
+                <TooltipTrigger>
+                  <InfoIcon className="cursor-pointer text-[#98A2B3]" />
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  {profile.new_insights} New Insights.
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
           {/* view profile */}
