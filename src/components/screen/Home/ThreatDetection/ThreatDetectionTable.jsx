@@ -256,7 +256,7 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                     <button
                       className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
                         newStatus[row.id] === "Mitigated"
-                          ? "bg-error/[0.15] text-error"
+                          ? "bg-[#473BF01A] text-primary_main"
                           : ""
                       } ${
                         newStatus[row.id] === "Dismissed"
