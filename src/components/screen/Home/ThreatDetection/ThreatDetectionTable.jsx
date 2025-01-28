@@ -22,7 +22,7 @@ const ThreatDetectionTable = () => {
   const [disabledRows, setDisabledRows] = useState({});
   const itemsPerPage = 4;
   const [status, setStatus] = useState({});
-  const [newStatus, setNewStatus] = useState({}); // Track individual row statuses
+  const [newStatus, setNewStatus] = useState({});
 
   const requestSort = (key) => {
     setSortConfig((prev) => {
@@ -107,17 +107,17 @@ const ThreatDetectionTable = () => {
     { header: "Status", key: "status" },
   ];
 
-  const handleDropdownChange = (rowIndex, newStatus) => {
+  const handleDropdownChange = (id, newStatus) => {
     setDisabledRows((prev) => ({
       ...prev,
-      [rowIndex]: true, // Disable only the specific row's dropdown
+      [id]: true, // Disable only the specific row's dropdown using id
     }));
-    setStatus({ rowIndex, newStatus });
+    setStatus({ id, newStatus });
 
     // Set the "In Progress" status immediately
     setNewStatus((prev) => ({
       ...prev,
-      [rowIndex]: "In Progress",
+      [id]: "In Progress",
     }));
 
     // Simulate the final status change after 1 second
@@ -126,12 +126,15 @@ const ThreatDetectionTable = () => {
         const updatedStatus =
           newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
 
-        // Update the rowData action field
-        rowData[rowIndex].action = true;
+        // Update the rowData action field using id
+        const rowIndex = rowData.findIndex((row) => row.id === id);
+        if (rowIndex !== -1) {
+          rowData[rowIndex].action = true;
+        }
 
         return {
           ...prev,
-          [rowIndex]: updatedStatus,
+          [id]: updatedStatus,
         };
       });
     }, 1000);
@@ -213,10 +216,10 @@ const ThreatDetectionTable = () => {
                       items: ["Mitigate", "Mitigate 2"],
                     }}
                     initialStatus={"Mitigate"}
-                    onStatusChange={(newStatus) =>
-                      handleDropdownChange(index, newStatus)
+                    onStatusChange={
+                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
                     }
-                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
+                    isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
                   <TableActionDropdown
                     options={{
@@ -224,30 +227,30 @@ const ThreatDetectionTable = () => {
                       items: ["Dismiss", "Dismiss 2"],
                     }}
                     initialStatus={"Dismiss"}
-                    onStatusChange={(newStatus) =>
-                      handleDropdownChange(index, newStatus)
+                    onStatusChange={
+                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
                     }
-                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
+                    isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
                 </td>
                 <td className="w-[13%] p-4">
-                  {newStatus[index] && (
+                  {newStatus[row.id] && (
                     <button
                       className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
-                        newStatus[index] === "Mitigated"
+                        newStatus[row.id] === "Mitigated"
                           ? "bg-error/[0.15] text-error"
                           : ""
                       } ${
-                        newStatus[index] === "Dismissed"
+                        newStatus[row.id] === "Dismissed"
                           ? "bg-[#0CAF6014] text-success"
                           : ""
                       } ${
-                        newStatus[index] === "In Progress"
+                        newStatus[row.id] === "In Progress"
                           ? "bg-[#F38E001A] text-warning dark:bg-white/[0.08] dark:text-white"
                           : ""
                       }`}
                     >
-                      {newStatus[index]}
+                      {newStatus[row.id]}
                     </button>
                   )}
                 </td>
