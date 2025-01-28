@@ -3,6 +3,7 @@ import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import StatisticChart from "./StatisticChart";
+import DateRangePicker from "./DateRangePicker";
 
 const Statistic = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -81,7 +82,7 @@ const Statistic = () => {
           Statistic
         </h5>
         <div className="flex items-center gap-3">
-          <TimePeriodDropdown options={["Weekly", "Monthly", "Yearly"]} />
+          <DateRangePicker />
           <div className="relative" ref={dropdownRef}>
             <button
               className="flex h-9 items-center justify-center rounded-lg border border-gray300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
