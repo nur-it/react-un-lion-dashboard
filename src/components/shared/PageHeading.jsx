@@ -1,6 +1,6 @@
+import { Home } from "lucide-react";
 import { MdChevronRight } from "react-icons/md";
 import { Link } from "react-router";
-import { UsersIcon } from "../ui/svgs";
 const PageHeading = ({ page_name }) => {
   return (
     <div className="space-y-2">
@@ -9,7 +9,7 @@ const PageHeading = ({ page_name }) => {
       </h2>
       <div className="flex items-center gap-1 text-gray600 dark:text-text_disable">
         <Link to={"/my-accounts"}>
-          <UsersIcon size={20} />
+          <Home size={20} />
         </Link>
         <MdChevronRight size={20} />
         <p className="text-sm">John Due</p>
