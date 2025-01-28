@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import info from "../../../assets/icon/information-circle.svg";
+import Tooltip from "./Tooltip";
 
 const RelevantKeywords = () => {
   const [keywords, setKeywords] = useState(["Best Price", "Low Price"]);
   const [showInput, setShowInput] = useState(false);
   const [newKeyword, setNewKeyword] = useState("");
+  const [hoveredTooltip, setHoveredTooltip] = useState(null);
   const inputRef = useRef(null);
 
   const addKeyword = () => {
@@ -33,14 +35,28 @@ const RelevantKeywords = () => {
     };
   }, [showInput]);
 
+  const tooltips = {
+    relevantKeywords: "Add relevant keywords to this document",
+  };
+
   return (
     <div className="space-y-4 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
       <div className="md:col-span-3">
-        <div className="relative flex items-center gap-1 sm:gap-1.5">
-          <p className="text-base font-medium text-secondary_main dark:text-white sm:text-lg">
+        <div className="relative flex items-center gap-1.5">
+          <h5 className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
             Relevant Keywords
-          </p>
-          <img src={info} alt="info" className="cursor-pointer" />
+          </h5>
+          <div
+            className="relative"
+            onMouseEnter={() => setHoveredTooltip("relevantKeywords")}
+            onMouseLeave={() => setHoveredTooltip(null)}
+          >
+            <img src={info} alt="info" className="cursor-pointer" />
+            <Tooltip
+              content={tooltips.relevantKeywords}
+              isVisible={hoveredTooltip === "relevantKeywords"}
+            />
+          </div>
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-2 md:col-span-6">
