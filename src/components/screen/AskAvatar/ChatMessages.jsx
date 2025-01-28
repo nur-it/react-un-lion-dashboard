@@ -9,7 +9,7 @@ export function ChatMessages({ response }) {
   }, [response]);
 
   return (
-    <div className="dark:scrollbar-thumb-primary_main dark:scrollbar-track-secondary_main scrollbar-thin max-h-[442px] min-h-[442px] flex-1 overflow-y-auto p-4">
+    <div className="max-h-[442px] min-h-[442px] flex-1 overflow-y-auto py-4 scrollbar-thin dark:scrollbar-track-secondary_main dark:scrollbar-thumb-primary_main">
       <div className="mx-auto max-w-4xl space-y-6">
         {response.map(({ user, avatar_ai }, index) => (
           <div key={index} className="space-y-3">
