@@ -60,7 +60,7 @@ const RelevantKeywords = () => {
               type="text"
               value={newKeyword}
               onChange={(e) => setNewKeyword(e.target.value)}
-              className="h-8 rounded-full border px-2.5 py-1.5 text-sm text-primary_main dark:border-[#FFFFFF99] dark:bg-transparent dark:text-[#FFFFFFCC] outline-none"
+              className="h-8 rounded-full border px-2.5 py-1.5 text-sm text-primary_main outline-none dark:border-[#FFFFFF99] dark:bg-transparent dark:text-[#FFFFFFCC]"
               placeholder="Enter keyword"
             />
             <button
