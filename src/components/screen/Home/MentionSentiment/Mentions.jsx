@@ -3,6 +3,7 @@ import { downloadMentionCSV } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import MentionChart from "./MentionChart";
+import DateRangePicker from "../StatisticEmotionAnalytics/DateRangePicker";
 
 const Mentions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -41,7 +42,7 @@ const Mentions = () => {
           Mentions
         </h5>
         <div className="flex items-center gap-3">
-          <TimePeriodDropdown options={["Weekly", "Monthly", "Yearly"]} />
+          <DateRangePicker />
           {/* Download button */}
           <div className="relative">
             <button
