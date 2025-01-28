@@ -10,7 +10,7 @@ const InformationKnowledge = () => {
     title: "Enter title text to submit",
     addTextInfo: "Add detailed text information here",
     additionalTitle: "Provide another title if needed",
-    updateDocument: "Update Initial Document",
+    updateDocument: "Upload Initial Document",
   };
 
   return (
@@ -101,7 +101,11 @@ const InformationKnowledge = () => {
           </div>
         </div>
         <div>
-          <InfoUpdateInitialDocument tooltips={tooltips} hoveredTooltip={hoveredTooltip} setHoveredTooltip={setHoveredTooltip}  />
+          <InfoUpdateInitialDocument
+            tooltips={tooltips}
+            hoveredTooltip={hoveredTooltip}
+            setHoveredTooltip={setHoveredTooltip}
+          />
         </div>
       </div>
     </div>
