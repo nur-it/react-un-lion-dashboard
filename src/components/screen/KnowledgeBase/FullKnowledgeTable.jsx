@@ -21,6 +21,7 @@ import writeIcon from "../../../assets/icon/pencil.svg";
 import checkIcon from "../../../assets/icon/tick-mark.svg";
 
 const FullKnowledgeTable = ({ data }) => {
+  const [tableData, setTableData] = useState(data); // Local state for the table data
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
@@ -64,7 +65,7 @@ const FullKnowledgeTable = ({ data }) => {
   };
 
   const sortedData = React.useMemo(() => {
-    let sortableItems = [...data];
+    let sortableItems = [...tableData];
 
     // Apply sorting logic
     if (sortConfig.key) {
@@ -80,7 +81,7 @@ const FullKnowledgeTable = ({ data }) => {
     }
 
     return sortableItems;
-  }, [sortConfig, data]);
+  }, [sortConfig, tableData]);
 
   const totalPages = Math.ceil(sortedData.length / itemsPerPage);
 
@@ -177,8 +178,8 @@ const FullKnowledgeTable = ({ data }) => {
       isActive: newRow.isActive,
     };
 
-    // Update the knowledge data state with the new row
-    setdata((prevData) => [newRowData, ...prevData]);
+    // Update the local tableData state with the new row
+    setTableData((prevData) => [newRowData, ...prevData]);
 
     // Reset the input fields and errors
     setNewRow({
@@ -245,7 +246,6 @@ const FullKnowledgeTable = ({ data }) => {
                   </th>
                 ),
               )}
-
               <th scope="col" className="w-[5%] p-4">
                 Action
               </th>
@@ -358,7 +358,12 @@ const FullKnowledgeTable = ({ data }) => {
                 </div>
               </td>
               <td className="w-[15%] p-4">
-                <Toggle initialActive={newRow.isActive} />
+                <Toggle
+                  initialActive={newRow.isActive}
+                  onToggle={(isActive) =>
+                    setNewRow((prev) => ({ ...prev, isActive }))
+                  }
+                />
               </td>
               <td className="p-4">
                 <button onClick={handleAddRow}>

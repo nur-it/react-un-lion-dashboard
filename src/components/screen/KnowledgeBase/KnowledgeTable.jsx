@@ -7,33 +7,69 @@ import FullKnowledgeTable from "./FullKnowledgeTable";
 
 const KnowledgeTable = () => {
   const [categories] = useState([
-    "Category 1",
-    "Category 2",
-    "Category 3",
-    "Category 4",
+    "All Time",
+    "This Year",
+    "This Month",
+    "Past 3 Years",
   ]);
   const [filteredData, setFilteredData] = useState(knowledgeTableData);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] =
+    useState("Filter by category");
 
-  // Handle search functionality
+  // Helper function to get the current year and month
+  const getCurrentYearAndMonth = () => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1; // Months are zero-based
+    return { currentYear, currentMonth };
+  };
+
+  // Handle category filtering
   useEffect(() => {
+    const { currentYear, currentMonth } = getCurrentYearAndMonth();
+
+    let data = knowledgeTableData;
+
+    // Apply category filtering
+    if (selectedCategory === "This Year") {
+      data = data.filter((row) => {
+        const rowYear = parseInt(row.date.split("/")[2]);
+        return rowYear === currentYear;
+      });
+    } else if (selectedCategory === "This Month") {
+      data = data.filter((row) => {
+        const [day, month, year] = row.date.split("/").map(Number);
+        return month === currentMonth && year === currentYear;
+      });
+    } else if (selectedCategory === "Past 3 Years") {
+      data = data.filter((row) => {
+        const rowYear = parseInt(row.date.split("/")[2]);
+        return rowYear >= currentYear - 3 && rowYear <= currentYear;
+      });
+    }
+
+    // Apply search term filtering on top of the category filter
     const term = searchTerm.toLowerCase();
     if (term) {
-      const filtered = knowledgeTableData.filter(
+      data = data.filter(
         (row) =>
           row.title.toLowerCase().includes(term) ||
           row.type.toLowerCase().includes(term) ||
           row.source.toLowerCase().includes(term) ||
           row.id.toLowerCase().includes(term),
       );
-      setFilteredData(filtered);
-    } else {
-      setFilteredData(knowledgeTableData);
     }
-  }, [searchTerm]);
+
+    setFilteredData(data);
+  }, [selectedCategory, searchTerm]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
   };
 
   return (
@@ -55,7 +91,11 @@ const KnowledgeTable = () => {
               className="h-full w-full bg-transparent text-sm text-black outline-none placeholder:text-[#98A2B3] dark:text-white dark:placeholder:text-[#FFFFFF99]"
             />
           </div>
-          <CategoryDropdown options={categories} />
+          <CategoryDropdown
+            options={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={handleCategorySelect}
+          />
         </div>
       </div>
       <div>
