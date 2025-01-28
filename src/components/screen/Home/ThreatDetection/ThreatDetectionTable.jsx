@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Pagination,
   PaginationContent,
@@ -11,7 +10,7 @@ import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import TableActionDropdown from "./TableActionDropdown";
 
-const ThreatDetectionTable = ({ rowData, onAction }) => {
+const ThreatDetectionTable = ({ data, onAction }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
@@ -43,7 +42,9 @@ const ThreatDetectionTable = ({ rowData, onAction }) => {
   };
 
   const sortedData = React.useMemo(() => {
-    let sortableItems = [...rowData];
+    let sortableItems = [...data];
+
+    // Apply sorting logic
     if (sortConfig.key) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -55,8 +56,9 @@ const ThreatDetectionTable = ({ rowData, onAction }) => {
         return 0;
       });
     }
+
     return sortableItems;
-  }, [sortConfig]);
+  }, [sortConfig, data]);
 
   const totalPages = Math.ceil(sortedData.length / itemsPerPage);
 
@@ -97,10 +99,13 @@ const ThreatDetectionTable = ({ rowData, onAction }) => {
     return pageNumbers;
   };
 
-  const paginatedData = sortedData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  const paginatedData = React.useMemo(() => {
+    // Apply pagination after sorting
+    return sortedData.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage,
+    );
+  }, [sortedData, currentPage, itemsPerPage]);
 
   const columns = [
     { header: "Threat Type", key: "threatType" },
@@ -131,10 +136,10 @@ const ThreatDetectionTable = ({ rowData, onAction }) => {
         const updatedStatus =
           newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
 
-        // Update the rowData action field using id
-        const rowIndex = rowData.findIndex((row) => row.id === id);
+        // Update the data action field using id
+        const rowIndex = data.findIndex((row) => row.id === id);
         if (rowIndex !== -1) {
-          rowData[rowIndex].action = true;
+          data[rowIndex].action = true;
         }
 
         onAction(id);
