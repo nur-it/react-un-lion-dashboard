@@ -1,7 +1,26 @@
+import { rowData } from "@/data/threatTableData";
+import { useEffect, useState } from "react";
 import search from "../../../../assets/icon/search.svg";
 import ThreatDetectionTable from "./ThreatDetectionTable";
 
 const ThreatDetection = () => {
+  const [openThreatsCount, setOpenThreatsCount] = useState(0);
+
+  // Calculate the initial count of open threats
+  useEffect(() => {
+    const count = rowData.filter((row) => !row.action).length;
+    setOpenThreatsCount(count);
+  }, []);
+
+  // Update the count when an action is performed
+  const handleAction = (id) => {
+    const threatIndex = rowData.findIndex((row) => row.id === id);
+    if (threatIndex !== -1) {
+      rowData[threatIndex].action = true; // Mark the row as having an action
+      const count = rowData.filter((row) => !row.action).length;
+      setOpenThreatsCount(count); // Update the open threats count
+    }
+  };
   return (
     <div className="w-full space-y-6 rounded-lg border border-gray-200 bg-white dark:border-white/[10%] dark:bg-white/[4%]">
       <div className="flex flex-col items-center justify-between gap-6 p-4 sm:flex-row sm:gap-3 sm:p-6">
@@ -11,7 +30,7 @@ const ThreatDetection = () => {
           </h5>
           <div className="flex items-center rounded-md bg-[#F238381A] px-2 py-1 sm:px-3">
             <p className="text-[10px] text-error sm:text-sm">
-              8 open threats to review
+              {openThreatsCount} open threats to review
             </p>
           </div>
         </div>
@@ -25,7 +44,7 @@ const ThreatDetection = () => {
         </div>
       </div>
       <div className="w-full pb-4 pl-4 sm:pb-6 sm:pl-6 sm:pr-6">
-        <ThreatDetectionTable />
+        <ThreatDetectionTable onAction={handleAction} rowData={rowData} />
       </div>
     </div>
   );

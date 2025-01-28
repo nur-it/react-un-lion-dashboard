@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Pagination,
   PaginationContent,
@@ -6,13 +7,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
-import { rowData } from "@/data/threatTableData";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import TableActionDropdown from "./TableActionDropdown";
 
-const ThreatDetectionTable = () => {
+const ThreatDetectionTable = ({ rowData, onAction }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
@@ -131,6 +130,8 @@ const ThreatDetectionTable = () => {
         if (rowIndex !== -1) {
           rowData[rowIndex].action = true;
         }
+
+        onAction(id);
 
         return {
           ...prev,
