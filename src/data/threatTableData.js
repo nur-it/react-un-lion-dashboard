@@ -2,7 +2,7 @@ export const rowData = [
   {
     threatType: "Climate Change",
     platform: "Mars Mission",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Global temperature rise impacting ecosystems on Mars.",
     id: "123482",
     reach: "High",
     status: "",
@@ -10,7 +10,7 @@ export const rowData = [
   {
     threatType: "Asteroid Impact",
     platform: "Mars Mission",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Monitoring asteroid trajectories to avoid collisions.",
     id: "123483",
     reach: "Low",
     status: "",
@@ -18,7 +18,7 @@ export const rowData = [
   {
     threatType: "Cyber Warfare",
     platform: "Earth Defense",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Potential cyberattacks on critical global infrastructure.",
     id: "123484",
     reach: "High",
     status: "",
@@ -26,7 +26,7 @@ export const rowData = [
   {
     threatType: "AI Misuse",
     platform: "Space Exploration",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Concerns about AI systems malfunctioning during missions.",
     id: "123485",
     reach: "Low",
     status: "",
@@ -34,7 +34,8 @@ export const rowData = [
   {
     threatType: "Deepfakes",
     platform: "Earth Defense",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary:
+      "Fake videos spreading misinformation among global leaders.",
     id: "123486",
     reach: "High",
     status: "",
@@ -42,7 +43,7 @@ export const rowData = [
   {
     threatType: "Fake News",
     platform: "Global Communication",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Misinformation campaigns destabilizing societal trust.",
     id: "123487",
     reach: "Low",
     status: "",
@@ -50,7 +51,7 @@ export const rowData = [
   {
     threatType: "Quantum Hacking",
     platform: "Space Exploration",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Quantum computers threatening encrypted communications.",
     id: "123488",
     reach: "High",
     status: "",
@@ -58,7 +59,8 @@ export const rowData = [
   {
     threatType: "Alien Signals",
     platform: "Mars Mission",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary:
+      "Decoding mysterious signals received from distant planets.",
     id: "123489",
     reach: "Low",
     status: "",
@@ -66,7 +68,7 @@ export const rowData = [
   {
     threatType: "Ecosystem Collapse",
     platform: "Earth Defense",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Collapse of key ecosystems due to pollution and climate.",
     id: "123490",
     reach: "High",
     status: "",
@@ -74,7 +76,7 @@ export const rowData = [
   {
     threatType: "Economic Instability",
     platform: "Mars Mission",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Challenges funding long-term colonization of Mars.",
     id: "123491",
     reach: "Low",
     status: "",
@@ -82,7 +84,7 @@ export const rowData = [
   {
     threatType: "Radiation Exposure",
     platform: "Space Exploration",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "High radiation levels risking astronaut health.",
     id: "123492",
     reach: "High",
     status: "",
@@ -90,7 +92,7 @@ export const rowData = [
   {
     threatType: "Food Security",
     platform: "Earth Defense",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Food supply chains disrupted by environmental changes.",
     id: "123493",
     reach: "Low",
     status: "",
@@ -98,7 +100,7 @@ export const rowData = [
   {
     threatType: "Pandemic",
     platform: "Global Health",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Emerging diseases causing widespread health crises.",
     id: "123494",
     reach: "High",
     status: "",
@@ -106,7 +108,7 @@ export const rowData = [
   {
     threatType: "Water Scarcity",
     platform: "Earth Defense",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Diminishing freshwater supplies creating conflict.",
     id: "123495",
     reach: "Low",
     status: "",
@@ -114,7 +116,7 @@ export const rowData = [
   {
     threatType: "Nuclear Threat",
     platform: "Global Security",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Escalation of nuclear arms race among global powers.",
     id: "123496",
     reach: "High",
     status: "",
@@ -122,7 +124,7 @@ export const rowData = [
   {
     threatType: "Satellite Failure",
     platform: "Space Exploration",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Critical satellites failing in orbit due to malfunctions.",
     id: "123497",
     reach: "Low",
     status: "",
@@ -130,7 +132,7 @@ export const rowData = [
   {
     threatType: "Terrorism",
     platform: "Earth Defense",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Acts of terror threatening international peace.",
     id: "123498",
     reach: "High",
     status: "",
@@ -138,7 +140,7 @@ export const rowData = [
   {
     threatType: "Genetic Modification",
     platform: "Mars Mission",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Ethical dilemmas over genetic changes for space survival.",
     id: "123499",
     reach: "Low",
     status: "",
@@ -146,7 +148,7 @@ export const rowData = [
   {
     threatType: "Privacy Breach",
     platform: "Global Communication",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "Mass surveillance programs violating individual privacy.",
     id: "123500",
     reach: "High",
     status: "",
@@ -154,9 +156,51 @@ export const rowData = [
   {
     threatType: "AI Overreach",
     platform: "Space Exploration",
-    contentSummary: "Content Summary Goes Here....",
+    contentSummary: "AI systems making autonomous decisions without oversight.",
     id: "123501",
     reach: "Low",
+    status: "",
+  },
+  {
+    threatType: "Energy Crisis",
+    platform: "Global Infrastructure",
+    contentSummary: "Global energy demands exceeding production capabilities.",
+    id: "123502",
+    reach: "High",
+    status: "",
+  },
+  {
+    threatType: "Bioterrorism",
+    platform: "Global Health",
+    contentSummary: "Terrorist groups weaponizing biological agents.",
+    id: "123503",
+    reach: "Low",
+    status: "",
+  },
+  {
+    threatType: "Space Debris",
+    platform: "Space Exploration",
+    contentSummary:
+      "Accumulation of debris threatening operational satellites.",
+    id: "123504",
+    reach: "High",
+    status: "",
+  },
+  {
+    threatType: "Cyber Espionage",
+    platform: "Global Security",
+    contentSummary: "Nations targeting confidential data for strategic gains.",
+    id: "123505",
+    reach: "Low",
+    status: "",
+  },
+  {
+    threatType: "Resource Depletion",
+    platform: "Earth Defense",
+    contentSummary:
+      "Overconsumption of natural resources leading to shortages.",
+    id: "123506",
+    reach: "High",
     status: "",
   },
 ];
