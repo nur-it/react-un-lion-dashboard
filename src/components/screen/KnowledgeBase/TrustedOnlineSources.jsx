@@ -4,6 +4,7 @@ import tickMark from "../../../assets/icon/check-circle.svg";
 import info from "../../../assets/icon/information-circle.svg";
 import rotateLeft from "../../../assets/icon/rotate_left.svg";
 import crossCircle from "../../../assets/icon/x-circle.svg";
+import Tooltip from "./Tooltip";
 
 const TrustedOnlineSources = () => {
   const {
@@ -12,6 +13,8 @@ const TrustedOnlineSources = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const [hoveredTooltip, setHoveredTooltip] = useState(null);
 
   const fields = [
     {
@@ -36,10 +39,10 @@ const TrustedOnlineSources = () => {
 
   const patterns = {
     wikipedia: /^https?:\/\/(www\.)?wikipedia\.org\/.+$/,
-    x: /^[a-zA-Z0-9_]{3,}$/, // Valid X account username (min 3 characters, alphanumeric + underscore)
-    facebook: /^[a-zA-Z0-9.]{3,}$/, // Facebook account username
-    instagram: /^[a-zA-Z0-9._]{3,}$/, // Instagram account username
-    tiktok: /^[a-zA-Z0-9._]{3,}$/, // TikTok account username
+    x: /^[a-zA-Z0-9_]{3,}$/,
+    facebook: /^[a-zA-Z0-9.]{3,}$/,
+    instagram: /^[a-zA-Z0-9._]{3,}$/,
+    tiktok: /^[a-zA-Z0-9._]{3,}$/,
     youtube: /^https?:\/\/(www\.)?youtube\.com\/.+$/,
   };
 
@@ -65,7 +68,7 @@ const TrustedOnlineSources = () => {
       } else {
         setInputStatus((prev) => ({ ...prev, [field]: "invalid" }));
       }
-    }, 500); // 500ms debounce delay
+    }, 500);
 
     setTypingTimeouts((prev) => ({ ...prev, [field]: timeout }));
   };
@@ -107,14 +110,28 @@ const TrustedOnlineSources = () => {
     }
   };
 
+  const tooltips = {
+    trustedOnlineSources: "Enter trusted online sources",
+  };
+
   return (
     <div className="space-y-4 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
       <div className="md:col-span-3">
         <div className="relative flex items-center gap-1.5">
-          <p className="text-base font-medium text-secondary_main dark:text-white sm:text-lg">
+          <h5 className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
             Trusted Online Sources
-          </p>
-          <img src={info} alt="info" className="h-5 w-5 cursor-pointer" />
+          </h5>
+          <div
+            className="relative"
+            onMouseEnter={() => setHoveredTooltip("trustedOnlineSources")}
+            onMouseLeave={() => setHoveredTooltip(null)}
+          >
+            <img src={info} alt="info" className="cursor-pointer" />
+            <Tooltip
+              content={tooltips.trustedOnlineSources}
+              isVisible={hoveredTooltip === "trustedOnlineSources"}
+            />
+          </div>
         </div>
       </div>
       <div className="md:col-span-6">
