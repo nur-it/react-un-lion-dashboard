@@ -36,9 +36,9 @@ export const dropdownMenuItems = [
     href: "/my-accounts",
     icon: UsersIcon,
   },
-  /* {
+  {
     label: "Settings",
     href: "/settings",
     icon: SettingIcon,
-  }, */
+  },
 ];

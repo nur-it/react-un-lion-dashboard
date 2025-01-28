@@ -15,6 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Link } from "react-router";
 
 const ThreatDetectionTable = ({ data, onAction }) => {
   const [sortConfig, setSortConfig] = useState({
@@ -204,17 +205,24 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                 key={index}
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
-                <td className="w-[12%] p-4 underline dark:no-underline">
-                  {row.threatType}
+                <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
+                  <Link to={`/threat-detection/${row.id}`}>
+                    {row.threatType}
+                  </Link>
                 </td>
-                <td className="w-[12%] p-4 underline dark:no-underline">
-                  {row.platform}
+                <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
+                  <Link to={`/threat-detection/${row.id}`}>{row.platform}</Link>
                 </td>
-                <td className="w-[26%] p-4 underline dark:no-underline">
-                  <p className="line-clamp-1">{row.contentSummary}</p>
+                <td className="w-[26%] p-4 transition-all duration-300 ease-in-out hover:underline">
+                  <Link
+                    className="line-clamp-1"
+                    to={`/threat-detection/${row.id}`}
+                  >
+                    {row.contentSummary}
+                  </Link>
                 </td>
-                <td className="w-[10%] p-4 underline dark:no-underline">
-                  {row.id}
+                <td className="w-[10%] p-4 transition-all duration-300 ease-in-out hover:underline">
+                  <Link to={`/threat-detection/${row.id}`}>{row.id}</Link>
                 </td>
                 <td
                   className={`w-[10%] p-4 ${

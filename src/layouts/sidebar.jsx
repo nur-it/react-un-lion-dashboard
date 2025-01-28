@@ -42,7 +42,7 @@ const Sidebar = ({ closeSidebar }) => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent className="min-w-[217px] border border-white_opacity10 bg-[#282c3f] shadow-primary">
-                  {dropdownMenuItems.map((item, index) => (
+                  {dropdownMenuItems.slice(0, 1).map((item, index) => (
                     <DropdownMenuItem
                       key={index}
                       className="text-white hover:bg-primary_main"
