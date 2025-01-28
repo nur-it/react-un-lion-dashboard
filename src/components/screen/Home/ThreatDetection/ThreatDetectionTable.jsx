@@ -10,6 +10,12 @@ import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import TableActionDropdown from "./TableActionDropdown";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 const ThreatDetectionTable = ({ data, onAction }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -262,7 +268,16 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                           : ""
                       }`}
                     >
-                      {newStatus[row.id]}
+                      <Tooltip>
+                        <TooltipTrigger>{newStatus[row.id]}</TooltipTrigger>
+                        <TooltipContent
+                          side="top"
+                          fillColor="#030303"
+                          className="max-w-[142px] rounded-md border-secondary_main bg-[#030303] text-center text-xs text-white dark:bg-[#161b2f]"
+                        >
+                          {newStatus[row.id]} was initiated on {date}
+                        </TooltipContent>
+                      </Tooltip>
                     </button>
                   )}
                 </td>
