@@ -1,8 +1,4 @@
-import {
-  ContactIcon,
-  // SettingIcon,
-  UsersIcon,
-} from "@/components/ui/svgs";
+import { ContactIcon, SettingIcon, UsersIcon } from "@/components/ui/svgs";
 import { BookOpen, LayoutDashboard, StarsIcon } from "lucide-react";
 
 export const menuItems = {
