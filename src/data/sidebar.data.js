@@ -1,7 +1,6 @@
 import {
   ContactIcon,
-  LogoutIcon,
-  SettingIcon,
+  // SettingIcon,
   UsersIcon,
 } from "@/components/ui/svgs";
 import { BookOpen, LayoutDashboard, StarsIcon } from "lucide-react";
@@ -41,9 +40,9 @@ export const dropdownMenuItems = [
     href: "/my-accounts",
     icon: UsersIcon,
   },
-  {
+  /* {
     label: "Settings",
     href: "/settings",
     icon: SettingIcon,
-  },
+  }, */
 ];
