@@ -13,7 +13,7 @@ import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 // Sample data
-const historyItems = [
+const initialHistoryItems = [
   { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
   { id: "2", title: "Great Offer", date: "19 Jan 2025" },
   { id: "3", title: "B2B Business", date: "18 Jan 2025" },
@@ -33,16 +33,39 @@ const getTodayDate = () => {
   });
 };
 
-const groupedHistory = historyItems.reduce((acc, item) => {
-  const todayDate = getTodayDate();
-  const group = item.date === todayDate ? "Today" : item.date;
-  acc[group] = acc[group] || [];
-  acc[group].push(item);
-  return acc;
-}, {});
-
 export function ChatHistory() {
   const [toggleModal, setToggleModal] = useState(false);
+  const [historyItems, setHistoryItems] = useState(initialHistoryItems);
+  const [editingItemId, setEditingItemId] = useState(null);
+  const [newTitle, setNewTitle] = useState("");
+
+  const groupedHistory = historyItems.reduce((acc, item) => {
+    const todayDate = getTodayDate();
+    const group = item.date === todayDate ? "Today" : item.date;
+    acc[group] = acc[group] || [];
+    acc[group].push(item);
+    return acc;
+  }, {});
+
+  const handleRemove = (id) => {
+    setHistoryItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const handleRename = (id, title) => {
+    setEditingItemId(id);
+    setNewTitle(title);
+  };
+
+  const handleRenameConfirm = () => {
+    setHistoryItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === editingItemId ? { ...item, title: newTitle } : item,
+      ),
+    );
+    setEditingItemId(null);
+    setNewTitle("");
+  };
+
   return (
     <div className="relative w-full rounded-2xl bg-[#f8f7fe] dark:bg-[#1a1d40] lg:min-h-[707px] lg:max-w-[280px]">
       <div className="space-y-6">
@@ -68,32 +91,57 @@ export function ChatHistory() {
                 <div className="space-y-2">
                   {groupedHistory[date].map((item) => (
                     <div key={item.id} className="group relative">
-                      <Button
-                        variant="ghost"
-                        className="h-auto w-full justify-start rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
-                      >
-                        {item.title}
-                      </Button>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
+                      {editingItemId === item.id ? (
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)}
+                            className="w-full rounded-lg border px-2 py-1.5 text-sm"
+                          />
                           <Button
                             variant="ghost"
-                            size="icon"
-                            className="absolute right-2 top-1/2 -translate-y-1/2"
+                            onClick={handleRenameConfirm}
+                            className="text-primary"
                           >
-                            <MoreHorizontal className="h-4 w-4" />
+                            Save
                           </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem>
-                            <PencilIcon /> Rename
-                          </DropdownMenuItem>
-                          <DropdownMenuItem className="text-error">
-                            <RiDeleteBin6Line />
-                            Remove
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                        </div>
+                      ) : (
+                        <Button
+                          variant="ghost"
+                          className="h-auto w-full justify-start rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
+                        >
+                          {item.title}
+                        </Button>
+                      )}
+                      {editingItemId !== item.id && (
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="absolute right-2 top-1/2 -translate-y-1/2"
+                            >
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem
+                              onClick={() => handleRename(item.id, item.title)}
+                            >
+                              <PencilIcon /> Rename
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              className="text-error"
+                              onClick={() => handleRemove(item.id)}
+                            >
+                              <RiDeleteBin6Line />
+                              Remove
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      )}
                     </div>
                   ))}
                 </div>
