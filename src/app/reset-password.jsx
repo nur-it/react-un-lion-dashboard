@@ -2,8 +2,17 @@ import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/use-authentication";
 
 const ResetPasswordPage = () => {
-  const { register, errors, handleSubmit, onSubmitResetPassword, isLoading } =
-    useAuthentication();
+  const {
+    register,
+    errors,
+    handleSubmit,
+    onSubmitResetPassword,
+    isLoading,
+    watch,
+  } = useAuthentication();
+
+  const password = watch("password");
+
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
@@ -14,7 +23,7 @@ const ResetPasswordPage = () => {
                 Reset Password?
               </h4>
               <p className="text-center text-[#666D80]">
-                Enter the your new password and confirm password to reset your
+                Enter your new password and confirm password to reset your
                 password.
               </p>
             </div>
@@ -33,23 +42,25 @@ const ResetPasswordPage = () => {
                 placeholder="Password"
                 className="auth_input_field"
                 {...register("password", {
-                  required: "The password you entered is incorrect.",
+                  required: "The password is required.",
                 })}
               />
               {errors.password && (
                 <p className="text-sm text-error">{errors.password.message}</p>
               )}
-            </div>{" "}
+            </div>
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm text-white">
+              <label htmlFor="confirm_password" className="text-sm text-white">
                 Confirm Password
               </label>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Confirm Password"
                 className="auth_input_field"
                 {...register("confirm_password", {
-                  required: "The password you entered is incorrect",
+                  required: "Confirm password is required.",
+                  validate: (value) =>
+                    value === password || "Passwords do not match.",
                 })}
               />
               {errors.confirm_password && (

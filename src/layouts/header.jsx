@@ -15,13 +15,14 @@ import {
 } from "@/components/ui/svgs";
 import { useSidebar } from "@/contexts/sidebar.contexts";
 import { dropdownMenuItems } from "@/data/sidebar.data";
+import useAuthentication from "@/hooks/use-authentication";
 import { cn } from "@/lib/utils";
-import Cookies from "js-cookie";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 
 const Header = () => {
+  const { logout } = useAuthentication();
   const { theme, setTheme } = useTheme();
   const { isSidebarOpen, toggleSidebar } = useSidebar();
   const [greeting, setGreeting] = useState("Good Morning");
@@ -40,8 +41,7 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    Cookies.remove("accessToken");
-    navigate("/sign-in");
+    logout();
   };
 
   return (

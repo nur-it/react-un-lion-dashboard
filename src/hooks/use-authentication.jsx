@@ -12,6 +12,7 @@ const useAuthentication = () => {
     handleSubmit,
     setValue,
     formState: { errors },
+    watch,
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,12 +55,10 @@ const useAuthentication = () => {
   const onSubmitForgotPassword = async (data) => {
     setIsLoading(true);
     try {
-      const response = await authService.forgotPassword(data);
-      toast.success(
-        "If an account with this email exists, a password reset link has been sent. Please check your inbox.",
-      );
+      // const response = await authService.forgotPassword(data);
+      console.log(data);
       navigate("/forget-password-message");
-      console.log("Forgot Password response:", response);
+      // console.log("Forgot Password response:", response);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -73,9 +72,10 @@ const useAuthentication = () => {
   const onSubmitResetPassword = async (data) => {
     setIsLoading(true);
     try {
-      const response = await authService.resetPassword(data);
-      toast.success("Password reset successful! You can now log in.");
-      console.log("Reset Password response:", response);
+      console.log(data);
+      // const response = await authService.resetPassword(data);
+      toast.success("Password reset successful!");
+      // console.log("Reset Password response:", response);
       navigate("/sign-in");
     } catch (error) {
       toast.error(
@@ -107,9 +107,10 @@ const useAuthentication = () => {
   const logout = async () => {
     setIsLoading(true);
     try {
-      const response = await authService.logout();
+      Cookies.remove("accessToken");
+      // const response = await authService.logout();
       toast.success("Logged out successfully.");
-      console.log("Logout response:", response);
+      // console.log("Logout response:", response);
       navigate("/sign-in");
     } catch (error) {
       toast.error(
@@ -126,6 +127,7 @@ const useAuthentication = () => {
     handleSubmit,
     errors,
     setValue,
+    watch,
     onSubmitLogin,
     onSubmitRegister,
     onSubmitForgotPassword,
