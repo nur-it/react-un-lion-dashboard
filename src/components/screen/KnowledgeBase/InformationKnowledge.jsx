@@ -8,7 +8,11 @@ const InformationKnowledge = () => {
 
   const tooltips = {
     title: "Enter title text to submit",
+    addTextInfo: "Add detailed text information here",
+    additionalTitle: "Provide another title if needed",
+    updateDocument: "Upload Initial Document",
   };
+
   return (
     <div className="pb-4 md:pb-5">
       <div className="mb-8 h-[1px] w-full bg-gray200 dark:bg-[#344054]"></div>
@@ -16,10 +20,11 @@ const InformationKnowledge = () => {
         <div className="space-y-2 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
           <div className="md:col-span-3">
             <div className="relative flex items-center gap-1.5">
-              <p className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
+              <h5 className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
                 Title
-              </p>
+              </h5>
               <div
+                className="relative"
                 onMouseEnter={() => setHoveredTooltip("title")}
                 onMouseLeave={() => setHoveredTooltip(null)}
               >
@@ -42,10 +47,20 @@ const InformationKnowledge = () => {
         <div className="space-y-2 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
           <div className="md:col-span-3">
             <div className="relative flex items-center gap-1.5">
-              <p className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
+              <h5 className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
                 Add Text Information
-              </p>
-              <img src={info} alt="info" className="cursor-pointer" />
+              </h5>
+              <div
+                className="relative"
+                onMouseEnter={() => setHoveredTooltip("addTextInfo")}
+                onMouseLeave={() => setHoveredTooltip(null)}
+              >
+                <img src={info} alt="info" className="cursor-pointer" />
+                <Tooltip
+                  content={tooltips.addTextInfo}
+                  isVisible={hoveredTooltip === "addTextInfo"}
+                />
+              </div>
             </div>
           </div>
           <div className="md:col-span-6">
@@ -61,10 +76,20 @@ const InformationKnowledge = () => {
         <div className="space-y-2 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
           <div className="md:col-span-3">
             <div className="relative flex items-center gap-1.5">
-              <p className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
-                Title
-              </p>
-              <img src={info} alt="info" className="cursor-pointer" />
+              <h5 className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
+                Additional Title
+              </h5>
+              <div
+                className="relative"
+                onMouseEnter={() => setHoveredTooltip("additionalTitle")}
+                onMouseLeave={() => setHoveredTooltip(null)}
+              >
+                <img src={info} alt="info" className="cursor-pointer" />
+                <Tooltip
+                  content={tooltips.additionalTitle}
+                  isVisible={hoveredTooltip === "additionalTitle"}
+                />
+              </div>
             </div>
           </div>
           <div className="md:col-span-6">
@@ -76,7 +101,11 @@ const InformationKnowledge = () => {
           </div>
         </div>
         <div>
-          <InfoUpdateInitialDocument />
+          <InfoUpdateInitialDocument
+            tooltips={tooltips}
+            hoveredTooltip={hoveredTooltip}
+            setHoveredTooltip={setHoveredTooltip}
+          />
         </div>
       </div>
     </div>

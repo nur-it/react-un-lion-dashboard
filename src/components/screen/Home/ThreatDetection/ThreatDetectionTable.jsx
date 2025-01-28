@@ -6,13 +6,17 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
-import { rowData } from "@/data/threatTableData";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import TableActionDropdown from "./TableActionDropdown";
 
-const ThreatDetectionTable = () => {
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+const ThreatDetectionTable = ({ data, onAction }) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
@@ -22,23 +26,31 @@ const ThreatDetectionTable = () => {
   const [disabledRows, setDisabledRows] = useState({});
   const itemsPerPage = 4;
   const [status, setStatus] = useState({});
-  const [newStatus, setNewStatus] = useState({}); // Track individual row statuses
+  const [newStatus, setNewStatus] = useState({});
 
   const requestSort = (key) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
-        return {
-          key,
-          direction:
-            prev.direction === "ascending" ? "descending" : "ascending",
-        };
+        if (prev.direction === "ascending") {
+          return {
+            key,
+            direction: "descending",
+          };
+        } else if (prev.direction === "descending") {
+          return {
+            key: null, // Reset sorting
+            direction: null,
+          };
+        }
       }
       return { key, direction: "ascending" };
     });
   };
 
   const sortedData = React.useMemo(() => {
-    let sortableItems = [...rowData];
+    let sortableItems = [...data];
+
+    // Apply sorting logic
     if (sortConfig.key) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -50,8 +62,9 @@ const ThreatDetectionTable = () => {
         return 0;
       });
     }
+
     return sortableItems;
-  }, [sortConfig]);
+  }, [sortConfig, data]);
 
   const totalPages = Math.ceil(sortedData.length / itemsPerPage);
 
@@ -92,10 +105,13 @@ const ThreatDetectionTable = () => {
     return pageNumbers;
   };
 
-  const paginatedData = sortedData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  const paginatedData = React.useMemo(() => {
+    // Apply pagination after sorting
+    return sortedData.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage,
+    );
+  }, [sortedData, currentPage, itemsPerPage]);
 
   const columns = [
     { header: "Threat Type", key: "threatType" },
@@ -107,17 +123,17 @@ const ThreatDetectionTable = () => {
     { header: "Status", key: "status" },
   ];
 
-  const handleDropdownChange = (rowIndex, newStatus) => {
+  const handleDropdownChange = (id, newStatus) => {
     setDisabledRows((prev) => ({
       ...prev,
-      [rowIndex]: true, // Disable only the specific row's dropdown
+      [id]: true, // Disable only the specific row's dropdown using id
     }));
-    setStatus({ rowIndex, newStatus });
+    setStatus({ id, newStatus });
 
     // Set the "In Progress" status immediately
     setNewStatus((prev) => ({
       ...prev,
-      [rowIndex]: "In Progress",
+      [id]: "In Progress",
     }));
 
     // Simulate the final status change after 1 second
@@ -126,12 +142,17 @@ const ThreatDetectionTable = () => {
         const updatedStatus =
           newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
 
-        // Update the rowData action field
-        rowData[rowIndex].action = true;
+        // Update the data action field using id
+        const rowIndex = data.findIndex((row) => row.id === id);
+        if (rowIndex !== -1) {
+          data[rowIndex].action = true;
+        }
+
+        onAction(id);
 
         return {
           ...prev,
-          [rowIndex]: updatedStatus,
+          [id]: updatedStatus,
         };
       });
     }, 1000);
@@ -213,10 +234,10 @@ const ThreatDetectionTable = () => {
                       items: ["Mitigate", "Mitigate 2"],
                     }}
                     initialStatus={"Mitigate"}
-                    onStatusChange={(newStatus) =>
-                      handleDropdownChange(index, newStatus)
+                    onStatusChange={
+                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
                     }
-                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
+                    isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
                   <TableActionDropdown
                     options={{
@@ -224,30 +245,39 @@ const ThreatDetectionTable = () => {
                       items: ["Dismiss", "Dismiss 2"],
                     }}
                     initialStatus={"Dismiss"}
-                    onStatusChange={(newStatus) =>
-                      handleDropdownChange(index, newStatus)
+                    onStatusChange={
+                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
                     }
-                    isDisabled={!!disabledRows[index]} // Disable only this row's dropdown if needed
+                    isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
                 </td>
                 <td className="w-[13%] p-4">
-                  {newStatus[index] && (
+                  {newStatus[row.id] && (
                     <button
                       className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
-                        newStatus[index] === "Mitigated"
+                        newStatus[row.id] === "Mitigated"
                           ? "bg-error/[0.15] text-error"
                           : ""
                       } ${
-                        newStatus[index] === "Dismissed"
+                        newStatus[row.id] === "Dismissed"
                           ? "bg-[#0CAF6014] text-success"
                           : ""
                       } ${
-                        newStatus[index] === "In Progress"
+                        newStatus[row.id] === "In Progress"
                           ? "bg-[#F38E001A] text-warning dark:bg-white/[0.08] dark:text-white"
                           : ""
                       }`}
                     >
-                      {newStatus[index]}
+                      <Tooltip>
+                        <TooltipTrigger>{newStatus[row.id]}</TooltipTrigger>
+                        <TooltipContent
+                          side="top"
+                          fillColor="#030303"
+                          className="max-w-[142px] rounded-md border-secondary_main bg-[#030303] text-center text-xs text-white dark:bg-[#161b2f]"
+                        >
+                          {newStatus[row.id]} was initiated on {date}
+                        </TooltipContent>
+                      </Tooltip>
                     </button>
                   )}
                 </td>

@@ -13,14 +13,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { knowledgeTableData } from "@/data/knowledgeTableData";
+
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import writeIcon from "../../../assets/icon/pencil.svg";
 import checkIcon from "../../../assets/icon/tick-mark.svg";
 
-const FullKnowledgeTable = () => {
+const FullKnowledgeTable = ({ data }) => {
+  const [tableData, setTableData] = useState(data); // Local state for the table data
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
@@ -35,7 +36,6 @@ const FullKnowledgeTable = () => {
     source: "",
     isActive: false,
   });
-  const [knowledgeData, setKnowledgeData] = useState(knowledgeTableData);
 
   const [errors, setErrors] = useState({
     title: "",
@@ -48,18 +48,26 @@ const FullKnowledgeTable = () => {
   const requestSort = (key) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
-        return {
-          key,
-          direction:
-            prev.direction === "ascending" ? "descending" : "ascending",
-        };
+        if (prev.direction === "ascending") {
+          return {
+            key,
+            direction: "descending",
+          };
+        } else if (prev.direction === "descending") {
+          return {
+            key: null, // Reset sorting
+            direction: null,
+          };
+        }
       }
       return { key, direction: "ascending" };
     });
   };
 
   const sortedData = React.useMemo(() => {
-    let sortableItems = [...knowledgeData];
+    let sortableItems = [...tableData];
+
+    // Apply sorting logic
     if (sortConfig.key) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -71,8 +79,9 @@ const FullKnowledgeTable = () => {
         return 0;
       });
     }
+
     return sortableItems;
-  }, [sortConfig, knowledgeData]);
+  }, [sortConfig, tableData]);
 
   const totalPages = Math.ceil(sortedData.length / itemsPerPage);
 
@@ -113,10 +122,13 @@ const FullKnowledgeTable = () => {
     return pageNumbers;
   };
 
-  const paginatedData = sortedData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  const paginatedData = React.useMemo(() => {
+    // Apply pagination after sorting
+    return sortedData.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage,
+    );
+  }, [sortedData, currentPage, itemsPerPage]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -166,8 +178,8 @@ const FullKnowledgeTable = () => {
       isActive: newRow.isActive,
     };
 
-    // Update the knowledge data state with the new row
-    setKnowledgeData((prevData) => [newRowData, ...prevData]);
+    // Update the local tableData state with the new row
+    setTableData((prevData) => [newRowData, ...prevData]);
 
     // Reset the input fields and errors
     setNewRow({
@@ -234,7 +246,6 @@ const FullKnowledgeTable = () => {
                   </th>
                 ),
               )}
-
               <th scope="col" className="w-[5%] p-4">
                 Action
               </th>
@@ -347,7 +358,12 @@ const FullKnowledgeTable = () => {
                 </div>
               </td>
               <td className="w-[15%] p-4">
-                <Toggle initialActive={newRow.isActive} />
+                <Toggle
+                  initialActive={newRow.isActive}
+                  onToggle={(isActive) =>
+                    setNewRow((prev) => ({ ...prev, isActive }))
+                  }
+                />
               </td>
               <td className="p-4">
                 <button onClick={handleAddRow}>

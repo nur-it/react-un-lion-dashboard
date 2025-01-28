@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router";
+import useAuthentication from "@/hooks/use-authentication";
 
 const ForgetPasswordPage = () => {
-  const navigate = useNavigate();
+  const { register, errors, handleSubmit, onSubmitForgotPassword, isLoading } =
+    useAuthentication();
   return (
     <section>
       <div className="flex h-screen w-full items-center justify-center bg-dark_bg">
@@ -18,7 +19,11 @@ const ForgetPasswordPage = () => {
               </p>
             </div>
           </div>
-          <form action="#" className="space-y-10">
+          <form
+            action="#"
+            onSubmit={handleSubmit(onSubmitForgotPassword)}
+            className="space-y-10"
+          >
             <div className="space-y-2">
               <label htmlFor="Email" className="text-sm text-white">
                 Email
@@ -27,14 +32,21 @@ const ForgetPasswordPage = () => {
                 type="email"
                 placeholder="Your Email"
                 className="auth_input_field"
+                {...register("email", { required: "Email is required" })}
               />
+              {errors.email && (
+                <span className="text-sm text-error">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
 
             <Button
-              onClick={() => navigate("/forget-password-message")}
+              type="submit"
+              disabled={isLoading}
               className="h-12 w-full bg-primary_main sm:h-[56px]"
             >
-              Continue
+              {isLoading ? "Continuing..." : "Continue"}
             </Button>
           </form>
         </div>

@@ -24,7 +24,7 @@ const ForgetPasswordMessagePage = () => {
           </div>
 
           <Button
-            onClick={() => navigate("/sign-in")}
+            onClick={() => navigate("/reset-password")}
             className="h-12 w-full bg-primary_main sm:h-[56px]"
           >
             OK

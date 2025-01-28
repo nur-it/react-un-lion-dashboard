@@ -8,10 +8,12 @@ import fileUpload from "../../../assets/icon/file-loading.svg";
 import tickMark from "../../../assets/icon/green-tick.svg";
 import info from "../../../assets/icon/information-circle.svg";
 import trashIcon from "../../../assets/icon/trash.svg";
+import Tooltip from "./Tooltip";
 
 const UpdateInitialDocument = () => {
   const fileInputRef = useRef(null);
   const [files, setFiles] = useState([]);
+  const [hoveredTooltip, setHoveredTooltip] = useState(null);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -56,15 +58,29 @@ const UpdateInitialDocument = () => {
     setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
   };
 
+  const tooltips = {
+    updateDocument: "Upload Initial Document",
+  };
+
   return (
     <div className="space-y-6">
       <div className="space-y-10 md:grid md:grid-cols-9 md:gap-10 md:space-y-0">
         <div className="md:col-span-3">
           <div className="relative flex items-center gap-1.5">
-            <p className="text-base font-medium text-secondary_main dark:text-white sm:text-lg">
+            <h5 className="text-sm font-medium text-secondary_main dark:text-white sm:text-lg">
               Upload Initial Documents
-            </p>
-            <img src={info} alt="info" className="cursor-pointer" />
+            </h5>
+            <div
+              className="relative"
+              onMouseEnter={() => setHoveredTooltip("updateDocument")}
+              onMouseLeave={() => setHoveredTooltip(null)}
+            >
+              <img src={info} alt="info" className="cursor-pointer" />
+              <Tooltip
+                content={tooltips.updateDocument}
+                isVisible={hoveredTooltip === "updateDocument"}
+              />
+            </div>
           </div>
         </div>
         <div className="space-y-3 md:col-span-6">

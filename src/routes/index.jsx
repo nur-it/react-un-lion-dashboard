@@ -5,6 +5,7 @@ import HomePage from "@/app/home";
 import KnowledgeBasePage from "@/app/knowledge-base";
 import MyAccountPage from "@/app/my-account";
 import ErrorPage from "@/app/not-found";
+import ResetPasswordPage from "@/app/reset-password";
 import SettingPage from "@/app/setting";
 import SignInPage from "@/app/sign-in";
 import SignUpPage from "@/app/sign-up";
@@ -33,6 +34,7 @@ const RouterProvider = () => {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/forget-password" element={<ForgetPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route
           path="/forget-password-message"
           element={<ForgetPasswordMessagePage />}
