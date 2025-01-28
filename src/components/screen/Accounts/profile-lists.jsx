@@ -5,11 +5,17 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Cookies from "js-cookie";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router";
 
 const ProfileLists = ({ profiles }) => {
   const navigate = useNavigate();
+
+  const handleViewProfile = (profile) => {
+    Cookies.set("selectedProfile", JSON.stringify(profile));
+    navigate("/");
+  };
 
   return (
     <div className="space-y-4 py-6">
@@ -73,7 +79,10 @@ const ProfileLists = ({ profiles }) => {
             </div>
           </div>
           {/* view profile */}
-          <Button onClick={() => navigate(`/`)} className="w-full md:w-auto">
+          <Button
+            onClick={() => handleViewProfile(profile)}
+            className="w-full md:w-auto"
+          >
             <Eye />
             <span>View Profile</span>
           </Button>
