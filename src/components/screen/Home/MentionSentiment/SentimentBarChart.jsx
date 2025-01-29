@@ -30,6 +30,7 @@ const SentimentBarChart = () => {
         backgroundColor: "#98A2B3",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
       {
         label: "Positive",
@@ -37,6 +38,7 @@ const SentimentBarChart = () => {
         backgroundColor: "#0CAF60",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
       {
         label: "Negative",
@@ -44,11 +46,12 @@ const SentimentBarChart = () => {
         backgroundColor: "#F23838",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
     ],
   };
 
-  // Adjust the dataset to make the stacking incremental
+
   const data = {
     labels: baseData.labels,
     datasets: baseData.datasets.map((dataset, index, datasets) => {
@@ -85,7 +88,7 @@ const SentimentBarChart = () => {
             };
 
             return [
-              `⚪ ${values.gray}`,
+              `🔘 ${values.gray}`,
               `🟢 ${values.green}`,
               `🔴 ${values.red}`,
             ].join("  ");

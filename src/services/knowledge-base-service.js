@@ -2,6 +2,10 @@ import requests from "./httpService";
 
 export const knowledgeBaseService = {
   knowledgeBase: async () => await requests.get("/knowledge-base"),
+
+  uploadSourceArticle: async (body) =>
+    await requests.post("/upload_source_article", body),
+
   uploadSourceFile: async (body) =>
     await requests.post("/upload_source_file", body),
 
