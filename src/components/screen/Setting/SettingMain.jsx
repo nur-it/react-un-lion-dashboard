@@ -94,6 +94,7 @@ const SettingMain = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Contact Us</DialogTitle>
+
               <DialogDescription>
                 <ContactModal />
               </DialogDescription>
