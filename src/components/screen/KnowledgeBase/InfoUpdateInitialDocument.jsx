@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { FiLoader } from "react-icons/fi";
 import addFrame from "../../../assets/icon/added-frame.svg";
@@ -171,9 +170,6 @@ const InfoUpdateInitialDocument = ({
             </div>
           ))}
         </div>
-      </div>
-      <div className="flex items-center justify-end">
-        <Button className="w-full md:max-w-[97px]">Submit</Button>
       </div>
     </div>
   );

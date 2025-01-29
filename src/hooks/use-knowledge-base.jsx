@@ -1,9 +1,31 @@
 import { knowledgeBaseService } from "@/services/knowledge-base-service";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const useKnowledgeBase = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch,
+  } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+
+  const sourceArticleSubmit = async (body) => {
+    setIsLoading(true);
+    try {
+      const response = await knowledgeBaseService.uploadSourceArticle(body);
+      toast.success("Uploaded successfully!");
+      return response.data;
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to upload article.");
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const fetchKnowledgeBase = async () => {
     setIsLoading(true);
@@ -100,6 +122,12 @@ const useKnowledgeBase = () => {
 
   return {
     isLoading,
+    register,
+    handleSubmit,
+    setValue,
+    errors,
+    watch,
+    sourceArticleSubmit,
     fetchKnowledgeBase,
     uploadSourceFile,
     saveTrustfulSource,

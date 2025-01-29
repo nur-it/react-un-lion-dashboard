@@ -5,20 +5,6 @@ import { toast } from "react-toastify";
 const useDashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const uploadSourceArticle = async (body) => {
-    setIsLoading(true);
-    try {
-      const response = await dashboardService.uploadSourceArticle(body);
-      toast.success("Uploaded successfully!");
-      return response.data;
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to upload article.");
-      return null;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const getChartData = async (fetchFunction, errorMessage) => {
     setIsLoading(true);
     try {
@@ -106,7 +92,6 @@ const useDashboard = () => {
 
   return {
     isLoading,
-    uploadSourceArticle,
     getEmotionsData,
     getMentionsData,
     getSentimentsData,
