@@ -2,7 +2,7 @@ import { dashboardService } from "@/services/dashboard-service";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const useDashboardHook = () => {
+const useDashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const uploadSourceArticle = async (body) => {
@@ -120,4 +120,4 @@ const useDashboardHook = () => {
   };
 };
 
-export default useDashboardHook;
+export default useDashboard;
