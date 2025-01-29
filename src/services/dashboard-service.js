@@ -1,9 +1,6 @@
 import requests from "./httpService";
 
 export const dashboardService = {
-  uploadSourceArticle: async (body) =>
-    await requests.post("/upload_source_article", body),
-
   //   for the charts
   getEmotionsData: async () => await requests.get("/chart-data"),
   getMentionsData: async () => await requests.get("/chart-data"),
