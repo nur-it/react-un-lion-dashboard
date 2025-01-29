@@ -29,7 +29,12 @@ const Header = () => {
   const [greeting, setGreeting] = useState("Good Morning");
   const navigate = useNavigate();
 
-  const profile = JSON.parse(Cookies.get("selectedProfile"));
+  // Get the cookie value first
+  const selectedProfileCookie = Cookies.get("selectedProfile");
+  // Safely parse the cookie or default to null
+  const profile = selectedProfileCookie
+    ? JSON.parse(selectedProfileCookie)
+    : null;
 
   // Determine greeting based on the current hour
   useEffect(() => {
@@ -146,7 +151,7 @@ const Header = () => {
               <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
                   className="rounded dark:w-7"
-                  src={profile ? profile.picture_url : "/user-icon.svg"}
+                  src={profile ? profile.picture_url : "/images/user.png"}
                   alt={profile ? profile.name : "avatar"}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
