@@ -63,6 +63,13 @@ const StatisticChart = () => {
         barThickness: 15,
       },
       {
+        label: "Gap", 
+        data: [0, 0, 0, 0, 0, 0, 0],
+        backgroundColor: "transparent",
+        stack: "gap",
+        barThickness: 4, 
+      },
+      {
         label: "Mitigated Risk",
         data: [30, 15, 20, 25, 40, 25, 25],
         backgroundColor: "#665CF3",
