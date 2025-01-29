@@ -120,6 +120,9 @@ const StatisticChart = () => {
         grid: {
           display: false,
         },
+        border: {
+          display: false,
+        },
         ticks: {
           color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
@@ -130,7 +133,9 @@ const StatisticChart = () => {
         stacked: false,
         grid: {
           display: true,
-          color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
+          drawBorder: false, 
+          color: isDarkMode ? "#4a4e5e" : "#e0d9d9", 
+          borderDash: [5, 5],
         },
         border: {
           display: false,
