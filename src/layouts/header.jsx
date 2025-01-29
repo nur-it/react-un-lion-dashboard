@@ -67,9 +67,7 @@ const Header = () => {
 
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">{greeting} -</span>
-          <span className="text-xl font-bold leading-[130%]">
-            {profile ? profile.name : "John Doe"}
-          </span>
+          <span className="text-xl font-bold leading-[130%]">{"John Doe"}</span>
         </h5>
       </div>
       <div className="flex items-center gap-3 lg:hidden">
@@ -151,11 +149,11 @@ const Header = () => {
               <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
                   className="rounded dark:w-7"
-                  src={profile ? profile.picture_url : "/images/user.png"}
-                  alt={profile ? profile.name : "avatar"}
+                  src={"/images/user.png"}
+                  alt={"avatar"}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
-                  {profile ? profile.name : "John Doe"}
+                  {"John Doe"}
                 </span>
               </span>
               <span className="text-[#898D97]">

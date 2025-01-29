@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { rowData } from "@/data/threatTableData";
 import { FileWarning } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -47,7 +48,7 @@ const ThreatDetection = () => {
 
   return (
     <div className="w-full space-y-6 rounded-lg border border-gray-200 bg-white dark:border-white/[10%] dark:bg-white/[4%]">
-      <div className="flex flex-col items-center justify-between gap-6 p-4 sm:flex-row sm:gap-3 sm:p-6">
+      <div className="flex flex-col items-center justify-between gap-6 p-4 sm:gap-3 sm:p-6 md:items-start xl:flex-row xl:items-center">
         <div className="flex w-full flex-wrap items-center justify-between gap-1 sm:justify-start sm:gap-2">
           <h5 className="whitespace-nowrap text-lg font-bold text-secondary_main dark:text-white sm:text-xl">
             Threat Detection
@@ -58,15 +59,18 @@ const ThreatDetection = () => {
             </p>
           </div>
         </div>
-        <div className="flex h-10 w-full items-center gap-2.5 rounded-lg border border-gray300 bg-[#0000000F] px-4 py-3 dark:border-[#E4E7EC1A] dark:bg-[#FFFFFF0F] sm:max-w-[384px]">
-          <img src={search} alt="search" />
-          <input
-            type="text"
-            placeholder="Search Threats"
-            value={searchTerm}
-            onChange={handleSearch}
-            className="h-full w-full bg-transparent text-sm text-black outline-none placeholder:text-[#98A2B3] dark:text-white dark:placeholder:text-[#FFFFFF80]"
-          />
+        <div className="flex items-center gap-4">
+          <div className="flex h-10 w-full flex-1 items-center gap-2.5 rounded-lg border border-gray300 bg-[#0000000F] px-2 py-3 dark:border-[#E4E7EC1A] dark:bg-[#FFFFFF0F] sm:max-w-[384px] sm:px-4 xl:min-w-[384px]">
+            <img src={search} alt="search" />
+            <input
+              type="text"
+              placeholder="Search Threats"
+              value={searchTerm}
+              onChange={handleSearch}
+              className="h-full w-full bg-transparent text-sm text-black outline-none placeholder:text-[#98A2B3] dark:text-white dark:placeholder:text-[#FFFFFF80]"
+            />
+          </div>
+          <Button className="max-h-10">Detect a Threats</Button>
         </div>
       </div>
       <div className="w-full pb-4 pl-4 sm:pb-6 sm:pl-6 sm:pr-6">

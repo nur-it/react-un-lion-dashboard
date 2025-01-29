@@ -51,7 +51,21 @@ const ProfileLists = ({ profiles }) => {
                   <InfoIcon className="cursor-pointer text-[#98A2B3]" />
                 </TooltipTrigger>
                 <TooltipContent side="top">
-                  {profile.other_threat} Other Threats
+                  <h3 className="text-lg font-bold text-secondary_main dark:text-white">
+                    {profile.other_threat} Other Threats
+                  </h3>
+                  <ol className="grid list-inside list-decimal grid-cols-2 gap-x-4 gap-y-2">
+                    {Array.from({ length: profile.other_threat }).map(
+                      (_, index) => (
+                        <li
+                          className="text-base text-[#4A5773] dark:text-white/85"
+                          key={index}
+                        >
+                          This is threat no {index + 1}
+                        </li>
+                      ),
+                    )}
+                  </ol>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -62,7 +76,21 @@ const ProfileLists = ({ profiles }) => {
                   <InfoIcon className="cursor-pointer text-[#98A2B3]" />
                 </TooltipTrigger>
                 <TooltipContent side="top">
-                  {profile.to_review} Elements to Review.
+                  <h3 className="text-lg font-bold text-secondary_main dark:text-white">
+                    {profile.to_review} Elements to Review.
+                  </h3>
+                  <ol className="grid list-inside list-decimal grid-cols-2 gap-x-4 gap-y-2">
+                    {Array.from({ length: profile.to_review }).map(
+                      (_, index) => (
+                        <li
+                          className="text-base text-[#4A5773] dark:text-white/85"
+                          key={index}
+                        >
+                          This is to review no {index + 1}
+                        </li>
+                      ),
+                    )}
+                  </ol>
                 </TooltipContent>
               </Tooltip>
             </div>{" "}
@@ -73,7 +101,21 @@ const ProfileLists = ({ profiles }) => {
                   <InfoIcon className="cursor-pointer text-[#98A2B3]" />
                 </TooltipTrigger>
                 <TooltipContent side="top">
-                  {profile.new_insights} New Insights.
+                  <h3 className="text-lg font-bold text-secondary_main dark:text-white">
+                    {profile.new_insights} New Insights.
+                  </h3>
+                  <ol className="grid list-inside list-decimal grid-cols-2 gap-x-4 gap-y-2">
+                    {Array.from({ length: profile.new_insights }).map(
+                      (_, index) => (
+                        <li
+                          className="text-base text-[#4A5773] dark:text-white/85"
+                          key={index}
+                        >
+                          This is new insights no {index + 1}
+                        </li>
+                      ),
+                    )}
+                  </ol>
                 </TooltipContent>
               </Tooltip>
             </div>
