@@ -65,7 +65,7 @@ const ChatHistoryModal = ({ toggleModal, setToggleModal }) => {
               <FilterIcon />
             </button>
           </div>
-          <ScrollArea className="max-h-[500px] overflow-y-auto 2xl:max-h-[600px]">
+          <ScrollArea className="max-h-[500px] overflow-y-auto lg:max-h-[250px] xl:max-h-[380px] 2xl:max-h-[600px]">
             <div className="space-y-6 p-4">
               {Object.keys(groupedHistory).map((date) => (
                 <div key={date}>
