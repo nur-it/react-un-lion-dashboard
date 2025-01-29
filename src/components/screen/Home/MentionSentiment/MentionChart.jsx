@@ -123,6 +123,7 @@ const MentionChart = () => {
         grid: {
           display: true,
           color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
+          borderDash: [5, 5],
         },
         border: {
           display: false,

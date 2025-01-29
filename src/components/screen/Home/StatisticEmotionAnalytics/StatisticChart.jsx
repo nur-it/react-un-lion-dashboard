@@ -133,8 +133,8 @@ const StatisticChart = () => {
         stacked: false,
         grid: {
           display: true,
-          drawBorder: false, 
-          color: isDarkMode ? "#4a4e5e" : "#e0d9d9", 
+          drawBorder: false,
+          color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
           borderDash: [5, 5],
         },
         border: {
