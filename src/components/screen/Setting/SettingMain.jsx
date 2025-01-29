@@ -1,9 +1,18 @@
+import ContactModal from "@/components/shared/ContactModal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
-import { Link } from "react-router";
 import userImg from "../../../assets/img/user.svg";
 import Notification from "./Notification";
 import ProfileEditModal from "./ProfileEditModal";
+
 const SettingMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState({
@@ -76,15 +85,22 @@ const SettingMain = () => {
       {/* Notification */}
       <Notification />
 
-      <p className="text-base text-text_secondary dark:text-[#98A2B3]">
-        If you need any help{" "}
-        <Link
-          to={"/contact-us"}
-          className="font-medium text-primary_main underline dark:text-[#665CF3]"
-        >
-          Contact us
-        </Link>{" "}
-      </p>
+      <div className="inline-flex items-center gap-1 text-base text-text_secondary dark:text-[#98A2B3]">
+        <p>If you need any help</p>{" "}
+        <Dialog>
+          <DialogTrigger className="font-medium text-primary_main underline dark:text-[#665CF3]">
+            Contact us
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Contact Us</DialogTitle>
+              <DialogDescription>
+                <ContactModal />
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      </div>
 
       <ProfileEditModal
         isOpen={isModalOpen}

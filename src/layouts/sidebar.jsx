@@ -1,3 +1,12 @@
+import ContactModal from "@/components/shared/ContactModal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -164,37 +173,43 @@ const Sidebar = ({ closeSidebar }) => {
       )}
       <div>
         {menuItems.bottom_level.map((item, index) => (
-          <Link
-            key={index}
-            to={item.href}
-            onClick={closeSidebar}
-            className={cn(
-              "inline-flex w-full items-center gap-2 rounded-md px-4 py-2.5 text-white/80 transition-all duration-300 ease-in-out hover:bg-white_opacity10 hover:text-white",
-              pathname === item.href && "bg-primary_main text-white",
-            )}
-          >
-            <span
+          <Dialog key={index}>
+            <DialogTrigger
               className={cn(
-                "relative inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-white_opacity10",
-                pathname === item.href && "bg-white/[0.16]",
+                "inline-flex w-full items-center gap-2 rounded-md px-4 py-2.5 text-white/80 transition-all duration-300 ease-in-out hover:bg-white_opacity10 hover:text-white",
               )}
             >
-              {
-                <item.icon
-                  className={cn(
-                    "h-4 w-4",
-                    pathname === item.href && "text-white",
-                  )}
-                />
-              }
-              {item.notify && (
-                <span className="absolute -right-1 -top-1.5 inline-flex h-[14px] w-[14px] items-center justify-center rounded-full bg-error text-[10px] text-white">
-                  {item.notify}
-                </span>
-              )}
-            </span>{" "}
-            <span>{item.label}</span>
-          </Link>
+              <span
+                className={cn(
+                  "relative inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-white_opacity10",
+                  pathname === item.href && "bg-white/[0.16]",
+                )}
+              >
+                {
+                  <item.icon
+                    className={cn(
+                      "h-4 w-4",
+                      pathname === item.href && "text-white",
+                    )}
+                  />
+                }
+                {item.notify && (
+                  <span className="absolute -right-1 -top-1.5 inline-flex h-[14px] w-[14px] items-center justify-center rounded-full bg-error text-[10px] text-white">
+                    {item.notify}
+                  </span>
+                )}
+              </span>{" "}
+              <span>{item.label}</span>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Contact Us</DialogTitle>
+                <DialogDescription>
+                  <ContactModal />
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         ))}
       </div>
     </div>
