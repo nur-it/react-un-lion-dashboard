@@ -132,36 +132,31 @@ const ThreatDetectionTable = ({ data, onAction }) => {
     setStatus({ id, newStatus });
 
     // Set the "In Progress" status immediately
-    if (newStatus === "Mitigate") {
-      setNewStatus((prev) => ({
-        ...prev,
-        [id]: "Mitigate In Progress",
-      }));
-    }
+    setNewStatus((prev) => ({
+      ...prev,
+      [id]: "In Progress",
+    }));
 
     // Simulate the final status change after 1 second
-    setTimeout(
-      () => {
-        setNewStatus((prev) => {
-          const updatedStatus =
-            newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
+    setTimeout(() => {
+      setNewStatus((prev) => {
+        const updatedStatus =
+          newStatus === "Mitigate" ? "Mitigated" : "Dismissed";
 
-          // Update the data action field using id
-          const rowIndex = data.findIndex((row) => row.id === id);
-          if (rowIndex !== -1) {
-            data[rowIndex].action = true;
-          }
+        // Update the data action field using id
+        const rowIndex = data.findIndex((row) => row.id === id);
+        if (rowIndex !== -1) {
+          data[rowIndex].action = true;
+        }
 
-          onAction(id);
+        onAction(id);
 
-          return {
-            ...prev,
-            [id]: updatedStatus,
-          };
-        });
-      },
-      newStatus === "Mitigate" ? 1000 : 50,
-    );
+        return {
+          ...prev,
+          [id]: updatedStatus,
+        };
+      });
+    }, 1000);
   };
 
   const date = new Date().toLocaleDateString("en-US", "dd/mm/yyyy");
@@ -264,7 +259,7 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                     isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
                 </td>
-                <td className="w-[15%] p-4">
+                <td className="w-[13%] p-4">
                   {newStatus[row.id] && (
                     <button
                       className={`flex h-8 w-[100px] cursor-pointer items-center justify-center rounded-md px-3 font-medium ${
@@ -276,8 +271,8 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                           ? "bg-[#0CAF6014] text-success"
                           : ""
                       } ${
-                        newStatus[row.id] === "Mitigate In Progress"
-                          ? "w-max bg-[#F38E001A] text-xs text-warning dark:bg-white/[0.08] dark:text-white"
+                        newStatus[row.id] === "In Progress"
+                          ? "bg-[#F38E001A] text-warning dark:bg-white/[0.08] dark:text-white"
                           : ""
                       }`}
                     >
