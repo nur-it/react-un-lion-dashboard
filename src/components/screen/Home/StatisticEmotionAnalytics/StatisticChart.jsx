@@ -132,6 +132,10 @@ const StatisticChart = () => {
           display: true,
           color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
         },
+        border: {
+          display: false,
+        },
+
         ticks: {
           stepSize: 20,
           max: 100,
