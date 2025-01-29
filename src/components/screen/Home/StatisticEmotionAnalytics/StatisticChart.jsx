@@ -45,7 +45,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderSkipped: false,
         barThickness: 15,
-        borderRadius: 20
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
       {
         label: "Positive",
@@ -54,7 +54,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderSkipped: false,
         barThickness: 15,
-        borderRadius: 20
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
       {
         label: "Negative",
@@ -63,7 +63,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderSkipped: false,
         barThickness: 15,
-        borderRadius: 20
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
       
       {
@@ -73,7 +73,7 @@ const StatisticChart = () => {
         stack: "stack2",
         borderSkipped: false,
         barThickness: 15,
-        borderRadius: 20
+        borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
       },
     ],
   };
