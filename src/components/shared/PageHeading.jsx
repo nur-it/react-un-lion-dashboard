@@ -3,7 +3,12 @@ import { Home } from "lucide-react";
 import { MdChevronRight } from "react-icons/md";
 import { Link } from "react-router";
 const PageHeading = ({ page_name }) => {
-  const profile = JSON.parse(Cookies.get("selectedProfile"));
+  // Get the cookie value first
+  const selectedProfileCookie = Cookies.get("selectedProfile");
+  // Safely parse the cookie or default to null
+  const profile = selectedProfileCookie
+    ? JSON.parse(selectedProfileCookie)
+    : null;
 
   return (
     <div className="space-y-2">
