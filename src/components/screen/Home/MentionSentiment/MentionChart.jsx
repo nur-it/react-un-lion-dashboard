@@ -102,13 +102,16 @@ const MentionChart = () => {
     },
     elements: {
       line: {
-        borderWidth: 2, 
+        borderWidth: 4, 
         hoverBorderWidth: 0, 
       },
     },
     scales: {
       x: {
         grid: {
+          display: false,
+        },
+        border: {
           display: false,
         },
         ticks: {
@@ -120,6 +123,10 @@ const MentionChart = () => {
         grid: {
           display: true,
           color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
+          borderDash: [5, 5],
+        },
+        border: {
+          display: false,
         },
         ticks: {
           stepSize: 20,

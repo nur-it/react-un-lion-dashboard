@@ -104,6 +104,9 @@ const SentimentBarChart = () => {
         grid: {
           display: false,
         },
+        border: {
+          display: false,
+        },
         ticks: {
           color: isDarkMode ? "#FFFFFFCC" : "#4A5773",
         },
@@ -113,6 +116,10 @@ const SentimentBarChart = () => {
         grid: {
           display: true,
           color: isDarkMode ? "#4a4e5e" : "#e0d9d9",
+          borderDash: [5, 5],
+        },
+        border: {
+          display: false,
         },
         ticks: {
           stepSize: 50,
