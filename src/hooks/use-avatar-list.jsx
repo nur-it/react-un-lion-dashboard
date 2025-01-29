@@ -8,8 +8,9 @@ const useAvatarList = () => {
   const listAvatars = async () => {
     setIsLoading(true);
     try {
-      const response = await avatarService.listAvatars();
-      return response.data;
+      toast.success("Avatars fetched successfully!");
+     /*  const response = await avatarService.listAvatars();
+      return response.data; */
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch avatars.");
       return [];
@@ -21,9 +22,10 @@ const useAvatarList = () => {
   const pickTarget = async (body) => {
     setIsLoading(true);
     try {
-      const response = await avatarService.pickTarget(body);
+    //   const response = await avatarService.pickTarget(body);
       toast.success("Target picked successfully!");
-      return response.data;
+      console.log(body);
+    //   return response.data;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to pick target.");
       return null;
