@@ -49,7 +49,9 @@ const Sidebar = ({ closeSidebar }) => {
                         className="h-8 w-8 rounded-full"
                         alt="profile"
                       />
-                      <span>{selectedProfile?.name || "John Doe"}</span>
+                      <span className="line-clamp-1">
+                        {selectedProfile?.name || "John Doe"}
+                      </span>
                     </span>
                     <span>
                       <ChevronsUpDown className="h-5 w-5 text-[#98A2B3]" />

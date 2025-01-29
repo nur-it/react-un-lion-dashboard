@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import DateRangePicker from "../StatisticEmotionAnalytics/DateRangePicker";
 import SentimentBarChart from "./SentimentBarChart";
+import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
 
 const Sentiment = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -54,8 +55,8 @@ const Sentiment = () => {
             Sentiment
           </h5>
           <div className="flex items-center gap-3">
-            {/* <TimePeriodDropdown options={["Weekly", "Monthly", "Yearly"]} /> */}
-            <DateRangePicker />
+            <TimePeriodDropdown options={["Weekly", "Monthly", "Yearly"]} />
+            {/* <DateRangePicker /> */}
             {/* Download button */}
             <div className="relative">
               <button

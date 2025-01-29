@@ -6,6 +6,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import DateRangePicker from "./DateRangePicker";
+import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
 
 const MainTopics = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -64,7 +65,8 @@ const MainTopics = () => {
           Main Topics
         </h5>
         <div className="flex items-center gap-3">
-          <DateRangePicker />
+          {/* <DateRangePicker /> */}
+          <TimePeriodDropdown options={["Weekly", "Monthly", "Yearly"]} />
           <div className="relative" ref={dropdownRef}>
             <button
               className="flex h-9 items-center justify-center rounded-lg border border-gray300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"

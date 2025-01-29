@@ -49,9 +49,9 @@ const ChatHistoryModal = ({ toggleModal, setToggleModal }) => {
     <div
       id="modal-container"
       onClick={handleOutsideClick}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 lg:hidden"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
     >
-      <div className="w-full max-w-[280px] rounded-lg bg-white py-4 dark:bg-[#1a1d40]">
+      <div className="w-full max-w-[280px] rounded-lg bg-white py-4 dark:bg-[#1a1d40] lg:max-w-[400px]">
         <div className="space-y-6">
           <div className="flex items-center justify-between px-3 py-2 lg:p-4">
             <button className="text-[#4A5773] dark:text-[#E4E7EC]">
@@ -65,7 +65,7 @@ const ChatHistoryModal = ({ toggleModal, setToggleModal }) => {
               <FilterIcon />
             </button>
           </div>
-          <ScrollArea className="max-h-[500px] overflow-y-scroll">
+          <ScrollArea className="max-h-[500px] overflow-y-auto lg:max-h-[600px]">
             <div className="space-y-6 p-4">
               {Object.keys(groupedHistory).map((date) => (
                 <div key={date}>
