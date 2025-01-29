@@ -15,6 +15,13 @@ const Sidebar = ({ closeSidebar }) => {
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
 
+  // Get the cookie value first
+  const selectedProfileCookie = Cookies.get("selectedProfile");
+  // Safely parse the cookie or default to null
+  const selectedProfile = selectedProfileCookie
+    ? JSON.parse(selectedProfileCookie)
+    : null;
+
   const handleViewProfile = (profile) => {
     Cookies.set("selectedProfile", JSON.stringify(profile));
     navigate("/");
@@ -54,17 +61,17 @@ const Sidebar = ({ closeSidebar }) => {
                   {profiles.map((profile, index) => (
                     <DropdownMenuItem
                       key={index}
-                      className="text-white hover:bg-primary_main"
+                      className={cn(
+                        "text-white hover:bg-primary_main",
+                        selectedProfile?.id === profile?.id &&
+                          "rounded-md border border-white_opacity10 bg-white_opacity05",
+                      )}
+                      onClick={() => handleViewProfile(profile)}
                     >
-                      <button
-                        onClick={() => handleViewProfile(profile)}
-                        className="inline-flex items-center justify-center gap-2.5"
-                      >
-                        <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#171D291A]">
-                          <img src={profile?.picture_url} alt={profile?.name} />
-                        </span>
-                        {profile?.name}
-                      </button>
+                      <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#171D291A]">
+                        <img src={profile?.picture_url} alt={profile?.name} />
+                      </span>
+                      {profile?.name}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
