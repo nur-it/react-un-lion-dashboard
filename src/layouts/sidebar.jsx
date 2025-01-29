@@ -4,13 +4,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { dropdownMenuItems, menuItems } from "@/data/sidebar.data";
+import { profiles } from "@/data/profiles.data";
+import { menuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
+import Cookies from "js-cookie";
 import { ChevronsUpDown } from "lucide-react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const Sidebar = ({ closeSidebar }) => {
   const pathname = useLocation().pathname;
+  const navigate = useNavigate();
+
+  const handleViewProfile = (profile) => {
+    Cookies.set("selectedProfile", JSON.stringify(profile));
+    navigate("/");
+  };
+
   return (
     <div className="flex h-full flex-col justify-between text-white/80">
       {pathname !== "/my-accounts" && (
@@ -42,21 +51,20 @@ const Sidebar = ({ closeSidebar }) => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent className="min-w-[217px] border border-white_opacity10 bg-[#282c3f] shadow-primary">
-                  {dropdownMenuItems.slice(0, 1).map((item, index) => (
+                  {profiles.map((profile, index) => (
                     <DropdownMenuItem
                       key={index}
                       className="text-white hover:bg-primary_main"
                     >
-                      <Link
-                        to={item.href}
-                        onClick={closeSidebar}
+                      <button
+                        onClick={() => handleViewProfile(profile)}
                         className="inline-flex items-center justify-center gap-2.5"
                       >
                         <span className="inline-flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#171D291A]">
-                          {<item.icon />}
+                          <img src={profile?.picture_url} alt={profile?.name} />
                         </span>
-                        {item.label}
-                      </Link>
+                        {profile?.name}
+                      </button>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
