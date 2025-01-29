@@ -102,7 +102,7 @@ const MentionChart = () => {
     },
     elements: {
       line: {
-        borderWidth: 4, 
+        borderWidth: 3, 
         hoverBorderWidth: 0, 
       },
     },

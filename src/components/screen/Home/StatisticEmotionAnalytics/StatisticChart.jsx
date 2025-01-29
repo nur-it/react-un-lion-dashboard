@@ -45,6 +45,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: 20
       },
       {
         label: "Positive",
@@ -53,6 +54,7 @@ const StatisticChart = () => {
         stack: "stack1",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: 20
       },
       {
         label: "Negative",
@@ -61,21 +63,17 @@ const StatisticChart = () => {
         stack: "stack1",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: 20
       },
-      {
-        label: "Gap", 
-        data: [0, 0, 0, 0, 0, 0, 0],
-        backgroundColor: "transparent",
-        stack: "gap",
-        barThickness: 4, 
-      },
+      
       {
         label: "Mitigated Risk",
-        data: [30, 15, 20, 25, 40, 25, 25],
+        data: [30, 20, 20, 25, 40, 25, 25],
         backgroundColor: "#665CF3",
         stack: "stack2",
         borderSkipped: false,
         barThickness: 15,
+        borderRadius: 20
       },
     ],
   };
@@ -98,7 +96,7 @@ const StatisticChart = () => {
 
             if (stack === "stack2") {
               const blueValue = data.datasets[3]?.data[index] || 0;
-              return `🔵 ${blueValue}`;
+              return `🟣 ${blueValue}`;
             }
 
             const values = {
