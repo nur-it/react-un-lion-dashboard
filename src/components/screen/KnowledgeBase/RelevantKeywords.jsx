@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import info from "../../../assets/icon/information-circle.svg";
@@ -16,6 +17,10 @@ const RelevantKeywords = () => {
       setNewKeyword("");
       setShowInput(false);
     }
+  };
+
+  const removeKeyword = (indexToRemove) => {
+    setKeywords(keywords.filter((_, index) => index !== indexToRemove));
   };
 
   useEffect(() => {
@@ -61,12 +66,20 @@ const RelevantKeywords = () => {
       </div>
       <div className="flex flex-wrap items-center gap-2 md:col-span-6">
         {keywords.map((keyword, index) => (
+          // close.. when click close icon then remove the keyword
           <button
             key={index}
             className="flex h-8 items-center justify-center gap-1 rounded-full bg-[#473BF012] px-2.5 py-1.5 text-sm font-medium text-primary_main dark:border dark:border-[#FFFFFF99] dark:bg-transparent dark:text-[#FFFFFFCC]"
           >
-            <FiPlus size={16} />
             {keyword}
+            <X
+              size={16}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeKeyword(index);
+              }}
+              className="cursor-pointer transition-all duration-300 ease-in-out hover:text-error"
+            />
           </button>
         ))}
 
