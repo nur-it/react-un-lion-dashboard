@@ -42,7 +42,8 @@ const Mentions = () => {
           Mentions
         </h5>
         <div className="flex items-center gap-3">
-          <DateRangePicker />
+          {/* <DateRangePicker /> */}
+          <TimePeriodDropdown options={["Weekly", "Monthly", "Yearly"]} />
           {/* Download button */}
           <div className="relative">
             <button
