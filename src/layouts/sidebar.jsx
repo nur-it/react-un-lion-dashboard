@@ -45,11 +45,11 @@ const Sidebar = ({ closeSidebar }) => {
                   <button className="mb-2 inline-flex w-full items-center justify-between gap-2 rounded-md border border-white_opacity10 bg-white_opacity05 px-4 py-2.5 text-white transition-all duration-300 ease-in-out">
                     <span className="inline-flex items-center space-x-2 text-sm font-medium">
                       <img
-                        src="/images/user.png"
+                        src={selectedProfile?.picture_url || "/images/user.png"}
                         className="h-8 w-8 rounded-full"
-                        alt="user"
+                        alt="profile"
                       />
-                      <span>John Doe</span>
+                      <span>{selectedProfile?.name || "John Doe"}</span>
                     </span>
                     <span>
                       <ChevronsUpDown className="h-5 w-5 text-[#98A2B3]" />
