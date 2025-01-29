@@ -12,7 +12,6 @@ import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-// Sample data
 const initialHistoryItems = [
   { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
   { id: "2", title: "Great Offer", date: "19 Jan 2025" },
@@ -23,7 +22,6 @@ const initialHistoryItems = [
   { id: "7", title: "Mail Reply", date: "16 Jan 2025" },
 ];
 
-// Get today's date in the same format as the data
 const getTodayDate = () => {
   const today = new Date();
   return today.toLocaleDateString("en-GB", {
@@ -57,11 +55,13 @@ export function ChatHistory() {
   };
 
   const handleRenameConfirm = () => {
-    setHistoryItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === editingItemId ? { ...item, title: newTitle } : item,
-      ),
-    );
+    if (editingItemId && newTitle.trim() !== "") {
+      setHistoryItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === editingItemId ? { ...item, title: newTitle } : item,
+        ),
+      );
+    }
     setEditingItemId(null);
     setNewTitle("");
   };
@@ -92,25 +92,22 @@ export function ChatHistory() {
                   {groupedHistory[date].map((item) => (
                     <div key={item.id} className="group relative">
                       {editingItemId === item.id ? (
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="text"
-                            value={newTitle}
-                            onChange={(e) => setNewTitle(e.target.value)}
-                            className="w-full rounded-lg border px-2 py-1.5 text-sm"
-                          />
-                          <Button
-                            variant="ghost"
-                            onClick={handleRenameConfirm}
-                            className="text-primary"
-                          >
-                            Save
-                          </Button>
-                        </div>
+                        <input
+                          type="text"
+                          value={newTitle}
+                          onChange={(e) => setNewTitle(e.target.value)}
+                          onBlur={handleRenameConfirm}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && handleRenameConfirm()
+                          }
+                          className="w-full rounded-lg border-none px-2 py-1.5 text-sm outline-none"
+                          autoFocus
+                          maxLength={30}
+                        />
                       ) : (
                         <Button
                           variant="ghost"
-                          className="h-auto w-full justify-start rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
+                          className="h-auto w-full justify-start truncate text-ellipsis rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
                         >
                           {item.title}
                         </Button>
@@ -150,7 +147,6 @@ export function ChatHistory() {
           </div>
         </ScrollArea>
       </div>
-
       {toggleModal && (
         <ChatHistoryModal
           toggleModal={toggleModal}
