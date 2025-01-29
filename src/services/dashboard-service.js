@@ -1,6 +1,6 @@
 import requests from "./httpService";
 
-export const dashOtherService = {
+export const dashboardService = {
   uploadSourceArticle: async (body) =>
     await requests.post("/upload_source_article", body),
 
