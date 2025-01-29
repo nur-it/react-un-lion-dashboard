@@ -1,4 +1,4 @@
-// import { avatarService } from "@/services/avatar-service";
+import { avatarService } from "@/services/avatar-service";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -8,9 +8,8 @@ const useAvatarList = () => {
   const listAvatars = async () => {
     setIsLoading(true);
     try {
-      toast.success("Avatars fetched successfully!");
-     /*  const response = await avatarService.listAvatars();
-      return response.data; */
+      const response = await avatarService.listAvatars();
+      return response.data;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch avatars.");
       return [];
@@ -22,10 +21,9 @@ const useAvatarList = () => {
   const pickTarget = async (body) => {
     setIsLoading(true);
     try {
-    //   const response = await avatarService.pickTarget(body);
+      const response = await avatarService.pickTarget(body);
       toast.success("Target picked successfully!");
-      console.log(body);
-    //   return response.data;
+      return response.data;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to pick target.");
       return null;
