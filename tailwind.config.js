@@ -42,6 +42,14 @@ export default {
         text_main900: "#0A0D14",
         text_soft400: "#868C98",
         text_sub500: "#525866",
+        pink_emo: "#FD28E0",
+        blue_emo: "#1E90FF",
+        gray_emo:"#8D8D8D",
+        orange_emo:"#F97315",
+        red_emo:"#F23938",
+        green_emo:"#0AAF60",
+        purple_emo:"#861A8F"
+
       },
       boxShadow: {
         primary:

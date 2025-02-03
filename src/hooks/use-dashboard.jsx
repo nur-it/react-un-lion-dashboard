@@ -9,7 +9,8 @@ const useDashboard = () => {
     setIsLoading(true);
     try {
       const response = await fetchFunction();
-      return response.data;
+      const result = await response;
+      return result;
     } catch (error) {
       toast.error(error.response?.data?.message || errorMessage);
       return [];
