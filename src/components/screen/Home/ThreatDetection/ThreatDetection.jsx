@@ -1,22 +1,34 @@
 import { Button } from "@/components/ui/button";
-import { rowData } from "@/data/threatTableData";
+// import { rowData } from "@/data/threatTableData";
 import { FileWarning } from "lucide-react";
 import { useEffect, useState } from "react";
 import search from "../../../../assets/icon/search.svg";
 import ThreatDetectionTable from "./ThreatDetectionTable";
+import useDashboard from "@/hooks/use-dashboard.jsx";
 
 const ThreatDetection = () => {
+  const [rowData, setRiskData] = useState([]); // ✅ Define state for avatars
+  const { getRiskTableData } = useDashboard();
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getRiskTableData(); // ✅ Fetch avatars
+      setRiskData(data); // ✅ Update state
+    };
+    fetchData();
+  }, []); // ✅ Run once on mount
+
   const [openThreatsCount, setOpenThreatsCount] = useState(0);
   const [filteredData, setFilteredData] = useState(rowData);
   const [searchTerm, setSearchTerm] = useState("");
-
   // Calculate the initial count of open threats
   useEffect(() => {
     const count = rowData.filter((row) => !row.action).length;
     setOpenThreatsCount(count);
   }, []);
 
-  // Update filtered data whenever searchTerm or rowData changes
+// Update filtered data whenever searchTerm or rowData changes
   useEffect(() => {
     if (searchTerm) {
       const filtered = rowData.filter(
@@ -24,13 +36,14 @@ const ThreatDetection = () => {
           row.threatType.toLowerCase().includes(searchTerm) ||
           row.platform.toLowerCase().includes(searchTerm) ||
           row.contentSummary.toLowerCase().includes(searchTerm) ||
-          row.id.toLowerCase().includes(searchTerm),
+          row.id.toLowerCase().includes(searchTerm)
       );
       setFilteredData(filtered);
     } else {
       setFilteredData(rowData);
     }
-  }, [searchTerm]);
+  }, [searchTerm, rowData]);
+
 
   // Update the count when an action is performed
   const handleAction = (id) => {

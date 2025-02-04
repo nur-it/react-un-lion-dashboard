@@ -9,14 +9,13 @@ import Cookies from "js-cookie";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router";
 import useAvatarList from "@/hooks/use-avatar-list.jsx";
-import { useEffect } from "react";
 
 const ProfileLists = ({ profiles }) => {
   const navigate = useNavigate();
   const { pickTarget } = useAvatarList();
   const handleViewProfile = async (profile) => {
-    Cookies.set("selectedProfile", JSON.stringify(profile));
     const pickedTarget = await pickTarget(JSON.stringify(profile)); // ✅ Fetch avatars
+    Cookies.set("selectedProfile", JSON.stringify(pickedTarget));
     navigate("/");
   };
 

@@ -18,7 +18,7 @@ const useKnowledgeBase = () => {
     try {
       const response = await knowledgeBaseService.uploadSourceArticle(body);
       toast.success("Uploaded successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to upload article.");
       return null;
@@ -31,10 +31,25 @@ const useKnowledgeBase = () => {
     setIsLoading(true);
     try {
       const response = await knowledgeBaseService.knowledgeBase();
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to fetch knowledge base.",
+      );
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchInitSources = async () => {
+    setIsLoading(true);
+    try {
+      const response = await knowledgeBaseService.initSources();
+      return response;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to fetch initial soures.",
       );
       return [];
     } finally {
@@ -47,7 +62,7 @@ const useKnowledgeBase = () => {
     try {
       const response = await knowledgeBaseService.uploadSourceFile(body);
       toast.success("Source file uploaded successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to upload source file.",
@@ -63,7 +78,7 @@ const useKnowledgeBase = () => {
     try {
       const response = await knowledgeBaseService.saveTrustfulSource(body);
       toast.success("Trustful source saved successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to save trustful source.",
@@ -129,6 +144,7 @@ const useKnowledgeBase = () => {
     watch,
     sourceArticleSubmit,
     fetchKnowledgeBase,
+    fetchInitSources,
     uploadSourceFile,
     saveTrustfulSource,
     updateToggleKb,

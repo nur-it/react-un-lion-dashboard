@@ -3,6 +3,8 @@ import requests from "./httpService";
 export const knowledgeBaseService = {
   knowledgeBase: async () => await requests.get("/knowledge-base"),
 
+  initSources: async () => await requests.get("/get_init_sources"),
+
   uploadSourceArticle: async (body) =>
     await requests.post("/upload_source_article", body),
 
@@ -17,6 +19,7 @@ export const knowledgeBaseService = {
 
   uploadVideoToCheck: async (body) =>
     await requests.post("/upload_video_to_check", body),
+
   checkProcessingStatus: async () =>
     await requests.get("/check_processing_status"),
 };

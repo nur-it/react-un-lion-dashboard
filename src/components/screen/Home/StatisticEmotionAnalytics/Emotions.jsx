@@ -4,6 +4,7 @@ import downloadIcon from "../../../../assets/icon/download.svg";
 import DateRangePicker from "./DateRangePicker";
 import EmotionsChart from "./EmotionsChart";
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import useDashboard from "@/hooks/use-dashboard.jsx";
 
 const Emotions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -16,6 +17,17 @@ const Emotions = () => {
     { label: "Surprise", value: 40, maxValue: 95, color: "bg-warning" },
     { label: "Sadness", value: 20, maxValue: 72, color: "bg-[#8D8D8D]" },
   ];
+
+  const { getEmotionsData } = useDashboard();
+  const [emotionsData, setEmotionsData] = useState([]); // ✅ Define state for avatars
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getEmotionsData(); // ✅ Fetch avatars
+      setEmotionsData(data); // ✅ Update state
+    };
+    fetchData();
+  }, []); // ✅ Run once on mount
 
   const handleDownloadClick = () => {
     setShowDropdown(!showDropdown);

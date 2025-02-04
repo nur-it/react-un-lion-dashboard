@@ -21,6 +21,7 @@ const useAuthentication = () => {
     try {
       const response = await authService.login(data);
       Cookies.set("accessToken", response?.accessToken, { expires: 7 });
+      Cookies.set("userProfile", JSON.stringify(response));
       toast.success("Login successful!");
       // console.log("Login response:", response);
       console.log(data);

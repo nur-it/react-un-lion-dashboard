@@ -22,7 +22,7 @@ const EmotionBar = ({ label, value, maxValue, color }) => {
             style={{ width: `${percentage}%` }}
           ></div>
         </div>
-        <span className="ml-2 w-9 text-right text-sm font-bold text-secondary_main dark:text-white">{maxValue}K</span>
+        <span className="ml-2 w-9 text-right text-sm font-bold text-secondary_main dark:text-white">{maxValue}</span>
 
         {/* Tooltip with Arrow */}
         {isHovered && (

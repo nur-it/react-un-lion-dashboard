@@ -12,13 +12,20 @@ import { FiEdit } from "react-icons/fi";
 import userImg from "../../../assets/img/user.svg";
 import Notification from "./Notification";
 import ProfileEditModal from "./ProfileEditModal";
+import Cookies from "js-cookie";
 
 const SettingMain = () => {
+  const userProfileCookie = Cookies.get("userProfile");
+  // Safely parse the cookie or default to null
+  const profile = userProfileCookie
+    ? JSON.parse(userProfileCookie)
+    : null;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState({
-    name: "John Due",
-    email: "username@gmail.com",
-    profilePic: userImg,
+    name: `${profile.first_name} ${profile.last_name}`,
+    email: profile.email,
+    user_picture: profile.user_picture,
   });
 
   const handleSave = (updatedUser) => {
@@ -30,7 +37,7 @@ const SettingMain = () => {
       <div className="flex items-center justify-between rounded-xl border border-gray300 px-[11px] py-2 dark:border-[#344054] sm:px-6 sm:py-6">
         <div className="flex items-center gap-4">
           <img
-            src={user.profilePic}
+            src={user.user_picture}
             alt="userImg"
             className="h-[42px] w-[42px] rounded-full sm:h-[64px] sm:w-[64px]"
           />

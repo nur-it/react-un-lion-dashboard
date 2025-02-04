@@ -32,19 +32,26 @@ const StatisticChart = () => {
     };
     fetchData();
   }, []); // ✅ Run once on mount
-  const stack1BaseData = [
-    [20, 15, 20, 20, 25, 15, 22],
-    [10, 10, 15, 10, 15, 10, 10],
-    [40, 20, 30, 30, 45, 40, 35],
-  ];
-  //
-  // const cumulativeData = stack1BaseData.map((dataset, idx) =>
-  //   dataset.map((value, index) =>
-  //     stack1BaseData
-  //       .slice(0, idx)
-  //       .reduce((acc, current) => acc + current[index], value),
-  //   ),
-  // );
+
+  const cumulativeData = statisticsData.datasets.map((dataset, idx) =>
+    dataset.data.map((value, index) =>
+      statisticsData.datasets
+        .slice(0, idx) // Take all previous datasets
+        .reduce((acc, prevDataset) => acc + prevDataset.data[index], value)
+    )
+  );
+
+// 🛠️ Apply cumulativeData back to datasets
+  const cumulativeDataSets = statisticsData.datasets.map((dataset, idx) => ({
+    ...dataset,
+    data: cumulativeData[idx], // Replace data with cumulative values
+  }));
+
+// ✅ Final Transformed Data Object
+  const transformedData = {
+    ...statisticsData,
+    datasets: cumulativeDataSets, // Use updated datasets
+  };
 
   // const data = {
   //   labels: [
@@ -119,9 +126,9 @@ const StatisticChart = () => {
             }
 
             const values = {
-              green: stack1BaseData[2][index],
-              red: stack1BaseData[0][index],
-              orange: stack1BaseData[1][index],
+              green: statisticsData.datasets[2]?.data[index] || 0,
+              red: statisticsData.datasets[0]?.data[index] || 0,
+              orange: statisticsData.datasets[1]?.data[index] || 0,
             };
 
             return [
@@ -176,7 +183,7 @@ const StatisticChart = () => {
 
   return (
     <div className="h-[230px] w-full">
-      <Bar data={statisticsData} options={options} />
+      <Bar data={transformedData} options={options} />
     </div>
   );
 };

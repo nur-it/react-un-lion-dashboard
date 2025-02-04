@@ -97,9 +97,9 @@ const SentimentBarChart = () => {
             const index = tooltipItem.dataIndex;
 
             const values = {
-              gray: sentimentsData.datasets[0]?.data[index] || 0,
-              green: sentimentsData.datasets[1]?.data[index] || 0,
-              red: sentimentsData.datasets[2]?.data[index] || 0,
+              gray: sentimentsData.datasets[2]?.data[index] || 0,
+              green: sentimentsData.datasets[0]?.data[index] || 0,
+              red: sentimentsData.datasets[1]?.data[index] || 0,
             };
 
             return [
