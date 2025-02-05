@@ -9,46 +9,60 @@ import tickMark from "../../../assets/icon/green-tick.svg";
 import info from "../../../assets/icon/information-circle.svg";
 import trashIcon from "../../../assets/icon/trash.svg";
 import Tooltip from "./Tooltip";
+import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 
 const UpdateInitialDocument = () => {
   const fileInputRef = useRef(null);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([]); // UI state for displaying files
+  const [formData, setFormData] = useState(new FormData()); // ✅ Fix: useState for FormData
   const [hoveredTooltip, setHoveredTooltip] = useState(null);
+  const { uploadSourceFile } = useKnowledgeBase(); // Extract upload function
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const newFile = {
+    const selectedFiles = Array.from(event.target.files);
+
+    if (selectedFiles.length > 0) {
+      const newFiles = selectedFiles.map((file) => ({
         name: file.name,
         size: file.size,
         status: "uploading",
         progress: 0,
-      };
+        fileObj: file, // Store actual file object
+      }));
 
-      setFiles((prevFiles) => [...prevFiles, newFile]);
+      // ✅ Update UI state
+      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
+      // ✅ Correctly update FormData
+      setFormData((prevFormData) => {
+        const updatedFormData = new FormData();
+        for (const [key, value] of prevFormData.entries()) {
+          updatedFormData.append(key, value);
+        }
+        selectedFiles.forEach((file) => updatedFormData.append("files", file));
+        console.log("Updated FormData:", updatedFormData.getAll("files")); // ✅ Debugging check
+        return updatedFormData;
+      });
+
+      // Simulate upload progress
       const interval = setInterval(() => {
         setFiles((prevFiles) =>
           prevFiles.map((f) =>
-            f.name === file.name && f.status === "uploading"
-              ? { ...f, progress: f.progress + 10 }
-              : f,
-          ),
+            f.status === "uploading"
+              ? { ...f, progress: Math.min(f.progress + 10, 100) }
+              : f
+          )
         );
-      }, 200);
+      }, 500);
 
       setTimeout(() => {
         clearInterval(interval);
         setFiles((prevFiles) =>
-          prevFiles.map((f) =>
-            f.name === file.name
-              ? { ...f, status: "completed", progress: 100 }
-              : f,
-          ),
+          prevFiles.map((f) => ({ ...f, status: "completed", progress: 100 }))
         );
       }, 2000);
     }
@@ -56,10 +70,35 @@ const UpdateInitialDocument = () => {
 
   const handleRemoveFile = (fileName) => {
     setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+
+    // ✅ Correctly remove file from FormData
+    setFormData((prevFormData) => {
+      const updatedFormData = new FormData();
+      for (const [key, value] of prevFormData.entries()) {
+        if (value.name !== fileName) {
+          updatedFormData.append(key, value);
+        }
+      }
+      console.log("Updated FormData after removal:", updatedFormData.getAll("files")); // ✅ Debugging check
+      return updatedFormData;
+    });
   };
 
-  const tooltips = {
-    updateDocument: "Upload Initial Document",
+  const handleSubmit = async () => {
+    if (!formData.has("files")) {
+      alert("No files selected for upload.");
+      return;
+    }
+
+    try {
+      await uploadSourceFile(formData.getAll("files"));
+      alert("Files uploaded successfully!");
+      setFiles([]);
+      setFormData(new FormData()); // ✅ Reset FormData after successful upload
+    } catch (error) {
+      console.error("File upload failed", error);
+      alert("Error uploading files. Please try again.");
+    }
   };
 
   return (
@@ -77,7 +116,7 @@ const UpdateInitialDocument = () => {
             >
               <img src={info} alt="info" className="cursor-pointer" />
               <Tooltip
-                content={tooltips.updateDocument}
+                content="Upload Initial Document"
                 isVisible={hoveredTooltip === "updateDocument"}
               />
             </div>
@@ -107,74 +146,34 @@ const UpdateInitialDocument = () => {
               type="file"
               className="hidden"
               onChange={handleFileChange}
+              multiple
             />
           </div>
 
           {files.map((file, index) => (
-            <div
-              key={index}
-              className={`w-full rounded-xl border border-[#D0D5DD] bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A] ${
-                file.status === "uploading"
-                  ? "border-gray300"
-                  : "border-[#D0D5DD]"
-              }`}
-            >
+            <div key={index} className="w-full rounded-xl border border-[#D0D5DD] bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]">
               <div className="flex justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={file.status === "uploading" ? fileUpload : addFrame}
-                    alt="fileIcon"
-                  />
+                  <img src={file.status === "uploading" ? fileUpload : addFrame} alt="fileIcon" />
                   <div>
-                    <p className="text-sm font-medium text-secondary_main dark:text-white">
-                      {file.name}
+                    <p className="text-sm font-medium text-secondary_main dark:text-white">{file.name}</p>
+                    <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
+                      {Math.round(file.size / 1024)} KB
                     </p>
-                    <div className="flex items-center gap-1">
-                      <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
-                        {Math.round(file.size / 1024)} KB
-                      </p>
-                      <div className="h-1 w-1 rounded-full bg-[#00000080] dark:bg-[#FFFFFF80]"></div>
-                      {file.status === "uploading" ? (
-                        <div className="flex items-center gap-1 text-secondary_main dark:text-white">
-                          <FiLoader size={16} className="animate-spin" />
-                          <p className="text-xs">Uploading...</p>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-1">
-                          <img src={tickMark} alt="tickMark" />
-                          <p className="text-xs text-secondary_main dark:text-white">
-                            Completed
-                          </p>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
-                <button
-                  className="text-gray600 dark:text-white"
-                  onClick={() => handleRemoveFile(file.name)}
-                >
-                  {file.status === "uploading" ? (
-                    <img src={closeLoading} alt="closeLoading" />
-                  ) : (
-                    <img src={trashIcon} alt="trashIcon" />
-                  )}
+                <button className="text-gray600 dark:text-white" onClick={() => handleRemoveFile(file.name)}>
+                  <img src={trashIcon} alt="trashIcon" />
                 </button>
               </div>
-              {file.status === "uploading" && (
-                <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A] dark:bg-[#FFFFFF1A]">
-                  <div
-                    className="h-full rounded-full bg-[#665CF3] transition-all duration-200"
-                    style={{ width: `${file.progress}%` }}
-                  ></div>
-                </div>
-              )}
             </div>
           ))}
         </div>
       </div>
       <div className="flex items-center justify-end">
-        <Button className="w-full md:max-w-[97px]">Submit</Button>
+        <Button className="w-full md:max-w-[97px]" onClick={handleSubmit}>
+          Submit
+        </Button>
       </div>
     </div>
   );

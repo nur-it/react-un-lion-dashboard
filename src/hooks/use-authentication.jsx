@@ -19,8 +19,9 @@ const useAuthentication = () => {
   const onSubmitLogin = async (data) => {
     setIsLoading(true);
     try {
-      Cookies.set("accessToken", "fake-access-token", { expires: 7 });
-      // const response = await authService.login(data);
+      const response = await authService.login(data);
+      Cookies.set("accessToken", response?.accessToken, { expires: 7 });
+      Cookies.set("userProfile", JSON.stringify(response));
       toast.success("Login successful!");
       // console.log("Login response:", response);
       console.log(data);

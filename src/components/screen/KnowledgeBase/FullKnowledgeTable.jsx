@@ -32,16 +32,16 @@ const FullKnowledgeTable = ({ data }) => {
   const [newRow, setNewRow] = useState({
     title: "",
     type: "",
-    date: "",
-    source: "",
+    timestamp: "",
+    name: "",
     isActive: false,
   });
 
   const [errors, setErrors] = useState({
     title: "",
     type: "",
-    date: "",
-    source: "",
+    timestamp: "",
+    name: "",
   });
 
   // Function to handle sorting
@@ -144,67 +144,67 @@ const FullKnowledgeTable = ({ data }) => {
     }));
   };
 
-  const handleAddRow = () => {
-    // Check if all fields are filled and set errors accordingly
-    const newErrors = {};
-    let hasError = false;
-
-    if (!newRow.title) {
-      newErrors.title = "Title is required!";
-      hasError = true;
-    }
-    if (!newRow.type) {
-      newErrors.type = "Type is required!";
-      hasError = true;
-    }
-    if (!newRow.date) {
-      newErrors.date = "Date is required!";
-      hasError = true;
-    }
-    if (!newRow.source) {
-      newErrors.source = "Source is required!";
-      hasError = true;
-    }
-
-    // If there are errors, update the errors state and don't add the row
-    if (hasError) {
-      setErrors(newErrors);
-      return;
-    }
-
-    // Create the new row object
-    const newRowData = {
-      ...newRow,
-      isActive: newRow.isActive,
-    };
-
-    // Update the local tableData state with the new row
-    setTableData((prevData) => [newRowData, ...prevData]);
-
-    // Reset the input fields and errors
-    setNewRow({
-      title: "",
-      type: "",
-      date: "",
-      source: "",
-      isActive: false,
-    });
-    setErrors({
-      title: "",
-      type: "",
-      date: "",
-      source: "",
-    });
-  };
+  // const handleAddRow = () => {
+  //   // Check if all fields are filled and set errors accordingly
+  //   const newErrors = {};
+  //   let hasError = false;
+  //
+  //   if (!newRow.title) {
+  //     newErrors.title = "Title is required!";
+  //     hasError = true;
+  //   }
+  //   if (!newRow.type) {
+  //     newErrors.type = "Type is required!";
+  //     hasError = true;
+  //   }
+  //   if (!newRow.timestamp) {
+  //     newErrors.timestamp = "Date is required!";
+  //     hasError = true;
+  //   }
+  //   if (!newRow.name) {
+  //     newErrors.name = "Source is required!";
+  //     hasError = true;
+  //   }
+  //
+  //   // If there are errors, update the errors state and don't add the row
+  //   if (hasError) {
+  //     setErrors(newErrors);
+  //     return;
+  //   }
+  //
+  //   // Create the new row object
+  //   const newRowData = {
+  //     ...newRow,
+  //     isActive: newRow.isActive,
+  //   };
+  //
+  //   // Update the local tableData state with the new row
+  //   setTableData((prevData) => [newRowData, ...prevData]);
+  //
+  //   // Reset the input fields and errors
+  //   setNewRow({
+  //     title: "",
+  //     type: "",
+  //     timestamp: "",
+  //     name: "",
+  //     isActive: false,
+  //   });
+  //   setErrors({
+  //     title: "",
+  //     type: "",
+  //     timestamp: "",
+  //     name: "",
+  //   });
+  // };
 
   const handleDateChange = (selectedDate) => {
     setNewRow((prev) => ({
       ...prev,
-      date: selectedDate ? format(selectedDate, "dd/MM/yyyy") : "",
+      timestamp: selectedDate ? format(selectedDate, "dd/MM/yyyy") : "",
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
-      date: selectedDate ? "" : "This field is required",
+      timestamp: selectedDate ? "" : "This field is required",
     }));
   };
 
@@ -214,7 +214,7 @@ const FullKnowledgeTable = ({ data }) => {
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
           <thead className="border-b border-[#0000001A] bg-[#4444440D] text-sm font-bold text-[#4A5773] dark:border-[#FFFFFF1A] dark:bg-[#212639] dark:text-[#E4E7EC]">
             <tr>
-              {["title", "type", "date", "source", "isActive"].map(
+              {["title", "type", "date", "source", "in use"].map(
                 (header, index) => (
                   <th key={index} scope="col" className="p-4">
                     <div className="flex items-center justify-between">
@@ -259,8 +259,8 @@ const FullKnowledgeTable = ({ data }) => {
               >
                 <td className="w-[20%] whitespace-nowrap p-4">{row.title}</td>
                 <td className="w-[20%] whitespace-nowrap p-4">{row.type}</td>
-                <td className="w-[20%] p-4">{row.date}</td>
-                <td className="w-[20%] whitespace-nowrap p-4">{row.source}</td>
+                <td className="w-[20%] p-4">{row.timestamp}</td>
+                <td className="w-[20%] whitespace-nowrap p-4">{row.name}</td>
                 <td className="w-[15%] p-4">
                   <Toggle initialActive={row.isActive} />
                 </td>
@@ -272,105 +272,105 @@ const FullKnowledgeTable = ({ data }) => {
               </tr>
             ))}
             {/* Blank row for input */}
-            <tr className="bg-white text-sm text-[#101828] dark:bg-[#161b2f] dark:text-white">
-              <td className="w-[20%] whitespace-nowrap p-4">
-                <div className="flex flex-col">
-                  <input
-                    type="text"
-                    name="title"
-                    value={newRow.title}
-                    required
-                    onChange={handleInputChange}
-                    placeholder="Enter title"
-                    className="w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
-                  />
-                  {errors.title && (
-                    <span className="text-xs text-red-500">{errors.title}</span>
-                  )}
-                </div>
-              </td>
-              <td className="w-[20%] whitespace-nowrap p-4">
-                <div className="flex flex-col">
-                  <input
-                    type="text"
-                    name="type"
-                    required
-                    value={newRow.type}
-                    onChange={handleInputChange}
-                    placeholder="Enter type"
-                    className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
-                  />
-                  {errors.type && (
-                    <span className="text-xs text-red-500">{errors.type}</span>
-                  )}
-                </div>
-              </td>
-              <td className="w-[20%] p-4">
-                <div className="flex flex-col">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <input
-                        type="text"
-                        name="date"
-                        required
-                        value={newRow.date}
-                        onChange={handleInputChange}
-                        placeholder="Enter date"
-                        className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
-                      />
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={
-                          newRow.date
-                            ? new Date(
-                                newRow.date.split("/").reverse().join("-"),
-                              )
-                            : null
-                        }
-                        onSelect={handleDateChange}
-                        className="rounded-lg border shadow"
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  {errors.date && (
-                    <span className="text-xs text-red-500">{errors.date}</span>
-                  )}
-                </div>
-              </td>
-              <td className="w-[20%] whitespace-nowrap p-4">
-                <div className="flex flex-col">
-                  <input
-                    type="text"
-                    name="source"
-                    value={newRow.source}
-                    required
-                    onChange={handleInputChange}
-                    placeholder="Enter source"
-                    className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"
-                  />
-                  {errors.source && (
-                    <span className="text-xs text-red-500">
-                      {errors.source}
-                    </span>
-                  )}
-                </div>
-              </td>
-              <td className="w-[15%] p-4">
-                <Toggle
-                  initialActive={newRow.isActive}
-                  onToggle={(isActive) =>
-                    setNewRow((prev) => ({ ...prev, isActive }))
-                  }
-                />
-              </td>
-              <td className="p-4">
-                <button onClick={handleAddRow}>
-                  <img src={checkIcon} alt="Check" />
-                </button>
-              </td>
-            </tr>
+            {/*<tr className="bg-white text-sm text-[#101828] dark:bg-[#161b2f] dark:text-white">*/}
+            {/*  <td className="w-[20%] whitespace-nowrap p-4">*/}
+            {/*    <div className="flex flex-col">*/}
+            {/*      <input*/}
+            {/*        type="text"*/}
+            {/*        name="title"*/}
+            {/*        value={newRow.title}*/}
+            {/*        required*/}
+            {/*        onChange={handleInputChange}*/}
+            {/*        placeholder="Enter title"*/}
+            {/*        className="w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"*/}
+            {/*      />*/}
+            {/*      {errors.title && (*/}
+            {/*        <span className="text-xs text-red-500">{errors.title}</span>*/}
+            {/*      )}*/}
+            {/*    </div>*/}
+            {/*  </td>*/}
+            {/*  <td className="w-[20%] whitespace-nowrap p-4">*/}
+            {/*    <div className="flex flex-col">*/}
+            {/*      <input*/}
+            {/*        type="text"*/}
+            {/*        name="type"*/}
+            {/*        required*/}
+            {/*        value={newRow.type}*/}
+            {/*        onChange={handleInputChange}*/}
+            {/*        placeholder="Enter type"*/}
+            {/*        className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"*/}
+            {/*      />*/}
+            {/*      {errors.type && (*/}
+            {/*        <span className="text-xs text-red-500">{errors.type}</span>*/}
+            {/*      )}*/}
+            {/*    </div>*/}
+            {/*  </td>*/}
+            {/*  <td className="w-[20%] p-4">*/}
+            {/*    <div className="flex flex-col">*/}
+            {/*      <Popover>*/}
+            {/*        <PopoverTrigger asChild>*/}
+            {/*          <input*/}
+            {/*            type="text"*/}
+            {/*            name="date"*/}
+            {/*            required*/}
+            {/*            value={newRow.timestamp}*/}
+            {/*            onChange={handleInputChange}*/}
+            {/*            placeholder="Enter date"*/}
+            {/*            className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"*/}
+            {/*          />*/}
+            {/*        </PopoverTrigger>*/}
+            {/*        <PopoverContent className="w-auto p-0">*/}
+            {/*          <Calendar*/}
+            {/*            mode="single"*/}
+            {/*            selected={*/}
+            {/*              newRow.timestamp*/}
+            {/*                ? new Date(*/}
+            {/*                    newRow.timestamp.split("/").reverse().join("-"),*/}
+            {/*                  )*/}
+            {/*                : null*/}
+            {/*            }*/}
+            {/*            onSelect={handleDateChange}*/}
+            {/*            className="rounded-lg border shadow"*/}
+            {/*          />*/}
+            {/*        </PopoverContent>*/}
+            {/*      </Popover>*/}
+            {/*      {errors.timestamp && (*/}
+            {/*        <span className="text-xs text-red-500">{errors.timestamp}</span>*/}
+            {/*      )}*/}
+            {/*    </div>*/}
+            {/*  </td>*/}
+            {/*  <td className="w-[20%] whitespace-nowrap p-4">*/}
+            {/*    <div className="flex flex-col">*/}
+            {/*      <input*/}
+            {/*        type="text"*/}
+            {/*        name="source"*/}
+            {/*        value={newRow.name}*/}
+            {/*        required*/}
+            {/*        onChange={handleInputChange}*/}
+            {/*        placeholder="Enter source"*/}
+            {/*        className="h-full w-full whitespace-nowrap bg-transparent outline-none placeholder:text-[#98A2B3]"*/}
+            {/*      />*/}
+            {/*      {errors.name && (*/}
+            {/*        <span className="text-xs text-red-500">*/}
+            {/*          {errors.name}*/}
+            {/*        </span>*/}
+            {/*      )}*/}
+            {/*    </div>*/}
+            {/*  </td>*/}
+            {/*  <td className="w-[15%] p-4">*/}
+            {/*    <Toggle*/}
+            {/*      initialActive={newRow.isActive}*/}
+            {/*      onToggle={(isActive) =>*/}
+            {/*        setNewRow((prev) => ({ ...prev, isActive }))*/}
+            {/*      }*/}
+            {/*    />*/}
+            {/*  </td>*/}
+            {/*  <td className="p-4">*/}
+            {/*    <button onClick={handleAddRow}>*/}
+            {/*      <img src={checkIcon} alt="Check" />*/}
+            {/*    </button>*/}
+            {/*  </td>*/}
+            {/*</tr>*/}
           </tbody>
         </table>
       </div>

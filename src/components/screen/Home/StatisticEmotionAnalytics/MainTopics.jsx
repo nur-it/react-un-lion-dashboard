@@ -1,4 +1,4 @@
-import { topics } from "@/data/topicsData";
+// import { topics } from "@/data/topicsData";
 import {
   exportMainTopicToCSV,
   exportMainTopicToJSON,
@@ -7,10 +7,22 @@ import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import DateRangePicker from "./DateRangePicker";
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import useDashboard from "@/hooks/use-dashboard.jsx";
 
 const MainTopics = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
+  const [topics, setTopicsData] = useState([]); // ✅ Define state for avatars
+  const { getWordCloudData } = useDashboard();
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getWordCloudData(); // ✅ Fetch avatars
+      setTopicsData(data); // ✅ Update state
+    };
+    fetchData();
+  }, []); // ✅ Run once on mount
 
   const handleDownloadClick = () => {
     setShowDropdown(!showDropdown);

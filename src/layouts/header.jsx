@@ -30,10 +30,10 @@ const Header = () => {
   const navigate = useNavigate();
 
   // Get the cookie value first
-  const selectedProfileCookie = Cookies.get("selectedProfile");
+  const userProfileCookie = Cookies.get("userProfile");
   // Safely parse the cookie or default to null
-  const profile = selectedProfileCookie
-    ? JSON.parse(selectedProfileCookie)
+  const profile = userProfileCookie
+    ? JSON.parse(userProfileCookie)
     : null;
 
   // Determine greeting based on the current hour
@@ -67,7 +67,7 @@ const Header = () => {
 
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">{greeting} -</span>
-          <span className="text-xl font-bold leading-[130%]">{"John Doe"}</span>
+          <span className="text-xl font-bold leading-[130%]">{profile.first_name}</span>
         </h5>
       </div>
       <div className="flex items-center gap-3 lg:hidden">
@@ -149,11 +149,11 @@ const Header = () => {
               <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
                   className="rounded dark:w-7"
-                  src={"/images/user.png"}
-                  alt={"avatar"}
+                  src={profile.user_picture}
+                  alt={`${profile.first_name} ${profile.last_name}`}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
-                  {"John Doe"}
+                  {profile.first_name} {profile.last_name}
                 </span>
               </span>
               <span className="text-[#898D97]">
