@@ -9,6 +9,8 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import useDashboard from "@/hooks/use-dashboard.jsx";
+import { useEffect, useState } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -17,64 +19,30 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 const MentionChart = () => {
   const isDarkMode = document.documentElement.classList.contains("dark");
-  const data = {
-    labels: [
-      "Jan 10",
-      "Jan 11",
-      "Jan 12",
-      "Jan 13",
-      "Jan 14",
-      "Jan 15",
-      "Jan 16",
-    ],
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: [10, 30, 35, 19, 25, 18, 10],
-        borderColor: "#F23838",
-        backgroundColor: "#F23838",
-        pointHoverRadius: 6,
-        pointRadius: 0,
-      },
-      {
-        label: "Dataset 2",
-        data: [30, 35, 39, 30, 42, 30, 50],
-        borderColor: "#1C89F6",
-        backgroundColor: "#1C89F6",
-        pointHoverRadius: 6,
-        pointRadius: 0,
-      },
-      {
-        label: "Dataset 3",
-        data: [50, 45, 50, 45, 55, 53, 75],
-        borderColor: "#0CAF60",
-        backgroundColor: "#0CAF60",
-        pointHoverRadius: 6,
-        pointRadius: 0,
-      },
-      {
-        label: "Dataset 4",
-        data: [30, 62, 55, 55, 62, 62, 30],
-        borderColor: "#F79009",
-        backgroundColor: "#F79009",
-        pointHoverRadius: 6,
-        pointRadius: 0,
-      },
-      {
-        label: "Dataset 5",
-        data: [75, 55, 75, 50, 78, 70, 78],
-        borderColor: "#FE16D4",
-        backgroundColor: "#FE16D4",
-        pointHoverRadius: 6,
-        pointRadius: 0.1,
-      },
-    ],
-  };
+  const { getMentionsData } = useDashboard();
+  const [mentionsData, setMentionsData] = useState({
+    labels: [],
+    datasets: [],
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getMentionsData();
+
+        setMentionsData(data);
+      } catch (error) {
+        console.error("❌ Error fetching mentions data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   const options = {
     responsive: true,
@@ -97,13 +65,13 @@ const MentionChart = () => {
       },
     },
     interaction: {
-      mode: "nearest", 
-      intersect: true, 
+      mode: "nearest",
+      intersect: true,
     },
     elements: {
       line: {
-        borderWidth: 4, 
-        hoverBorderWidth: 0, 
+        borderWidth: 3,
+        hoverBorderWidth: 0,
       },
     },
     scales: {
@@ -138,7 +106,7 @@ const MentionChart = () => {
 
   return (
     <div className="h-[210px] w-full max-w-full" style={{ width: "100%", height: "210px" }}>
-      <Line data={data} options={options} />
+      <Line data={mentionsData} options={options} />
     </div>
   );
 };

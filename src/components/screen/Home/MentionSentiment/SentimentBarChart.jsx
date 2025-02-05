@@ -7,51 +7,69 @@ import {
   Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import useDashboard from "@/hooks/use-dashboard.jsx";
+import { useEffect, useState } from "react";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const SentimentBarChart = () => {
   const isDarkMode = document.documentElement.classList.contains("dark");
+  const { getSentimentsData } = useDashboard();
+  const [sentimentsData, setSentimentsData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
-  const baseData = {
-    labels: [
-      "Jan 10",
-      "Jan 11",
-      "Jan 12",
-      "Jan 13",
-      "Jan 14",
-      "Jan 15",
-      "Jan 16",
-    ],
-    datasets: [
-      {
-        label: "Neutral",
-        data: [125, 100, 140, 105, 105, 115, 105],
-        backgroundColor: "#98A2B3",
-        borderSkipped: false,
-        barThickness: 15,
-      },
-      {
-        label: "Positive",
-        data: [40, 20, 20, 20, 25, 30, 20],
-        backgroundColor: "#0CAF60",
-        borderSkipped: false,
-        barThickness: 15,
-      },
-      {
-        label: "Negative",
-        data: [25, 25, 25, 35, 30, 35, 30],
-        backgroundColor: "#F23838",
-        borderSkipped: false,
-        barThickness: 15,
-      },
-    ],
-  };
+  // const sentimentsData = {
+  //   labels: [
+  //     "Jan 10",
+  //     "Jan 11",
+  //     "Jan 12",
+  //     "Jan 13",
+  //     "Jan 14",
+  //     "Jan 15",
+  //     "Jan 16",
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: "Neutral",
+  //       data: [125, 100, 140, 105, 105, 115, 105],
+  //       backgroundColor: "#98A2B3",
+  //       borderSkipped: false,
+  //       barThickness: 15,
+  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
+  //     },
+  //     {
+  //       label: "Positive",
+  //       data: [40, 20, 20, 20, 25, 30, 20],
+  //       backgroundColor: "#0CAF60",
+  //       borderSkipped: false,
+  //       barThickness: 15,
+  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
+  //     },
+  //     {
+  //       label: "Negative",
+  //       data: [25, 25, 25, 35, 30, 35, 30],
+  //       backgroundColor: "#F23838",
+  //       borderSkipped: false,
+  //       barThickness: 15,
+  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
+  //     },
+  //   ],
+  // };
 
-  // Adjust the dataset to make the stacking incremental
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const dataF = await getSentimentsData(); // ✅ Fetch avatars
+      setSentimentsData(dataF); // ✅ Update state
+    };
+    fetchData();
+  }, []); // ✅ Run once on mount
+
   const data = {
-    labels: baseData.labels,
-    datasets: baseData.datasets.map((dataset, index, datasets) => {
+    labels: sentimentsData.labels,
+    datasets: sentimentsData.datasets.map((dataset, index, datasets) => {
       const adjustedData = dataset.data.map((value, i) => {
         // Sum the values of all previous datasets at the same index
         const previousSum = datasets
@@ -79,13 +97,13 @@ const SentimentBarChart = () => {
             const index = tooltipItem.dataIndex;
 
             const values = {
-              gray: baseData.datasets[0]?.data[index] || 0,
-              green: baseData.datasets[1]?.data[index] || 0,
-              red: baseData.datasets[2]?.data[index] || 0,
+              gray: sentimentsData.datasets[2]?.data[index] || 0,
+              green: sentimentsData.datasets[0]?.data[index] || 0,
+              red: sentimentsData.datasets[1]?.data[index] || 0,
             };
 
             return [
-              `⚪ ${values.gray}`,
+              `🔘 ${values.gray}`,
               `🟢 ${values.green}`,
               `🔴 ${values.red}`,
             ].join("  ");

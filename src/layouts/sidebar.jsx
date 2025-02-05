@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ContactModal from "@/components/shared/ContactModal";
 import {
   Dialog,
@@ -28,15 +29,11 @@ const Sidebar = ({ closeSidebar }) => {
 
   useEffect(() => {
     const fetchAvatars = async () => {
-      try {
-        const data = await listAvatars(); // ✅ Fetch avatars
-        setAvatars(data); // ✅ Update state
-      } catch (error) {
-        console.error(error);
-      }
+      const data = await listAvatars(); // ✅ Fetch avatars
+      setAvatars(data); // ✅ Update state
     };
     fetchAvatars();
-  }, [listAvatars]); // ✅ Run once on mount
+  }, []); // ✅ Run once on mount
 
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
@@ -82,15 +79,12 @@ const Sidebar = ({ closeSidebar }) => {
                   <button className="mb-2 inline-flex w-full items-center justify-between gap-2 rounded-md border border-white_opacity10 bg-white_opacity05 px-4 py-2.5 text-white transition-all duration-300 ease-in-out">
                     <span className="inline-flex items-center space-x-2 text-sm font-medium">
                       <img
-                        src={
-                          selectedProfile?.picture_url ||
-                          "/images/user.png"
-                        }
+                        src={selectedProfile?.picture_url || "/images/user_profile_pic.jpeg"}
                         className="h-8 w-8 rounded-full"
                         alt="profile"
                       />
                       <span className="line-clamp-1">
-                        {selectedProfile?.name || "John Doe"}
+                        {selectedProfile.name || "John Doe"}
                       </span>
                     </span>
                     <span>

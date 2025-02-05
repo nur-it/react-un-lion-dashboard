@@ -22,6 +22,7 @@ instance.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
+
 // Add a response interceptor to handle 401 errors
 instance.interceptors.response.use(
   (response) => response,

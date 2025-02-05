@@ -1,9 +1,10 @@
 import CategoryDropdown from "@/components/shared/CategoryDropdown";
-import { knowledgeTableData } from "@/data/knowledgeTableData";
+// import { knowledgeTableData } from "@/data/knowledgeTableData";
 import { FileWarning } from "lucide-react";
 import { useEffect, useState } from "react";
 import search from "../../../assets/icon/search.svg";
 import FullKnowledgeTable from "./FullKnowledgeTable";
+import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 
 const KnowledgeTable = () => {
   const [categories] = useState([
@@ -12,7 +13,21 @@ const KnowledgeTable = () => {
     "This Month",
     "Past 3 Years",
   ]);
-  const [filteredData, setFilteredData] = useState(knowledgeTableData);
+
+  const [knowledgeTableData, setKnowledgeData] = useState([]); // ✅ Define state for avatars
+  const [filteredData, setFilteredData] = useState([]);
+  const { fetchKnowledgeBase } = useKnowledgeBase();
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchKnowledgeBase(); // ✅ Fetch avatars
+      setKnowledgeData(data); // ✅ Update state
+      setFilteredData(data);
+    };
+    fetchData();
+  }, []); // ✅ Run once on mount
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState("Filter by category");
@@ -34,17 +49,17 @@ const KnowledgeTable = () => {
     // Apply category filtering
     if (selectedCategory === "This Year") {
       data = data.filter((row) => {
-        const rowYear = parseInt(row.date.split("/")[2]);
+        const rowYear = parseInt(row.timestamp.split("/")[2]);
         return rowYear === currentYear;
       });
     } else if (selectedCategory === "This Month") {
       data = data.filter((row) => {
-        const [day, month, year] = row.date.split("/").map(Number);
+        const [day, month, year] = row.timestamp.split("/").map(Number);
         return month === currentMonth && year === currentYear;
       });
     } else if (selectedCategory === "Past 3 Years") {
       data = data.filter((row) => {
-        const rowYear = parseInt(row.date.split("/")[2]);
+        const rowYear = parseInt(row.timestamp.split("/")[2]);
         return rowYear >= currentYear - 3 && rowYear <= currentYear;
       });
     }
@@ -56,7 +71,7 @@ const KnowledgeTable = () => {
         (row) =>
           row.title.toLowerCase().includes(term) ||
           row.type.toLowerCase().includes(term) ||
-          row.source.toLowerCase().includes(term) ||
+          row.name.toLowerCase().includes(term) ||
           row.id.toLowerCase().includes(term),
       );
     }

@@ -2,11 +2,11 @@ import requests from "./httpService";
 
 export const dashboardService = {
   //   for the charts
-  getEmotionsData: async () => await requests.get("/chart-data"),
-  getMentionsData: async () => await requests.get("/chart-data"),
-  getSentimentsData: async () => await requests.get("/chart-data"),
-  getStatisticsData: async () => await requests.get("/chart-data"),
-  getMitigationsData: async () => await requests.get("/chart-data"),
+  getEmotionsData: async () => await requests.get("/emotions-data"),
+  getMentionsData: async () => await requests.get("/mentions-data"),
+  getSentimentsData: async () => await requests.get("/sentiments-data"),
+  getStatisticsData: async () => await requests.get("/statistics-data"),
+  getMitigationsData: async () => await requests.get("/mitigations-data"),
 
   //   table data
   getRiskTableData: async () => await requests.get("/risk-table"),

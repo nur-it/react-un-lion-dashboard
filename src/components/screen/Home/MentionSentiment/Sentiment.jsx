@@ -4,28 +4,24 @@ import downloadIcon from "../../../../assets/icon/download.svg";
 import DateRangePicker from "../StatisticEmotionAnalytics/DateRangePicker";
 import SentimentBarChart from "./SentimentBarChart";
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import useDashboard from "@/hooks/use-dashboard.jsx";
 
 const Sentiment = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
-  const datasets = {
-    labels: [
-      "Jan 10",
-      "Jan 11",
-      "Jan 12",
-      "Jan 13",
-      "Jan 14",
-      "Jan 15",
-      "Jan 16",
-    ],
-    data: [
-      { label: "Neutral", values: [125, 100, 140, 105, 105, 115, 105] },
-      { label: "Positive", values: [40, 20, 20, 20, 25, 30, 20] },
-      { label: "Negative", values: [25, 25, 25, 35, 30, 35, 30] },
-    ],
-  };
+  const { getSentimentsData } = useDashboard();
+  const [sentimentsData, setSentimentsData] = useState([]); // ✅ Define state for avatars
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const dataF = await getSentimentsData(); // ✅ Fetch avatars
+      setSentimentsData(dataF); // ✅ Update state
+    };
+    fetchData();
+  }, []);
+
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -61,7 +57,7 @@ const Sentiment = () => {
             <div className="relative">
               <button
                 ref={buttonRef}
-                onClick={() => downloadAsCsv(datasets)}
+                onClick={() => downloadAsCsv(sentimentsData)}
                 className="flex h-9 items-center justify-center rounded-lg border border-gray300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
               >
                 <img src={downloadIcon} alt="Download" />
@@ -72,13 +68,13 @@ const Sentiment = () => {
                   className="absolute right-0 mt-2 w-40 rounded-lg bg-white shadow-lg dark:bg-[#282C3F]"
                 >
                   <button
-                    onClick={() => downloadAsJson(datasets)}
+                    onClick={() => downloadAsJson(sentimentsData)}
                     className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-black"
                   >
                     JSON
                   </button>
                   <button
-                    onClick={() => downloadAsCsv(datasets)}
+                    onClick={() => downloadAsCsv(sentimentsData)}
                     className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-black"
                   >
                     CSV

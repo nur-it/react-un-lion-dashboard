@@ -206,23 +206,23 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
                 <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link to={`/threat-detection/${row.id}`}>
+                  <Link to={row.url}>
                     {row.threatType}
                   </Link>
                 </td>
                 <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link to={`/threat-detection/${row.id}`}>{row.platform}</Link>
+                  <Link to={row.url}>{row.platform}</Link>
                 </td>
                 <td className="w-[26%] p-4 transition-all duration-300 ease-in-out hover:underline">
                   <Link
                     className="line-clamp-1"
-                    to={`/threat-detection/${row.id}`}
+                    to={row.url}
                   >
                     {row.contentSummary}
                   </Link>
                 </td>
                 <td className="w-[10%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link to={`/threat-detection/${row.id}`}>{row.id}</Link>
+                  <Link to={row.url}>{row.id}</Link>
                 </td>
                 <td
                   className={`w-[10%] p-4 ${
