@@ -21,9 +21,25 @@ const useAskAvatar = () => {
     }
   };
 
+  const getChatHistory = async (messageBody) => {
+    setIsLoading(true);
+    try {
+      const response = await askAvatarService.chatHistory(messageBody);
+      toast.success("Chat history successfully retrieved!");
+      return response.data;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to load chat history.",
+      );
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return {
     isLoading,
     sendMessageToAvatar,
+    getChatHistory
   };
 };
 
