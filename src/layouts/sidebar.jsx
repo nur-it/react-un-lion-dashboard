@@ -84,7 +84,7 @@ const Sidebar = ({ closeSidebar }) => {
                       <img
                         src={
                           selectedProfile?.picture_url ||
-                          "/images/user_profile_pic.jpeg"
+                          "/images/user.png"
                         }
                         className="h-8 w-8 rounded-full"
                         alt="profile"
