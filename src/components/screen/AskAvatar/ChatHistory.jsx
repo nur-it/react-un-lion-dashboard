@@ -38,10 +38,10 @@ const getTodayDate = () => {
 
 export function ChatHistory() {
   const [historyItems, setHistoryItems] = useState([]);
-  const { getChatHistory } = useAskAvatar();
+  const { getChatsHistory } = useAskAvatar();
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getChatHistory();
+      const data = await getChatsHistory();
       setHistoryItems(data);
     };
     fetchData();

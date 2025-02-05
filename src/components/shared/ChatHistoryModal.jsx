@@ -26,10 +26,10 @@ import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
 
 const ChatHistoryModal = ({ toggleModal, setToggleModal }) => {
   const [historyItems, setChatsData] = useState([]);
-  const { getChatHistory } = useAskAvatar();
+  const { getChatsHistory } = useAskAvatar();
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getChatHistory();
+      const data = await getChatsHistory();
       setChatsData(data);
     };
     fetchData();

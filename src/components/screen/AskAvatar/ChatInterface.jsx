@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChatHistory } from "./ChatHistory";
 import { ChatInput } from "./ChatInput";
 import { ChatMessages } from "./ChatMessages";
 import { TopicSuggestions } from "./TopicSuggestions";
 import Cookies from "js-cookie";
+import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
 
 export default function ChatInterface() {
   const [response, setResponse] = useState([]);
@@ -26,10 +27,18 @@ export default function ChatInterface() {
       attachments,
       avatar: user.user_picture,
     };
+    const [answer, setAnswer] = useState("");
+    const { sendMessageToAvatar } = useAskAvatar();
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await sendMessageToAvatar(input_value);
+        setAnswer(data);
+      };
+      fetchData();
+    }, []);
     const avatar_message = {
       role: "avatar",
-      content:
-        "I am an AI. I am here to help. I can answer any question you have.",
+      content: answer,
       avatar: "/images/avatar.svg",
     };
 
