@@ -13,14 +13,31 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { profiles } from "@/data/profiles.data";
+// import { profiles } from "@/data/profiles.data";
 import { menuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
 import { ChevronsUpDown } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
+import useAvatarList from "@/hooks/use-avatar-list.jsx";
+import { useEffect, useState } from "react";
 
 const Sidebar = ({ closeSidebar }) => {
+  const { listAvatars } = useAvatarList();
+  const [profiles, setAvatars] = useState([]); // ✅ Define state for avatars
+
+  useEffect(() => {
+    const fetchAvatars = async () => {
+      try {
+        const data = await listAvatars(); // ✅ Fetch avatars
+        setAvatars(data); // ✅ Update state
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAvatars();
+  }, [listAvatars]); // ✅ Run once on mount
+
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
 
@@ -30,8 +47,19 @@ const Sidebar = ({ closeSidebar }) => {
   const selectedProfile = selectedProfileCookie
     ? JSON.parse(selectedProfileCookie)
     : null;
+  //
+  // const userProfileCookie = Cookies.get("userProfile");
+  // // Safely parse the cookie or default to null
+  // const userProfile = userProfileCookie
+  //   ? JSON.parse(userProfileCookie)
+  //   : null;
 
   const handleViewProfile = (profile) => {
+    if (!profile) {
+      console.error("Profile is null or undefined");
+      return;
+    }
+
     Cookies.set("selectedProfile", JSON.stringify(profile));
     navigate("/");
   };
@@ -54,7 +82,10 @@ const Sidebar = ({ closeSidebar }) => {
                   <button className="mb-2 inline-flex w-full items-center justify-between gap-2 rounded-md border border-white_opacity10 bg-white_opacity05 px-4 py-2.5 text-white transition-all duration-300 ease-in-out">
                     <span className="inline-flex items-center space-x-2 text-sm font-medium">
                       <img
-                        src={selectedProfile?.picture_url || "/images/user.png"}
+                        src={
+                          selectedProfile?.picture_url ||
+                          "/images/user_profile_pic.jpeg"
+                        }
                         className="h-8 w-8 rounded-full"
                         alt="profile"
                       />
