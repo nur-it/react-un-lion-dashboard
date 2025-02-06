@@ -6,8 +6,8 @@ const StatisticEmotionAnalytics = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 xl:gap-6">
       <Statistic />
-    {/*   <Emotions />
-      <MainTopics /> */}
+      <Emotions />
+      <MainTopics />
     </div>
   );
 };

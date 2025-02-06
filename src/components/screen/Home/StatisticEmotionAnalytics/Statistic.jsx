@@ -1,4 +1,5 @@
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import useDashboard from "@/hooks/use-dashboard";
 import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
@@ -7,46 +8,37 @@ import StatisticChart from "./StatisticChart";
 const Statistic = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
+  const { getStatisticsData } = useDashboard(); // ✅ Define state for avatars
+  const [statisticsData, setStatisticsData] = useState({
+    labels: [],
+    datasets: [],
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getStatisticsData();
+        if (data && data.labels && data.datasets) {
+          setStatisticsData(data);
+        } else {
+          console.error("❌ Invalid data structure:", data);
+        }
+      } catch (error) {
+        console.error("❌ Error fetching statistic data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleDownloadClick = () => {
     setShowDropdown(!showDropdown);
   };
 
   const handleDownload = (format) => {
-    const chartData = {
-      labels: [
-        "Jan 10",
-        "Jan 11",
-        "Jan 12",
-        "Jan 13",
-        "Jan 14",
-        "Jan 15",
-        "Jan 16",
-      ],
-      datasets: [
-        {
-          label: "High Risk",
-          data: [20, 15, 20, 20, 25, 15, 22],
-        },
-        {
-          label: "Positive",
-          data: [10, 10, 15, 10, 15, 10, 10],
-        },
-        {
-          label: "Negative",
-          data: [40, 20, 30, 30, 45, 40, 35],
-        },
-        {
-          label: "Mitigated Risk",
-          data: [30, 15, 20, 25, 40, 25, 25],
-        },
-      ],
-    };
-
     if (format === "json") {
-      exportToJSON(chartData);
+      exportToJSON(statisticsData);
     } else if (format === "csv") {
-      exportToCSV(chartData);
+      exportToCSV(statisticsData);
     }
 
     setShowDropdown(false);

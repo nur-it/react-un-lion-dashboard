@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import EmotionBar from "./EmotionBar";
 import useDashboard from "@/hooks/use-dashboard.jsx";
 import { useEffect, useState } from "react";

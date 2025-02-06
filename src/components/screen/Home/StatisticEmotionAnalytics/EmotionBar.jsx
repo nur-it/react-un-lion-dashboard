@@ -6,7 +6,9 @@ const EmotionBar = ({ label, value, maxValue, color }) => {
 
   return (
     <div className="space-y-[2px]">
-      <p className="text-sm text-text_secondary dark:text-[#FFFFFFCC]">{label}</p>
+      <p className="text-sm text-text_secondary dark:text-[#FFFFFFCC]">
+        {label}
+      </p>
       <div className="relative flex items-center whitespace-nowrap">
         <div
           className="flex h-2.5 w-full overflow-hidden rounded-full bg-[#0000000D] dark:bg-white/[10%]"
@@ -18,11 +20,13 @@ const EmotionBar = ({ label, value, maxValue, color }) => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div
-            className={`flex h-full rounded-full text-center text-xs text-white transition duration-500 dark:bg-opacity-80 ${color}`}
-            style={{ width: `${percentage}%` }}
+            className={`flex h-full cursor-pointer rounded-full text-center text-xs text-white transition duration-500 dark:bg-opacity-80`}
+            style={{ width: `${percentage}%`, backgroundColor: color }}
           ></div>
         </div>
-        <span className="ml-2 w-9 text-right text-sm font-bold text-secondary_main dark:text-white">{maxValue}</span>
+        <span className="ml-2 w-9 text-right text-sm font-bold text-secondary_main dark:text-white">
+          {maxValue}
+        </span>
 
         {/* Tooltip with Arrow */}
         {isHovered && (
