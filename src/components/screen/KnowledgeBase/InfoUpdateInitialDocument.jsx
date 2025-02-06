@@ -1,3 +1,4 @@
+import useKnowledgeBase from "@/hooks/use-knowledge-base";
 import { useRef, useState } from "react";
 import { FiLoader } from "react-icons/fi";
 import addFrame from "../../../assets/icon/added-frame.svg";
@@ -16,6 +17,7 @@ const InfoUpdateInitialDocument = ({
 }) => {
   const fileInputRef = useRef(null);
   const [files, setFiles] = useState([]);
+  const { uploadSourceFile } = useKnowledgeBase();
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -54,6 +56,8 @@ const InfoUpdateInitialDocument = ({
         );
       }, 2000);
     }
+
+    uploadSourceFile(file);
   };
 
   const handleRemoveFile = (fileName) => {

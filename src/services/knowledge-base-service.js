@@ -8,8 +8,13 @@ export const knowledgeBaseService = {
   uploadSourceArticle: async (body) =>
     await requests.post("/upload_source_article", body),
 
-  uploadSourceFile: async (body) =>
-    await requests.post("/upload_source_file", body),
+  uploadSourceFile: async (file) => {
+    const formData = new FormData();
+    // Append the file to FormData
+    formData.append("file", file);
+    // Post the FormData with correct headers
+    return await requests.post("/upload_source_file", formData);
+  },
 
   saveTrustfulSource: async (body) =>
     await requests.post("/save_trustful_source", body),

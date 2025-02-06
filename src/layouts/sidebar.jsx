@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ContactModal from "@/components/shared/ContactModal";
 import {
   Dialog,
@@ -51,6 +52,11 @@ const Sidebar = ({ closeSidebar }) => {
   //   : null;
 
   const handleViewProfile = (profile) => {
+    if (!profile) {
+      console.error("Profile is null or undefined");
+      return;
+    }
+
     Cookies.set("selectedProfile", JSON.stringify(profile));
     navigate("/");
   };

@@ -57,8 +57,14 @@ const responseBody = (response) => response?.data || {};
 
 const requests = {
   get: (url, headers = {}) => instance.get(url, { headers }).then(responseBody),
-  post: (url, body, headers = {}) =>
-    instance.post(url, body, { headers }).then(responseBody),
+  post: async (url, body, headers = {}) => {
+    // Check if body is FormData (file upload) and set the correct Content-Type
+    if (body instanceof FormData) {
+      delete headers["Content-Type"];
+    }
+    const response = await instance.post(url, body, { headers });
+    return responseBody(response);
+  },
   put: (url, body, headers = {}) =>
     instance.put(url, body, { headers }).then(responseBody),
   patch: (url, body, headers = {}) =>
