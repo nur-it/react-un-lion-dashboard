@@ -1,44 +1,33 @@
-import { useEffect, useState } from "react";
+import useAskAvatar from "@/hooks/use-ask-avatar";
+import Cookies from "js-cookie";
+import { useState } from "react";
 import { ChatHistory } from "./ChatHistory";
 import { ChatInput } from "./ChatInput";
 import { ChatMessages } from "./ChatMessages";
 import { TopicSuggestions } from "./TopicSuggestions";
-import Cookies from "js-cookie";
-import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
 
 export default function ChatInterface() {
   const [response, setResponse] = useState([]);
   const [topic, setTopic] = useState("");
+  const [answer, setAnswer] = useState("");
 
-  const userProfileCookie = Cookies.get("userProfile");
-  const user = userProfileCookie
-    ? JSON.parse(userProfileCookie)
-    : null;
   const selectedProfileCookie = Cookies.get("selectedProfile");
+
   const profile = selectedProfileCookie
     ? JSON.parse(selectedProfileCookie)
     : null;
 
   const handleSend = async (input_value, attachments = []) => {
-
     const user_message = {
       role: "user",
       content: input_value,
       attachments,
-      avatar: user.user_picture,
+      avatar: profile?.picture_url || "/images/danj/user_profile_pic.jpeg",
     };
-    const [answer, setAnswer] = useState("");
-    const { sendMessageToAvatar } = useAskAvatar();
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await sendMessageToAvatar(input_value);
-        setAnswer(data);
-      };
-      fetchData();
-    }, []);
+
     const avatar_message = {
       role: "avatar",
-      content: answer,
+      content: !answer ? "coming soon" : "",
       avatar: "/images/avatar.svg",
     };
 
@@ -58,7 +47,7 @@ export default function ChatInterface() {
               <div className="space-y-5 xl:space-y-10">
                 <div className="space-y-4 p-8 text-center">
                   <h1 className="bg-gradient-primary bg-clip-text text-2xl font-bold text-transparent dark:bg-gradient-dark-text sm:text-5xl">
-                    Hi {user.first_name} <br /> What would you like to know about {profile.name}?
+                    Hi {profile?.name} <br /> What would you like to know
                   </h1>
                   <p className="mx-auto max-w-[375px] text-base text-[#475467] dark:text-[#98A2B3]">
                     Choose a prompt or write your own to start chatting with

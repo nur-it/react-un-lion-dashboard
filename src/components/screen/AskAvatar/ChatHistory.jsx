@@ -8,47 +8,41 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ClockIcon, FilterIcon, PencilIcon } from "@/components/ui/svgs";
+import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
 import { MoreHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
-import Cookies from "js-cookie";
 
-// const initialHistoryItems = [
-//   { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
-//   { id: "2", title: "Great Offer", date: "19 Jan 2025" },
-//   { id: "3", title: "B2B Business", date: "18 Jan 2025" },
-//   { id: "4", title: "Business Idea", date: "18 Jan 2025" },
-//   { id: "5", title: "Potential Threats Detection", date: "17 Jan 2025" },
-//   { id: "6", title: "How to protect Accounts fr...", date: "17 Jan 2025" },
-//   { id: "7", title: "Mail Reply", date: "16 Jan 2025" },
-// ];
-
-
-
-
-const getTodayDate = () => {
-  const today = new Date();
-  return today.toLocaleDateString("en-GB", {
+const getFormattedDate = (timestamp) => {
+  return new Date(timestamp).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "short",
     year: "numeric",
   });
 };
 
+const getTodayDate = () => {
+  return getFormattedDate(new Date());
+};
+
 export function ChatHistory() {
   const [historyItems, setHistoryItems] = useState([]);
   const { getChatsHistory } = useAskAvatar();
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getChatsHistory();
-      setHistoryItems(data);
+      // Format timestamps before setting state
+      const formattedData = data.map((item) => ({
+        ...item,
+        date: getFormattedDate(item.timestamp),
+      }));
+      setHistoryItems(formattedData);
     };
     fetchData();
   }, []);
 
   const [toggleModal, setToggleModal] = useState(false);
-
   const [editingItemId, setEditingItemId] = useState(null);
   const [newTitle, setNewTitle] = useState("");
 
@@ -107,24 +101,32 @@ export function ChatHistory() {
                   {groupedHistory[date].map((item) => (
                     <div key={item.id} className="group relative">
                       {editingItemId === item.id ? (
-                        <input
-                          type="text"
-                          value={newTitle}
-                          onChange={(e) => setNewTitle(e.target.value)}
-                          onBlur={handleRenameConfirm}
-                          onKeyDown={(e) =>
-                            e.key === "Enter" && handleRenameConfirm()
-                          }
-                          className="w-full rounded-lg border-none px-2 py-1.5 text-sm outline-none"
-                          autoFocus
-                          maxLength={30}
-                        />
+                        <>
+                          <input
+                            type="text"
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)}
+                            onBlur={handleRenameConfirm}
+                            onKeyDown={(e) =>
+                              e.key === "Enter" && handleRenameConfirm()
+                            }
+                            className="w-full rounded-lg border-none px-2 py-1.5 text-sm outline-none"
+                            autoFocus
+                            maxLength={30}
+                          />
+                          {newTitle.length > 30 && (
+                            <p className="text-xs text-red-500">
+                              Title max length is 30 characters
+                            </p>
+                          )}
+                        </>
                       ) : (
                         <Button
                           variant="ghost"
                           className="h-auto w-full justify-start truncate text-ellipsis rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
                         >
-                          {item.title}
+                          {item.title.slice(0, 25) +
+                            (item.title.length > 30 ? "..." : "")}
                         </Button>
                       )}
                       {editingItemId !== item.id && (

@@ -9,7 +9,7 @@ const useAskAvatar = () => {
     setIsLoading(true);
     try {
       const response = await askAvatarService.messageToAvatar(messageBody);
-      toast.success("Message sent successfully!");
+      // toast.success("Message sent successfully!");
       return response.data;
     } catch (error) {
       toast.error(
@@ -27,9 +27,7 @@ const useAskAvatar = () => {
       const response = await askAvatarService.chatsHistory(messageBody);
       return response.data;
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed to load chats.",
-      );
+      toast.error(error.response?.data?.message || "Failed to load chats.");
       return null;
     } finally {
       setIsLoading(false);
@@ -55,7 +53,7 @@ const useAskAvatar = () => {
     isLoading,
     sendMessageToAvatar,
     getChatsHistory,
-    getChatHistory
+    getChatHistory,
   };
 };
 
