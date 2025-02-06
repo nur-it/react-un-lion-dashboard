@@ -1,21 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import useDashboard from "@/hooks/use-dashboard.jsx";
 import { exportEmotionToCSV } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
-import DateRangePicker from "./DateRangePicker";
 import EmotionsChart from "./EmotionsChart";
-import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
-import useDashboard from "@/hooks/use-dashboard.jsx";
 
 const Emotions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
   const emotions = [
-    { label: "Joy", value: 420, maxValue: 480, color: "bg-[#FD27E0]" },
-    { label: "Disgust", value: 120, maxValue: 185, color: "bg-blue_main" },
-    { label: "Anger", value: 120, maxValue: 220, color: "bg-error" },
-    { label: "Surprise", value: 40, maxValue: 95, color: "bg-warning" },
-    { label: "Sadness", value: 20, maxValue: 72, color: "bg-[#8D8D8D]" },
+    { label: "Joy", value: 420, maxValue: 480, color: "#FD28E0" },
+    { label: "Disgust", value: 120, maxValue: 185, color: "#1E90FF" },
+    { label: "Anger", value: 120, maxValue: 220, color: "#F23938" },
+    { label: "Surprise", value: 40, maxValue: 95, color: "#F97315" },
+    { label: "Sadness", value: 20, maxValue: 72, color: "#8D8D8D" },
   ];
 
   const { getEmotionsData } = useDashboard();
