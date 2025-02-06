@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import ContactModal from "@/components/shared/ContactModal";
 import {
   Dialog,
@@ -14,7 +13,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { profiles } from "@/data/profiles.data";
 import { menuItems } from "@/data/sidebar.data";
 import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
@@ -84,7 +82,7 @@ const Sidebar = ({ closeSidebar }) => {
                         alt="profile"
                       />
                       <span className="line-clamp-1">
-                        {selectedProfile.name || "John Doe"}
+                        {selectedProfile?.name || "John Doe"}
                       </span>
                     </span>
                     <span>

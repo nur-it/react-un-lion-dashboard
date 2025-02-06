@@ -72,9 +72,9 @@ const Header = () => {
           <span className="text-base leading-[0.2px]">{greeting} -</span>
           <span className="text-xl font-bold leading-[130%]">
             {selectedProfile
-              ? selectedProfile.name
-              : profile.username
-                ? profile.username
+              ? selectedProfile?.name
+              : profile?.username
+                ? profile?.username
                 : "Welcome!"}
           </span>
         </h5>
