@@ -9,9 +9,18 @@ const profile = selectedProfileCookie
   : null;
 
 const topics = [
-  { id: "1", name: `Is it true that ${profile.name} officially supported Donald Trump for the 2024 elections?` },
-  { id: "2", name: `Is this video about ${profile.name} legit?` },
-  { id: "3", name: `What does ${profile.name} think about ...?` },
+  {
+    id: "1",
+    name: `Is it true that ${profile?.name ? profile?.name : "John Due"} officially supported Donald Trump for the 2024 elections?`,
+  },
+  {
+    id: "2",
+    name: `Is this video about ${profile?.name ? profile?.name : "John Due"} legit?`,
+  },
+  {
+    id: "3",
+    name: `What does ${profile?.name ? profile?.name : "John Due"} think about ...?`,
+  },
   // { id: "4", name: "Match lead to Account" },
   // { id: "5", name: "Mail Replay" },
   // { id: "6", name: "Great Offer" },
