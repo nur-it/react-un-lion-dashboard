@@ -77,7 +77,10 @@ const Sidebar = ({ closeSidebar }) => {
                   <button className="mb-2 inline-flex w-full items-center justify-between gap-2 rounded-md border border-white_opacity10 bg-white_opacity05 px-4 py-2.5 text-white transition-all duration-300 ease-in-out">
                     <span className="inline-flex items-center space-x-2 text-sm font-medium">
                       <img
-                        src={selectedProfile?.picture_url || "/images/user_profile_pic.jpeg"}
+                        src={
+                          selectedProfile?.picture_url ||
+                          "/images/danj/user_profile_pic.jpeg"
+                        }
                         className="h-8 w-8 rounded-full"
                         alt="profile"
                       />
