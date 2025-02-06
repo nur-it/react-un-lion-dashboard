@@ -1,6 +1,6 @@
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
 import useDashboard from "@/hooks/use-dashboard.jsx";
-import { downloadAsCsv } from "@/utils/exportUtils";
+import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import SentimentBarChart from "./SentimentBarChart";
@@ -41,6 +41,16 @@ const Sentiment = () => {
     };
   }, []);
 
+  const handleDownload = (format) => {
+    const title = "sentiment-data";
+    if (format === "json") {
+      exportToJSON(sentimentsData);
+    } else if (format === "csv") {
+      exportToCSV(sentimentsData, title);
+    }
+
+    setShowDropdown(false);
+  };
   return (
     <div>
       <div className="space-y-5 rounded-lg border border-gray-200 bg-white p-4 dark:border-white/[10%] dark:bg-white/[4%] sm:p-6">
@@ -55,7 +65,7 @@ const Sentiment = () => {
             <div className="relative">
               <button
                 ref={buttonRef}
-                onClick={() => downloadAsCsv(sentimentsData)}
+                onClick={() => handleDownload("csv")}
                 className="flex h-9 items-center justify-center rounded-lg border border-gray300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
               >
                 <img src={downloadIcon} alt="Download" />
