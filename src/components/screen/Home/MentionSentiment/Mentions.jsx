@@ -1,22 +1,35 @@
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
-import { downloadMentionCSV } from "@/utils/exportUtils";
+import useDashboard from "@/hooks/use-dashboard";
+import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import MentionChart from "./MentionChart";
-import DateRangePicker from "../StatisticEmotionAnalytics/DateRangePicker";
 
 const Mentions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const buttonRef = useRef(null);
   const dropdownRef = useRef(null);
+  const { getMentionsData } = useDashboard();
+  const [mentions, setMentions] = useState({
+    datasets: [],
+    labels: [],
+  });
 
-  const mentionData = [
-    { platform: "Youtube", value: [10, 30, 35, 19, 25, 18, 10] },
-    { platform: "Facebook", value: [30, 35, 39, 30, 42, 30, 50] },
-    { platform: "X", value: [50, 45, 50, 45, 55, 53, 75] },
-    { platform: "TikTok", value: [30, 62, 55, 55, 62, 62, 30] },
-    { platform: "Instagram", value: [75, 55, 75, 50, 78, 70, 78] },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getMentionsData();
+        if (data && data.labels && data.datasets) {
+          setMentions(data);
+        } else {
+          console.error("❌ Invalid data structure:", data);
+        }
+      } catch (error) {
+        console.error("❌ Error fetching statistic data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -35,6 +48,17 @@ const Mentions = () => {
     };
   }, []);
 
+  const handleDownload = (format) => {
+    const title = "mentions-data";
+    if (format === "json") {
+      exportToJSON(mentions);
+    } else if (format === "csv") {
+      exportToCSV(mentions, title);
+    }
+
+    setShowDropdown(false);
+  };
+
   return (
     <div className="space-y-5 rounded-lg border border-gray-200 bg-white p-4 dark:border-white/[10%] dark:bg-white/[4%] sm:p-6">
       <div className="flex items-center justify-between">
@@ -48,7 +72,7 @@ const Mentions = () => {
           <div className="relative">
             <button
               ref={buttonRef}
-              onClick={() => downloadMentionCSV(mentionData)}
+              onClick={() => handleDownload("csv")}
               className="flex h-9 items-center justify-center rounded-lg border border-gray-300 bg-[#FFFFFF05] px-3 dark:border-[#FFFFFF4D]"
             >
               <img src={downloadIcon} alt="Download" />

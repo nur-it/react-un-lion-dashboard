@@ -1,31 +1,29 @@
-
-
 export const exportToJSON = (data) => {
-  const jsonData = JSON.stringify(data, null, 2); 
+  const jsonData = JSON.stringify(data, null, 2);
   const blob = new Blob([jsonData], { type: "application/json" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "statistic_data.json"; 
+  link.download = "statistic_data.json";
   link.click();
 };
 
-export const exportToCSV = (data) => {
+export const exportToCSV = (data, title = "statistic-data") => {
   const headers = ["Label", ...data.labels];
   const rows = data.datasets[0].data.map((_, index) => {
     return data.datasets.map((dataset) => dataset.data[index]);
   });
 
   let csvContent = "data:text/csv;charset=utf-8,";
-  csvContent += headers.join(",") + "\n"; 
+  csvContent += headers.join(",") + "\n";
 
   rows.forEach((row) => {
-    csvContent += row.join(",") + "\n"; 
+    csvContent += row.join(",") + "\n";
   });
 
   const blob = new Blob([csvContent], { type: "text/csv" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "statistic_data.csv";
+  link.download = `${title}.csv`;
   link.click();
 };
 
@@ -43,9 +41,7 @@ export const exportEmotionToCSV = (data) => {
 
   const csvContent =
     "data:text/csv;charset=utf-8," +
-    [header, ...rows]
-      .map((row) => row.join(","))
-      .join("\n");
+    [header, ...rows].map((row) => row.join(",")).join("\n");
 
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
@@ -66,7 +62,6 @@ export const exportEmotionToJSON = (data) => {
   URL.revokeObjectURL(url);
 };
 
-
 // ---------------------------- MEntions--------------------------
 
 // utils/downloadUtils.js
@@ -74,21 +69,20 @@ import { saveAs } from "file-saver";
 
 // Function to download data as JSON
 export const downloadMentionJSON = (data, filename = "data.json") => {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json",
+  });
   saveAs(blob, filename);
 };
 
 // Function to download data as CSV
 export const downloadMentionCSV = (data, filename = "data.csv") => {
   const headers = ["Platform", "Data"];
-  const rows = data.map(
-    (item) => `${item.platform},${item.value.join(";")}`
-  );
+  const rows = data.map((item) => `${item.platform},${item.value.join(";")}`);
   const csvContent = [headers.join(","), ...rows].join("\n");
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
   saveAs(blob, filename);
 };
-
 
 // ---------------------------- sentiment page ----------------------
 // utils/downloadUtils.js
@@ -113,38 +107,37 @@ export const downloadAsJson = (datasets) => {
 export const downloadAsCsv = (datasets) => {
   const headers = ["Label", ...datasets.labels].join(",");
   const rows = datasets.data.map((dataset) =>
-    [dataset.label, ...dataset.values].join(",")
+    [dataset.label, ...dataset.values].join(","),
   );
   const csvData = [headers, ...rows].join("\n");
   downloadFile(csvData, "csv");
 };
 
-
 // --------------------------Main topics -----------------------
 
 export const exportMainTopicToJSON = (data) => {
   const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
+  const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'topics.json';
+  a.download = "topics.json";
   a.click();
   URL.revokeObjectURL(url);
 };
 
 export const exportMainTopicToCSV = (data) => {
-  const header = 'Topic, Value, Color\n';
+  const header = "Topic, Value, Color\n";
   const rows = data
     .map(([text, value, color]) => `${text},${value},${color}`)
-    .join('\n');
-  
+    .join("\n");
+
   const csv = header + rows;
-  const blob = new Blob([csv], { type: 'text/csv' });
+  const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'topics.csv';
+  a.download = "topics.csv";
   a.click();
   URL.revokeObjectURL(url);
 };
