@@ -1,10 +1,9 @@
+import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import useDashboard from "@/hooks/use-dashboard.jsx";
 import { downloadAsCsv } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
-import DateRangePicker from "../StatisticEmotionAnalytics/DateRangePicker";
 import SentimentBarChart from "./SentimentBarChart";
-import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
-import useDashboard from "@/hooks/use-dashboard.jsx";
 
 const Sentiment = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -21,7 +20,6 @@ const Sentiment = () => {
     };
     fetchData();
   }, []);
-
 
   // Close dropdown if clicked outside
   useEffect(() => {

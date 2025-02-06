@@ -15,6 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useDashboard from "@/hooks/use-dashboard";
 import { Link } from "react-router";
 
 const ThreatDetectionTable = ({ data, onAction }) => {
@@ -28,6 +29,7 @@ const ThreatDetectionTable = ({ data, onAction }) => {
   const itemsPerPage = 4;
   const [status, setStatus] = useState({});
   const [newStatus, setNewStatus] = useState({});
+  const { mitigate } = useDashboard();
 
   const requestSort = (key) => {
     setSortConfig((prev) => {
@@ -119,12 +121,12 @@ const ThreatDetectionTable = ({ data, onAction }) => {
     { header: "Platform", key: "platform" },
     { header: "Content Summary", key: "contentSummary" },
     { header: "ID", key: "id" },
-    { header: "Reach", key: "reach" },
+    { header: "Reach", key: "level" },
     { header: "Action", key: "action" },
     { header: "Status", key: "status" },
   ];
 
-  const handleDropdownChange = (id, newStatus) => {
+  const handleDropdownChange = (id, index, newStatus) => {
     setDisabledRows((prev) => ({
       ...prev,
       [id]: true, // Disable only the specific row's dropdown using id
@@ -157,6 +159,10 @@ const ThreatDetectionTable = ({ data, onAction }) => {
         };
       });
     }, 1000);
+
+    if (newStatus === "Mitigate") {
+      mitigate({ index, action_id: id });
+    }
   };
 
   const date = new Date().toLocaleDateString("en-US", "dd/mm/yyyy");
@@ -206,18 +212,13 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
                 <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link to={row.url}>
-                    {row.threatType}
-                  </Link>
+                  <Link to={row.url}>{row.threatType}</Link>
                 </td>
                 <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
                   <Link to={row.url}>{row.platform}</Link>
                 </td>
                 <td className="w-[26%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link
-                    className="line-clamp-1"
-                    to={row.url}
-                  >
+                  <Link className="line-clamp-1" to={row.url}>
                     {row.contentSummary}
                   </Link>
                 </td>
@@ -226,14 +227,14 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                 </td>
                 <td
                   className={`w-[10%] p-4 ${
-                    row.reach === "High"
+                    row.level === "high"
                       ? "text-error"
-                      : row.reach === "Low"
+                      : row.level === "low"
                         ? "text-text_secondary dark:text-white"
                         : "text-warning"
                   }`}
                 >
-                  {row.reach}
+                  {row.level}
                 </td>
                 <td className="flex items-center justify-between gap-2 p-4">
                   <TableActionDropdown
@@ -243,7 +244,8 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                     }}
                     initialStatus={"Mitigate"}
                     onStatusChange={
-                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
+                      (newStatus) =>
+                        handleDropdownChange(row.id, index, newStatus) // Pass row.id to the handler
                     }
                     isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
@@ -254,7 +256,8 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                     }}
                     initialStatus={"Dismiss"}
                     onStatusChange={
-                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
+                      (newStatus) =>
+                        handleDropdownChange(row.id, index, newStatus) // Pass row.id to the handler
                     }
                     isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />

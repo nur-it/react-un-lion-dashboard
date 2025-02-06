@@ -1,3 +1,4 @@
+import useDashboard from "@/hooks/use-dashboard";
 import {
   BarElement,
   CategoryScale,
@@ -6,9 +7,8 @@ import {
   LinearScale,
   Tooltip,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import useDashboard from "@/hooks/use-dashboard.jsx";
 import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
@@ -24,85 +24,38 @@ const StatisticChart = () => {
     const fetchData = async () => {
       try {
         const data = await getStatisticsData();
-
-        setStatisticsData(data); // ✅ Update state
+        if (data && data.labels && data.datasets) {
+          setStatisticsData(data);
+        } else {
+          console.error("❌ Invalid data structure:", data);
+        }
       } catch (error) {
         console.error("❌ Error fetching statistic data:", error);
       }
     };
     fetchData();
-  }, []); // ✅ Run once on mount
+  }, []);
 
   const cumulativeData = statisticsData.datasets.map((dataset, idx) =>
     dataset.data.map((value, index) =>
       statisticsData.datasets
-        .slice(0, idx) // Take all previous datasets
-        .reduce((acc, prevDataset) => acc + prevDataset.data[index], value)
-    )
+        .slice(0, idx)
+        .reduce(
+          (acc, prevDataset) => acc + (prevDataset.data[index] || 0),
+          value,
+        ),
+    ),
   );
 
-// 🛠️ Apply cumulativeData back to datasets
   const cumulativeDataSets = statisticsData.datasets.map((dataset, idx) => ({
     ...dataset,
-    data: cumulativeData[idx], // Replace data with cumulative values
+    data: cumulativeData[idx] || [],
   }));
 
-// ✅ Final Transformed Data Object
   const transformedData = {
     ...statisticsData,
-    datasets: cumulativeDataSets, // Use updated datasets
+    datasets: cumulativeDataSets,
   };
-
-  // const data = {
-  //   labels: [
-  //     "Jan 10",
-  //     "Jan 11",
-  //     "Jan 12",
-  //     "Jan 13",
-  //     "Jan 14",
-  //     "Jan 15",
-  //     "Jan 16",
-  //   ],
-  //   datasets: [
-  //     {
-  //       label: "High Risk",
-  //       data: cumulativeData[0],
-  //       backgroundColor: "#F23838",
-  //       stack: "stack1",
-  //       borderSkipped: false,
-  //       barThickness: 15,
-  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
-  //     },
-  //     {
-  //       label: "Positive",
-  //       data: cumulativeData[1],
-  //       backgroundColor: "#E38604",
-  //       stack: "stack1",
-  //       borderSkipped: false,
-  //       barThickness: 15,
-  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
-  //     },
-  //     {
-  //       label: "Negative",
-  //       data: cumulativeData[2],
-  //       backgroundColor: "#0CAF60",
-  //       stack: "stack1",
-  //       borderSkipped: false,
-  //       barThickness: 15,
-  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
-  //     },
-  //
-  //     {
-  //       label: "Mitigated Risk",
-  //       data: [30, 20, 20, 25, 40, 25, 25],
-  //       backgroundColor: "#665CF3",
-  //       stack: "stack2",
-  //       borderSkipped: false,
-  //       barThickness: 15,
-  //       borderRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 }
-  //     },
-  //   ],
-  // };
 
   const options = {
     plugins: {
@@ -113,8 +66,8 @@ const StatisticChart = () => {
         titleAlign: "center",
         callbacks: {
           title: (tooltipItems) => {
-            const index = tooltipItems[0].dataIndex;
-            return statisticsData.labels[index];
+            const index = tooltipItems[0]?.dataIndex;
+            return statisticsData.labels[index] || "";
           },
           label: (tooltipItem) => {
             const index = tooltipItem.dataIndex;
@@ -171,7 +124,6 @@ const StatisticChart = () => {
         border: {
           display: false,
         },
-
         ticks: {
           stepSize: 20,
           max: 100,

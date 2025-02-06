@@ -5,10 +5,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useAvatarList from "@/hooks/use-avatar-list.jsx";
 import Cookies from "js-cookie";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router";
-import useAvatarList from "@/hooks/use-avatar-list.jsx";
 
 const ProfileLists = ({ profiles }) => {
   const navigate = useNavigate();
@@ -21,9 +21,9 @@ const ProfileLists = ({ profiles }) => {
 
   return (
     <div className="space-y-4 py-6">
-      {profiles.map((profile) => (
+      {profiles.map((profile, index) => (
         <div
-          key={profile.id}
+          key={index}
           className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-gray200 bg-white px-6 py-5 dark:border-white_opacity10 dark:bg-white/[0.04]"
         >
           <div className="flex items-center gap-3 md:min-w-[220px]">

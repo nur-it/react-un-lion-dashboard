@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import ProfileLists from "@/components/screen/Accounts/profile-lists";
 import useAvatarList from "@/hooks/use-avatar-list.jsx";

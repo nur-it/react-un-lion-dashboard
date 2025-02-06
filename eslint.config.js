@@ -29,6 +29,7 @@ export default [
       ...react.configs["jsx-runtime"].rules,
       ...reactHooks.configs.recommended.rules,
       "react/jsx-no-target-blank": "off",
+      "react-hooks/exhaustive-deps": "off",
       "react/prop-types": "off",
       "no-undef": "off",
       "no-unused-vars": "off",

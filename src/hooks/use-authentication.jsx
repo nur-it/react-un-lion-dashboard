@@ -109,6 +109,8 @@ const useAuthentication = () => {
     setIsLoading(true);
     try {
       Cookies.remove("accessToken");
+      Cookies.remove("userProfile");
+      Cookies.remove("selectedProfile");
       // const response = await authService.logout();
       toast.success("Logged out successfully.");
       // console.log("Logout response:", response);

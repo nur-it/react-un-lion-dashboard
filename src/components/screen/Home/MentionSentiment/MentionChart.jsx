@@ -1,3 +1,4 @@
+import useDashboard from "@/hooks/use-dashboard";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -8,9 +9,8 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
-import useDashboard from "@/hooks/use-dashboard.jsx";
 import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +19,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const MentionChart = () => {
@@ -42,7 +42,6 @@ const MentionChart = () => {
 
     fetchData();
   }, []);
-
 
   const options = {
     responsive: true,
@@ -70,7 +69,7 @@ const MentionChart = () => {
     },
     elements: {
       line: {
-        borderWidth: 3,
+        borderWidth: 2,
         hoverBorderWidth: 0,
       },
     },
@@ -105,7 +104,10 @@ const MentionChart = () => {
   };
 
   return (
-    <div className="h-[210px] w-full max-w-full" style={{ width: "100%", height: "210px" }}>
+    <div
+      className="h-[210px] w-full max-w-full"
+      style={{ width: "100%", height: "210px" }}
+    >
       <Line data={mentionsData} options={options} />
     </div>
   );
