@@ -21,9 +21,42 @@ const useAskAvatar = () => {
     }
   };
 
+  const getChatsHistory = async (messageBody) => {
+    setIsLoading(true);
+    try {
+      const response = await askAvatarService.chatsHistory(messageBody);
+      toast.success("Chats successfully retrieved!");
+      return response.data;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to load chats.",
+      );
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getChatHistory = async (messageBody) => {
+    setIsLoading(true);
+    try {
+      const response = await askAvatarService.chatsHistory(messageBody);
+      toast.success("Chat history successfully retrieved!");
+      return response.data;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to load chat history.",
+      );
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return {
     isLoading,
     sendMessageToAvatar,
+    getChatsHistory,
+    getChatHistory
   };
 };
 

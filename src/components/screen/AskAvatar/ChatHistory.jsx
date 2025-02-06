@@ -9,18 +9,23 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ClockIcon, FilterIcon, PencilIcon } from "@/components/ui/svgs";
 import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
+import Cookies from "js-cookie";
 
-const initialHistoryItems = [
-  { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
-  { id: "2", title: "Great Offer", date: "19 Jan 2025" },
-  { id: "3", title: "B2B Business", date: "18 Jan 2025" },
-  { id: "4", title: "Business Idea", date: "18 Jan 2025" },
-  { id: "5", title: "Potential Threats Detection", date: "17 Jan 2025" },
-  { id: "6", title: "How to protect Accounts fr...", date: "17 Jan 2025" },
-  { id: "7", title: "Mail Reply", date: "16 Jan 2025" },
-];
+// const initialHistoryItems = [
+//   { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
+//   { id: "2", title: "Great Offer", date: "19 Jan 2025" },
+//   { id: "3", title: "B2B Business", date: "18 Jan 2025" },
+//   { id: "4", title: "Business Idea", date: "18 Jan 2025" },
+//   { id: "5", title: "Potential Threats Detection", date: "17 Jan 2025" },
+//   { id: "6", title: "How to protect Accounts fr...", date: "17 Jan 2025" },
+//   { id: "7", title: "Mail Reply", date: "16 Jan 2025" },
+// ];
+
+
+
 
 const getTodayDate = () => {
   const today = new Date();
@@ -32,8 +37,18 @@ const getTodayDate = () => {
 };
 
 export function ChatHistory() {
+  const [historyItems, setHistoryItems] = useState([]);
+  const { getChatsHistory } = useAskAvatar();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getChatsHistory();
+      setHistoryItems(data);
+    };
+    fetchData();
+  }, []);
+
   const [toggleModal, setToggleModal] = useState(false);
-  const [historyItems, setHistoryItems] = useState(initialHistoryItems);
+
   const [editingItemId, setEditingItemId] = useState(null);
   const [newTitle, setNewTitle] = useState("");
 

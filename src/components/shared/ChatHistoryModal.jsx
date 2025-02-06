@@ -9,36 +9,51 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ClockIcon, FilterIcon, PencilIcon } from "@/components/ui/svgs";
 import { MoreHorizontal } from "lucide-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useEffect, useState } from "react";
+import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
 
-const historyItems = [
-  { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
-  { id: "2", title: "Great Offer", date: "19 Jan 2025" },
-  { id: "3", title: "B2B Business", date: "18 Jan 2025" },
-  { id: "4", title: "Business Idea", date: "18 Jan 2025" },
-  { id: "5", title: "Potential Threats Detection", date: "17 Jan 2025" },
-  { id: "6", title: "How to protect Accounts fr...", date: "17 Jan 2025" },
-  { id: "7", title: "Mail Reply", date: "16 Jan 2025" },
-];
+// const historyItems = [
+//   { id: "1", title: "Greetings & Inquiry", date: "20 Jan 2025" },
+//   { id: "2", title: "Great Offer", date: "19 Jan 2025" },
+//   { id: "3", title: "B2B Business", date: "18 Jan 2025" },
+//   { id: "4", title: "Business Idea", date: "18 Jan 2025" },
+//   { id: "5", title: "Potential Threats Detection", date: "17 Jan 2025" },
+//   { id: "6", title: "How to protect Accounts fr...", date: "17 Jan 2025" },
+//   { id: "7", title: "Mail Reply", date: "16 Jan 2025" },
+// ];
 
-// Get today's date in the same format as the data
-const getTodayDate = () => {
-  const today = new Date();
-  return today.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-};
 
-const groupedHistory = historyItems.reduce((acc, item) => {
-  const todayDate = getTodayDate();
-  const group = item.date === todayDate ? "Today" : item.date;
-  acc[group] = acc[group] || [];
-  acc[group].push(item);
-  return acc;
-}, {});
 
 const ChatHistoryModal = ({ toggleModal, setToggleModal }) => {
+  const [historyItems, setChatsData] = useState([]);
+  const { getChatsHistory } = useAskAvatar();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getChatsHistory();
+      setChatsData(data);
+    };
+    fetchData();
+  }, []);
+
+// Get today's date in the same format as the data
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const groupedHistory = historyItems.reduce((acc, item) => {
+    const todayDate = getTodayDate();
+    const group = item.date === todayDate ? "Today" : item.date;
+    acc[group] = acc[group] || [];
+    acc[group].push(item);
+    return acc;
+  }, {});
+
+
   const handleOutsideClick = (e) => {
     if (e.target.id === "modal-container") {
       setToggleModal(false);
