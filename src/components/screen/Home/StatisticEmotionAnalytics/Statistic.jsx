@@ -3,13 +3,11 @@ import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import StatisticChart from "./StatisticChart";
-import DateRangePicker from "./DateRangePicker";
 
 const Statistic = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  
   const handleDownloadClick = () => {
     setShowDropdown(!showDropdown);
   };
