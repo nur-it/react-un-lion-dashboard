@@ -71,7 +71,11 @@ const Header = () => {
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">{greeting} -</span>
           <span className="text-xl font-bold leading-[130%]">
-            {selectedProfile ? selectedProfile.name : profile}
+            {selectedProfile
+              ? selectedProfile.name
+              : profile.username
+                ? profile.username
+                : "Welcome!"}
           </span>
         </h5>
       </div>
@@ -162,7 +166,11 @@ const Header = () => {
                   alt={`${selectedProfile ? selectedProfile.name : profile}`}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
-                  {selectedProfile ? selectedProfile.name : profile}
+                  {selectedProfile
+                    ? selectedProfile.name
+                    : profile.username
+                      ? profile.username
+                      : "User"}
                 </span>
               </span>
               <span className="text-[#898D97]">
