@@ -17,81 +17,47 @@ const InfoUpdateInitialDocument = ({
 }) => {
   const fileInputRef = useRef(null);
   const [files, setFiles] = useState([]);
-  const { uploadSourceFile, isLoading, toast } = useKnowledgeBase();
+  const { uploadSourceFile } = useKnowledgeBase();
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = async (event) => {
-    const newFiles = Array.from(event.target.files);
-    const updatedFiles = newFiles.map((file) => ({
-      name: file.name,
-      size: file.size,
-      status: "uploading",
-      progress: 0,
-    }));
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const newFile = {
+        name: file.name,
+        size: file.size,
+        status: "uploading",
+        progress: 0,
+      };
 
-    // Add new files to the existing files array
-    setFiles((prevFiles) => [...prevFiles, ...updatedFiles]);
+      setFiles((prevFiles) => [...prevFiles, newFile]);
 
-    // Handle the uploading process for multiple files
-    const uploadFiles = newFiles.map((file) => {
-      return new Promise((resolve, reject) => {
-        const interval = setInterval(() => {
-          setFiles((prevFiles) =>
-            prevFiles.map((f) =>
-              f.name === file.name && f.status === "uploading"
-                ? { ...f, progress: f.progress + 10 }
-                : f,
-            ),
-          );
-        }, 200);
+      const interval = setInterval(() => {
+        setFiles((prevFiles) =>
+          prevFiles.map((f) =>
+            f.name === file.name && f.status === "uploading"
+              ? { ...f, progress: f.progress + 10 }
+              : f,
+          ),
+        );
+      }, 200);
 
-        const uploadFile = async () => {
-          try {
-            // Upload the file using the custom hook method
-            const response = await uploadSourceFile(file);
-
-            // Handle the response if the upload is successful
-            if (response) {
-              clearInterval(interval);
-              setFiles((prevFiles) =>
-                prevFiles.map((f) =>
-                  f.name === file.name
-                    ? { ...f, status: "completed", progress: 100 }
-                    : f,
-                ),
-              );
-              resolve(response); // Resolve the promise
-            } else {
-              throw new Error("Upload failed");
-            }
-          } catch (error) {
-            // Handle errors
-            clearInterval(interval);
-            setFiles((prevFiles) =>
-              prevFiles.map((f) =>
-                f.name === file.name
-                  ? { ...f, status: "failed", progress: 0 }
-                  : f,
-              ),
-            );
-            reject(error); // Reject the promise
-          }
-        };
-
-        uploadFile();
-      });
-    });
-
-    // Start uploading all files
-    try {
-      await Promise.all(uploadFiles); // Upload all files in parallel
-      toast.success("All files uploaded successfully!");
-    } catch (error) {
-      toast.error("Some files failed to upload.");
+      setTimeout(() => {
+        clearInterval(interval);
+        setFiles((prevFiles) =>
+          prevFiles.map((f) =>
+            f.name === file.name
+              ? { ...f, status: "completed", progress: 100 }
+              : f,
+          ),
+        );
+      }, 2000);
     }
+
+    uploadSourceFile(file);
   };
 
   const handleRemoveFile = (fileName) => {
