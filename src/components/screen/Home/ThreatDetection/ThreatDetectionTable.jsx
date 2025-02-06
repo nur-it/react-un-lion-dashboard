@@ -15,6 +15,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useDashboard from "@/hooks/use-dashboard";
 import { Link } from "react-router";
 
 const ThreatDetectionTable = ({ data, onAction }) => {
@@ -28,6 +29,7 @@ const ThreatDetectionTable = ({ data, onAction }) => {
   const itemsPerPage = 4;
   const [status, setStatus] = useState({});
   const [newStatus, setNewStatus] = useState({});
+  const { mitigate } = useDashboard();
 
   const requestSort = (key) => {
     setSortConfig((prev) => {
@@ -124,7 +126,7 @@ const ThreatDetectionTable = ({ data, onAction }) => {
     { header: "Status", key: "status" },
   ];
 
-  const handleDropdownChange = (id, newStatus) => {
+  const handleDropdownChange = (id, index, newStatus) => {
     setDisabledRows((prev) => ({
       ...prev,
       [id]: true, // Disable only the specific row's dropdown using id
@@ -157,6 +159,10 @@ const ThreatDetectionTable = ({ data, onAction }) => {
         };
       });
     }, 1000);
+
+    if (newStatus === "Mitigate") {
+      mitigate({ index, action_id: id });
+    }
   };
 
   const date = new Date().toLocaleDateString("en-US", "dd/mm/yyyy");
@@ -238,7 +244,8 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                     }}
                     initialStatus={"Mitigate"}
                     onStatusChange={
-                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
+                      (newStatus) =>
+                        handleDropdownChange(row.id, index, newStatus) // Pass row.id to the handler
                     }
                     isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />
@@ -249,7 +256,8 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                     }}
                     initialStatus={"Dismiss"}
                     onStatusChange={
-                      (newStatus) => handleDropdownChange(row.id, newStatus) // Pass row.id to the handler
+                      (newStatus) =>
+                        handleDropdownChange(row.id, index, newStatus) // Pass row.id to the handler
                     }
                     isDisabled={!!disabledRows[row.id]} // Disable using row.id
                   />

@@ -25,7 +25,6 @@ const useAskAvatar = () => {
     setIsLoading(true);
     try {
       const response = await askAvatarService.chatsHistory(messageBody);
-      toast.success("Chats successfully retrieved!");
       return response.data;
     } catch (error) {
       toast.error(
