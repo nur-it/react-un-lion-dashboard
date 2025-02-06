@@ -17,14 +17,16 @@ const ThreatDetection = () => {
     fetchData();
   }, []); // ✅ Run once on mount
 
-  const [openThreatsCount, setOpenThreatsCount] = useState(rowData?.length || 0);
+  const [openThreatsCount, setOpenThreatsCount] = useState(
+    rowData?.length || 0,
+  );
   const [filteredData, setFilteredData] = useState(rowData);
   const [searchTerm, setSearchTerm] = useState("");
   // Calculate the initial count of open threats
   useEffect(() => {
     const count = rowData.filter((row) => !row.action).length;
     setOpenThreatsCount(count);
-  }, []);
+  }, [rowData]);
 
   // Update filtered data whenever searchTerm or rowData changes
   useEffect(() => {
@@ -43,7 +45,6 @@ const ThreatDetection = () => {
       setFilteredData(rowData);
     }
   }, [searchTerm, rowData]);
-
 
   // Update the count when an action is performed
   const handleAction = (id) => {
