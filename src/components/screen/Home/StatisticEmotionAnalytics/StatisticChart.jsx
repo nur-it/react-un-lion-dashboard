@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useDashboard from "@/hooks/use-dashboard";
 import {
   BarElement,
