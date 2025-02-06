@@ -160,17 +160,17 @@ const Header = () => {
                   className="w-9 rounded dark:w-7"
                   src={
                     selectedProfile
-                      ? selectedProfile.picture_url
-                      : "/images/avatar.svg"
+                      ? selectedProfile?.picture_url
+                      : "/images/danj/user_profile_pic.jpeg"
                   }
-                  alt={`${selectedProfile ? selectedProfile.name : profile}`}
+                  alt={`${selectedProfile ? selectedProfile?.name : profile?.username ? profile?.username : "User"}`}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
                   {selectedProfile
-                    ? selectedProfile.name
-                    : profile.username
-                      ? profile.username
-                      : "User"}
+                    ? selectedProfile?.name
+                    : profile?.username
+                      ? profile?.username
+                      : "John Doe"}
                 </span>
               </span>
               <span className="text-[#898D97]">
