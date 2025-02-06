@@ -31,9 +31,12 @@ const Header = () => {
 
   // Get the cookie value first
   const userProfileCookie = Cookies.get("userProfile");
+  const SelectedProfileCookie = Cookies.get("selectedProfile");
   // Safely parse the cookie or default to null
-  const profile = userProfileCookie
-    ? JSON.parse(userProfileCookie)
+  const profile = userProfileCookie ? JSON.parse(userProfileCookie) : null;
+
+  const selectedProfile = SelectedProfileCookie
+    ? JSON.parse(SelectedProfileCookie)
     : null;
 
   // Determine greeting based on the current hour
@@ -67,7 +70,9 @@ const Header = () => {
 
         <h5 className="hidden items-center gap-1 text-secondary_main dark:text-white lg:inline-flex">
           <span className="text-base leading-[0.2px]">{greeting} -</span>
-          <span className="text-xl font-bold leading-[130%]">{profile.first_name}</span>
+          <span className="text-xl font-bold leading-[130%]">
+            {selectedProfile ? selectedProfile.name : profile}
+          </span>
         </h5>
       </div>
       <div className="flex items-center gap-3 lg:hidden">
@@ -148,12 +153,16 @@ const Header = () => {
             <div className="inline-flex w-full cursor-pointer items-center justify-between gap-0.5 dark:rounded-lg dark:bg-[#282c3f] dark:px-3 dark:py-1.5 md:gap-3">
               <span className="inline-flex items-center gap-2 md:gap-3">
                 <img
-                  className="rounded dark:w-7"
-                  src={profile.user_picture}
-                  alt={`${profile.first_name} ${profile.last_name}`}
+                  className="w-9 rounded dark:w-7"
+                  src={
+                    selectedProfile
+                      ? selectedProfile.picture_url
+                      : "/images/avatar.svg"
+                  }
+                  alt={`${selectedProfile ? selectedProfile.name : profile}`}
                 />
                 <span className="text-xs font-semibold leading-[130%] tracking-[-0.126px] text-[#111723] dark:text-white">
-                  {profile.first_name} {profile.last_name}
+                  {selectedProfile ? selectedProfile.name : profile}
                 </span>
               </span>
               <span className="text-[#898D97]">
