@@ -10,16 +10,16 @@ const Emotions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const emotions = [
-    { label: "Joy", value: 420, maxValue: 480, color: "#FD28E0" },
-    { label: "Disgust", value: 120, maxValue: 185, color: "#1E90FF" },
-    { label: "Anger", value: 120, maxValue: 220, color: "#F23938" },
-    { label: "Surprise", value: 40, maxValue: 95, color: "#F97315" },
-    { label: "Sadness", value: 20, maxValue: 72, color: "#8D8D8D" },
-  ];
+  // const emotions = [
+  //   { label: "Joy", value: 420, maxValue: 480, color: "#FD28E0" },
+  //   { label: "Disgust", value: 120, maxValue: 185, color: "#1E90FF" },
+  //   { label: "Anger", value: 120, maxValue: 220, color: "#F23938" },
+  //   { label: "Surprise", value: 40, maxValue: 95, color: "#F97315" },
+  //   { label: "Sadness", value: 20, maxValue: 72, color: "#8D8D8D" },
+  // ];
 
   const { getEmotionsData } = useDashboard();
-  const [emotionsData, setEmotionsData] = useState([]); // ✅ Define state for avatars
+  const [emotions, setEmotionsData] = useState([]); // ✅ Define state for avatars
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,7 +81,8 @@ const Emotions = () => {
           </div>
         </div>
       </div>
-      <EmotionsChart emotions={emotions} />
+      <EmotionsChart />
+      {/*<EmotionsChart emotions={emotions} />*/}
     </div>
   );
 };
