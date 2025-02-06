@@ -119,7 +119,7 @@ const ThreatDetectionTable = ({ data, onAction }) => {
     { header: "Platform", key: "platform" },
     { header: "Content Summary", key: "contentSummary" },
     { header: "ID", key: "id" },
-    { header: "Reach", key: "reach" },
+    { header: "Reach", key: "level" },
     { header: "Action", key: "action" },
     { header: "Status", key: "status" },
   ];
@@ -206,18 +206,13 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                 className="border-b bg-white text-sm text-[#1880F0] dark:border-[#FFFFFF1A] dark:bg-[#161b2f] dark:text-white"
               >
                 <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link to={row.url}>
-                    {row.threatType}
-                  </Link>
+                  <Link to={row.url}>{row.threatType}</Link>
                 </td>
                 <td className="w-[12%] p-4 transition-all duration-300 ease-in-out hover:underline">
                   <Link to={row.url}>{row.platform}</Link>
                 </td>
                 <td className="w-[26%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link
-                    className="line-clamp-1"
-                    to={row.url}
-                  >
+                  <Link className="line-clamp-1" to={row.url}>
                     {row.contentSummary}
                   </Link>
                 </td>
@@ -226,14 +221,14 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                 </td>
                 <td
                   className={`w-[10%] p-4 ${
-                    row.reach === "High"
+                    row.level === "high"
                       ? "text-error"
-                      : row.reach === "Low"
+                      : row.level === "low"
                         ? "text-text_secondary dark:text-white"
                         : "text-warning"
                   }`}
                 >
-                  {row.reach}
+                  {row.level}
                 </td>
                 <td className="flex items-center justify-between gap-2 p-4">
                   <TableActionDropdown
