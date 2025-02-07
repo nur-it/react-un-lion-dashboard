@@ -1,4 +1,5 @@
 import TimePeriodDropdown from "@/components/shared/TimePeriodDropdown";
+import { Skeleton } from "@/components/ui/skeleton";
 import useDashboard from "@/hooks/use-dashboard.jsx";
 import {
   exportMainTopicToCSV,
@@ -11,7 +12,7 @@ const MainTopics = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const [topics, setTopicsData] = useState([]); // ✅ Define state for avatars
-  const { getWordCloudData } = useDashboard();
+  const { getWordCloudData, isLoading } = useDashboard();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +67,18 @@ const MainTopics = () => {
 
     return `${textSize} ${fontWeight}`;
   };
+
+  if (isLoading || !topics) {
+    return (
+      <div className="min-h-[418px] space-y-5 bg-white p-4 dark:bg-white/[4%]">
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-20 w-full" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5 rounded-lg border border-gray-200 bg-white p-4 dark:border-white/[10%] dark:bg-white/[4%] sm:p-6">

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import useDashboard from "@/hooks/use-dashboard.jsx";
 import { FileWarning } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -7,7 +8,7 @@ import ThreatDetectionTable from "./ThreatDetectionTable";
 
 const ThreatDetection = () => {
   const [rowData, setRiskData] = useState([]); // ✅ Define state for avatars
-  const { getRiskTableData } = useDashboard();
+  const { getRiskTableData, isLoading } = useDashboard();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +61,18 @@ const ThreatDetection = () => {
     setSearchTerm(e.target.value.toLowerCase());
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[400px] space-y-5 bg-white p-4 dark:bg-white/[4%]">
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-20 w-full" />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full space-y-6 rounded-lg border border-gray-200 bg-white dark:border-white/[10%] dark:bg-white/[4%]">
       <div className="flex flex-col items-center justify-between gap-6 p-4 sm:gap-3 sm:p-6 md:items-start xl:flex-row xl:items-center">
@@ -93,7 +106,7 @@ const ThreatDetection = () => {
         ) : (
           <div className="flex min-h-[400px] items-center justify-center gap-2 text-error dark:text-white">
             <FileWarning />
-            No threats found
+            No threats found!
           </div>
         )}
       </div>

@@ -100,6 +100,7 @@ const InfoUpdateInitialDocument = ({
             </div>
             <button
               onClick={handleButtonClick}
+              type="button"
               className="flex h-8 w-full items-center justify-center rounded-lg border border-[#E2E4E9] bg-white px-4 py-1.5 text-sm font-medium text-text_sub500 dark:border-[#475467] dark:bg-[#FFFFFF1A] dark:text-white sm:max-w-[117px]"
             >
               Browse File

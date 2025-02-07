@@ -1,10 +1,10 @@
 import CategoryDropdown from "@/components/shared/CategoryDropdown";
 // import { knowledgeTableData } from "@/data/knowledgeTableData";
+import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 import { FileWarning } from "lucide-react";
 import { useEffect, useState } from "react";
 import search from "../../../assets/icon/search.svg";
 import FullKnowledgeTable from "./FullKnowledgeTable";
-import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 
 const KnowledgeTable = () => {
   const [categories] = useState([
@@ -17,7 +17,6 @@ const KnowledgeTable = () => {
   const [knowledgeTableData, setKnowledgeData] = useState([]); // ✅ Define state for avatars
   const [filteredData, setFilteredData] = useState([]);
   const { fetchKnowledgeBase } = useKnowledgeBase();
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,10 +68,10 @@ const KnowledgeTable = () => {
     if (term) {
       data = data.filter(
         (row) =>
-          row.title.toLowerCase().includes(term) ||
-          row.type.toLowerCase().includes(term) ||
-          row.name.toLowerCase().includes(term) ||
-          row.id.toLowerCase().includes(term),
+          row?.title.toLowerCase().includes(term) ||
+          row?.type.toLowerCase().includes(term) ||
+          row?.name.toLowerCase().includes(term) ||
+          (row?.id && row.id.toString().toLowerCase().includes(term)),
       );
     }
 

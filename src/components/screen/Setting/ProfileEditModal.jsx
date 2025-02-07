@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 
 const ProfileEditModal = ({ isOpen, onClose, user, onSave }) => {
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [profilePic, setProfilePic] = useState(user.profilePic);
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [profilePic, setProfilePic] = useState(user?.user_picture);
   const [isUploading, setIsUploading] = useState(false);
 
   // Sync the state with the user prop when the modal opens
@@ -12,7 +12,7 @@ const ProfileEditModal = ({ isOpen, onClose, user, onSave }) => {
     if (isOpen) {
       setName(user.name);
       setEmail(user.email);
-      setProfilePic(user.profilePic);
+      setProfilePic(user.user_picture);
     }
   }, [isOpen, user]);
 
@@ -28,7 +28,7 @@ const ProfileEditModal = ({ isOpen, onClose, user, onSave }) => {
   };
 
   const handleSave = () => {
-    onSave({ name, email, profilePic });
+    onSave({ name, email, user_picture });
     onClose();
   };
 
