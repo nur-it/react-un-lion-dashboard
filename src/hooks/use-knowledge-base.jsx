@@ -61,8 +61,8 @@ const useKnowledgeBase = () => {
     setIsLoading(true);
     try {
       const response = await knowledgeBaseService.uploadSourceFile(file);
-      toast.success("Source file uploaded successfully!");
-      return response.data;
+      toast.success(response?.message || "Source file uploaded successfully!");
+      return response;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to upload source file.",

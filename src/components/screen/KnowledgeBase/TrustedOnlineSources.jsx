@@ -1,11 +1,9 @@
+import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import tickMark from "../../../assets/icon/check-circle.svg";
-import info from "../../../assets/icon/information-circle.svg";
 import rotateLeft from "../../../assets/icon/rotate_left.svg";
 import crossCircle from "../../../assets/icon/x-circle.svg";
-import Tooltip from "./Tooltip";
-import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 
 const TrustedOnlineSources = () => {
   const { fetchInitSources } = useKnowledgeBase();
@@ -34,8 +32,8 @@ const TrustedOnlineSources = () => {
       setInputStatus(
         Object.keys(data.status || {}).reduce(
           (acc, key) => ({ ...acc, [key]: data.status[key] || "typing" }),
-          {}
-        )
+          {},
+        ),
       );
     };
 
@@ -43,10 +41,22 @@ const TrustedOnlineSources = () => {
   }, [setValue]); // ✅ `setValue` ensures proper updates
 
   const fields = [
-    { name: "Wikipedia", placeholder: "Wikipedia Page", label: "Wikipedia Page" },
+    {
+      name: "Wikipedia",
+      placeholder: "Wikipedia Page",
+      label: "Wikipedia Page",
+    },
     { name: "X", placeholder: "X account name", label: "X" },
-    { name: "Facebook", placeholder: "Facebook account name", label: "Facebook" },
-    { name: "Instagram", placeholder: "Instagram account name", label: "Instagram" },
+    {
+      name: "Facebook",
+      placeholder: "Facebook account name",
+      label: "Facebook",
+    },
+    {
+      name: "Instagram",
+      placeholder: "Instagram account name",
+      label: "Instagram",
+    },
     { name: "Tiktok", placeholder: "TikTok account name", label: "TikTok" },
     { name: "Youtube", placeholder: "Youtube account name", label: "Youtube" },
   ];
@@ -92,7 +102,10 @@ const TrustedOnlineSources = () => {
           <div className="grid gap-3 md:grid-cols-2">
             {fields.map((field, index) => (
               <div className="space-y-1" key={index}>
-                <label htmlFor={field.name} className="trusted-label dark:text-white">
+                <label
+                  htmlFor={field.name}
+                  className="trusted-label dark:text-white"
+                >
                   {field.label}
                 </label>
                 <div className="trusted-input-box flex items-center gap-2">
@@ -107,7 +120,9 @@ const TrustedOnlineSources = () => {
                   {renderIcon(field.name)}
                 </div>
                 {errors[field.name] && (
-                  <p className="text-sm text-red-500">{errors[field.name].message}</p>
+                  <p className="text-sm text-red-500">
+                    {errors[field.name].message}
+                  </p>
                 )}
               </div>
             ))}
