@@ -1,4 +1,3 @@
-import useAskAvatar from "@/hooks/use-ask-avatar";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { ChatHistory } from "./ChatHistory";
@@ -47,7 +46,8 @@ export default function ChatInterface() {
               <div className="space-y-5 xl:space-y-10">
                 <div className="space-y-4 p-8 text-center">
                   <h1 className="bg-gradient-primary bg-clip-text text-2xl font-bold text-transparent dark:bg-gradient-dark-text sm:text-5xl">
-                    Hi {profile?.name} <br /> What would you like to know
+                    Hi {profile?.name ? profile?.name : "John Doe"} <br /> What
+                    would you like to know
                   </h1>
                   <p className="mx-auto max-w-[375px] text-base text-[#475467] dark:text-[#98A2B3]">
                     Choose a prompt or write your own to start chatting with
