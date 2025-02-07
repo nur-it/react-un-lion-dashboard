@@ -4,11 +4,12 @@ import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import StatisticChart from "./StatisticChart";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Statistic = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
-  const { getStatisticsData } = useDashboard(); // ✅ Define state for avatars
+  const { getStatisticsData, isLoading } = useDashboard(); // ✅ Define state for avatars
   const [statisticsData, setStatisticsData] = useState({
     labels: [],
     datasets: [],
@@ -64,6 +65,19 @@ const Statistic = () => {
     { label: "Low Risk", color: "#0CAF60" },
     { label: "Mitigated Risk", color: "#665CF3" },
   ];
+
+
+   if (isLoading) {
+     return (
+       <div className="min-h-[418px] space-y-5 bg-white p-4 dark:bg-white/[4%]">
+         <Skeleton className="h-20 w-full" />
+         <Skeleton className="h-10 w-full" />
+         <Skeleton className="h-20 w-full" />
+         <Skeleton className="h-10 w-full" />
+         <Skeleton className="h-20 w-full" />
+       </div>
+     );
+   }
 
   return (
     <div className="space-y-5 rounded-lg border border-gray-200 bg-white p-4 dark:border-white/[10%] dark:bg-white/[4%] sm:p-6">

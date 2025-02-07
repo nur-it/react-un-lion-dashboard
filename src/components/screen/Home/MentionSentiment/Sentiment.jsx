@@ -4,13 +4,14 @@ import { exportToCSV, exportToJSON } from "@/utils/exportUtils";
 import { useEffect, useRef, useState } from "react";
 import downloadIcon from "../../../../assets/icon/download.svg";
 import SentimentBarChart from "./SentimentBarChart";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Sentiment = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
-  const { getSentimentsData } = useDashboard();
+  const { getSentimentsData, isLoading } = useDashboard();
   const [sentimentsData, setSentimentsData] = useState([]); // ✅ Define state for avatars
 
   useEffect(() => {
@@ -51,6 +52,19 @@ const Sentiment = () => {
 
     setShowDropdown(false);
   };
+
+ if (isLoading) {
+   return (
+     <div className="min-h-[352px] space-y-5 bg-white p-4 dark:bg-white/[4%]">
+       <Skeleton className="h-20 w-full" />
+       <Skeleton className="h-20 w-full" />
+       <Skeleton className="h-10 w-full" />
+       <Skeleton className="h-20 w-full" />
+     </div>
+   );
+ }
+
+
   return (
     <div>
       <div className="space-y-5 rounded-lg border border-gray-200 bg-white p-4 dark:border-white/[10%] dark:bg-white/[4%] sm:p-6">
