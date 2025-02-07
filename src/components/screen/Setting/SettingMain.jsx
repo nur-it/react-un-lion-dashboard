@@ -7,25 +7,26 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
-import userImg from "../../../assets/img/user.svg";
 import Notification from "./Notification";
 import ProfileEditModal from "./ProfileEditModal";
-import Cookies from "js-cookie";
 
 const SettingMain = () => {
-  const userProfileCookie = Cookies.get("userProfile");
+  const selectedProfileCookie = Cookies.get("selectedProfile");
   // Safely parse the cookie or default to null
-  const profile = userProfileCookie
-    ? JSON.parse(userProfileCookie)
+  const selectedProfile = selectedProfileCookie
+    ? JSON.parse(selectedProfileCookie)
     : null;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState({
-    name: `${profile.first_name} ${profile.last_name}`,
-    email: profile.email,
-    user_picture: profile.user_picture,
+    name: `${selectedProfile?.name ? selectedProfile?.name : "John Due"}`,
+    email: !selectedProfile?.email ? "unlie@user.com" : selectedProfile?.email,
+    user_picture: !selectedProfile?.picture_url
+      ? "/images/danj/user_profile_pic.jpeg"
+      : selectedProfile?.picture_url,
   });
 
   const handleSave = (updatedUser) => {
