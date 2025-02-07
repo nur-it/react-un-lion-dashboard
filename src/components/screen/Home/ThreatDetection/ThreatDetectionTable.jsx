@@ -218,8 +218,11 @@ const ThreatDetectionTable = ({ data, onAction }) => {
                   <Link to={row.url}>{row.platform}</Link>
                 </td>
                 <td className="w-[26%] p-4 transition-all duration-300 ease-in-out hover:underline">
-                  <Link className="line-clamp-1" to={row.url}>
-                    {row.contentSummary}
+                  <Link
+                    className="line-clamp-1"
+                    to={row.contentSummary ? row.url : "#"}
+                  >
+                    {row.contentSummary ? row.contentSummary : "N/A"}
                   </Link>
                 </td>
                 <td className="w-[10%] p-4 transition-all duration-300 ease-in-out hover:underline">
