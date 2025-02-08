@@ -18,15 +18,15 @@ export default function ChatInterface() {
 
   const handleSend = async (input_value, attachments = []) => {
     const user_message = {
-      role: "user",
+      role: "User",
       content: input_value,
       attachments,
       avatar: profile?.picture_url || "/images/danj/user_profile_pic.jpeg",
     };
 
     const avatar_message = {
-      role: "avatar",
-      content: !answer ? "coming soon" : "",
+      role: "Avatar",
+      content: !answer ? "coming soon" : answer,
       avatar: "/images/avatar.svg",
     };
 
