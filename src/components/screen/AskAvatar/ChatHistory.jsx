@@ -26,7 +26,7 @@ const getTodayDate = () => {
   return getFormattedDate(new Date());
 };
 
-export function ChatHistory() {
+export function ChatHistory({ setDiscussionId }) {
   const [historyItems, setHistoryItems] = useState([]);
   const { getChatsHistory, isLoading } = useAskAvatar();
 
@@ -141,6 +141,7 @@ export function ChatHistory() {
                       ) : (
                         <Button
                           variant="ghost"
+                          onClick={() => setDiscussionId(item.user_id)}
                           className="h-auto w-full justify-start truncate text-ellipsis rounded-lg border-[0.5px] border-[#d0d5dd4f] px-2 py-1.5 text-sm font-normal text-[#4A5773] group-hover:bg-white/50 dark:border-[#344054] dark:text-[#D0D5DD] dark:group-hover:bg-[#344054]"
                         >
                           {item.title.slice(0, 25) +

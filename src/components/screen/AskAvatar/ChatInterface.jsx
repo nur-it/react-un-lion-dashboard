@@ -9,9 +9,10 @@ import { TopicSuggestions } from "./TopicSuggestions";
 export default function ChatInterface() {
   const [response, setResponse] = useState([]);
   const [topic, setTopic] = useState("");
-  const [answer, setAnswer] = useState(""); // Keep answer as an empty string by default
-  const [userInput, setUserInput] = useState(""); // Set default as an empty string
+  const [answer, setAnswer] = useState("");
+  const [userInput, setUserInput] = useState("");
   const { sendMessageToAvatar, isLoading } = useAskAvatar();
+  const [discussionId, setDiscussionId] = useState(null);
 
   const selectedProfileCookie = Cookies.get("selectedProfile");
 
@@ -68,11 +69,11 @@ export default function ChatInterface() {
 
   return (
     <div className="gap-8 space-y-8 lg:flex lg:space-y-0">
-      <ChatHistory />
+      <ChatHistory setDiscussionId={setDiscussionId} />
       <div className="flex-1">
         <div className="flex h-full items-center justify-center rounded-2xl bg-white from-white to-[#f8f7fe] p-4 dark:bg-[#171c38] dark:from-[#171c38] dark:to-[#1d204b] lg:min-h-[707px] lg:bg-gradient-to-r">
           <div className="min-w-full space-y-5 xl:space-y-10 2xl:min-w-[820px]">
-            {response.length === 0 ? (
+            {response.length === 0 && !discussionId ? (
               <div className="space-y-5 xl:space-y-10">
                 <div className="space-y-4 p-8 text-center">
                   <h1 className="bg-gradient-primary bg-clip-text text-2xl font-bold text-transparent dark:bg-gradient-dark-text sm:text-5xl">
@@ -92,7 +93,7 @@ export default function ChatInterface() {
                 </div>
               </div>
             ) : (
-              <ChatMessages response={response} />
+              <ChatMessages response={response} discussionId={discussionId} />
             )}
             <div>
               <ChatInput handleSend={handleSend} topic={topic} />
