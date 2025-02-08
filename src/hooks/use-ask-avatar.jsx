@@ -10,7 +10,7 @@ const useAskAvatar = () => {
     try {
       const response = await askAvatarService.messageToAvatar(messageBody);
       // toast.success("Message sent successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to send message to Avatar.",
@@ -37,10 +37,10 @@ const useAskAvatar = () => {
   const chatDiscussionAvatar = async (id) => {
     setIsLoading(true);
     try {
-      const response = await askAvatarService.chatDiscussion(id);
+      const response = await askAvatarService.chatDiscussion({ chat_id: id });
       return response.data;
     } catch (error) {
-      toast.error(
+      console.error(
         error.response?.data?.message || "Failed to load chat history.",
       );
       return null;
