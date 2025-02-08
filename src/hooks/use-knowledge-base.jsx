@@ -89,12 +89,12 @@ const useKnowledgeBase = () => {
     }
   };
 
-  const updateToggleKb = async (body) => {
+  const updateToggle = async (body) => {
     setIsLoading(true);
     try {
       const response = await knowledgeBaseService.updateToggleKb(body);
-      toast.success("Knowledge base toggle updated!");
-      return response.data;
+      toast.success(response?.message || "Knowledge base toggle updated!");
+      return response;
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -147,7 +147,7 @@ const useKnowledgeBase = () => {
     fetchInitSources,
     uploadSourceFile,
     saveTrustfulSource,
-    updateToggleKb,
+    updateToggle,
     uploadVideoToCheck,
     checkProcessingStatus,
   };

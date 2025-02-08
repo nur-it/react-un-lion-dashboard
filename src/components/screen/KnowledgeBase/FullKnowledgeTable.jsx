@@ -1,5 +1,4 @@
 import Toggle from "@/components/shared/Toggle";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Pagination,
   PaginationContent,
@@ -8,17 +7,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import writeIcon from "../../../assets/icon/pencil.svg";
-import checkIcon from "../../../assets/icon/tick-mark.svg";
 
 const FullKnowledgeTable = ({ data }) => {
   const [tableData, setTableData] = useState(data); // Local state for the table data
@@ -262,7 +255,7 @@ const FullKnowledgeTable = ({ data }) => {
                 <td className="w-[20%] p-4">{row.timestamp}</td>
                 <td className="w-[20%] whitespace-nowrap p-4">{row.name}</td>
                 <td className="w-[15%] p-4">
-                  <Toggle initialActive={row.isActive} />
+                  <Toggle initialActive={row.isActive} index={index}  />
                 </td>
                 <td className="p-4">
                   <button>
