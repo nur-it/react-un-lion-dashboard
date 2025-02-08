@@ -1,15 +1,12 @@
 import { Button } from "@/components/ui/button";
+import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 import { useRef, useState } from "react";
-import { FiLoader } from "react-icons/fi";
 import addFrame from "../../../assets/icon/added-frame.svg";
-import closeLoading from "../../../assets/icon/close-loading.svg";
 import cloudIcon from "../../../assets/icon/cloud-icon.svg";
 import fileUpload from "../../../assets/icon/file-loading.svg";
-import tickMark from "../../../assets/icon/green-tick.svg";
 import info from "../../../assets/icon/information-circle.svg";
 import trashIcon from "../../../assets/icon/trash.svg";
 import Tooltip from "./Tooltip";
-import useKnowledgeBase from "@/hooks/use-knowledge-base.jsx";
 
 const UpdateInitialDocument = () => {
   const fileInputRef = useRef(null);
@@ -48,23 +45,46 @@ const UpdateInitialDocument = () => {
         return updatedFormData;
       });
 
-      // Simulate upload progress
-      const interval = setInterval(() => {
-        setFiles((prevFiles) =>
-          prevFiles.map((f) =>
-            f.status === "uploading"
-              ? { ...f, progress: Math.min(f.progress + 10, 100) }
-              : f
-          )
-        );
-      }, 500);
+      // Create a function to simulate the file upload and track progress
+      const uploadFile = (file) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/upload-endpoint", true); // Replace with your endpoint
 
-      setTimeout(() => {
-        clearInterval(interval);
-        setFiles((prevFiles) =>
-          prevFiles.map((f) => ({ ...f, status: "completed", progress: 100 }))
-        );
-      }, 2000);
+        xhr.upload.onprogress = (event) => {
+          if (event.lengthComputable) {
+            const progress = Math.round((event.loaded / event.total) * 100);
+            setFiles((prevFiles) =>
+              prevFiles.map((f) =>
+                f.name === file.name ? { ...f, progress } : f,
+              ),
+            );
+          }
+        };
+
+        xhr.onload = () => {
+          setFiles((prevFiles) =>
+            prevFiles.map((f) =>
+              f.name === file.name
+                ? { ...f, status: "completed", progress: 100 }
+                : f,
+            ),
+          );
+        };
+
+        xhr.onerror = () => {
+          console.error("Upload failed.");
+          setFiles((prevFiles) =>
+            prevFiles.map((f) =>
+              f.name === file.name ? { ...f, status: "failed" } : f,
+            ),
+          );
+        };
+
+        xhr.send(file.fileObj); // Send the actual file object
+      };
+
+      // Start uploading files
+      newFiles.forEach(uploadFile);
     }
   };
 
@@ -79,7 +99,10 @@ const UpdateInitialDocument = () => {
           updatedFormData.append(key, value);
         }
       }
-      console.log("Updated FormData after removal:", updatedFormData.getAll("files")); // ✅ Debugging check
+      console.log(
+        "Updated FormData after removal:",
+        updatedFormData.getAll("files"),
+      ); // ✅ Debugging check
       return updatedFormData;
     });
   };
@@ -92,12 +115,10 @@ const UpdateInitialDocument = () => {
 
     try {
       await uploadSourceFile(formData.getAll("files"));
-      alert("Files uploaded successfully!");
       setFiles([]);
       setFormData(new FormData()); // ✅ Reset FormData after successful upload
     } catch (error) {
       console.error("File upload failed", error);
-      alert("Error uploading files. Please try again.");
     }
   };
 
@@ -151,21 +172,40 @@ const UpdateInitialDocument = () => {
           </div>
 
           {files.map((file, index) => (
-            <div key={index} className="w-full rounded-xl border border-[#D0D5DD] bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]">
+            <div
+              key={index}
+              className="w-full rounded-xl border border-[#D0D5DD] bg-black/[4%] py-4 pl-[14px] pr-4 dark:border-[#FFFFFF1A] dark:bg-[#FFFFFF0A]"
+            >
               <div className="flex justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <img src={file.status === "uploading" ? fileUpload : addFrame} alt="fileIcon" />
+                  <img
+                    src={file.status === "uploading" ? fileUpload : addFrame}
+                    alt="fileIcon"
+                  />
                   <div>
-                    <p className="text-sm font-medium text-secondary_main dark:text-white">{file.name}</p>
+                    <p className="text-sm font-medium text-secondary_main dark:text-white">
+                      {file.name}
+                    </p>
                     <p className="text-xs text-text_secondary dark:text-[#FFFFFFB2]">
                       {Math.round(file.size / 1024)} KB
                     </p>
                   </div>
                 </div>
-                <button className="text-gray600 dark:text-white" onClick={() => handleRemoveFile(file.name)}>
+                <button
+                  className="text-gray600 dark:text-white"
+                  onClick={() => handleRemoveFile(file.name)}
+                >
                   <img src={trashIcon} alt="trashIcon" />
                 </button>
               </div>
+              {file.status === "uploading" && (
+                <div className="mt-4 h-1.5 w-full rounded-full bg-[#0000001A] dark:bg-[#FFFFFF1A]">
+                  <div
+                    className="h-full rounded-full bg-[#665CF3] transition-all duration-200"
+                    style={{ width: `${file.progress}%` }}
+                  ></div>
+                </div>
+              )}
             </div>
           ))}
         </div>
