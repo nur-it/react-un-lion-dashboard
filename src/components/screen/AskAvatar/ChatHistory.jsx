@@ -7,8 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ClockIcon, FilterIcon, PencilIcon } from "@/components/ui/svgs";
-import useAskAvatar from "@/hooks/use-ask-avatar.jsx";
+import useAskAvatar from "@/hooks/use-ask-avatar";
 import { MoreHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -27,7 +28,7 @@ const getTodayDate = () => {
 
 export function ChatHistory() {
   const [historyItems, setHistoryItems] = useState([]);
-  const { getChatsHistory } = useAskAvatar();
+  const { getChatsHistory, isLoading } = useAskAvatar();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +75,21 @@ export function ChatHistory() {
     setEditingItemId(null);
     setNewTitle("");
   };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-5 rounded-lg bg-white p-4 dark:bg-white/[4%] lg:min-h-80 lg:w-[280px]">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full rounded-2xl bg-[#f8f7fe] dark:bg-[#1a1d40] lg:min-h-[707px] lg:max-w-[280px]">

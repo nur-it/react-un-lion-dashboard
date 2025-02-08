@@ -21,10 +21,10 @@ const useAskAvatar = () => {
     }
   };
 
-  const getChatsHistory = async (messageBody) => {
+  const getChatsHistory = async () => {
     setIsLoading(true);
     try {
-      const response = await askAvatarService.chatsHistory(messageBody);
+      const response = await askAvatarService.getChatsHistory();
       return response.data;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to load chats.");
@@ -34,11 +34,10 @@ const useAskAvatar = () => {
     }
   };
 
-  const getChatHistory = async (messageBody) => {
+  const chatDiscussionAvatar = async (id) => {
     setIsLoading(true);
     try {
-      const response = await askAvatarService.chatsHistory(messageBody);
-      toast.success("Chat history successfully retrieved!");
+      const response = await askAvatarService.chatDiscussion(id);
       return response.data;
     } catch (error) {
       toast.error(
@@ -53,7 +52,7 @@ const useAskAvatar = () => {
     isLoading,
     sendMessageToAvatar,
     getChatsHistory,
-    getChatHistory,
+    chatDiscussionAvatar,
   };
 };
 
