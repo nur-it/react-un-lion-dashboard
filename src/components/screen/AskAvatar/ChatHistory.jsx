@@ -87,6 +87,8 @@ export function ChatHistory() {
         <Skeleton className="hidden h-10 w-full lg:block" />
         <Skeleton className="hidden h-10 w-full lg:block" />
         <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
+        <Skeleton className="hidden h-10 w-full lg:block" />
       </div>
     );
   }
