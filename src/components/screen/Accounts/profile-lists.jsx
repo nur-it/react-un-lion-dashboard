@@ -5,7 +5,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import useAvatarList from "@/hooks/use-avatar-list.jsx";
+import useAvatarList from "@/hooks/use-avatar-list";
 import Cookies from "js-cookie";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router";
@@ -42,22 +42,22 @@ const ProfileLists = ({ profiles }) => {
           <div className="flex items-center gap-1 rounded-md bg-error_opacity10 px-3 py-1.5 text-sm font-medium text-error">
             <WarnRedIcon />
             <span>Critical Threats:</span>
-            <b>{profile.threat}</b>
+            <b>{profile?.threat || 0}</b>
           </div>
           {/* threats, review, insights  */}
           <div className="items-center gap-1.5 space-y-1.5 md:flex md:space-y-0">
             <div className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white">
-              <span>{profile.other_threat} Other Threats</span>
+              <span>{profile?.other_threat || 0} Other Threats</span>
               <Tooltip>
                 <TooltipTrigger>
                   <InfoIcon className="cursor-pointer text-[#98A2B3]" />
                 </TooltipTrigger>
                 <TooltipContent side="top">
                   <h3 className="text-lg font-bold text-secondary_main dark:text-white">
-                    {profile.other_threat} Other Threats
+                    {profile?.other_threat || 0} Other Threats
                   </h3>
                   <ol className="grid list-inside list-decimal grid-cols-2 gap-x-4 gap-y-2">
-                    {Array.from({ length: profile.other_threat }).map(
+                    {Array.from({ length: profile?.other_threat }).map(
                       (_, index) => (
                         <li
                           className="text-base text-[#4A5773] dark:text-white/85"
@@ -72,14 +72,14 @@ const ProfileLists = ({ profiles }) => {
               </Tooltip>
             </div>
             <div className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white">
-              <span>{profile.to_review} Elements to Review</span>
+              <span>{profile?.to_review || 0} Elements to Review</span>
               <Tooltip>
                 <TooltipTrigger>
                   <InfoIcon className="cursor-pointer text-[#98A2B3]" />
                 </TooltipTrigger>
                 <TooltipContent side="top">
                   <h3 className="text-lg font-bold text-secondary_main dark:text-white">
-                    {profile.to_review} Elements to Review.
+                    {profile?.to_review || 0} Elements to Review.
                   </h3>
                   <ol className="grid list-inside list-decimal grid-cols-2 gap-x-4 gap-y-2">
                     {Array.from({ length: profile.to_review }).map(
@@ -97,14 +97,14 @@ const ProfileLists = ({ profiles }) => {
               </Tooltip>
             </div>{" "}
             <div className="flex items-center gap-2 rounded-md bg-black/[0.06] px-3 py-1.5 text-sm font-medium text-secondary_main dark:bg-white/[0.06] dark:text-white">
-              <span>{profile.new_insights} New Insights</span>
+              <span>{profile?.new_insights || 0} New Insights</span>
               <Tooltip>
                 <TooltipTrigger>
                   <InfoIcon className="cursor-pointer text-[#98A2B3]" />
                 </TooltipTrigger>
                 <TooltipContent side="top">
                   <h3 className="text-lg font-bold text-secondary_main dark:text-white">
-                    {profile.new_insights} New Insights.
+                    {profile?.new_insights || 0} New Insights.
                   </h3>
                   <ol className="grid list-inside list-decimal grid-cols-2 gap-x-4 gap-y-2">
                     {Array.from({ length: profile.new_insights }).map(
