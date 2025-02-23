@@ -28,6 +28,7 @@ const SignInPage = () => {
                 <input
                   type="text"
                   placeholder="User name"
+                  defaultValue="admin"
                   className="auth_input_field"
                   {...register("username", {
                     required: "Username is required",
@@ -46,6 +47,7 @@ const SignInPage = () => {
                 <input
                   type="password"
                   placeholder="Password"
+                  defaultValue="admin"
                   className="auth_input_field"
                   {...register("password", {
                     required:
